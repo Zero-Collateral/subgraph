@@ -30,3 +30,16 @@ type CollateralW @entity {
   borrower: Borrower!
   amount: BigInt!
 }
+
+type Signer @entity {
+  id: ID!
+  address: Bytes!
+  active: Boolean!
+}
+
+type DaiPoolAction @entity {
+  id: ID!
+  address: Bytes!
+  amount: BigInt!
+  action: String! # Deposit / Withdraw / Repaid / Liquidate
+}

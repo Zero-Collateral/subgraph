@@ -1,13 +1,13 @@
 {
-  "name": "contracts-events",
-  "license": "UNLICENSED",
+  "name": "events-listener",
+  "license": "MIT",
   "scripts": {
     "codegen": "graph codegen",
     "build": "graph build",
-    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ ark4n631/contractsEvents",
-    "create-local": "graph create --node http://localhost:8020/ ark4n631/contracts-events",
-    "remove-local": "graph remove --node http://localhost:8020/ ark4n631/contracts-events",
-    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 ark4n631/contracts-events"
+    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ salazarguille/zero-collateral",
+    "create-local": "graph create --node http://localhost:8020/ salazarguille/zero-collateral",
+    "remove-local": "graph remove --node http://localhost:8020/ salazarguille/zero-collateral",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 salazarguille/zero-collateral"
   },
   "dependencies": {
     "@graphprotocol/graph-cli": "0.17.1",

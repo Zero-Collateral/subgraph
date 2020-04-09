@@ -141,7 +141,7 @@ export class SignerRemoved__Params {
   }
 }
 
-export class Contract__loansResult {
+export class Loans__loansResult {
   value0: BigInt;
   value1: BigInt;
   value2: BigInt;
@@ -197,9 +197,9 @@ export class Contract__loansResult {
   }
 }
 
-export class Contract extends SmartContract {
-  static bind(address: Address): Contract {
-    return new Contract("Contract", address);
+export class Loans extends SmartContract {
+  static bind(address: Address): Loans {
+    return new Loans("Loans", address);
   }
 
   daiPool(): Address {
@@ -215,25 +215,6 @@ export class Contract extends SmartContract {
     }
     let value = result.value;
     return CallResult.fromValue(value[0].toAddress());
-  }
-
-  getBorrowerLoans(borrower: Address): Array<BigInt> {
-    let result = super.call("getBorrowerLoans", [
-      EthereumValue.fromAddress(borrower)
-    ]);
-
-    return result[0].toBigIntArray();
-  }
-
-  try_getBorrowerLoans(borrower: Address): CallResult<Array<BigInt>> {
-    let result = super.tryCall("getBorrowerLoans", [
-      EthereumValue.fromAddress(borrower)
-    ]);
-    if (result.reverted) {
-      return new CallResult();
-    }
-    let value = result.value;
-    return CallResult.fromValue(value[0].toBigIntArray());
   }
 
   isSigner(account: Address): boolean {
@@ -268,12 +249,12 @@ export class Contract extends SmartContract {
     return CallResult.fromValue(value[0].toBigInt());
   }
 
-  loans(param0: BigInt): Contract__loansResult {
+  loans(param0: BigInt): Loans__loansResult {
     let result = super.call("loans", [
       EthereumValue.fromUnsignedBigInt(param0)
     ]);
 
-    return new Contract__loansResult(
+    return new Loans__loansResult(
       result[0].toBigInt(),
       result[1].toBigInt(),
       result[2].toBigInt(),
@@ -288,7 +269,7 @@ export class Contract extends SmartContract {
     );
   }
 
-  try_loans(param0: BigInt): CallResult<Contract__loansResult> {
+  try_loans(param0: BigInt): CallResult<Loans__loansResult> {
     let result = super.tryCall("loans", [
       EthereumValue.fromUnsignedBigInt(param0)
     ]);
@@ -297,7 +278,7 @@ export class Contract extends SmartContract {
     }
     let value = result.value;
     return CallResult.fromValue(
-      new Contract__loansResult(
+      new Loans__loansResult(
         value[0].toBigInt(),
         value[1].toBigInt(),
         value[2].toBigInt(),
@@ -362,6 +343,25 @@ export class Contract extends SmartContract {
     }
     let value = result.value;
     return CallResult.fromValue(value[0].toBigInt());
+  }
+
+  getBorrowerLoans(borrower: Address): Array<BigInt> {
+    let result = super.call("getBorrowerLoans", [
+      EthereumValue.fromAddress(borrower)
+    ]);
+
+    return result[0].toBigIntArray();
+  }
+
+  try_getBorrowerLoans(borrower: Address): CallResult<Array<BigInt>> {
+    let result = super.tryCall("getBorrowerLoans", [
+      EthereumValue.fromAddress(borrower)
+    ]);
+    if (result.reverted) {
+      return new CallResult();
+    }
+    let value = result.value;
+    return CallResult.fromValue(value[0].toBigIntArray());
   }
 }
 
@@ -429,6 +429,32 @@ export class AddSignerCall__Outputs {
   }
 }
 
+export class RenounceSignerCall extends EthereumCall {
+  get inputs(): RenounceSignerCall__Inputs {
+    return new RenounceSignerCall__Inputs(this);
+  }
+
+  get outputs(): RenounceSignerCall__Outputs {
+    return new RenounceSignerCall__Outputs(this);
+  }
+}
+
+export class RenounceSignerCall__Inputs {
+  _call: RenounceSignerCall;
+
+  constructor(call: RenounceSignerCall) {
+    this._call = call;
+  }
+}
+
+export class RenounceSignerCall__Outputs {
+  _call: RenounceSignerCall;
+
+  constructor(call: RenounceSignerCall) {
+    this._call = call;
+  }
+}
+
 export class DepositCollateralCall extends EthereumCall {
   get inputs(): DepositCollateralCall__Inputs {
     return new DepositCollateralCall__Inputs(this);
@@ -463,76 +489,20 @@ export class DepositCollateralCall__Outputs {
   }
 }
 
-export class LiquidateLoanCall extends EthereumCall {
-  get inputs(): LiquidateLoanCall__Inputs {
-    return new LiquidateLoanCall__Inputs(this);
+export class WithdrawCollateralCall extends EthereumCall {
+  get inputs(): WithdrawCollateralCall__Inputs {
+    return new WithdrawCollateralCall__Inputs(this);
   }
 
-  get outputs(): LiquidateLoanCall__Outputs {
-    return new LiquidateLoanCall__Outputs(this);
-  }
-}
-
-export class LiquidateLoanCall__Inputs {
-  _call: LiquidateLoanCall;
-
-  constructor(call: LiquidateLoanCall) {
-    this._call = call;
-  }
-
-  get loanID(): BigInt {
-    return this._call.inputValues[0].value.toBigInt();
+  get outputs(): WithdrawCollateralCall__Outputs {
+    return new WithdrawCollateralCall__Outputs(this);
   }
 }
 
-export class LiquidateLoanCall__Outputs {
-  _call: LiquidateLoanCall;
+export class WithdrawCollateralCall__Inputs {
+  _call: WithdrawCollateralCall;
 
-  constructor(call: LiquidateLoanCall) {
-    this._call = call;
-  }
-}
-
-export class RenounceSignerCall extends EthereumCall {
-  get inputs(): RenounceSignerCall__Inputs {
-    return new RenounceSignerCall__Inputs(this);
-  }
-
-  get outputs(): RenounceSignerCall__Outputs {
-    return new RenounceSignerCall__Outputs(this);
-  }
-}
-
-export class RenounceSignerCall__Inputs {
-  _call: RenounceSignerCall;
-
-  constructor(call: RenounceSignerCall) {
-    this._call = call;
-  }
-}
-
-export class RenounceSignerCall__Outputs {
-  _call: RenounceSignerCall;
-
-  constructor(call: RenounceSignerCall) {
-    this._call = call;
-  }
-}
-
-export class RepayDaiCall extends EthereumCall {
-  get inputs(): RepayDaiCall__Inputs {
-    return new RepayDaiCall__Inputs(this);
-  }
-
-  get outputs(): RepayDaiCall__Outputs {
-    return new RepayDaiCall__Outputs(this);
-  }
-}
-
-export class RepayDaiCall__Inputs {
-  _call: RepayDaiCall;
-
-  constructor(call: RepayDaiCall) {
+  constructor(call: WithdrawCollateralCall) {
     this._call = call;
   }
 
@@ -545,10 +515,10 @@ export class RepayDaiCall__Inputs {
   }
 }
 
-export class RepayDaiCall__Outputs {
-  _call: RepayDaiCall;
+export class WithdrawCollateralCall__Outputs {
+  _call: WithdrawCollateralCall;
 
-  constructor(call: RepayDaiCall) {
+  constructor(call: WithdrawCollateralCall) {
     this._call = call;
   }
 }
@@ -625,20 +595,20 @@ export class TakeOutLoanCallSignatureStruct extends EthereumTuple {
   }
 }
 
-export class WithdrawCollateralCall extends EthereumCall {
-  get inputs(): WithdrawCollateralCall__Inputs {
-    return new WithdrawCollateralCall__Inputs(this);
+export class RepayDaiCall extends EthereumCall {
+  get inputs(): RepayDaiCall__Inputs {
+    return new RepayDaiCall__Inputs(this);
   }
 
-  get outputs(): WithdrawCollateralCall__Outputs {
-    return new WithdrawCollateralCall__Outputs(this);
+  get outputs(): RepayDaiCall__Outputs {
+    return new RepayDaiCall__Outputs(this);
   }
 }
 
-export class WithdrawCollateralCall__Inputs {
-  _call: WithdrawCollateralCall;
+export class RepayDaiCall__Inputs {
+  _call: RepayDaiCall;
 
-  constructor(call: WithdrawCollateralCall) {
+  constructor(call: RepayDaiCall) {
     this._call = call;
   }
 
@@ -651,10 +621,40 @@ export class WithdrawCollateralCall__Inputs {
   }
 }
 
-export class WithdrawCollateralCall__Outputs {
-  _call: WithdrawCollateralCall;
+export class RepayDaiCall__Outputs {
+  _call: RepayDaiCall;
 
-  constructor(call: WithdrawCollateralCall) {
+  constructor(call: RepayDaiCall) {
+    this._call = call;
+  }
+}
+
+export class LiquidateLoanCall extends EthereumCall {
+  get inputs(): LiquidateLoanCall__Inputs {
+    return new LiquidateLoanCall__Inputs(this);
+  }
+
+  get outputs(): LiquidateLoanCall__Outputs {
+    return new LiquidateLoanCall__Outputs(this);
+  }
+}
+
+export class LiquidateLoanCall__Inputs {
+  _call: LiquidateLoanCall;
+
+  constructor(call: LiquidateLoanCall) {
+    this._call = call;
+  }
+
+  get loanID(): BigInt {
+    return this._call.inputValues[0].value.toBigInt();
+  }
+}
+
+export class LiquidateLoanCall__Outputs {
+  _call: LiquidateLoanCall;
+
+  constructor(call: LiquidateLoanCall) {
     this._call = call;
   }
 }

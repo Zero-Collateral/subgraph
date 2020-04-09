@@ -3,11 +3,11 @@ schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum/contract
-    name: Contract
+    name: Loans
     network: ropsten
     source:
-      address: "0x321A4596F3006F004f555ADEeAf2F44A0a4b4BDC"
-      abi: Contract
+      address: "0x913b86eAAABaF9B291Ae7D0F7A63a89b9E459d1b"
+      abi: Loans
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.3
@@ -19,8 +19,8 @@ dataSources:
         - SignerAdded
         - SignerRemoved
       abis:
-        - name: Contract
-          file: ./abis/Contract.json
+        - name: Loans
+          file: ./abis/Loans.json
       eventHandlers:
         - event: CollateralDeposited(indexed uint256,indexed address,uint256)
           handler: handleCollateralDeposited
@@ -32,4 +32,32 @@ dataSources:
           handler: handleSignerAdded
         - event: SignerRemoved(indexed address)
           handler: handleSignerRemoved
-      file: ./src/mapping.ts
+      file: ./src/mappings/loansMappings.ts
+  - kind: ethereum/contract
+    name: DAIPoolInterface
+    network: ropsten
+    source:
+      address: "0xCD3a6d493c04571FBE0ACD9e60634f4cc29fF42a"
+      abi: DAIPoolInterface
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.3
+      language: wasm/assemblyscript
+      entities:
+        - DaiDeposited
+        - DaiWithdrawn
+        - DaiRepaid
+        - PaymentLiquidated
+      abis:
+        - name: DAIPoolInterface
+          file: ./abis/DAIPoolInterface.json
+      eventHandlers:
+        - event: DaiDeposited(indexed address,uint256)
+          handler: handleDaiDeposited
+        - event: DaiWithdrawn(indexed address,uint256)
+          handler: handleDaiWithdrawn
+        - event: DaiRepaid(indexed address,uint256)
+          handler: handleDaiRepaid
+        - event: PaymentLiquidated(indexed address,uint256)
+          handler: handlePaymentLiquidated
+      file: ./src/mappings/daiPoolMappings.ts

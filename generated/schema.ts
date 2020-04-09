@@ -288,3 +288,110 @@ export class CollateralW extends Entity {
     this.set("amount", Value.fromBigInt(value));
   }
 }
+
+export class Signer extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id !== null, "Cannot save Signer entity without an ID");
+    assert(
+      id.kind == ValueKind.STRING,
+      "Cannot save Signer entity with non-string ID. " +
+        'Considering using .toHex() to convert the "id" to a string.'
+    );
+    store.set("Signer", id.toString(), this);
+  }
+
+  static load(id: string): Signer | null {
+    return store.get("Signer", id) as Signer | null;
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get address(): Bytes {
+    let value = this.get("address");
+    return value.toBytes();
+  }
+
+  set address(value: Bytes) {
+    this.set("address", Value.fromBytes(value));
+  }
+
+  get active(): boolean {
+    let value = this.get("active");
+    return value.toBoolean();
+  }
+
+  set active(value: boolean) {
+    this.set("active", Value.fromBoolean(value));
+  }
+}
+
+export class DaiPoolAction extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id !== null, "Cannot save DaiPoolAction entity without an ID");
+    assert(
+      id.kind == ValueKind.STRING,
+      "Cannot save DaiPoolAction entity with non-string ID. " +
+        'Considering using .toHex() to convert the "id" to a string.'
+    );
+    store.set("DaiPoolAction", id.toString(), this);
+  }
+
+  static load(id: string): DaiPoolAction | null {
+    return store.get("DaiPoolAction", id) as DaiPoolAction | null;
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get address(): Bytes {
+    let value = this.get("address");
+    return value.toBytes();
+  }
+
+  set address(value: Bytes) {
+    this.set("address", Value.fromBytes(value));
+  }
+
+  get amount(): BigInt {
+    let value = this.get("amount");
+    return value.toBigInt();
+  }
+
+  set amount(value: BigInt) {
+    this.set("amount", Value.fromBigInt(value));
+  }
+
+  get action(): string {
+    let value = this.get("action");
+    return value.toString();
+  }
+
+  set action(value: string) {
+    this.set("action", Value.fromString(value));
+  }
+}
