@@ -22,7 +22,7 @@ type EthTransaction @entity {
   event: EthEvent!
   from: Bytes!
   gasPrice: BigInt!
-  gasUsed: BigInt!
+  gasSent: BigInt!
   hash: Bytes!
   index: BigInt!
   to: Bytes!
@@ -79,5 +79,5 @@ type DaiPoolAction @entity {
   transaction: EthTransaction!
   address: Bytes!
   amount: BigInt!
-  action: DaiPoolAction!
+  action: PoolAction!
 }

@@ -9,7 +9,7 @@ export function createEthTransaction (event:EthereumEvent, action:string): EthTr
   entity.event = action
   entity.from = event.transaction.from
   entity.gasPrice = event.transaction.gasPrice
-  entity.gasUsed = event.transaction.gasUsed
+  entity.gasSent = event.transaction.gasUsed
   entity.hash = event.transaction.hash
   entity.index = event.transaction.index
   entity.to = event.transaction.to as Bytes

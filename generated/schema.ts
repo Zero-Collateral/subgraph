@@ -69,13 +69,13 @@ export class EthTransaction extends Entity {
     this.set("gasPrice", Value.fromBigInt(value));
   }
 
-  get gasUsed(): BigInt {
-    let value = this.get("gasUsed");
+  get gasSent(): BigInt {
+    let value = this.get("gasSent");
     return value.toBigInt();
   }
 
-  set gasUsed(value: BigInt) {
-    this.set("gasUsed", Value.fromBigInt(value));
+  set gasSent(value: BigInt) {
+    this.set("gasSent", Value.fromBigInt(value));
   }
 
   get hash(): Bytes {
