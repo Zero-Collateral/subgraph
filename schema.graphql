@@ -1,3 +1,37 @@
+enum PoolAction {
+  Deposit
+  Repay
+  Withdraw
+  Liquidate
+}
+
+enum EthEvent {
+  LoanCreated
+  DaiDeposited
+  DaiWithdrawn
+  DaiRepaid
+  PaymentLiquidated
+  SignerAdded
+  SignerRemoved
+  CollateralWithdrawn
+  CollateralDeposited
+}
+
+type EthTransaction @entity {
+  id: ID!
+  event: EthEvent!
+  from: Bytes!
+  gasPrice: BigInt!
+  gasUsed: BigInt!
+  hash: Bytes!
+  index: BigInt!
+  to: Bytes!
+  value: BigInt!
+  contract: Bytes!
+  timestamp: BigInt!
+  gasLimit: BigInt!
+}
+
 type Borrower @entity {
   id: ID!
   address: Bytes!
@@ -6,6 +40,7 @@ type Borrower @entity {
 
 type Loan @entity {
   id: ID!
+  transaction: EthTransaction!
   borrower: Borrower!
   startDate: BigInt! # https://github.com/graphql/graphql-js/issues/1003#issuecomment-324790647
   interestRate: BigInt!
@@ -19,6 +54,7 @@ type Loan @entity {
 
 type CollateralD @entity {
   id: ID!
+  transaction: EthTransaction!
   loan: Loan!
   borrower: Borrower!
   amount: BigInt!
@@ -26,6 +62,7 @@ type CollateralD @entity {
 
 type CollateralW @entity {
   id: ID!
+  transaction: EthTransaction!
   loan: Loan!
   borrower: Borrower!
   amount: BigInt!
@@ -39,7 +76,8 @@ type Signer @entity {
 
 type DaiPoolAction @entity {
   id: ID!
+  transaction: EthTransaction!
   address: Bytes!
   amount: BigInt!
-  action: String! # Deposit / Withdraw / Repaid / Liquidate
+  action: DaiPoolAction!
 }
