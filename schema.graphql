@@ -1,4 +1,14 @@
-enum PoolAction {
+enum Token {
+  DAI
+  USDC
+}
+
+enum ZToken {
+  zDAI
+  zUSDC
+}
+
+enum LendingPoolAction {
   Deposit
   Repay
   Withdraw
@@ -7,14 +17,26 @@ enum PoolAction {
 
 enum EthEvent {
   LoanCreated
-  DaiDeposited
-  DaiWithdrawn
-  DaiRepaid
+  TokenDeposited
+  TokenWithdrawn
+  TokenRepaid
   PaymentLiquidated
   SignerAdded
   SignerRemoved
   CollateralWithdrawn
   CollateralDeposited
+  InterestSubmitted
+  InterestAccepted
+}
+
+enum InterestUpdateStatusAction {
+  Requested
+  Canceled
+}
+
+enum AccruedInterestStatusAction {
+  Withdrawn
+  Updated
 }
 
 type EthTransaction @entity {
@@ -30,6 +52,7 @@ type EthTransaction @entity {
   contract: Bytes!
   timestamp: BigInt!
   gasLimit: BigInt!
+  blockNumber: BigInt!
 }
 
 type Borrower @entity {
@@ -48,11 +71,11 @@ type Loan @entity {
   maxLoanAmount: BigInt!
   numberDays: BigInt!
   amountBorrow: BigInt!
-  collateralDeposits: [CollateralD!]!
-  collateralWithdrawns: [CollateralW!]!
+  collateralDeposits: [CollateralDeposit!]!
+  collateralWithdrawns: [CollateralWithdraw!]!
 }
 
-type CollateralD @entity {
+type CollateralDeposit @entity {
   id: ID!
   transaction: EthTransaction!
   loan: Loan!
@@ -60,7 +83,7 @@ type CollateralD @entity {
   amount: BigInt!
 }
 
-type CollateralW @entity {
+type CollateralWithdraw @entity {
   id: ID!
   transaction: EthTransaction!
   loan: Loan!
@@ -74,10 +97,48 @@ type Signer @entity {
   active: Boolean!
 }
 
-type DaiPoolAction @entity {
+type LendingPoolStatus @entity {
   id: ID!
+  zToken: ZToken!
+  lendingToken: Token!
   transaction: EthTransaction!
   address: Bytes!
   amount: BigInt!
-  action: PoolAction!
+  action: LendingPoolAction!
+}
+
+type InterestSubmitted @entity {
+  id: ID!
+  transaction: EthTransaction!
+  signer: Bytes!
+  lender: Bytes!
+  blockNumber: BigInt!
+  interest: BigInt!
+}
+
+type InterestAccepted @entity {
+  id: ID!
+  transaction: EthTransaction!
+  lender: Bytes!
+  blockNumber: BigInt!
+  interest: BigInt!
+  acceptedAt: BigInt!
+}
+
+type AccruedInterestStatus @entity {
+  id: ID!
+  transaction: EthTransaction!
+  lender: Bytes!
+  totalAmount: BigInt!
+  accruedInterest: BigInt!
+  action: AccruedInterestStatusAction!
+}
+
+type InterestUpdateStatus @entity {
+  id: ID!
+  transaction: EthTransaction!
+  lender: Bytes!
+  blockNumber: BigInt!
+  updatedAt: BigInt!
+  action: InterestUpdateStatusAction!
 }

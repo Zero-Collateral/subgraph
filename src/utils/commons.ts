@@ -1,5 +1,5 @@
 import { log, BigInt, EthereumEvent, Bytes } from '@graphprotocol/graph-ts'
-import { Borrower, DaiPoolAction, EthTransaction } from "../../generated/schema";
+import { Borrower, LendingPoolStatus, EthTransaction } from "../../generated/schema";
 import { Address } from "@graphprotocol/graph-ts";
 
 export function createEthTransaction (event:EthereumEvent, action:string): EthTransaction {
@@ -17,6 +17,7 @@ export function createEthTransaction (event:EthereumEvent, action:string): EthTr
   entity.contract = event.address
   entity.timestamp = event.block.timestamp.times(BigInt.fromI32(1000))
   entity.gasLimit = event.block.gasLimit
+  entity.blockNumber = event.block.number
   entity.save()
   return entity;
 }
@@ -34,12 +35,18 @@ export function getOrCreateBorrower (address:Address): Borrower {
   return borrower as Borrower;
 }
 
-export function createDaiPoolAction (id:string, action:string, address:Address, amount:BigInt, transaction:EthTransaction): void {
-  log.info("Creating DAI pool action {} for address / amount {} / {}", [action.toString(), address.toHexString(), amount.toString()])
-  let daiPoolAction = new DaiPoolAction(id)
+export function createLendingPoolStatus (id:string, zToken:string, lendingToken:string, action:string, address:Address, amount:BigInt, transaction:EthTransaction): void {
+  log.info("Creating lending pool action {} ({}/{}) for address / amount {} / {}", [action.toString(), zToken, lendingToken, address.toHexString(), amount.toString()])
+  let daiPoolAction = new LendingPoolStatus(id)
+  daiPoolAction.zToken = zToken
+  daiPoolAction.lendingToken = lendingToken
   daiPoolAction.action = action
   daiPoolAction.address = address
   daiPoolAction.amount = amount
   daiPoolAction.transaction = transaction.id
   daiPoolAction.save()
+}
+
+export function buildId(event:EthereumEvent): string {
+  return event.transaction.hash.toHex() + "-" + event.logIndex.toString();
 }

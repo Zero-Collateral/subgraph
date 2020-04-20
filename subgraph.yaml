@@ -6,7 +6,7 @@ dataSources:
     name: Loans
     network: ropsten
     source:
-      address: "0x913b86eAAABaF9B291Ae7D0F7A63a89b9E459d1b"
+      address: "0x1E9347e488675cC4BDf03d42B420620B5AE95a70"
       abi: Loans
     mapping:
       kind: ethereum/events
@@ -34,30 +34,80 @@ dataSources:
           handler: handleSignerRemoved
       file: ./src/mappings/loansMappings.ts
   - kind: ethereum/contract
-    name: DAIPoolInterface
+    name: LendingPoolInterface
     network: ropsten
     source:
-      address: "0xCD3a6d493c04571FBE0ACD9e60634f4cc29fF42a"
-      abi: DAIPoolInterface
+      address: "0x90Bb28aA21EE1BC8ed4826c4d261C54d847F4C59"
+      abi: LendingPoolInterface
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.3
       language: wasm/assemblyscript
       entities:
-        - DaiDeposited
-        - DaiWithdrawn
-        - DaiRepaid
+        - TokenDeposited
+        - TokenWithdrawn
+        - TokenRepaid
         - PaymentLiquidated
       abis:
-        - name: DAIPoolInterface
-          file: ./abis/DAIPoolInterface.json
+        - name: LendingPoolInterface
+          file: ./abis/LendingPoolInterface.json
       eventHandlers:
-        - event: DaiDeposited(indexed address,uint256)
-          handler: handleDaiDeposited
-        - event: DaiWithdrawn(indexed address,uint256)
-          handler: handleDaiWithdrawn
-        - event: DaiRepaid(indexed address,uint256)
+        - event: TokenDeposited(indexed address,uint256)
+          handler: handleTokenDeposited
+        - event: TokenWithdrawn(indexed address,uint256)
+          handler: handleTokenWithdrawn
+        - event: TokenRepaid(indexed address,uint256)
           handler: handleDaiRepaid
         - event: PaymentLiquidated(indexed address,uint256)
           handler: handlePaymentLiquidated
-      file: ./src/mappings/daiPoolMappings.ts
+      file: ./src/mappings/lendingPools/daiLendingPoolMappings.ts
+  - kind: ethereum/contract
+    name: InterestConsensusInterface
+    network: ropsten
+    source:
+      address: "0x226c667fac6413a1Df61d34Ec3A67c0DC8370D64"
+      abi: InterestConsensusInterface
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.3
+      language: wasm/assemblyscript
+      entities:
+        - InterestSubmitted
+        - InterestAccepted
+      abis:
+        - name: InterestConsensusInterface
+          file: ./abis/InterestConsensusInterface.json
+      eventHandlers:
+        - event: InterestSubmitted(address,address,uint256,uint256)
+          handler: handleInterestSubmitted
+        - event: InterestAccepted(address,uint256,uint256)
+          handler: handleInterestAccepted
+      file: ./src/mappings/interestConsensusMappings.ts
+  - kind: ethereum/contract
+    name: LendersInterface
+    network: ropsten
+    source:
+      address: "0xD766989Ef070948A0470Faa467081274474131D2"
+      abi: LendersInterface
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.3
+      language: wasm/assemblyscript
+      entities:
+        - AccruedInterestUpdated
+        - AccruedInterestWithdrawn
+        - InterestUpdateRequested
+        - CancelInterestUpdate
+      abis:
+        - name: LendersInterface
+          file: ./abis/LendersInterface.json
+      eventHandlers:
+        - event: AccruedInterestUpdated(indexed address,uint256,uint256)
+          handler: handleAccruedInterestUpdated
+        - event: AccruedInterestWithdrawn(indexed address,uint256)
+          handler: handleAccruedInterestWithdrawn
+        - event: InterestUpdateRequested(indexed address,uint256)
+          handler: handleInterestUpdateRequested
+        - event: CancelInterestUpdate(indexed address,uint256)
+          handler: handleCancelInterestUpdate
+      file: ./src/mappings/lendersMappings.ts

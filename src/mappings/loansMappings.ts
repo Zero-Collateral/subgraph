@@ -7,17 +7,17 @@ import {
   SignerAdded as SignerAddedEvent,
   SignerRemoved as SignerRemovedEvent,
 } from "../../generated/Loans/Loans"
-import { Borrower, Signer, Loan, CollateralD, CollateralW } from "../../generated/schema"
+import { Borrower, Signer, Loan, CollateralDeposit, CollateralWithdraw } from "../../generated/schema"
 import { getOrCreateBorrower, createEthTransaction } from "../utils/commons"
-import { Eth_Tx_CollateralDeposited, Eth_Tx_CollateralWithdrawn, Eth_Tx_LoanCreated } from '../utils/consts/ethTransactionEvents'
+import { ETH_TX_COLLATERAL_DEPOSITED, ETH_TX_COLLATERAL_WITHDRAWN, ETH_TX_LOAN_CREATED } from '../utils/consts'
 
 export function handleCollateralDeposited(event: CollateralDepositedEvent): void {
   let loanID = event.params.loanID.toBigDecimal().toString()
   log.info('Adding collateral deposit for loan id {}', [loanID])
-  let ethTransaction = createEthTransaction(event, Eth_Tx_CollateralDeposited)
+  let ethTransaction = createEthTransaction(event, ETH_TX_COLLATERAL_DEPOSITED)
 
   let collateralDId = event.transaction.hash.toHex() + "-" + event.logIndex.toString();
-  let entity = new CollateralD(collateralDId)
+  let entity = new CollateralDeposit(collateralDId)
   entity.loan = loanID
   entity.transaction = ethTransaction.id
   entity.borrower = getOrCreateBorrower(event.params.borrower).address.toHexString()
@@ -33,12 +33,12 @@ export function handleCollateralDeposited(event: CollateralDepositedEvent): void
 }
 
 export function handleCollateralWithdrawn(event: CollateralWithdrawnEvent): void {
-  let ethTransaction = createEthTransaction(event, Eth_Tx_CollateralWithdrawn)
+  let ethTransaction = createEthTransaction(event, ETH_TX_COLLATERAL_WITHDRAWN)
 
   let loanID = event.params.loanID.toBigDecimal().toString()
   log.info(`Adding collateral withdrawn for loan id ${loanID}`, [])
   let collateralWId = event.transaction.hash.toHex() + "-" + event.logIndex.toString()
-  let entity = new CollateralW(collateralWId)
+  let entity = new CollateralWithdraw(collateralWId)
   entity.loan = loanID
   entity.transaction = ethTransaction.id
   entity.borrower = getOrCreateBorrower(event.params.borrower).address.toHexString()
@@ -54,7 +54,7 @@ export function handleCollateralWithdrawn(event: CollateralWithdrawnEvent): void
 }
 
 export function handleLoanCreated(event: LoanCreatedEvent): void {
-  let ethTransaction = createEthTransaction(event, Eth_Tx_LoanCreated)
+  let ethTransaction = createEthTransaction(event, ETH_TX_LOAN_CREATED)
 
   let loanID = event.params.loanID.toBigDecimal().toString()
   let address = event.params.borrower

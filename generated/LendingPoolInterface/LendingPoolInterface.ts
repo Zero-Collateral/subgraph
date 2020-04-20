@@ -15,72 +15,6 @@ import {
   CallResult
 } from "@graphprotocol/graph-ts";
 
-export class DaiDeposited extends EthereumEvent {
-  get params(): DaiDeposited__Params {
-    return new DaiDeposited__Params(this);
-  }
-}
-
-export class DaiDeposited__Params {
-  _event: DaiDeposited;
-
-  constructor(event: DaiDeposited) {
-    this._event = event;
-  }
-
-  get sender(): Address {
-    return this._event.parameters[0].value.toAddress();
-  }
-
-  get amount(): BigInt {
-    return this._event.parameters[1].value.toBigInt();
-  }
-}
-
-export class DaiRepaid extends EthereumEvent {
-  get params(): DaiRepaid__Params {
-    return new DaiRepaid__Params(this);
-  }
-}
-
-export class DaiRepaid__Params {
-  _event: DaiRepaid;
-
-  constructor(event: DaiRepaid) {
-    this._event = event;
-  }
-
-  get borrower(): Address {
-    return this._event.parameters[0].value.toAddress();
-  }
-
-  get amount(): BigInt {
-    return this._event.parameters[1].value.toBigInt();
-  }
-}
-
-export class DaiWithdrawn extends EthereumEvent {
-  get params(): DaiWithdrawn__Params {
-    return new DaiWithdrawn__Params(this);
-  }
-}
-
-export class DaiWithdrawn__Params {
-  _event: DaiWithdrawn;
-
-  constructor(event: DaiWithdrawn) {
-    this._event = event;
-  }
-
-  get sender(): Address {
-    return this._event.parameters[0].value.toAddress();
-  }
-
-  get amount(): BigInt {
-    return this._event.parameters[1].value.toBigInt();
-  }
-}
-
 export class PaymentLiquidated extends EthereumEvent {
   get params(): PaymentLiquidated__Params {
     return new PaymentLiquidated__Params(this);
@@ -103,26 +37,92 @@ export class PaymentLiquidated__Params {
   }
 }
 
-export class DAIPoolInterface extends SmartContract {
-  static bind(address: Address): DAIPoolInterface {
-    return new DAIPoolInterface("DAIPoolInterface", address);
+export class TokenDeposited extends EthereumEvent {
+  get params(): TokenDeposited__Params {
+    return new TokenDeposited__Params(this);
   }
 }
 
-export class DepositDaiCall extends EthereumCall {
-  get inputs(): DepositDaiCall__Inputs {
-    return new DepositDaiCall__Inputs(this);
+export class TokenDeposited__Params {
+  _event: TokenDeposited;
+
+  constructor(event: TokenDeposited) {
+    this._event = event;
   }
 
-  get outputs(): DepositDaiCall__Outputs {
-    return new DepositDaiCall__Outputs(this);
+  get sender(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get amount(): BigInt {
+    return this._event.parameters[1].value.toBigInt();
   }
 }
 
-export class DepositDaiCall__Inputs {
-  _call: DepositDaiCall;
+export class TokenRepaid extends EthereumEvent {
+  get params(): TokenRepaid__Params {
+    return new TokenRepaid__Params(this);
+  }
+}
 
-  constructor(call: DepositDaiCall) {
+export class TokenRepaid__Params {
+  _event: TokenRepaid;
+
+  constructor(event: TokenRepaid) {
+    this._event = event;
+  }
+
+  get borrower(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get amount(): BigInt {
+    return this._event.parameters[1].value.toBigInt();
+  }
+}
+
+export class TokenWithdrawn extends EthereumEvent {
+  get params(): TokenWithdrawn__Params {
+    return new TokenWithdrawn__Params(this);
+  }
+}
+
+export class TokenWithdrawn__Params {
+  _event: TokenWithdrawn;
+
+  constructor(event: TokenWithdrawn) {
+    this._event = event;
+  }
+
+  get sender(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get amount(): BigInt {
+    return this._event.parameters[1].value.toBigInt();
+  }
+}
+
+export class LendingPoolInterface extends SmartContract {
+  static bind(address: Address): LendingPoolInterface {
+    return new LendingPoolInterface("LendingPoolInterface", address);
+  }
+}
+
+export class DepositCall extends EthereumCall {
+  get inputs(): DepositCall__Inputs {
+    return new DepositCall__Inputs(this);
+  }
+
+  get outputs(): DepositCall__Outputs {
+    return new DepositCall__Outputs(this);
+  }
+}
+
+export class DepositCall__Inputs {
+  _call: DepositCall;
+
+  constructor(call: DepositCall) {
     this._call = call;
   }
 
@@ -131,28 +131,28 @@ export class DepositDaiCall__Inputs {
   }
 }
 
-export class DepositDaiCall__Outputs {
-  _call: DepositDaiCall;
+export class DepositCall__Outputs {
+  _call: DepositCall;
 
-  constructor(call: DepositDaiCall) {
+  constructor(call: DepositCall) {
     this._call = call;
   }
 }
 
-export class WithdrawDaiCall extends EthereumCall {
-  get inputs(): WithdrawDaiCall__Inputs {
-    return new WithdrawDaiCall__Inputs(this);
+export class WithdrawCall extends EthereumCall {
+  get inputs(): WithdrawCall__Inputs {
+    return new WithdrawCall__Inputs(this);
   }
 
-  get outputs(): WithdrawDaiCall__Outputs {
-    return new WithdrawDaiCall__Outputs(this);
+  get outputs(): WithdrawCall__Outputs {
+    return new WithdrawCall__Outputs(this);
   }
 }
 
-export class WithdrawDaiCall__Inputs {
-  _call: WithdrawDaiCall;
+export class WithdrawCall__Inputs {
+  _call: WithdrawCall;
 
-  constructor(call: WithdrawDaiCall) {
+  constructor(call: WithdrawCall) {
     this._call = call;
   }
 
@@ -161,28 +161,28 @@ export class WithdrawDaiCall__Inputs {
   }
 }
 
-export class WithdrawDaiCall__Outputs {
-  _call: WithdrawDaiCall;
+export class WithdrawCall__Outputs {
+  _call: WithdrawCall;
 
-  constructor(call: WithdrawDaiCall) {
+  constructor(call: WithdrawCall) {
     this._call = call;
   }
 }
 
-export class RepayDaiCall extends EthereumCall {
-  get inputs(): RepayDaiCall__Inputs {
-    return new RepayDaiCall__Inputs(this);
+export class RepayCall extends EthereumCall {
+  get inputs(): RepayCall__Inputs {
+    return new RepayCall__Inputs(this);
   }
 
-  get outputs(): RepayDaiCall__Outputs {
-    return new RepayDaiCall__Outputs(this);
+  get outputs(): RepayCall__Outputs {
+    return new RepayCall__Outputs(this);
   }
 }
 
-export class RepayDaiCall__Inputs {
-  _call: RepayDaiCall;
+export class RepayCall__Inputs {
+  _call: RepayCall;
 
-  constructor(call: RepayDaiCall) {
+  constructor(call: RepayCall) {
     this._call = call;
   }
 
@@ -195,10 +195,10 @@ export class RepayDaiCall__Inputs {
   }
 }
 
-export class RepayDaiCall__Outputs {
-  _call: RepayDaiCall;
+export class RepayCall__Outputs {
+  _call: RepayCall;
 
-  constructor(call: RepayDaiCall) {
+  constructor(call: RepayCall) {
     this._call = call;
   }
 }
