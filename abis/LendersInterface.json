@@ -1,0 +1,1648 @@
+{
+  "contractName": "LendersInterface",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "lender",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "totalNotWithdrawn",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "totalAccruedInterest",
+          "type": "uint256"
+        }
+      ],
+      "name": "AccruedInterestUpdated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "recipient",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "AccruedInterestWithdrawn",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "lender",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "blockNumber",
+          "type": "uint256"
+        }
+      ],
+      "name": "CancelInterestUpdate",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "lender",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "blockNumber",
+          "type": "uint256"
+        }
+      ],
+      "name": "InterestUpdateRequested",
+      "type": "event"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "sender",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "recipient",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "zTokenTransfer",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "recipient",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "zTokenMinted",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "recipient",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "zTokenBurnt",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "recipient",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "withdrawInterest",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.5.17+commit.d19bba13\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"lender\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"totalNotWithdrawn\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"totalAccruedInterest\",\"type\":\"uint256\"}],\"name\":\"AccruedInterestUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"AccruedInterestWithdrawn\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"lender\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"blockNumber\",\"type\":\"uint256\"}],\"name\":\"CancelInterestUpdate\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"lender\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"blockNumber\",\"type\":\"uint256\"}],\"name\":\"InterestUpdateRequested\",\"type\":\"event\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"withdrawInterest\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"zTokenBurnt\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"zTokenMinted\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"zTokenTransfer\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/guillesalazar/Repos/ZeroCollateral/smart-contracts-v1/contracts/interfaces/LendersInterface.sol\":\"LendersInterface\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/guillesalazar/Repos/ZeroCollateral/smart-contracts-v1/contracts/interfaces/LendersInterface.sol\":{\"keccak256\":\"0x0adb712cd9d095a0cb3841d7dbebffe57561ec02453eb57627f77cb67909eb18\",\"urls\":[\"bzz-raw://c235fb33080a923f5103a3e787d95ea94345906dfb1fad8942aa150a59bd0663\",\"dweb:/ipfs/QmVbZjvnBRQ9eHSsUfs5bVpvgK556nCYi5Rev3YZoR8Ro4\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "pragma solidity 0.5.17;\n\n\ninterface LendersInterface {\n    function zTokenTransfer(address sender, address recipient, uint256 amount) external;\n\n    function zTokenMinted(address recipient, uint256 amount) external;\n\n    function zTokenBurnt(address recipient, uint256 amount) external;\n\n    function withdrawInterest(address recipient, uint256 amount)\n        external\n        returns (uint256);\n\n    event AccruedInterestUpdated(\n        address indexed lender,\n        uint256 totalNotWithdrawn,\n        uint256 totalAccruedInterest\n    );\n    event InterestUpdateRequested(address indexed lender, uint256 blockNumber);\n    event CancelInterestUpdate(address indexed lender, uint256 blockNumber);\n    event AccruedInterestWithdrawn(address indexed recipient, uint256 amount);\n}\n",
+  "sourcePath": "/Users/guillesalazar/Repos/ZeroCollateral/smart-contracts-v1/contracts/interfaces/LendersInterface.sol",
+  "ast": {
+    "absolutePath": "/Users/guillesalazar/Repos/ZeroCollateral/smart-contracts-v1/contracts/interfaces/LendersInterface.sol",
+    "exportedSymbols": {
+      "LendersInterface": [
+        1693
+      ]
+    },
+    "id": 1694,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1634,
+        "literals": [
+          "solidity",
+          "0.5",
+          ".17"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:8"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 1693,
+        "linearizedBaseContracts": [
+          1693
+        ],
+        "name": "LendersInterface",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": null,
+            "documentation": null,
+            "id": 1643,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "zTokenTransfer",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1641,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1636,
+                  "name": "sender",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1643,
+                  "src": "83:14:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1635,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "83:7:8",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1638,
+                  "name": "recipient",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1643,
+                  "src": "99:17:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1637,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "99:7:8",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1640,
+                  "name": "amount",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1643,
+                  "src": "118:14:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1639,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "118:7:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "82:51:8"
+            },
+            "returnParameters": {
+              "id": 1642,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "142:0:8"
+            },
+            "scope": 1693,
+            "src": "59:84:8",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 1650,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "zTokenMinted",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1648,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1645,
+                  "name": "recipient",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1650,
+                  "src": "171:17:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1644,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "171:7:8",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1647,
+                  "name": "amount",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1650,
+                  "src": "190:14:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1646,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "190:7:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "170:35:8"
+            },
+            "returnParameters": {
+              "id": 1649,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "214:0:8"
+            },
+            "scope": 1693,
+            "src": "149:66:8",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 1657,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "zTokenBurnt",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1655,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1652,
+                  "name": "recipient",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1657,
+                  "src": "242:17:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1651,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "242:7:8",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1654,
+                  "name": "amount",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1657,
+                  "src": "261:14:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1653,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "261:7:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "241:35:8"
+            },
+            "returnParameters": {
+              "id": 1656,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "285:0:8"
+            },
+            "scope": 1693,
+            "src": "221:65:8",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 1666,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "withdrawInterest",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1662,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1659,
+                  "name": "recipient",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1666,
+                  "src": "318:17:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1658,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "318:7:8",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1661,
+                  "name": "amount",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1666,
+                  "src": "337:14:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1660,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "337:7:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "317:35:8"
+            },
+            "returnParameters": {
+              "id": 1665,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1664,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1666,
+                  "src": "387:7:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1663,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "387:7:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "386:9:8"
+            },
+            "scope": 1693,
+            "src": "292:104:8",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 1674,
+            "name": "AccruedInterestUpdated",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 1673,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1668,
+                  "indexed": true,
+                  "name": "lender",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1674,
+                  "src": "440:22:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1667,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "440:7:8",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1670,
+                  "indexed": false,
+                  "name": "totalNotWithdrawn",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1674,
+                  "src": "472:25:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1669,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "472:7:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1672,
+                  "indexed": false,
+                  "name": "totalAccruedInterest",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1674,
+                  "src": "507:28:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1671,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "507:7:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "430:111:8"
+            },
+            "src": "402:140:8"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 1680,
+            "name": "InterestUpdateRequested",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 1679,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1676,
+                  "indexed": true,
+                  "name": "lender",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1680,
+                  "src": "577:22:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1675,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "577:7:8",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1678,
+                  "indexed": false,
+                  "name": "blockNumber",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1680,
+                  "src": "601:19:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1677,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "601:7:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "576:45:8"
+            },
+            "src": "547:75:8"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 1686,
+            "name": "CancelInterestUpdate",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 1685,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1682,
+                  "indexed": true,
+                  "name": "lender",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1686,
+                  "src": "654:22:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1681,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "654:7:8",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1684,
+                  "indexed": false,
+                  "name": "blockNumber",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1686,
+                  "src": "678:19:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1683,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "678:7:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "653:45:8"
+            },
+            "src": "627:72:8"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 1692,
+            "name": "AccruedInterestWithdrawn",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 1691,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1688,
+                  "indexed": true,
+                  "name": "recipient",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1692,
+                  "src": "735:25:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1687,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "735:7:8",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1690,
+                  "indexed": false,
+                  "name": "amount",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1692,
+                  "src": "762:14:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1689,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "762:7:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "734:43:8"
+            },
+            "src": "704:74:8"
+          }
+        ],
+        "scope": 1694,
+        "src": "26:754:8"
+      }
+    ],
+    "src": "0:781:8"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/guillesalazar/Repos/ZeroCollateral/smart-contracts-v1/contracts/interfaces/LendersInterface.sol",
+    "exportedSymbols": {
+      "LendersInterface": [
+        1693
+      ]
+    },
+    "id": 1694,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1634,
+        "literals": [
+          "solidity",
+          "0.5",
+          ".17"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:8"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 1693,
+        "linearizedBaseContracts": [
+          1693
+        ],
+        "name": "LendersInterface",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": null,
+            "documentation": null,
+            "id": 1643,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "zTokenTransfer",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1641,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1636,
+                  "name": "sender",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1643,
+                  "src": "83:14:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1635,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "83:7:8",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1638,
+                  "name": "recipient",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1643,
+                  "src": "99:17:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1637,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "99:7:8",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1640,
+                  "name": "amount",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1643,
+                  "src": "118:14:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1639,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "118:7:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "82:51:8"
+            },
+            "returnParameters": {
+              "id": 1642,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "142:0:8"
+            },
+            "scope": 1693,
+            "src": "59:84:8",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 1650,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "zTokenMinted",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1648,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1645,
+                  "name": "recipient",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1650,
+                  "src": "171:17:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1644,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "171:7:8",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1647,
+                  "name": "amount",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1650,
+                  "src": "190:14:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1646,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "190:7:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "170:35:8"
+            },
+            "returnParameters": {
+              "id": 1649,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "214:0:8"
+            },
+            "scope": 1693,
+            "src": "149:66:8",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 1657,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "zTokenBurnt",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1655,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1652,
+                  "name": "recipient",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1657,
+                  "src": "242:17:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1651,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "242:7:8",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1654,
+                  "name": "amount",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1657,
+                  "src": "261:14:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1653,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "261:7:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "241:35:8"
+            },
+            "returnParameters": {
+              "id": 1656,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "285:0:8"
+            },
+            "scope": 1693,
+            "src": "221:65:8",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 1666,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "withdrawInterest",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1662,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1659,
+                  "name": "recipient",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1666,
+                  "src": "318:17:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1658,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "318:7:8",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1661,
+                  "name": "amount",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1666,
+                  "src": "337:14:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1660,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "337:7:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "317:35:8"
+            },
+            "returnParameters": {
+              "id": 1665,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1664,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1666,
+                  "src": "387:7:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1663,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "387:7:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "386:9:8"
+            },
+            "scope": 1693,
+            "src": "292:104:8",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 1674,
+            "name": "AccruedInterestUpdated",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 1673,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1668,
+                  "indexed": true,
+                  "name": "lender",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1674,
+                  "src": "440:22:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1667,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "440:7:8",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1670,
+                  "indexed": false,
+                  "name": "totalNotWithdrawn",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1674,
+                  "src": "472:25:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1669,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "472:7:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1672,
+                  "indexed": false,
+                  "name": "totalAccruedInterest",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1674,
+                  "src": "507:28:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1671,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "507:7:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "430:111:8"
+            },
+            "src": "402:140:8"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 1680,
+            "name": "InterestUpdateRequested",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 1679,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1676,
+                  "indexed": true,
+                  "name": "lender",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1680,
+                  "src": "577:22:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1675,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "577:7:8",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1678,
+                  "indexed": false,
+                  "name": "blockNumber",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1680,
+                  "src": "601:19:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1677,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "601:7:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "576:45:8"
+            },
+            "src": "547:75:8"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 1686,
+            "name": "CancelInterestUpdate",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 1685,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1682,
+                  "indexed": true,
+                  "name": "lender",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1686,
+                  "src": "654:22:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1681,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "654:7:8",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1684,
+                  "indexed": false,
+                  "name": "blockNumber",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1686,
+                  "src": "678:19:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1683,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "678:7:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "653:45:8"
+            },
+            "src": "627:72:8"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 1692,
+            "name": "AccruedInterestWithdrawn",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 1691,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1688,
+                  "indexed": true,
+                  "name": "recipient",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1692,
+                  "src": "735:25:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1687,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "735:7:8",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1690,
+                  "indexed": false,
+                  "name": "amount",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1692,
+                  "src": "762:14:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1689,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "762:7:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "734:43:8"
+            },
+            "src": "704:74:8"
+          }
+        ],
+        "scope": 1694,
+        "src": "26:754:8"
+      }
+    ],
+    "src": "0:781:8"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.17+commit.d19bba13.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.0.23",
+  "updatedAt": "2020-04-17T17:45:49.689Z",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}
