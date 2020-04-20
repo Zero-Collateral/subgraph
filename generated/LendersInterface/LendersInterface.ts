@@ -132,6 +132,25 @@ export class LendersInterface extends SmartContract {
     let value = result.value;
     return CallResult.fromValue(value[0].toBigInt());
   }
+
+  requestedInterestUpdate(param0: Address): BigInt {
+    let result = super.call("requestedInterestUpdate", [
+      EthereumValue.fromAddress(param0)
+    ]);
+
+    return result[0].toBigInt();
+  }
+
+  try_requestedInterestUpdate(param0: Address): CallResult<BigInt> {
+    let result = super.tryCall("requestedInterestUpdate", [
+      EthereumValue.fromAddress(param0)
+    ]);
+    if (result.reverted) {
+      return new CallResult();
+    }
+    let value = result.value;
+    return CallResult.fromValue(value[0].toBigInt());
+  }
 }
 
 export class ZTokenTransferCall extends EthereumCall {
@@ -168,40 +187,6 @@ export class ZTokenTransferCall__Outputs {
   _call: ZTokenTransferCall;
 
   constructor(call: ZTokenTransferCall) {
-    this._call = call;
-  }
-}
-
-export class ZTokenMintedCall extends EthereumCall {
-  get inputs(): ZTokenMintedCall__Inputs {
-    return new ZTokenMintedCall__Inputs(this);
-  }
-
-  get outputs(): ZTokenMintedCall__Outputs {
-    return new ZTokenMintedCall__Outputs(this);
-  }
-}
-
-export class ZTokenMintedCall__Inputs {
-  _call: ZTokenMintedCall;
-
-  constructor(call: ZTokenMintedCall) {
-    this._call = call;
-  }
-
-  get recipient(): Address {
-    return this._call.inputValues[0].value.toAddress();
-  }
-
-  get amount(): BigInt {
-    return this._call.inputValues[1].value.toBigInt();
-  }
-}
-
-export class ZTokenMintedCall__Outputs {
-  _call: ZTokenMintedCall;
-
-  constructor(call: ZTokenMintedCall) {
     this._call = call;
   }
 }
@@ -275,5 +260,77 @@ export class WithdrawInterestCall__Outputs {
 
   get value0(): BigInt {
     return this._call.outputValues[0].value.toBigInt();
+  }
+}
+
+export class RequestedInterestUpdateCall extends EthereumCall {
+  get inputs(): RequestedInterestUpdateCall__Inputs {
+    return new RequestedInterestUpdateCall__Inputs(this);
+  }
+
+  get outputs(): RequestedInterestUpdateCall__Outputs {
+    return new RequestedInterestUpdateCall__Outputs(this);
+  }
+}
+
+export class RequestedInterestUpdateCall__Inputs {
+  _call: RequestedInterestUpdateCall;
+
+  constructor(call: RequestedInterestUpdateCall) {
+    this._call = call;
+  }
+
+  get value0(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+}
+
+export class RequestedInterestUpdateCall__Outputs {
+  _call: RequestedInterestUpdateCall;
+
+  constructor(call: RequestedInterestUpdateCall) {
+    this._call = call;
+  }
+
+  get value0(): BigInt {
+    return this._call.outputValues[0].value.toBigInt();
+  }
+}
+
+export class SetAccruedInterestCall extends EthereumCall {
+  get inputs(): SetAccruedInterestCall__Inputs {
+    return new SetAccruedInterestCall__Inputs(this);
+  }
+
+  get outputs(): SetAccruedInterestCall__Outputs {
+    return new SetAccruedInterestCall__Outputs(this);
+  }
+}
+
+export class SetAccruedInterestCall__Inputs {
+  _call: SetAccruedInterestCall;
+
+  constructor(call: SetAccruedInterestCall) {
+    this._call = call;
+  }
+
+  get lender(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+
+  get endBlock(): BigInt {
+    return this._call.inputValues[1].value.toBigInt();
+  }
+
+  get amount(): BigInt {
+    return this._call.inputValues[2].value.toBigInt();
+  }
+}
+
+export class SetAccruedInterestCall__Outputs {
+  _call: SetAccruedInterestCall;
+
+  constructor(call: SetAccruedInterestCall) {
+    this._call = call;
   }
 }

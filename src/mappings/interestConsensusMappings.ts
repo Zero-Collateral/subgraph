@@ -3,7 +3,7 @@ import { BigInt } from "@graphprotocol/graph-ts"
 import {
   InterestAccepted as InterestAcceptedEvent,
   InterestSubmitted as InterestSubmittedEvent,
-} from "../../generated/ConsensusInterface/ConsensusInterface"
+} from "../../generated/InterestConsensusInterface/InterestConsensusInterface"
 import { InterestAccepted, InterestSubmitted } from "../../generated/schema"
 import { createEthTransaction, buildId } from "../utils/commons"
 import { ETH_TX_INTEREST_ACCEPTED, ETH_TX_INTEREST_SUBMITTED } from '../utils/consts'

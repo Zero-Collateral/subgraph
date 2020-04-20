@@ -202,21 +202,6 @@ export class Loans extends SmartContract {
     return new Loans("Loans", address);
   }
 
-  daiPool(): Address {
-    let result = super.call("daiPool", []);
-
-    return result[0].toAddress();
-  }
-
-  try_daiPool(): CallResult<Address> {
-    let result = super.tryCall("daiPool", []);
-    if (result.reverted) {
-      return new CallResult();
-    }
-    let value = result.value;
-    return CallResult.fromValue(value[0].toAddress());
-  }
-
   isSigner(account: Address): boolean {
     let result = super.call("isSigner", [EthereumValue.fromAddress(account)]);
 
@@ -232,6 +217,21 @@ export class Loans extends SmartContract {
     }
     let value = result.value;
     return CallResult.fromValue(value[0].toBoolean());
+  }
+
+  lendingPool(): Address {
+    let result = super.call("lendingPool", []);
+
+    return result[0].toAddress();
+  }
+
+  try_lendingPool(): CallResult<Address> {
+    let result = super.tryCall("lendingPool", []);
+    if (result.reverted) {
+      return new CallResult();
+    }
+    let value = result.value;
+    return CallResult.fromValue(value[0].toAddress());
   }
 
   loanIDCounter(): BigInt {
@@ -386,7 +386,7 @@ export class ConstructorCall__Inputs {
     return this._call.inputValues[0].value.toAddress();
   }
 
-  get daiPoolAddress(): Address {
+  get lendingPoolAddress(): Address {
     return this._call.inputValues[1].value.toAddress();
   }
 }
@@ -572,7 +572,7 @@ export class TakeOutLoanCall__Outputs {
     this._call = call;
   }
 
-  get loanID(): BigInt {
+  get value0(): BigInt {
     return this._call.outputValues[0].value.toBigInt();
   }
 }
@@ -595,20 +595,20 @@ export class TakeOutLoanCallSignatureStruct extends EthereumTuple {
   }
 }
 
-export class RepayDaiCall extends EthereumCall {
-  get inputs(): RepayDaiCall__Inputs {
-    return new RepayDaiCall__Inputs(this);
+export class RepayCall extends EthereumCall {
+  get inputs(): RepayCall__Inputs {
+    return new RepayCall__Inputs(this);
   }
 
-  get outputs(): RepayDaiCall__Outputs {
-    return new RepayDaiCall__Outputs(this);
+  get outputs(): RepayCall__Outputs {
+    return new RepayCall__Outputs(this);
   }
 }
 
-export class RepayDaiCall__Inputs {
-  _call: RepayDaiCall;
+export class RepayCall__Inputs {
+  _call: RepayCall;
 
-  constructor(call: RepayDaiCall) {
+  constructor(call: RepayCall) {
     this._call = call;
   }
 
@@ -621,10 +621,10 @@ export class RepayDaiCall__Inputs {
   }
 }
 
-export class RepayDaiCall__Outputs {
-  _call: RepayDaiCall;
+export class RepayCall__Outputs {
+  _call: RepayCall;
 
-  constructor(call: RepayDaiCall) {
+  constructor(call: RepayCall) {
     this._call = call;
   }
 }

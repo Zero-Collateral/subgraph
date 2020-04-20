@@ -1,0 +1,967 @@
+{
+  "contractName": "InterestConsensusInterface",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "lender",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "blockNumber",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "interest",
+          "type": "uint256"
+        }
+      ],
+      "name": "InterestAccepted",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "signer",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "lender",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "blockNumber",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "interest",
+          "type": "uint256"
+        }
+      ],
+      "name": "InterestSubmitted",
+      "type": "event"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "signerNonce",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint8",
+              "name": "v",
+              "type": "uint8"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "r",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "s",
+              "type": "bytes32"
+            }
+          ],
+          "internalType": "struct ZeroCollateralCommon.Signature",
+          "name": "signature",
+          "type": "tuple"
+        },
+        {
+          "internalType": "address",
+          "name": "lender",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "blockNumber",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "interest",
+          "type": "uint256"
+        }
+      ],
+      "name": "submitInterestResult",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.5.17+commit.d19bba13\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"lender\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"blockNumber\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"interest\",\"type\":\"uint256\"}],\"name\":\"InterestAccepted\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"signer\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"lender\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"blockNumber\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"interest\",\"type\":\"uint256\"}],\"name\":\"InterestSubmitted\",\"type\":\"event\"},{\"constant\":false,\"inputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"signerNonce\",\"type\":\"uint256\"},{\"internalType\":\"uint8\",\"name\":\"v\",\"type\":\"uint8\"},{\"internalType\":\"bytes32\",\"name\":\"r\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"s\",\"type\":\"bytes32\"}],\"internalType\":\"struct ZeroCollateralCommon.Signature\",\"name\":\"signature\",\"type\":\"tuple\"},{\"internalType\":\"address\",\"name\":\"lender\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"blockNumber\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"interest\",\"type\":\"uint256\"}],\"name\":\"submitInterestResult\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/guillesalazar/Repos/ZeroCollateral/smart-contracts-v1/contracts/interfaces/InterestConsensusInterface.sol\":\"InterestConsensusInterface\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/guillesalazar/Repos/ZeroCollateral/smart-contracts-v1/contracts/interfaces/InterestConsensusInterface.sol\":{\"keccak256\":\"0x4a9c82d8ae1aea02fb02d78b894c50285574c6bb6563133a11b95c7221236e07\",\"urls\":[\"bzz-raw://d416a9e40a7b22f555bdc5077083ac6560b473f83fa40eadbf0c41b54d7e4c5f\",\"dweb:/ipfs/QmSrKsNC9neuTnUxLssM7qCQcofFv9Txsbc2jeFuZi3hoW\"]},\"/Users/guillesalazar/Repos/ZeroCollateral/smart-contracts-v1/contracts/util/ZeroCollateralCommon.sol\":{\"keccak256\":\"0xdd085ddb6174533fad7028505fdb8ff24a1f68f3633561690d5f69bf1352cf42\",\"urls\":[\"bzz-raw://c1168fb96d6f504004d4e862ef19b7b07caad6d476fbc9c9c0429191029da9b5\",\"dweb:/ipfs/QmPy4vUdxktxRpYAih6zUeGkeo2XFTRaWVxtQXT8FiNAvh\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "pragma solidity 0.5.17;\npragma experimental ABIEncoderV2;\n\nimport \"../util/ZeroCollateralCommon.sol\";\n\n\ninterface InterestConsensusInterface {\n    event InterestSubmitted(\n        address signer,\n        address lender,\n        uint256 blockNumber,\n        uint256 interest\n    );\n\n    event InterestAccepted(address lender, uint256 blockNumber, uint256 interest);\n\n    function submitInterestResult(\n        ZeroCollateralCommon.Signature calldata signature,\n        address lender,\n        uint256 blockNumber,\n        uint256 interest\n    ) external;\n}\n",
+  "sourcePath": "/Users/guillesalazar/Repos/ZeroCollateral/smart-contracts-v1/contracts/interfaces/InterestConsensusInterface.sol",
+  "ast": {
+    "absolutePath": "/Users/guillesalazar/Repos/ZeroCollateral/smart-contracts-v1/contracts/interfaces/InterestConsensusInterface.sol",
+    "exportedSymbols": {
+      "InterestConsensusInterface": [
+        2099
+      ]
+    },
+    "id": 2100,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 2067,
+        "literals": [
+          "solidity",
+          "0.5",
+          ".17"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:8"
+      },
+      {
+        "id": 2068,
+        "literals": [
+          "experimental",
+          "ABIEncoderV2"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "24:33:8"
+      },
+      {
+        "absolutePath": "/Users/guillesalazar/Repos/ZeroCollateral/smart-contracts-v1/contracts/util/ZeroCollateralCommon.sol",
+        "file": "../util/ZeroCollateralCommon.sol",
+        "id": 2069,
+        "nodeType": "ImportDirective",
+        "scope": 2100,
+        "sourceUnit": 3109,
+        "src": "59:42:8",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 2099,
+        "linearizedBaseContracts": [
+          2099
+        ],
+        "name": "InterestConsensusInterface",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 2079,
+            "name": "InterestSubmitted",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 2078,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2071,
+                  "indexed": false,
+                  "name": "signer",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2079,
+                  "src": "180:14:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2070,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "180:7:8",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2073,
+                  "indexed": false,
+                  "name": "lender",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2079,
+                  "src": "204:14:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2072,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "204:7:8",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2075,
+                  "indexed": false,
+                  "name": "blockNumber",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2079,
+                  "src": "228:19:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 2074,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "228:7:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2077,
+                  "indexed": false,
+                  "name": "interest",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2079,
+                  "src": "257:16:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 2076,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "257:7:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "170:109:8"
+            },
+            "src": "147:133:8"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 2087,
+            "name": "InterestAccepted",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 2086,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2081,
+                  "indexed": false,
+                  "name": "lender",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2087,
+                  "src": "309:14:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2080,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "309:7:8",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2083,
+                  "indexed": false,
+                  "name": "blockNumber",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2087,
+                  "src": "325:19:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 2082,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "325:7:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2085,
+                  "indexed": false,
+                  "name": "interest",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2087,
+                  "src": "346:16:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 2084,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "346:7:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "308:55:8"
+            },
+            "src": "286:78:8"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 2098,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "submitInterestResult",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2096,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2089,
+                  "name": "signature",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2098,
+                  "src": "409:49:8",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Signature_$3107_calldata_ptr",
+                    "typeString": "struct ZeroCollateralCommon.Signature"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 2088,
+                    "name": "ZeroCollateralCommon.Signature",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 3107,
+                    "src": "409:30:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Signature_$3107_storage_ptr",
+                      "typeString": "struct ZeroCollateralCommon.Signature"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2091,
+                  "name": "lender",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2098,
+                  "src": "468:14:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2090,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "468:7:8",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2093,
+                  "name": "blockNumber",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2098,
+                  "src": "492:19:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 2092,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "492:7:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2095,
+                  "name": "interest",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2098,
+                  "src": "521:16:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 2094,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "521:7:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "399:144:8"
+            },
+            "returnParameters": {
+              "id": 2097,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "552:0:8"
+            },
+            "scope": 2099,
+            "src": "370:183:8",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          }
+        ],
+        "scope": 2100,
+        "src": "104:451:8"
+      }
+    ],
+    "src": "0:556:8"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/guillesalazar/Repos/ZeroCollateral/smart-contracts-v1/contracts/interfaces/InterestConsensusInterface.sol",
+    "exportedSymbols": {
+      "InterestConsensusInterface": [
+        2099
+      ]
+    },
+    "id": 2100,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 2067,
+        "literals": [
+          "solidity",
+          "0.5",
+          ".17"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:8"
+      },
+      {
+        "id": 2068,
+        "literals": [
+          "experimental",
+          "ABIEncoderV2"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "24:33:8"
+      },
+      {
+        "absolutePath": "/Users/guillesalazar/Repos/ZeroCollateral/smart-contracts-v1/contracts/util/ZeroCollateralCommon.sol",
+        "file": "../util/ZeroCollateralCommon.sol",
+        "id": 2069,
+        "nodeType": "ImportDirective",
+        "scope": 2100,
+        "sourceUnit": 3109,
+        "src": "59:42:8",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 2099,
+        "linearizedBaseContracts": [
+          2099
+        ],
+        "name": "InterestConsensusInterface",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 2079,
+            "name": "InterestSubmitted",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 2078,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2071,
+                  "indexed": false,
+                  "name": "signer",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2079,
+                  "src": "180:14:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2070,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "180:7:8",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2073,
+                  "indexed": false,
+                  "name": "lender",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2079,
+                  "src": "204:14:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2072,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "204:7:8",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2075,
+                  "indexed": false,
+                  "name": "blockNumber",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2079,
+                  "src": "228:19:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 2074,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "228:7:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2077,
+                  "indexed": false,
+                  "name": "interest",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2079,
+                  "src": "257:16:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 2076,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "257:7:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "170:109:8"
+            },
+            "src": "147:133:8"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 2087,
+            "name": "InterestAccepted",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 2086,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2081,
+                  "indexed": false,
+                  "name": "lender",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2087,
+                  "src": "309:14:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2080,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "309:7:8",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2083,
+                  "indexed": false,
+                  "name": "blockNumber",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2087,
+                  "src": "325:19:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 2082,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "325:7:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2085,
+                  "indexed": false,
+                  "name": "interest",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2087,
+                  "src": "346:16:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 2084,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "346:7:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "308:55:8"
+            },
+            "src": "286:78:8"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 2098,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "submitInterestResult",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2096,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2089,
+                  "name": "signature",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2098,
+                  "src": "409:49:8",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Signature_$3107_calldata_ptr",
+                    "typeString": "struct ZeroCollateralCommon.Signature"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 2088,
+                    "name": "ZeroCollateralCommon.Signature",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 3107,
+                    "src": "409:30:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Signature_$3107_storage_ptr",
+                      "typeString": "struct ZeroCollateralCommon.Signature"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2091,
+                  "name": "lender",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2098,
+                  "src": "468:14:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2090,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "468:7:8",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2093,
+                  "name": "blockNumber",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2098,
+                  "src": "492:19:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 2092,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "492:7:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2095,
+                  "name": "interest",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2098,
+                  "src": "521:16:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 2094,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "521:7:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "399:144:8"
+            },
+            "returnParameters": {
+              "id": 2097,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "552:0:8"
+            },
+            "scope": 2099,
+            "src": "370:183:8",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          }
+        ],
+        "scope": 2100,
+        "src": "104:451:8"
+      }
+    ],
+    "src": "0:556:8"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.17+commit.d19bba13.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.0.23",
+  "updatedAt": "2020-04-20T17:42:35.494Z",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}
