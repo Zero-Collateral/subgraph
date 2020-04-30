@@ -27,6 +27,14 @@ enum EthEvent {
   CollateralDeposited
   InterestSubmitted
   InterestAccepted
+  AccruedInterestUpdated
+  AccruedInterestWithdrawn
+  InterestUpdateRequested
+  CancelInterestUpdate
+  ZTokenTransfer
+  ZTokenApproval
+  ZTokenMinterAdded
+  ZTokenMinterRemoved
 }
 
 enum InterestUpdateStatusAction {
@@ -37,6 +45,13 @@ enum InterestUpdateStatusAction {
 enum AccruedInterestStatusAction {
   Withdrawn
   Updated
+}
+
+enum ZTokenStatusAction {
+  Transfer
+  Approval
+  MinterAdded
+  MinterRemoved
 }
 
 type EthTransaction @entity {
@@ -73,6 +88,8 @@ type Loan @entity {
   amountBorrow: BigInt!
   collateralDeposits: [CollateralDeposit!]!
   collateralWithdrawns: [CollateralWithdraw!]!
+  blockNumber: BigInt!
+  timestamp: BigInt!
 }
 
 type CollateralDeposit @entity {
@@ -81,6 +98,8 @@ type CollateralDeposit @entity {
   loan: Loan!
   borrower: Borrower!
   amount: BigInt!
+  blockNumber: BigInt!
+  timestamp: BigInt!
 }
 
 type CollateralWithdraw @entity {
@@ -89,6 +108,8 @@ type CollateralWithdraw @entity {
   loan: Loan!
   borrower: Borrower!
   amount: BigInt!
+  blockNumber: BigInt!
+  timestamp: BigInt!
 }
 
 type Signer @entity {
@@ -105,6 +126,8 @@ type LendingPoolStatus @entity {
   address: Bytes!
   amount: BigInt!
   action: LendingPoolAction!
+  blockNumber: BigInt!
+  timestamp: BigInt!
 }
 
 type InterestSubmitted @entity {
@@ -114,6 +137,7 @@ type InterestSubmitted @entity {
   lender: Bytes!
   blockNumber: BigInt!
   interest: BigInt!
+  timestamp: BigInt!
 }
 
 type InterestAccepted @entity {
@@ -132,6 +156,8 @@ type AccruedInterestStatus @entity {
   totalAmount: BigInt!
   accruedInterest: BigInt!
   action: AccruedInterestStatusAction!
+  blockNumber: BigInt!
+  timestamp: BigInt!
 }
 
 type InterestUpdateStatus @entity {
@@ -141,4 +167,25 @@ type InterestUpdateStatus @entity {
   blockNumber: BigInt!
   updatedAt: BigInt!
   action: InterestUpdateStatusAction!
+}
+
+type ZTokenBalance @entity {
+  id: ID!
+  amount: BigInt!
+  zToken: ZToken!
+  account: Bytes!
+  blockNumber: BigInt!
+  updatedAt: BigInt!
+}
+
+type ZTokenStatus @entity {
+  id: ID!
+  transaction: EthTransaction!
+  amount: BigInt!
+  zToken: ZToken!
+  from: Bytes!
+  to: Bytes!
+  action: ZTokenStatusAction!
+  blockNumber: BigInt!
+  timestamp: BigInt!
 }

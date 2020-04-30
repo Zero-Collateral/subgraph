@@ -111,3 +111,55 @@ dataSources:
         - event: CancelInterestUpdate(indexed address,uint256)
           handler: handleCancelInterestUpdate
       file: ./src/mappings/lendersMappings.ts
+  - kind: ethereum/contract
+    name: ZDAIToken
+    network: ropsten
+    source:
+      address: "0xbadb7f7cbb3C03C974fA4b4119B87bFA566CB7dF"
+      abi: ZToken
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.3
+      language: wasm/assemblyscript
+      entities:
+        - Transfer
+        - Approval
+      abis:
+        - name: ZToken
+          file: ./abis/ZToken.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: MinterAdded(indexed address)
+          handler: handleMinterAdded
+        - event: MinterRemoved(indexed address)
+          handler: handleMinterRemoved
+      file: ./src/mappings/zTokens/zDaiMappings.ts
+  - kind: ethereum/contract
+    name: ZUSDCToken
+    network: ropsten
+    source:
+      address: "0xFb58b8cCC9123E6E5441E28e57Cb823a632d5967"
+      abi: ZToken
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.3
+      language: wasm/assemblyscript
+      entities:
+        - Transfer
+        - Approval
+      abis:
+        - name: ZToken
+          file: ./abis/ZToken.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: MinterAdded(indexed address)
+          handler: handleMinterAdded
+        - event: MinterRemoved(indexed address)
+          handler: handleMinterRemoved
+      file: ./src/mappings/zTokens/zUSDCMappings.ts

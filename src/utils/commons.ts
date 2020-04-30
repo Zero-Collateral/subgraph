@@ -1,6 +1,14 @@
 import { log, BigInt, EthereumEvent, Bytes } from '@graphprotocol/graph-ts'
-import { Borrower, LendingPoolStatus, EthTransaction } from "../../generated/schema";
+import { Borrower, LendingPoolStatus, EthTransaction, ZTokenStatus, ZTokenBalance } from "../../generated/schema";
 import { Address } from "@graphprotocol/graph-ts";
+import { EMPTY_ADDRESS_STRING } from './consts';
+import {
+  Transfer as TransferEvent,
+} from "../../generated/ZToken/ZToken";
+
+export function getTimestampInMillis(event: EthereumEvent): BigInt {
+  return event.block.timestamp.times(BigInt.fromI32(1000));
+}
 
 export function createEthTransaction (event:EthereumEvent, action:string): EthTransaction {
   let id = event.transaction.hash.toHex() + "-" + event.logIndex.toString()
@@ -15,7 +23,7 @@ export function createEthTransaction (event:EthereumEvent, action:string): EthTr
   entity.to = event.transaction.to as Bytes
   entity.value = event.transaction.value
   entity.contract = event.address
-  entity.timestamp = event.block.timestamp.times(BigInt.fromI32(1000))
+  entity.timestamp = getTimestampInMillis(event)
   entity.gasLimit = event.block.gasLimit
   entity.blockNumber = event.block.number
   entity.save()
@@ -44,9 +52,61 @@ export function createLendingPoolStatus (id:string, zToken:string, lendingToken:
   daiPoolAction.address = address
   daiPoolAction.amount = amount
   daiPoolAction.transaction = transaction.id
+  daiPoolAction.blockNumber = transaction.blockNumber
+  daiPoolAction.timestamp = transaction.timestamp
   daiPoolAction.save()
 }
 
 export function buildId(event:EthereumEvent): string {
   return event.transaction.hash.toHex() + "-" + event.logIndex.toString();
+}
+
+export function createZTokenStatus(id: string, amount:BigInt, zToken:string, from:Address, to:Address, action:string, ethTransaction:EthTransaction): void {
+  let entity = new ZTokenStatus(id);
+  entity.transaction = ethTransaction.id
+  entity.amount = amount
+  entity.zToken = zToken
+  entity.from = from
+  entity.to = to
+  entity.action = action
+  entity.blockNumber = ethTransaction.blockNumber
+  entity.timestamp = ethTransaction.timestamp
+  entity.save()
+}
+
+export function getOrCreateZTokenBalance(holder: Address): ZTokenBalance {
+  let id = holder.toHexString();
+  log.info('Loading ZTokenBalance for holder {}', [id])
+  let entity = ZTokenBalance.load(id);
+  if (entity == null) {
+    log.info('Creating new ZTokenBalance instance for holder {}', [id])
+    entity = new ZTokenBalance(id)
+    entity.amount = BigInt.fromI32(0)
+    entity.account = holder
+    entity.blockNumber = BigInt.fromI32(0)
+    entity.updatedAt = BigInt.fromI32(0)
+  }
+  return entity as ZTokenBalance;
+}
+
+export function updateZTokenBalancesFor(zToken: string, event: TransferEvent): void {
+  log.info('Updating ZToken balance for holders {} / {} ', [event.params.from.toHexString(), event.params.to.toHexString()])
+  if (event.params.from.toHexString() != EMPTY_ADDRESS_STRING) {
+    let fromEntity = getOrCreateZTokenBalance(event.params.from)
+    log.info('Updating ZToken balance for holder {} (from). Current balance {} {}', [event.params.from.toHexString(), fromEntity.amount.toString(), zToken])
+    fromEntity.amount = fromEntity.amount.minus(event.params.value)
+    fromEntity.zToken = zToken
+    fromEntity.blockNumber = event.block.number
+    fromEntity.updatedAt = getTimestampInMillis(event)
+    fromEntity.save()
+  }
+  if (event.params.to.toHexString() != EMPTY_ADDRESS_STRING) {
+    let toEntity = getOrCreateZTokenBalance(event.params.to)
+    log.info('Updating ZToken balance for holder {} (to). Current balance {} {}', [event.params.to.toHexString(), toEntity.amount.toString(), zToken])
+    toEntity.amount = toEntity.amount.plus(event.params.value)
+    toEntity.zToken = zToken
+    toEntity.blockNumber = event.block.number
+    toEntity.updatedAt = getTimestampInMillis(event)
+    toEntity.save()
+  }
 }

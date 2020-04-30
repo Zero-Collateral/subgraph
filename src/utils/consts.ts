@@ -1,4 +1,5 @@
 // See enums in schema.graphql
+export const EMPTY_ADDRESS_STRING = "0x0000000000000000000000000000000000000000";
 
 // zTokens consts
 export const ZTOKEN_ZDAI = "zDAI";
@@ -26,6 +27,10 @@ export const ETH_TX_ACCRUED_INTEREST_UPDATED = "AccruedInterestUpdated";
 export const ETH_TX_ACCRUED_INTEREST_WITHDRAWN = "AccruedInterestWithdrawn";
 export const ETH_TX_INTEREST_UPDATE_REQUESTED = "InterestUpdateRequested";
 export const ETH_TX_INTEREST_UPDATE_CANCELED = "CancelInterestUpdate";
+export const ETH_TX_ZTOKEN_TRANSFER = "ZTokenTransfer";
+export const ETH_TX_ZTOKEN_APPROVAL = "ZTokenApproval";
+export const ETH_TX_ZTOKEN_MINTER_ADDED = "ZTokenMinterAdded";
+export const ETH_TX_ZTOKEN_MINTER_REMOVED = "ZTokenMinterRemoved";
 
 // Tokens consts
 export const TOKEN_DAI = "DAI";
@@ -38,3 +43,9 @@ export const INTEREST_UPDATE_CANCELED = "Canceled";
 // Accrued Interest Status consts
 export const ACCRUED_INTEREST_STATUS_WITHDRAWN = "Withdrawn";
 export const ACCRUED_INTEREST_STATUS_UPDATED = "Updated";
+
+// ZToken Status consts
+export const ZTOKEN_STATUS_TRANSFER = "Transfer";
+export const ZTOKEN_STATUS_APPROVAL = "Approval";
+export const ZTOKEN_STATUS_MINTER_ADDED = "MinterAdded";
+export const ZTOKEN_STATUS_MINTER_REMOVED = "MinterRemoved";

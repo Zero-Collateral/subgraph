@@ -8,7 +8,7 @@ import {
   SignerRemoved as SignerRemovedEvent,
 } from "../../generated/Loans/Loans"
 import { Borrower, Signer, Loan, CollateralDeposit, CollateralWithdraw } from "../../generated/schema"
-import { getOrCreateBorrower, createEthTransaction } from "../utils/commons"
+import { getOrCreateBorrower, createEthTransaction, getTimestampInMillis } from "../utils/commons"
 import { ETH_TX_COLLATERAL_DEPOSITED, ETH_TX_COLLATERAL_WITHDRAWN, ETH_TX_LOAN_CREATED } from '../utils/consts'
 
 export function handleCollateralDeposited(event: CollateralDepositedEvent): void {
@@ -22,6 +22,8 @@ export function handleCollateralDeposited(event: CollateralDepositedEvent): void
   entity.transaction = ethTransaction.id
   entity.borrower = getOrCreateBorrower(event.params.borrower).address.toHexString()
   entity.amount = event.params.depositAmount
+  entity.blockNumber = ethTransaction.blockNumber
+  entity.timestamp = getTimestampInMillis(event)
   entity.save()
 
   log.info('Adding new collateral deposit {} item in loan id {}', [entity.id, loanID])
@@ -29,6 +31,7 @@ export function handleCollateralDeposited(event: CollateralDepositedEvent): void
   let collateralDeposits = loan.collateralDeposits;
   collateralDeposits.push(collateralDId)
   loan.collateralDeposits = collateralDeposits
+
   loan.save()
 }
 
@@ -43,6 +46,8 @@ export function handleCollateralWithdrawn(event: CollateralWithdrawnEvent): void
   entity.transaction = ethTransaction.id
   entity.borrower = getOrCreateBorrower(event.params.borrower).address.toHexString()
   entity.amount = event.params.depositAmount
+  entity.blockNumber = ethTransaction.blockNumber
+  entity.timestamp = getTimestampInMillis(event)
   entity.save()
 
   log.info('Adding new collateral withdrawn {} item in loan id {}', [entity.id, loanID])
@@ -65,7 +70,7 @@ export function handleLoanCreated(event: LoanCreatedEvent): void {
   loan.borrower = address.toHexString()
   loan.transaction = ethTransaction.id
   // TODO Do we need end date? or just we calculate with start date and number of days?
-  loan.startDate = event.block.timestamp.times(BigInt.fromI32(1000))
+  loan.startDate = getTimestampInMillis(event)
   loan.amountBorrow = event.transaction.value
   loan.interestRate = event.params.interestRate
   loan.collateralRatio = event.params.collateralRatio
@@ -73,6 +78,8 @@ export function handleLoanCreated(event: LoanCreatedEvent): void {
   loan.numberDays = event.params.numberDays
   loan.collateralDeposits = []
   loan.collateralWithdrawns = []
+  loan.blockNumber = ethTransaction.blockNumber
+  loan.timestamp = getTimestampInMillis(event)
   loan.save()
 
   log.info('Adding new loan {} to borrower {}', [loanID, address.toHex()])
