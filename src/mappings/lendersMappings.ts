@@ -10,7 +10,7 @@ import {
   AccruedInterestStatus,
   InterestUpdateStatus,
 } from "../../generated/schema";
-import { createEthTransaction, buildId } from "../utils/commons";
+import { createEthTransaction, buildId, getTimestampInMillis } from "../utils/commons";
 import {
   ACCRUED_INTEREST_STATUS_UPDATED,
   ETH_TX_ACCRUED_INTEREST_UPDATED,
@@ -71,7 +71,7 @@ export function handleInterestUpdateRequested(
   entity.transaction = ethTransaction.id;
   entity.lender = event.params.lender;
   entity.blockNumber = event.params.blockNumber;
-  entity.updatedAt = event.block.timestamp.times(BigInt.fromI32(1000));
+  entity.updatedAt = getTimestampInMillis(event)
   entity.action = INTEREST_UPDATE_REQUESTED;
   entity.save();
 }
@@ -89,7 +89,7 @@ export function handleCancelInterestUpdate(
   entity.transaction = ethTransaction.id;
   entity.lender = event.params.lender;
   entity.blockNumber = event.params.blockNumber;
-  entity.updatedAt = event.block.timestamp.times(BigInt.fromI32(1000));
+  entity.updatedAt = getTimestampInMillis(event)
   entity.action = INTEREST_UPDATE_CANCELED;
   entity.save();
 }

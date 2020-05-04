@@ -319,6 +319,24 @@ export class Loan extends Entity {
   set collateralWithdrawns(value: Array<string>) {
     this.set("collateralWithdrawns", Value.fromStringArray(value));
   }
+
+  get blockNumber(): BigInt {
+    let value = this.get("blockNumber");
+    return value.toBigInt();
+  }
+
+  set blockNumber(value: BigInt) {
+    this.set("blockNumber", Value.fromBigInt(value));
+  }
+
+  get timestamp(): BigInt {
+    let value = this.get("timestamp");
+    return value.toBigInt();
+  }
+
+  set timestamp(value: BigInt) {
+    this.set("timestamp", Value.fromBigInt(value));
+  }
 }
 
 export class CollateralDeposit extends Entity {
@@ -386,6 +404,24 @@ export class CollateralDeposit extends Entity {
   set amount(value: BigInt) {
     this.set("amount", Value.fromBigInt(value));
   }
+
+  get blockNumber(): BigInt {
+    let value = this.get("blockNumber");
+    return value.toBigInt();
+  }
+
+  set blockNumber(value: BigInt) {
+    this.set("blockNumber", Value.fromBigInt(value));
+  }
+
+  get timestamp(): BigInt {
+    let value = this.get("timestamp");
+    return value.toBigInt();
+  }
+
+  set timestamp(value: BigInt) {
+    this.set("timestamp", Value.fromBigInt(value));
+  }
 }
 
 export class CollateralWithdraw extends Entity {
@@ -452,6 +488,24 @@ export class CollateralWithdraw extends Entity {
 
   set amount(value: BigInt) {
     this.set("amount", Value.fromBigInt(value));
+  }
+
+  get blockNumber(): BigInt {
+    let value = this.get("blockNumber");
+    return value.toBigInt();
+  }
+
+  set blockNumber(value: BigInt) {
+    this.set("blockNumber", Value.fromBigInt(value));
+  }
+
+  get timestamp(): BigInt {
+    let value = this.get("timestamp");
+    return value.toBigInt();
+  }
+
+  set timestamp(value: BigInt) {
+    this.set("timestamp", Value.fromBigInt(value));
   }
 }
 
@@ -587,6 +641,24 @@ export class LendingPoolStatus extends Entity {
   set action(value: string) {
     this.set("action", Value.fromString(value));
   }
+
+  get blockNumber(): BigInt {
+    let value = this.get("blockNumber");
+    return value.toBigInt();
+  }
+
+  set blockNumber(value: BigInt) {
+    this.set("blockNumber", Value.fromBigInt(value));
+  }
+
+  get timestamp(): BigInt {
+    let value = this.get("timestamp");
+    return value.toBigInt();
+  }
+
+  set timestamp(value: BigInt) {
+    this.set("timestamp", Value.fromBigInt(value));
+  }
 }
 
 export class InterestSubmitted extends Entity {
@@ -662,6 +734,15 @@ export class InterestSubmitted extends Entity {
 
   set interest(value: BigInt) {
     this.set("interest", Value.fromBigInt(value));
+  }
+
+  get timestamp(): BigInt {
+    let value = this.get("timestamp");
+    return value.toBigInt();
+  }
+
+  set timestamp(value: BigInt) {
+    this.set("timestamp", Value.fromBigInt(value));
   }
 }
 
@@ -821,6 +902,24 @@ export class AccruedInterestStatus extends Entity {
   set action(value: string) {
     this.set("action", Value.fromString(value));
   }
+
+  get blockNumber(): BigInt {
+    let value = this.get("blockNumber");
+    return value.toBigInt();
+  }
+
+  set blockNumber(value: BigInt) {
+    this.set("blockNumber", Value.fromBigInt(value));
+  }
+
+  get timestamp(): BigInt {
+    let value = this.get("timestamp");
+    return value.toBigInt();
+  }
+
+  set timestamp(value: BigInt) {
+    this.set("timestamp", Value.fromBigInt(value));
+  }
 }
 
 export class InterestUpdateStatus extends Entity {
@@ -899,5 +998,184 @@ export class InterestUpdateStatus extends Entity {
 
   set action(value: string) {
     this.set("action", Value.fromString(value));
+  }
+}
+
+export class ZTokenBalance extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id !== null, "Cannot save ZTokenBalance entity without an ID");
+    assert(
+      id.kind == ValueKind.STRING,
+      "Cannot save ZTokenBalance entity with non-string ID. " +
+        'Considering using .toHex() to convert the "id" to a string.'
+    );
+    store.set("ZTokenBalance", id.toString(), this);
+  }
+
+  static load(id: string): ZTokenBalance | null {
+    return store.get("ZTokenBalance", id) as ZTokenBalance | null;
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get amount(): BigInt {
+    let value = this.get("amount");
+    return value.toBigInt();
+  }
+
+  set amount(value: BigInt) {
+    this.set("amount", Value.fromBigInt(value));
+  }
+
+  get zToken(): string {
+    let value = this.get("zToken");
+    return value.toString();
+  }
+
+  set zToken(value: string) {
+    this.set("zToken", Value.fromString(value));
+  }
+
+  get account(): Bytes {
+    let value = this.get("account");
+    return value.toBytes();
+  }
+
+  set account(value: Bytes) {
+    this.set("account", Value.fromBytes(value));
+  }
+
+  get blockNumber(): BigInt {
+    let value = this.get("blockNumber");
+    return value.toBigInt();
+  }
+
+  set blockNumber(value: BigInt) {
+    this.set("blockNumber", Value.fromBigInt(value));
+  }
+
+  get updatedAt(): BigInt {
+    let value = this.get("updatedAt");
+    return value.toBigInt();
+  }
+
+  set updatedAt(value: BigInt) {
+    this.set("updatedAt", Value.fromBigInt(value));
+  }
+}
+
+export class ZTokenStatus extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id !== null, "Cannot save ZTokenStatus entity without an ID");
+    assert(
+      id.kind == ValueKind.STRING,
+      "Cannot save ZTokenStatus entity with non-string ID. " +
+        'Considering using .toHex() to convert the "id" to a string.'
+    );
+    store.set("ZTokenStatus", id.toString(), this);
+  }
+
+  static load(id: string): ZTokenStatus | null {
+    return store.get("ZTokenStatus", id) as ZTokenStatus | null;
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get transaction(): string {
+    let value = this.get("transaction");
+    return value.toString();
+  }
+
+  set transaction(value: string) {
+    this.set("transaction", Value.fromString(value));
+  }
+
+  get amount(): BigInt {
+    let value = this.get("amount");
+    return value.toBigInt();
+  }
+
+  set amount(value: BigInt) {
+    this.set("amount", Value.fromBigInt(value));
+  }
+
+  get zToken(): string {
+    let value = this.get("zToken");
+    return value.toString();
+  }
+
+  set zToken(value: string) {
+    this.set("zToken", Value.fromString(value));
+  }
+
+  get from(): Bytes {
+    let value = this.get("from");
+    return value.toBytes();
+  }
+
+  set from(value: Bytes) {
+    this.set("from", Value.fromBytes(value));
+  }
+
+  get to(): Bytes {
+    let value = this.get("to");
+    return value.toBytes();
+  }
+
+  set to(value: Bytes) {
+    this.set("to", Value.fromBytes(value));
+  }
+
+  get action(): string {
+    let value = this.get("action");
+    return value.toString();
+  }
+
+  set action(value: string) {
+    this.set("action", Value.fromString(value));
+  }
+
+  get blockNumber(): BigInt {
+    let value = this.get("blockNumber");
+    return value.toBigInt();
+  }
+
+  set blockNumber(value: BigInt) {
+    this.set("blockNumber", Value.fromBigInt(value));
+  }
+
+  get timestamp(): BigInt {
+    let value = this.get("timestamp");
+    return value.toBigInt();
+  }
+
+  set timestamp(value: BigInt) {
+    this.set("timestamp", Value.fromBigInt(value));
   }
 }

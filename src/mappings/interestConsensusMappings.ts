@@ -5,7 +5,7 @@ import {
   InterestSubmitted as InterestSubmittedEvent,
 } from "../../generated/InterestConsensusInterface/InterestConsensusInterface"
 import { InterestAccepted, InterestSubmitted } from "../../generated/schema"
-import { createEthTransaction, buildId } from "../utils/commons"
+import { createEthTransaction, buildId, getTimestampInMillis } from "../utils/commons"
 import { ETH_TX_INTEREST_ACCEPTED, ETH_TX_INTEREST_SUBMITTED } from '../utils/consts'
 
 export function handleInterestSubmitted(event: InterestSubmittedEvent): void {
@@ -29,7 +29,7 @@ export function handleInterestAccepted(event: InterestAcceptedEvent): void {
   entity.transaction = ethTransaction.id
   entity.interest = event.params.interest
   entity.lender = event.params.lender
-  entity.acceptedAt = event.block.timestamp.times(BigInt.fromI32(1000))
+  entity.acceptedAt = getTimestampInMillis(event)
   entity.blockNumber = event.params.blockNumber
   entity.save()
 }
