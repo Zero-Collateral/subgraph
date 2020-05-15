@@ -3,13 +3,13 @@ import { BigInt } from "@graphprotocol/graph-ts"
 import {
   CollateralDeposited as CollateralDepositedEvent,
   CollateralWithdrawn as CollateralWithdrawnEvent,
-  LoanCreated as LoanCreatedEvent,
-  SignerAdded as SignerAddedEvent,
-  SignerRemoved as SignerRemovedEvent,
-} from "../../generated/Loans/Loans"
-import { Borrower, Signer, Loan, CollateralDeposit, CollateralWithdraw } from "../../generated/schema"
-import { getOrCreateBorrower, createEthTransaction, getTimestampInMillis } from "../utils/commons"
-import { ETH_TX_COLLATERAL_DEPOSITED, ETH_TX_COLLATERAL_WITHDRAWN, ETH_TX_LOAN_CREATED } from '../utils/consts'
+  LoanRepaid as LoanRepaidEvent,
+  LoanTermsSet as LoanTermsSetEvent,
+  LoanTakenOut as LoanTakenOutEvent,
+} from "../../../generated/Loans/Loans"
+import { LoanTerm, Loan, CollateralDeposit, CollateralWithdraw } from "../../../generated/schema"
+import { getOrCreateBorrower, createEthTransaction, getTimestampInMillis, createLoanTerms, createLoan, createLoanRepayment } from "../../utils/commons"
+import { LOAN_STATUS_CLOSED, LOAN_STATUS_ACTIVE, ETH_TX_COLLATERAL_DEPOSITED, ETH_TX_COLLATERAL_WITHDRAWN, ETH_TX_LOAN_TAKEN_OUT, ETH_TX_LOAN_TERMS_SET } from '../../utils/consts'
 
 export function handleCollateralDeposited(event: CollateralDepositedEvent): void {
   let loanID = event.params.loanID.toBigDecimal().toString()
@@ -31,7 +31,7 @@ export function handleCollateralDeposited(event: CollateralDepositedEvent): void
   let collateralDeposits = loan.collateralDeposits;
   collateralDeposits.push(collateralDId)
   loan.collateralDeposits = collateralDeposits
-
+  loan.totalCollateralDepositsAmount = loan.totalCollateralDepositsAmount.plus(event.params.depositAmount)
   loan.save()
 }
 
@@ -45,7 +45,7 @@ export function handleCollateralWithdrawn(event: CollateralWithdrawnEvent): void
   entity.loan = loanID
   entity.transaction = ethTransaction.id
   entity.borrower = getOrCreateBorrower(event.params.borrower).address.toHexString()
-  entity.amount = event.params.depositAmount
+  entity.amount = event.params.withdrawalAmount
   entity.blockNumber = ethTransaction.blockNumber
   entity.timestamp = getTimestampInMillis(event)
   entity.save()
@@ -55,40 +55,64 @@ export function handleCollateralWithdrawn(event: CollateralWithdrawnEvent): void
   let collateralWithdrawns = loan.collateralWithdrawns;
   collateralWithdrawns.push(collateralWId)
   loan.collateralWithdrawns = collateralWithdrawns
+  loan.totalCollateralWithdrawalsAmount = loan.totalCollateralWithdrawalsAmount.plus(event.params.withdrawalAmount)
   loan.save()
 }
 
-export function handleLoanCreated(event: LoanCreatedEvent): void {
-  let ethTransaction = createEthTransaction(event, ETH_TX_LOAN_CREATED)
+export function handleLoanTermsSet(event: LoanTermsSetEvent): void {
+  let ethTransaction = createEthTransaction(event, ETH_TX_LOAN_TERMS_SET)
 
   let loanID = event.params.loanID.toBigDecimal().toString()
-  let address = event.params.borrower
-  let borrower:Borrower = getOrCreateBorrower(event.params.borrower)
+  let loanTerms = createLoanTerms(event)
+  createLoan(
+    loanID,
+    ethTransaction.id,
+    loanTerms,
+    event.params.borrower,
+    event.params.recipient,
+    BigInt.fromI32(0),
+    event,
+  )
+}
 
-  let loan = new Loan(loanID)
-  log.info('Adding new loan {}', [loanID])
-  loan.borrower = address.toHexString()
+export function handleLoanTakenOut(event: LoanTakenOutEvent): void {
+  let ethTransaction = createEthTransaction(event, ETH_TX_LOAN_TAKEN_OUT)
+
+  let loanID = event.params.loanID.toBigDecimal().toString()
+  let loan = Loan.load(loanID)
+  let loanTerms = LoanTerm.load(loan.terms)
+
   loan.transaction = ethTransaction.id
-  // TODO Do we need end date? or just we calculate with start date and number of days?
+  loan.status = LOAN_STATUS_ACTIVE
+  loan.amountBorrowed = event.params.amountBorrowed
   loan.startDate = getTimestampInMillis(event)
-  loan.amountBorrow = event.transaction.value
-  loan.interestRate = event.params.interestRate
-  loan.collateralRatio = event.params.collateralRatio
-  loan.maxLoanAmount = event.params.maxLoanAmount
-  loan.numberDays = event.params.numberDays
-  loan.collateralDeposits = []
-  loan.collateralWithdrawns = []
-  loan.blockNumber = ethTransaction.blockNumber
-  loan.timestamp = getTimestampInMillis(event)
+  loan.endDate = loan.startDate.plus(loanTerms.duration)
   loan.save()
 
-  log.info('Adding new loan {} to borrower {}', [loanID, address.toHex()])
+  let borrower = getOrCreateBorrower(event.params.borrower)
+  log.info('Adding new loan {} to borrower {}', [loanID, event.params.borrower.toHexString()])
   let loans = borrower.loans
   loans.push(loanID)
   borrower.loans = loans
   borrower.save()
 }
 
+export function handleLoanRepaid(event: LoanRepaidEvent): void {
+  let loanID = event.params.loanID.toBigDecimal().toString()
+  let loan = Loan.load(loanID)
+  let repayment = createLoanRepayment(event)
+  let repayments = loan.repayments
+  
+  repayments.push(repayment.id)
+  loan.repayments = repayments
+  let newStatus = event.params.totalOwed.isZero() ? LOAN_STATUS_CLOSED : LOAN_STATUS_ACTIVE;
+  loan.status = newStatus
+  loan.totalRepaidAmount = loan.totalRepaidAmount.plus(event.params.paid)
+
+  loan.save()
+}
+
+/*
 export function handleSignerAdded(event: SignerAddedEvent): void {
   let signerId = event.params.account.toHexString()
   let signer = Signer.load(signerId)
@@ -106,3 +130,5 @@ export function handleSignerRemoved(event: SignerRemovedEvent): void {
   signer.active = false
   signer.save()
 }
+
+*/

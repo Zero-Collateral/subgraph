@@ -15,16 +15,25 @@ enum LendingPoolAction {
   Liquidate
 }
 
+enum SettingName {
+  RequiredSubmissions
+  MaximumTolerance
+  ResponseExpiryLength
+  SafetyInterval
+}
+
 enum EthEvent {
-  LoanCreated
+  LoanTermsSet
+  LoanTakenOut
+  LoanRepaid
+  CollateralWithdrawn
+  CollateralDeposited
   TokenDeposited
   TokenWithdrawn
   TokenRepaid
   PaymentLiquidated
   SignerAdded
   SignerRemoved
-  CollateralWithdrawn
-  CollateralDeposited
   InterestSubmitted
   InterestAccepted
   AccruedInterestUpdated
@@ -35,6 +44,15 @@ enum EthEvent {
   ZTokenApproval
   ZTokenMinterAdded
   ZTokenMinterRemoved
+  SettingUpdated
+  LendingPoolPaused
+  LendingPoolUnpaused
+}
+
+enum LoanStatus {
+  TermsSet
+  Active
+  Closed
 }
 
 enum InterestUpdateStatusAction {
@@ -80,14 +98,39 @@ type Loan @entity {
   id: ID!
   transaction: EthTransaction!
   borrower: Borrower!
+  recipient: Bytes!
+  terms: LoanTerm!
   startDate: BigInt! # https://github.com/graphql/graphql-js/issues/1003#issuecomment-324790647
+  endDate: BigInt!
+  amountBorrowed: BigInt!
+  status: LoanStatus!
+  repayments: [LoanRepayment!]!
+  totalRepaidAmount: BigInt!
+  collateralDeposits: [CollateralDeposit!]!
+  totalCollateralDepositsAmount: BigInt!
+  collateralWithdrawns: [CollateralWithdraw!]!
+  totalCollateralWithdrawalsAmount: BigInt!
+  blockNumber: BigInt!
+  timestamp: BigInt!
+}
+
+type LoanTerm @entity {
+  id: ID! # LoanID
+  transaction: EthTransaction!
   interestRate: BigInt!
   collateralRatio: BigInt! 
   maxLoanAmount: BigInt!
-  numberDays: BigInt!
-  amountBorrow: BigInt!
-  collateralDeposits: [CollateralDeposit!]!
-  collateralWithdrawns: [CollateralWithdraw!]!
+  duration: BigInt!
+  expiryAt: BigInt!
+  blockNumber: BigInt!
+  timestamp: BigInt!
+}
+
+type LoanRepayment @entity {
+  id: ID!
+  transaction: EthTransaction!
+  amount: BigInt!
+  payer: Bytes!
   blockNumber: BigInt!
   timestamp: BigInt!
 }
@@ -110,12 +153,6 @@ type CollateralWithdraw @entity {
   amount: BigInt!
   blockNumber: BigInt!
   timestamp: BigInt!
-}
-
-type Signer @entity {
-  id: ID!
-  address: Bytes!
-  active: Boolean!
 }
 
 type LendingPoolStatus @entity {
@@ -186,6 +223,43 @@ type ZTokenStatus @entity {
   from: Bytes!
   to: Bytes!
   action: ZTokenStatusAction!
+  blockNumber: BigInt!
+  timestamp: BigInt!
+}
+
+type Setting @entity {
+  id: ID!
+  settingName: SettingName!
+  value: BigInt!
+  lastBlockNumber: BigInt!
+  lastTimestamp: BigInt!
+}
+
+type SettingsStatus @entity {
+  id: ID!
+  transaction: EthTransaction!
+  oldValue: BigInt!
+  newValue: BigInt!
+  from: Bytes!
+  settingName: SettingName!
+  blockNumber: BigInt!
+  timestamp: BigInt!
+}
+
+type LendingPoolPause @entity {
+  id: ID!
+  lendingPool: Bytes!
+  paused: Boolean!
+  lastBlockNumber: BigInt!
+  lastTimestamp: BigInt!
+}
+
+type LendingPoolPauseStatus @entity {
+  id: ID!
+  transaction: EthTransaction!
+  paused: Boolean!
+  lendingPool: Bytes!
+  from: Bytes!
   blockNumber: BigInt!
   timestamp: BigInt!
 }

@@ -1,0 +1,2002 @@
+{
+  "contractName": "SettingsInterface",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "lendingPoolAddress",
+          "type": "address"
+        }
+      ],
+      "name": "LendingPoolPaused",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "lendingPoolAddress",
+          "type": "address"
+        }
+      ],
+      "name": "LendingPoolUnpaused",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "settingName",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "sender",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "oldValue",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "newValue",
+          "type": "uint256"
+        }
+      ],
+      "name": "SettingUpdated",
+      "type": "event"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "requiredSubmissions",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "newRequiredSubmissions",
+          "type": "uint256"
+        }
+      ],
+      "name": "setRequiredSubmissions",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "maximumTolerance",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "newMaximumTolerance",
+          "type": "uint256"
+        }
+      ],
+      "name": "setMaximumTolerance",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "responseExpiryLength",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "newResponseExpiryLength",
+          "type": "uint256"
+        }
+      ],
+      "name": "setResponseExpiryLength",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "isPaused",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "lendingPoolAddress",
+          "type": "address"
+        }
+      ],
+      "name": "lendingPoolPaused",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "lendingPoolAddress",
+          "type": "address"
+        }
+      ],
+      "name": "pauseLendingPool",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "lendingPoolAddress",
+          "type": "address"
+        }
+      ],
+      "name": "unpauseLendingPool",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.5.17+commit.d19bba13\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"lendingPoolAddress\",\"type\":\"address\"}],\"name\":\"LendingPoolPaused\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"lendingPoolAddress\",\"type\":\"address\"}],\"name\":\"LendingPoolUnpaused\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"settingName\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"oldValue\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newValue\",\"type\":\"uint256\"}],\"name\":\"SettingUpdated\",\"type\":\"event\"},{\"constant\":true,\"inputs\":[],\"name\":\"isPaused\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"lendingPoolAddress\",\"type\":\"address\"}],\"name\":\"lendingPoolPaused\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"maximumTolerance\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"lendingPoolAddress\",\"type\":\"address\"}],\"name\":\"pauseLendingPool\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"requiredSubmissions\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"responseExpiryLength\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"newMaximumTolerance\",\"type\":\"uint256\"}],\"name\":\"setMaximumTolerance\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"newRequiredSubmissions\",\"type\":\"uint256\"}],\"name\":\"setRequiredSubmissions\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"newResponseExpiryLength\",\"type\":\"uint256\"}],\"name\":\"setResponseExpiryLength\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"lendingPoolAddress\",\"type\":\"address\"}],\"name\":\"unpauseLendingPool\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/guillesalazar/Repos/ZeroCollateral/smart-contracts-v1/contracts/interfaces/SettingsInterface.sol\":\"SettingsInterface\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/guillesalazar/Repos/ZeroCollateral/smart-contracts-v1/contracts/interfaces/SettingsInterface.sol\":{\"keccak256\":\"0xf765b78cf4243ce64b98e3d58112cc8ec73d18b7af9c7e44cdcb7db79140f46f\",\"urls\":[\"bzz-raw://670909ac968b1e38459065be7f27e7e0a17b9788ff91c307e0141a4857adf0b2\",\"dweb:/ipfs/QmSmYqhRdWxoZKgvMho3sXXvVhZunqy2RAS162eT3ZdWTD\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "pragma solidity 0.5.17;\n\n\ninterface SettingsInterface {\n    event SettingUpdated(\n        bytes32 indexed settingName,\n        address indexed sender,\n        uint256 oldValue,\n        uint256 newValue\n    );\n\n    event LendingPoolPaused(address indexed account, address indexed lendingPoolAddress);\n\n    event LendingPoolUnpaused(\n        address indexed account,\n        address indexed lendingPoolAddress\n    );\n\n    function requiredSubmissions() external view returns (uint256);\n\n    function setRequiredSubmissions(uint256 newRequiredSubmissions) external;\n\n    function maximumTolerance() external view returns (uint256);\n\n    function setMaximumTolerance(uint256 newMaximumTolerance) external;\n\n    function responseExpiryLength() external view returns (uint256);\n\n    function setResponseExpiryLength(uint256 newResponseExpiryLength) external;\n\n    function isPaused() external view returns (bool);\n\n    function lendingPoolPaused(address lendingPoolAddress) external view returns (bool);\n\n    function pauseLendingPool(address lendingPoolAddress) external;\n\n    function unpauseLendingPool(address lendingPoolAddress) external;\n}\n",
+  "sourcePath": "/Users/guillesalazar/Repos/ZeroCollateral/smart-contracts-v1/contracts/interfaces/SettingsInterface.sol",
+  "ast": {
+    "absolutePath": "/Users/guillesalazar/Repos/ZeroCollateral/smart-contracts-v1/contracts/interfaces/SettingsInterface.sol",
+    "exportedSymbols": {
+      "SettingsInterface": [
+        2932
+      ]
+    },
+    "id": 2933,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 2857,
+        "literals": [
+          "solidity",
+          "0.5",
+          ".17"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:17"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 2932,
+        "linearizedBaseContracts": [
+          2932
+        ],
+        "name": "SettingsInterface",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 2867,
+            "name": "SettingUpdated",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 2866,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2859,
+                  "indexed": true,
+                  "name": "settingName",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2867,
+                  "src": "90:27:17",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 2858,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "90:7:17",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2861,
+                  "indexed": true,
+                  "name": "sender",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2867,
+                  "src": "127:22:17",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2860,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "127:7:17",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2863,
+                  "indexed": false,
+                  "name": "oldValue",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2867,
+                  "src": "159:16:17",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 2862,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "159:7:17",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2865,
+                  "indexed": false,
+                  "name": "newValue",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2867,
+                  "src": "185:16:17",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 2864,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "185:7:17",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "80:127:17"
+            },
+            "src": "60:148:17"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 2873,
+            "name": "LendingPoolPaused",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 2872,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2869,
+                  "indexed": true,
+                  "name": "account",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2873,
+                  "src": "238:23:17",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2868,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "238:7:17",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2871,
+                  "indexed": true,
+                  "name": "lendingPoolAddress",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2873,
+                  "src": "263:34:17",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2870,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "263:7:17",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "237:61:17"
+            },
+            "src": "214:85:17"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 2879,
+            "name": "LendingPoolUnpaused",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 2878,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2875,
+                  "indexed": true,
+                  "name": "account",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2879,
+                  "src": "340:23:17",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2874,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "340:7:17",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2877,
+                  "indexed": true,
+                  "name": "lendingPoolAddress",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2879,
+                  "src": "373:34:17",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2876,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "373:7:17",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "330:83:17"
+            },
+            "src": "305:109:17"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 2884,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "requiredSubmissions",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2880,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "448:2:17"
+            },
+            "returnParameters": {
+              "id": 2883,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2882,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2884,
+                  "src": "474:7:17",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 2881,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "474:7:17",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "473:9:17"
+            },
+            "scope": 2932,
+            "src": "420:63:17",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 2889,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "setRequiredSubmissions",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2887,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2886,
+                  "name": "newRequiredSubmissions",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2889,
+                  "src": "521:30:17",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 2885,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "521:7:17",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "520:32:17"
+            },
+            "returnParameters": {
+              "id": 2888,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "561:0:17"
+            },
+            "scope": 2932,
+            "src": "489:73:17",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 2894,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "maximumTolerance",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2890,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "593:2:17"
+            },
+            "returnParameters": {
+              "id": 2893,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2892,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2894,
+                  "src": "619:7:17",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 2891,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "619:7:17",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "618:9:17"
+            },
+            "scope": 2932,
+            "src": "568:60:17",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 2899,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "setMaximumTolerance",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2897,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2896,
+                  "name": "newMaximumTolerance",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2899,
+                  "src": "663:27:17",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 2895,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "663:7:17",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "662:29:17"
+            },
+            "returnParameters": {
+              "id": 2898,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "700:0:17"
+            },
+            "scope": 2932,
+            "src": "634:67:17",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 2904,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "responseExpiryLength",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2900,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "736:2:17"
+            },
+            "returnParameters": {
+              "id": 2903,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2902,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2904,
+                  "src": "762:7:17",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 2901,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "762:7:17",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "761:9:17"
+            },
+            "scope": 2932,
+            "src": "707:64:17",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 2909,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "setResponseExpiryLength",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2907,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2906,
+                  "name": "newResponseExpiryLength",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2909,
+                  "src": "810:31:17",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 2905,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "810:7:17",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "809:33:17"
+            },
+            "returnParameters": {
+              "id": 2908,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "851:0:17"
+            },
+            "scope": 2932,
+            "src": "777:75:17",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 2914,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "isPaused",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2910,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "875:2:17"
+            },
+            "returnParameters": {
+              "id": 2913,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2912,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2914,
+                  "src": "901:4:17",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 2911,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "901:4:17",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "900:6:17"
+            },
+            "scope": 2932,
+            "src": "858:49:17",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 2921,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "lendingPoolPaused",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2917,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2916,
+                  "name": "lendingPoolAddress",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2921,
+                  "src": "940:26:17",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2915,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "940:7:17",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "939:28:17"
+            },
+            "returnParameters": {
+              "id": 2920,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2919,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2921,
+                  "src": "991:4:17",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 2918,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "991:4:17",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "990:6:17"
+            },
+            "scope": 2932,
+            "src": "913:84:17",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 2926,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "pauseLendingPool",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2924,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2923,
+                  "name": "lendingPoolAddress",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2926,
+                  "src": "1029:26:17",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2922,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1029:7:17",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1028:28:17"
+            },
+            "returnParameters": {
+              "id": 2925,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1065:0:17"
+            },
+            "scope": 2932,
+            "src": "1003:63:17",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 2931,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "unpauseLendingPool",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2929,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2928,
+                  "name": "lendingPoolAddress",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2931,
+                  "src": "1100:26:17",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2927,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1100:7:17",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1099:28:17"
+            },
+            "returnParameters": {
+              "id": 2930,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1136:0:17"
+            },
+            "scope": 2932,
+            "src": "1072:65:17",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          }
+        ],
+        "scope": 2933,
+        "src": "26:1113:17"
+      }
+    ],
+    "src": "0:1140:17"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/guillesalazar/Repos/ZeroCollateral/smart-contracts-v1/contracts/interfaces/SettingsInterface.sol",
+    "exportedSymbols": {
+      "SettingsInterface": [
+        2932
+      ]
+    },
+    "id": 2933,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 2857,
+        "literals": [
+          "solidity",
+          "0.5",
+          ".17"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:17"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 2932,
+        "linearizedBaseContracts": [
+          2932
+        ],
+        "name": "SettingsInterface",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 2867,
+            "name": "SettingUpdated",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 2866,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2859,
+                  "indexed": true,
+                  "name": "settingName",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2867,
+                  "src": "90:27:17",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 2858,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "90:7:17",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2861,
+                  "indexed": true,
+                  "name": "sender",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2867,
+                  "src": "127:22:17",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2860,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "127:7:17",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2863,
+                  "indexed": false,
+                  "name": "oldValue",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2867,
+                  "src": "159:16:17",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 2862,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "159:7:17",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2865,
+                  "indexed": false,
+                  "name": "newValue",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2867,
+                  "src": "185:16:17",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 2864,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "185:7:17",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "80:127:17"
+            },
+            "src": "60:148:17"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 2873,
+            "name": "LendingPoolPaused",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 2872,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2869,
+                  "indexed": true,
+                  "name": "account",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2873,
+                  "src": "238:23:17",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2868,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "238:7:17",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2871,
+                  "indexed": true,
+                  "name": "lendingPoolAddress",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2873,
+                  "src": "263:34:17",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2870,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "263:7:17",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "237:61:17"
+            },
+            "src": "214:85:17"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 2879,
+            "name": "LendingPoolUnpaused",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 2878,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2875,
+                  "indexed": true,
+                  "name": "account",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2879,
+                  "src": "340:23:17",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2874,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "340:7:17",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2877,
+                  "indexed": true,
+                  "name": "lendingPoolAddress",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2879,
+                  "src": "373:34:17",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2876,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "373:7:17",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "330:83:17"
+            },
+            "src": "305:109:17"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 2884,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "requiredSubmissions",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2880,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "448:2:17"
+            },
+            "returnParameters": {
+              "id": 2883,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2882,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2884,
+                  "src": "474:7:17",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 2881,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "474:7:17",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "473:9:17"
+            },
+            "scope": 2932,
+            "src": "420:63:17",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 2889,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "setRequiredSubmissions",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2887,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2886,
+                  "name": "newRequiredSubmissions",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2889,
+                  "src": "521:30:17",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 2885,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "521:7:17",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "520:32:17"
+            },
+            "returnParameters": {
+              "id": 2888,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "561:0:17"
+            },
+            "scope": 2932,
+            "src": "489:73:17",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 2894,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "maximumTolerance",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2890,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "593:2:17"
+            },
+            "returnParameters": {
+              "id": 2893,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2892,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2894,
+                  "src": "619:7:17",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 2891,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "619:7:17",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "618:9:17"
+            },
+            "scope": 2932,
+            "src": "568:60:17",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 2899,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "setMaximumTolerance",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2897,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2896,
+                  "name": "newMaximumTolerance",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2899,
+                  "src": "663:27:17",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 2895,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "663:7:17",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "662:29:17"
+            },
+            "returnParameters": {
+              "id": 2898,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "700:0:17"
+            },
+            "scope": 2932,
+            "src": "634:67:17",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 2904,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "responseExpiryLength",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2900,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "736:2:17"
+            },
+            "returnParameters": {
+              "id": 2903,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2902,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2904,
+                  "src": "762:7:17",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 2901,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "762:7:17",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "761:9:17"
+            },
+            "scope": 2932,
+            "src": "707:64:17",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 2909,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "setResponseExpiryLength",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2907,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2906,
+                  "name": "newResponseExpiryLength",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2909,
+                  "src": "810:31:17",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 2905,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "810:7:17",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "809:33:17"
+            },
+            "returnParameters": {
+              "id": 2908,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "851:0:17"
+            },
+            "scope": 2932,
+            "src": "777:75:17",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 2914,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "isPaused",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2910,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "875:2:17"
+            },
+            "returnParameters": {
+              "id": 2913,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2912,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2914,
+                  "src": "901:4:17",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 2911,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "901:4:17",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "900:6:17"
+            },
+            "scope": 2932,
+            "src": "858:49:17",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 2921,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "lendingPoolPaused",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2917,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2916,
+                  "name": "lendingPoolAddress",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2921,
+                  "src": "940:26:17",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2915,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "940:7:17",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "939:28:17"
+            },
+            "returnParameters": {
+              "id": 2920,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2919,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2921,
+                  "src": "991:4:17",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 2918,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "991:4:17",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "990:6:17"
+            },
+            "scope": 2932,
+            "src": "913:84:17",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 2926,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "pauseLendingPool",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2924,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2923,
+                  "name": "lendingPoolAddress",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2926,
+                  "src": "1029:26:17",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2922,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1029:7:17",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1028:28:17"
+            },
+            "returnParameters": {
+              "id": 2925,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1065:0:17"
+            },
+            "scope": 2932,
+            "src": "1003:63:17",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 2931,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "unpauseLendingPool",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2929,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2928,
+                  "name": "lendingPoolAddress",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2931,
+                  "src": "1100:26:17",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2927,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1100:7:17",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1099:28:17"
+            },
+            "returnParameters": {
+              "id": 2930,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1136:0:17"
+            },
+            "scope": 2932,
+            "src": "1072:65:17",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          }
+        ],
+        "scope": 2933,
+        "src": "26:1113:17"
+      }
+    ],
+    "src": "0:1140:17"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.17+commit.d19bba13.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.0.23",
+  "updatedAt": "2020-05-14T15:32:01.149Z",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}

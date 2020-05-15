@@ -3,41 +3,45 @@ schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum/contract
-    name: Loans
+    name: ZDaiLoans
     network: ropsten
     source:
-      address: "0x1E9347e488675cC4BDf03d42B420620B5AE95a70"
+      startBlock: 7900000
+      address: "0xe29e2fb8BE7d305Ef91AFB504bB2a7ef158849C1"
       abi: Loans
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.3
       language: wasm/assemblyscript
       entities:
-        - CollateralDeposited
-        - CollateralWithdrawn
-        - LoanCreated
-        - SignerAdded
-        - SignerRemoved
+        - Loan
+        - LoanTerm
+        - CollateralDeposit
+        - CollateralWithdraw
+        - LoanRepayment
+        - Borrower
+        - EthTransaction
       abis:
         - name: Loans
-          file: ./abis/Loans.json
+          file: ./abis/LoansInterface.json
       eventHandlers:
         - event: CollateralDeposited(indexed uint256,indexed address,uint256)
           handler: handleCollateralDeposited
         - event: CollateralWithdrawn(indexed uint256,indexed address,uint256)
           handler: handleCollateralWithdrawn
-        - event: LoanCreated(indexed uint256,indexed address,uint256,uint256,uint256,uint256)
-          handler: handleLoanCreated
-        - event: SignerAdded(indexed address)
-          handler: handleSignerAdded
-        - event: SignerRemoved(indexed address)
-          handler: handleSignerRemoved
-      file: ./src/mappings/loansMappings.ts
+        - event: LoanTermsSet(indexed uint256,indexed address,address,uint256,uint256,uint256,uint256,uint256)
+          handler: handleLoanTermsSet
+        - event: LoanTakenOut(indexed uint256,indexed address,uint256)
+          handler: handleLoanTakenOut
+        - event: LoanRepaid(indexed address,indexed address,indexed uint256,uint256,uint256)
+          handler: handleLoanRepaid
+      file: ./src/mappings/loans/zdaiLoansMappings.ts
   - kind: ethereum/contract
-    name: LendingPoolInterface
+    name: DaiLendingPoolInterface
     network: ropsten
     source:
-      address: "0x90Bb28aA21EE1BC8ed4826c4d261C54d847F4C59"
+      startBlock: 7900000
+      address: "0x814BF532b28E0F126B1309BFDbd5f45787116c3D"
       abi: LendingPoolInterface
     mapping:
       kind: ethereum/events
@@ -65,7 +69,8 @@ dataSources:
     name: InterestConsensusInterface
     network: ropsten
     source:
-      address: "0x226c667fac6413a1Df61d34Ec3A67c0DC8370D64"
+      startBlock: 7900000
+      address: "0xC1A1EaBbA7b7Be9E77088bA5AcBD903A87704438"
       abi: InterestConsensusInterface
     mapping:
       kind: ethereum/events
@@ -87,7 +92,8 @@ dataSources:
     name: LendersInterface
     network: ropsten
     source:
-      address: "0xD766989Ef070948A0470Faa467081274474131D2"
+      startBlock: 7900000
+      address: "0x0Bb1f6c0A6CA2D863C5C94DAAA66c1b9e513B763"
       abi: LendersInterface
     mapping:
       kind: ethereum/events
@@ -115,7 +121,8 @@ dataSources:
     name: ZDAIToken
     network: ropsten
     source:
-      address: "0xbadb7f7cbb3C03C974fA4b4119B87bFA566CB7dF"
+      startBlock: 7900000
+      address: "0x31AAe6F9F77f63b2B64bdbc991a6D43E681594e8"
       abi: ZToken
     mapping:
       kind: ethereum/events
@@ -124,6 +131,8 @@ dataSources:
       entities:
         - Transfer
         - Approval
+        - MinterAdded
+        - MinterRemoved
       abis:
         - name: ZToken
           file: ./abis/ZToken.json
@@ -141,7 +150,8 @@ dataSources:
     name: ZUSDCToken
     network: ropsten
     source:
-      address: "0xFb58b8cCC9123E6E5441E28e57Cb823a632d5967"
+      startBlock: 7900000
+      address: "0xA77dC767BE7EFca53Adc4A9453FB1E8E3Febd41F"
       abi: ZToken
     mapping:
       kind: ethereum/events
@@ -150,6 +160,8 @@ dataSources:
       entities:
         - Transfer
         - Approval
+        - MinterAdded
+        - MinterRemoved
       abis:
         - name: ZToken
           file: ./abis/ZToken.json
@@ -163,3 +175,29 @@ dataSources:
         - event: MinterRemoved(indexed address)
           handler: handleMinterRemoved
       file: ./src/mappings/zTokens/zUSDCMappings.ts
+  - kind: ethereum/contract
+    name: SettingsInterface
+    network: ropsten
+    source:
+      startBlock: 7900000
+      address: "0xE0236a40Fe1613B73c7174C1D70e05650A6bb2e0"
+      abi: SettingsInterface
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.3
+      language: wasm/assemblyscript
+      entities:
+        - SettingUpdated
+        - LendingPoolPaused
+        - LendingPoolUnpaused
+      abis:
+        - name: SettingsInterface
+          file: ./abis/SettingsInterface.json
+      eventHandlers:
+        - event: SettingUpdated(indexed bytes32,indexed address,uint256,uint256)
+          handler: handleSettingUpdated
+        - event: LendingPoolPaused(indexed address,indexed address)
+          handler: handleLendingPoolPaused
+        - event: LendingPoolUnpaused(indexed address,indexed address)
+          handler: handleLendingPoolUnpaused
+      file: ./src/mappings/settingsMappings.ts
