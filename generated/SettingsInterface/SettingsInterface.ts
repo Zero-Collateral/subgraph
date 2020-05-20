@@ -59,6 +59,60 @@ export class LendingPoolUnpaused__Params {
   }
 }
 
+export class Paused extends EthereumEvent {
+  get params(): Paused__Params {
+    return new Paused__Params(this);
+  }
+}
+
+export class Paused__Params {
+  _event: Paused;
+
+  constructor(event: Paused) {
+    this._event = event;
+  }
+
+  get account(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+}
+
+export class PauserAdded extends EthereumEvent {
+  get params(): PauserAdded__Params {
+    return new PauserAdded__Params(this);
+  }
+}
+
+export class PauserAdded__Params {
+  _event: PauserAdded;
+
+  constructor(event: PauserAdded) {
+    this._event = event;
+  }
+
+  get account(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+}
+
+export class PauserRemoved extends EthereumEvent {
+  get params(): PauserRemoved__Params {
+    return new PauserRemoved__Params(this);
+  }
+}
+
+export class PauserRemoved__Params {
+  _event: PauserRemoved;
+
+  constructor(event: PauserRemoved) {
+    this._event = event;
+  }
+
+  get account(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+}
+
 export class SettingUpdated extends EthereumEvent {
   get params(): SettingUpdated__Params {
     return new SettingUpdated__Params(this);
@@ -89,19 +143,163 @@ export class SettingUpdated__Params {
   }
 }
 
+export class Unpaused extends EthereumEvent {
+  get params(): Unpaused__Params {
+    return new Unpaused__Params(this);
+  }
+}
+
+export class Unpaused__Params {
+  _event: Unpaused;
+
+  constructor(event: Unpaused) {
+    this._event = event;
+  }
+
+  get account(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+}
+
 export class SettingsInterface extends SmartContract {
   static bind(address: Address): SettingsInterface {
     return new SettingsInterface("SettingsInterface", address);
   }
 
-  requiredSubmissions(): BigInt {
-    let result = super.call("requiredSubmissions", []);
+  LIQUIDATE_ETH_PRICE_SETTING(): Bytes {
+    let result = super.call("LIQUIDATE_ETH_PRICE_SETTING", []);
+
+    return result[0].toBytes();
+  }
+
+  try_LIQUIDATE_ETH_PRICE_SETTING(): CallResult<Bytes> {
+    let result = super.tryCall("LIQUIDATE_ETH_PRICE_SETTING", []);
+    if (result.reverted) {
+      return new CallResult();
+    }
+    let value = result.value;
+    return CallResult.fromValue(value[0].toBytes());
+  }
+
+  MAXIMUM_TOLERANCE_SETTING(): Bytes {
+    let result = super.call("MAXIMUM_TOLERANCE_SETTING", []);
+
+    return result[0].toBytes();
+  }
+
+  try_MAXIMUM_TOLERANCE_SETTING(): CallResult<Bytes> {
+    let result = super.tryCall("MAXIMUM_TOLERANCE_SETTING", []);
+    if (result.reverted) {
+      return new CallResult();
+    }
+    let value = result.value;
+    return CallResult.fromValue(value[0].toBytes());
+  }
+
+  REQUIRED_SUBMISSIONS_SETTING(): Bytes {
+    let result = super.call("REQUIRED_SUBMISSIONS_SETTING", []);
+
+    return result[0].toBytes();
+  }
+
+  try_REQUIRED_SUBMISSIONS_SETTING(): CallResult<Bytes> {
+    let result = super.tryCall("REQUIRED_SUBMISSIONS_SETTING", []);
+    if (result.reverted) {
+      return new CallResult();
+    }
+    let value = result.value;
+    return CallResult.fromValue(value[0].toBytes());
+  }
+
+  RESPONSE_EXPIRY_LENGTH_SETTING(): Bytes {
+    let result = super.call("RESPONSE_EXPIRY_LENGTH_SETTING", []);
+
+    return result[0].toBytes();
+  }
+
+  try_RESPONSE_EXPIRY_LENGTH_SETTING(): CallResult<Bytes> {
+    let result = super.tryCall("RESPONSE_EXPIRY_LENGTH_SETTING", []);
+    if (result.reverted) {
+      return new CallResult();
+    }
+    let value = result.value;
+    return CallResult.fromValue(value[0].toBytes());
+  }
+
+  SAFETY_INTERVAL_LENGTH_SETTING(): Bytes {
+    let result = super.call("SAFETY_INTERVAL_LENGTH_SETTING", []);
+
+    return result[0].toBytes();
+  }
+
+  try_SAFETY_INTERVAL_LENGTH_SETTING(): CallResult<Bytes> {
+    let result = super.tryCall("SAFETY_INTERVAL_LENGTH_SETTING", []);
+    if (result.reverted) {
+      return new CallResult();
+    }
+    let value = result.value;
+    return CallResult.fromValue(value[0].toBytes());
+  }
+
+  TERMS_EXPIRY_TIME_SETTING(): Bytes {
+    let result = super.call("TERMS_EXPIRY_TIME_SETTING", []);
+
+    return result[0].toBytes();
+  }
+
+  try_TERMS_EXPIRY_TIME_SETTING(): CallResult<Bytes> {
+    let result = super.tryCall("TERMS_EXPIRY_TIME_SETTING", []);
+    if (result.reverted) {
+      return new CallResult();
+    }
+    let value = result.value;
+    return CallResult.fromValue(value[0].toBytes());
+  }
+
+  isPauser(account: Address): boolean {
+    let result = super.call("isPauser", [EthereumValue.fromAddress(account)]);
+
+    return result[0].toBoolean();
+  }
+
+  try_isPauser(account: Address): CallResult<boolean> {
+    let result = super.tryCall("isPauser", [
+      EthereumValue.fromAddress(account)
+    ]);
+    if (result.reverted) {
+      return new CallResult();
+    }
+    let value = result.value;
+    return CallResult.fromValue(value[0].toBoolean());
+  }
+
+  lendingPoolPaused(param0: Address): boolean {
+    let result = super.call("lendingPoolPaused", [
+      EthereumValue.fromAddress(param0)
+    ]);
+
+    return result[0].toBoolean();
+  }
+
+  try_lendingPoolPaused(param0: Address): CallResult<boolean> {
+    let result = super.tryCall("lendingPoolPaused", [
+      EthereumValue.fromAddress(param0)
+    ]);
+    if (result.reverted) {
+      return new CallResult();
+    }
+    let value = result.value;
+    return CallResult.fromValue(value[0].toBoolean());
+  }
+
+  liquidateEthPrice(): BigInt {
+    let result = super.call("liquidateEthPrice", []);
 
     return result[0].toBigInt();
   }
 
-  try_requiredSubmissions(): CallResult<BigInt> {
-    let result = super.tryCall("requiredSubmissions", []);
+  try_liquidateEthPrice(): CallResult<BigInt> {
+    let result = super.tryCall("liquidateEthPrice", []);
     if (result.reverted) {
       return new CallResult();
     }
@@ -124,6 +322,36 @@ export class SettingsInterface extends SmartContract {
     return CallResult.fromValue(value[0].toBigInt());
   }
 
+  paused(): boolean {
+    let result = super.call("paused", []);
+
+    return result[0].toBoolean();
+  }
+
+  try_paused(): CallResult<boolean> {
+    let result = super.tryCall("paused", []);
+    if (result.reverted) {
+      return new CallResult();
+    }
+    let value = result.value;
+    return CallResult.fromValue(value[0].toBoolean());
+  }
+
+  requiredSubmissions(): BigInt {
+    let result = super.call("requiredSubmissions", []);
+
+    return result[0].toBigInt();
+  }
+
+  try_requiredSubmissions(): CallResult<BigInt> {
+    let result = super.tryCall("requiredSubmissions", []);
+    if (result.reverted) {
+      return new CallResult();
+    }
+    let value = result.value;
+    return CallResult.fromValue(value[0].toBigInt());
+  }
+
   responseExpiryLength(): BigInt {
     let result = super.call("responseExpiryLength", []);
 
@@ -132,6 +360,36 @@ export class SettingsInterface extends SmartContract {
 
   try_responseExpiryLength(): CallResult<BigInt> {
     let result = super.tryCall("responseExpiryLength", []);
+    if (result.reverted) {
+      return new CallResult();
+    }
+    let value = result.value;
+    return CallResult.fromValue(value[0].toBigInt());
+  }
+
+  safetyInterval(): BigInt {
+    let result = super.call("safetyInterval", []);
+
+    return result[0].toBigInt();
+  }
+
+  try_safetyInterval(): CallResult<BigInt> {
+    let result = super.tryCall("safetyInterval", []);
+    if (result.reverted) {
+      return new CallResult();
+    }
+    let value = result.value;
+    return CallResult.fromValue(value[0].toBigInt());
+  }
+
+  termsExpiryTime(): BigInt {
+    let result = super.call("termsExpiryTime", []);
+
+    return result[0].toBigInt();
+  }
+
+  try_termsExpiryTime(): CallResult<BigInt> {
+    let result = super.tryCall("termsExpiryTime", []);
     if (result.reverted) {
       return new CallResult();
     }
@@ -153,24 +411,163 @@ export class SettingsInterface extends SmartContract {
     let value = result.value;
     return CallResult.fromValue(value[0].toBoolean());
   }
+}
 
-  lendingPoolPaused(lendingPoolAddress: Address): boolean {
-    let result = super.call("lendingPoolPaused", [
-      EthereumValue.fromAddress(lendingPoolAddress)
-    ]);
-
-    return result[0].toBoolean();
+export class ConstructorCall extends EthereumCall {
+  get inputs(): ConstructorCall__Inputs {
+    return new ConstructorCall__Inputs(this);
   }
 
-  try_lendingPoolPaused(lendingPoolAddress: Address): CallResult<boolean> {
-    let result = super.tryCall("lendingPoolPaused", [
-      EthereumValue.fromAddress(lendingPoolAddress)
-    ]);
-    if (result.reverted) {
-      return new CallResult();
-    }
-    let value = result.value;
-    return CallResult.fromValue(value[0].toBoolean());
+  get outputs(): ConstructorCall__Outputs {
+    return new ConstructorCall__Outputs(this);
+  }
+}
+
+export class ConstructorCall__Inputs {
+  _call: ConstructorCall;
+
+  constructor(call: ConstructorCall) {
+    this._call = call;
+  }
+
+  get aRequiredSubmissions(): BigInt {
+    return this._call.inputValues[0].value.toBigInt();
+  }
+
+  get aMaximumTolerance(): BigInt {
+    return this._call.inputValues[1].value.toBigInt();
+  }
+
+  get aResponseExpiryLength(): BigInt {
+    return this._call.inputValues[2].value.toBigInt();
+  }
+
+  get aSafetyInterval(): BigInt {
+    return this._call.inputValues[3].value.toBigInt();
+  }
+
+  get aTermsExpiryTime(): BigInt {
+    return this._call.inputValues[4].value.toBigInt();
+  }
+
+  get aLiquidateEthPrice(): BigInt {
+    return this._call.inputValues[5].value.toBigInt();
+  }
+}
+
+export class ConstructorCall__Outputs {
+  _call: ConstructorCall;
+
+  constructor(call: ConstructorCall) {
+    this._call = call;
+  }
+}
+
+export class AddPauserCall extends EthereumCall {
+  get inputs(): AddPauserCall__Inputs {
+    return new AddPauserCall__Inputs(this);
+  }
+
+  get outputs(): AddPauserCall__Outputs {
+    return new AddPauserCall__Outputs(this);
+  }
+}
+
+export class AddPauserCall__Inputs {
+  _call: AddPauserCall;
+
+  constructor(call: AddPauserCall) {
+    this._call = call;
+  }
+
+  get account(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+}
+
+export class AddPauserCall__Outputs {
+  _call: AddPauserCall;
+
+  constructor(call: AddPauserCall) {
+    this._call = call;
+  }
+}
+
+export class PauseCall extends EthereumCall {
+  get inputs(): PauseCall__Inputs {
+    return new PauseCall__Inputs(this);
+  }
+
+  get outputs(): PauseCall__Outputs {
+    return new PauseCall__Outputs(this);
+  }
+}
+
+export class PauseCall__Inputs {
+  _call: PauseCall;
+
+  constructor(call: PauseCall) {
+    this._call = call;
+  }
+}
+
+export class PauseCall__Outputs {
+  _call: PauseCall;
+
+  constructor(call: PauseCall) {
+    this._call = call;
+  }
+}
+
+export class RenouncePauserCall extends EthereumCall {
+  get inputs(): RenouncePauserCall__Inputs {
+    return new RenouncePauserCall__Inputs(this);
+  }
+
+  get outputs(): RenouncePauserCall__Outputs {
+    return new RenouncePauserCall__Outputs(this);
+  }
+}
+
+export class RenouncePauserCall__Inputs {
+  _call: RenouncePauserCall;
+
+  constructor(call: RenouncePauserCall) {
+    this._call = call;
+  }
+}
+
+export class RenouncePauserCall__Outputs {
+  _call: RenouncePauserCall;
+
+  constructor(call: RenouncePauserCall) {
+    this._call = call;
+  }
+}
+
+export class UnpauseCall extends EthereumCall {
+  get inputs(): UnpauseCall__Inputs {
+    return new UnpauseCall__Inputs(this);
+  }
+
+  get outputs(): UnpauseCall__Outputs {
+    return new UnpauseCall__Outputs(this);
+  }
+}
+
+export class UnpauseCall__Inputs {
+  _call: UnpauseCall;
+
+  constructor(call: UnpauseCall) {
+    this._call = call;
+  }
+}
+
+export class UnpauseCall__Outputs {
+  _call: UnpauseCall;
+
+  constructor(call: UnpauseCall) {
+    this._call = call;
   }
 }
 
@@ -260,6 +657,96 @@ export class SetResponseExpiryLengthCall__Outputs {
   _call: SetResponseExpiryLengthCall;
 
   constructor(call: SetResponseExpiryLengthCall) {
+    this._call = call;
+  }
+}
+
+export class SetSafetyIntervalCall extends EthereumCall {
+  get inputs(): SetSafetyIntervalCall__Inputs {
+    return new SetSafetyIntervalCall__Inputs(this);
+  }
+
+  get outputs(): SetSafetyIntervalCall__Outputs {
+    return new SetSafetyIntervalCall__Outputs(this);
+  }
+}
+
+export class SetSafetyIntervalCall__Inputs {
+  _call: SetSafetyIntervalCall;
+
+  constructor(call: SetSafetyIntervalCall) {
+    this._call = call;
+  }
+
+  get newSafetyInterval(): BigInt {
+    return this._call.inputValues[0].value.toBigInt();
+  }
+}
+
+export class SetSafetyIntervalCall__Outputs {
+  _call: SetSafetyIntervalCall;
+
+  constructor(call: SetSafetyIntervalCall) {
+    this._call = call;
+  }
+}
+
+export class SetTermsExpiryTimeCall extends EthereumCall {
+  get inputs(): SetTermsExpiryTimeCall__Inputs {
+    return new SetTermsExpiryTimeCall__Inputs(this);
+  }
+
+  get outputs(): SetTermsExpiryTimeCall__Outputs {
+    return new SetTermsExpiryTimeCall__Outputs(this);
+  }
+}
+
+export class SetTermsExpiryTimeCall__Inputs {
+  _call: SetTermsExpiryTimeCall;
+
+  constructor(call: SetTermsExpiryTimeCall) {
+    this._call = call;
+  }
+
+  get newTermsExpiryTime(): BigInt {
+    return this._call.inputValues[0].value.toBigInt();
+  }
+}
+
+export class SetTermsExpiryTimeCall__Outputs {
+  _call: SetTermsExpiryTimeCall;
+
+  constructor(call: SetTermsExpiryTimeCall) {
+    this._call = call;
+  }
+}
+
+export class SetLiquidateEthPriceCall extends EthereumCall {
+  get inputs(): SetLiquidateEthPriceCall__Inputs {
+    return new SetLiquidateEthPriceCall__Inputs(this);
+  }
+
+  get outputs(): SetLiquidateEthPriceCall__Outputs {
+    return new SetLiquidateEthPriceCall__Outputs(this);
+  }
+}
+
+export class SetLiquidateEthPriceCall__Inputs {
+  _call: SetLiquidateEthPriceCall;
+
+  constructor(call: SetLiquidateEthPriceCall) {
+    this._call = call;
+  }
+
+  get newLiquidateEthPrice(): BigInt {
+    return this._call.inputValues[0].value.toBigInt();
+  }
+}
+
+export class SetLiquidateEthPriceCall__Outputs {
+  _call: SetLiquidateEthPriceCall;
+
+  constructor(call: SetLiquidateEthPriceCall) {
     this._call = call;
   }
 }

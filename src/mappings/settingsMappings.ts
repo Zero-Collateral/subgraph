@@ -1,77 +1,52 @@
-import { log } from "@graphprotocol/graph-ts";
+import { log, BigInt } from "@graphprotocol/graph-ts";
 import {
   SettingUpdated as SettingUpdatedEvent,
   LendingPoolPaused as LendingPoolPausedEvent,
   LendingPoolUnpaused as LendingPoolUnpausedEvent,
+  Paused as PausedEvent,
+  Unpaused as UnpausedEvent,
+  PauserAdded as PauserAddedEvent,
+  PauserRemoved as PauserRemovedEvent,
 } from "../../generated/SettingsInterface/SettingsInterface";
+
+import { getTimestampInMillis } from "../utils/commons";
 import {
-  Setting,
-  SettingsStatus,
-  LendingPoolPauseStatus,
-} from "../../generated/schema";
-import { createEthTransaction, buildId, getTimestampInMillis, updateOrCreateLendingPoolPause } from "../utils/commons";
-import {
-  ETH_TX_SETTINGS_UPDATED,
-  ETH_TX_LENDING_POOL_PAUSED,
-  ETH_TX_LENDING_POOL_UNPAUSED,
+  ETH_TX_PLATFORM_PAUSER_ADDED,
+  ETH_TX_PLATFORM_PAUSER_REMOVED,
 } from "../utils/consts";
+import {
+  creatingLendingPoolPauseChange,
+  updateOrCreateLendingPoolPauseStatus,
+  internalHandleSettingUpdated,
+  createPauserChange,
+  updateOrCreatePauserStatus,
+} from "../utils/settings-commons";
 
-export function handleSettingUpdated(
-  event: SettingUpdatedEvent
-): void {
-  let id = buildId(event);
-  log.info("Creating new settings status with id {}", [id]);
-  let ethTransaction = createEthTransaction(
-    event,
-    ETH_TX_SETTINGS_UPDATED
-  )
-  let entity = new SettingsStatus(id)
-  entity.transaction = ethTransaction.id;
-  entity.oldValue = event.params.oldValue
-  entity.newValue = event.params.newValue
-  entity.from = event.params.sender
-  entity.settingName = event.params.settingName.toString()
-  entity.blockNumber = event.block.number
-  entity.timestamp = getTimestampInMillis(event)
-  entity.save()
-
-  let settingsId = event.params.settingName.toString()
-  let settingsEntity = Setting.load(settingsId)
-  if (settingsEntity == null) {
-    settingsEntity = new Setting(settingsId);
-    settingsEntity.settingName = event.params.settingName.toString()
-  }
-  settingsEntity.value = event.params.newValue
-  settingsEntity.lastBlockNumber = event.block.number
-  settingsEntity.lastTimestamp = getTimestampInMillis(event)
-  settingsEntity.save()
+export function handleSettingUpdated(event: SettingUpdatedEvent): void {
+  internalHandleSettingUpdated(
+    event.params.oldValue,
+    event.params.newValue,
+    event.params.sender,
+    event.params.settingName.toString(),
+    event
+  );
 }
 
-export function handleLendingPoolPaused(
-  event: LendingPoolPausedEvent
-): void {
-  let id = event.params.lendingPoolAddress.toHexString();
-  log.info("Creating new lending pool pause status with id {}", [id]);
-  let ethTransaction = createEthTransaction(
-    event,
-    ETH_TX_LENDING_POOL_PAUSED
-  )
-  let entity = new LendingPoolPauseStatus(id)
-  entity.transaction = ethTransaction.id
-  entity.paused = true
-  entity.lendingPool = event.params.lendingPoolAddress
-  entity.from = event.params.account
-  entity.blockNumber = event.block.number
-  entity.timestamp = getTimestampInMillis(event)
-  entity.save()
+export function handleLendingPoolPaused(event: LendingPoolPausedEvent): void {
+  let entity = creatingLendingPoolPauseChange(
+    true,
+    event.params.lendingPoolAddress,
+    event.params.account,
+    event
+  );
 
-  updateOrCreateLendingPoolPause(
-    id,
+  updateOrCreateLendingPoolPauseStatus(
+    entity.id,
     true,
     event.params.lendingPoolAddress,
     event.block.number,
-    getTimestampInMillis(event),
-  )
+    getTimestampInMillis(event)
+  );
 }
 
 export function handleLendingPoolUnpaused(
@@ -79,24 +54,58 @@ export function handleLendingPoolUnpaused(
 ): void {
   let id = event.params.lendingPoolAddress.toHexString();
   log.info("Creating new lending pool unpause status with id {}", [id]);
-  let ethTransaction = createEthTransaction(
-    event,
-    ETH_TX_LENDING_POOL_UNPAUSED
-  )
-  let entity = new LendingPoolPauseStatus(id)
-  entity.transaction = ethTransaction.id
-  entity.paused = false
-  entity.lendingPool = event.params.lendingPoolAddress
-  entity.from = event.params.account
-  entity.blockNumber = event.block.number
-  entity.timestamp = getTimestampInMillis(event)
-  entity.save()
 
-  updateOrCreateLendingPoolPause(
-    id,
+  let entity = creatingLendingPoolPauseChange(
+    false,
+    event.params.lendingPoolAddress,
+    event.params.account,
+    event
+  );
+
+  updateOrCreateLendingPoolPauseStatus(
+    entity.id,
     false,
     event.params.lendingPoolAddress,
     event.block.number,
-    getTimestampInMillis(event),
-  )
+    getTimestampInMillis(event)
+  );
+}
+export function handlePaused(event: PausedEvent): void {
+  internalHandleSettingUpdated(
+    BigInt.fromI32(0),
+    BigInt.fromI32(1),
+    event.params.account,
+    "PausePlatform",
+    event
+  );
+}
+
+export function handleUnpaused(event: UnpausedEvent): void {
+  internalHandleSettingUpdated(
+    BigInt.fromI32(1),
+    BigInt.fromI32(0),
+    event.params.account,
+    "UnpausePlatform",
+    event
+  );
+}
+
+export function handlePauserAdded(event: PauserAddedEvent): void {
+  createPauserChange(
+    ETH_TX_PLATFORM_PAUSER_ADDED,
+    event.params.account,
+    true,
+    event
+  );
+  updateOrCreatePauserStatus(event.params.account, true, event);
+}
+
+export function handlePauserRemoved(event: PauserRemovedEvent): void {
+  createPauserChange(
+    ETH_TX_PLATFORM_PAUSER_REMOVED,
+    event.params.account,
+    false,
+    event
+  );
+  updateOrCreatePauserStatus(event.params.account, false, event);
 }

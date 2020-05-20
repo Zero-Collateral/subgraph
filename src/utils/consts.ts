@@ -6,43 +6,62 @@ export const ZTOKEN_ZDAI = "zDAI";
 export const ZTOKEN_ZUSDC = "zUSDC";
 
 // LendingPool consts
-export const LENDING_POOL_DEPOSIT = 'Deposit';
-export const LENDING_POOL_REPAY = 'Repay';
-export const LENDING_POOL_WITHDRAW = 'Withdraw';
-export const LENDING_POOL_LIQUIDATE = 'Liquidate';
+export const LENDING_POOL_DEPOSITED = 'Deposited';
+export const LENDING_POOL_REPAID = 'Repaid';
+export const LENDING_POOL_WITHDRAWN = 'Withdrawn';
+export const LENDING_POOL_LIQUIDATED = 'PaymentLiquidated';
+export const LENDING_POOL_INTEREST_WITHDRAWN = 'InterestWithdrawn';
 
 // Ethereum Transaction consts
 
-// Loans contract
-export const ETH_TX_LOAN_TERMS_SET = "LoanTermsSet";
-export const ETH_TX_LOAN_TAKEN_OUT = "LoanTakenOut";
-export const ETH_TX_LOAN_REPAID = "LoanRepaid";
-export const ETH_TX_COLLATERAL_WITHDRAWN = "CollateralWithdrawn";
-export const ETH_TX_COLLATERAL_DEPOSITED = "CollateralDeposited";
+// Eth Event Types
+// Loans
+export const ETH_TX_COLLATERAL_DEPOSITED = "CollateralDeposited"
+export const ETH_TX_COLLATERAL_WITHDRAWN = "CollateralWithdrawn"
+export const ETH_TX_LOAN_TERMS_SET = "LoanTermsSet"
+export const ETH_TX_LOAN_TAKEN_OUT = "LoanTakenOut"
+export const ETH_TX_LOAN_REPAID = "LoanRepaid"
+export const ETH_TX_LOAN_LIQUIDATED = "LoanLiquidated"
+// Lenders
+export const ETH_TX_ACCRUED_INTEREST_UPDATED = "AccruedInterestUpdated"
+export const ETH_TX_ACCRUED_INTEREST_WITHDRAWN = "AccruedInterestWithdrawn"
+// LendingPool
+export const ETH_TX_TOKEN_DEPOSITED = "TokenDeposited"
+export const ETH_TX_TOKEN_WITHDRAWN = "TokenWithdrawn"
+export const ETH_TX_TOKEN_REPAID = "TokenRepaid"
+export const ETH_TX_INTEREST_WITHDRAWN = "InterestWithdrawn"
+export const ETH_TX_PAYMENT_LIQUIDATED = "PaymentLiquidated"
+// Settings
+export const ETH_TX_SETTING_UPDATED = "SettingUpdated"
+export const ETH_TX_LENDING_POOL_PAUSED = "LendingPoolPaused"
+export const ETH_TX_LENDING_POOL_UNPAUSED = "LendingPoolUnpaused"
+export const ETH_TX_PLATFORM_PAUSED = "Paused"
+export const ETH_TX_PLATFORM_UNPAUSED = "Unpaused"
+export const ETH_TX_PLATFORM_PAUSER_ADDED = "PauserAdded"
+export const ETH_TX_PLATFORM_PAUSER_REMOVED = "PauserRemoved"
 
-export const ETH_TX_TOKEN_DEPOSITED = "TokenDeposited";
-export const ETH_TX_TOKEN_WITHDRAWN = "TokenWithdrawn";
-export const ETH_TX_TOKEN_REPAID = "TokenRepaid";
-export const ETH_TX_PAYMENT_LIQUIDATED = "PaymentLiquidated";
-export const ETH_TX_SIGNER_ADDED = "SignerAdded";
-export const ETH_TX_SIGNER_REMOVED = "SignerRemoved";
-export const ETH_TX_INTEREST_SUBMITTED = "InterestSubmitted";
-export const ETH_TX_INTEREST_ACCEPTED = "InterestAccepted";
-export const ETH_TX_ACCRUED_INTEREST_UPDATED = "AccruedInterestUpdated";
-export const ETH_TX_ACCRUED_INTEREST_WITHDRAWN = "AccruedInterestWithdrawn";
-export const ETH_TX_INTEREST_UPDATE_REQUESTED = "InterestUpdateRequested";
-export const ETH_TX_INTEREST_UPDATE_CANCELED = "CancelInterestUpdate";
-export const ETH_TX_ZTOKEN_TRANSFER = "ZTokenTransfer";
-export const ETH_TX_ZTOKEN_APPROVAL = "ZTokenApproval";
-export const ETH_TX_ZTOKEN_MINTER_ADDED = "ZTokenMinterAdded";
-export const ETH_TX_ZTOKEN_MINTER_REMOVED = "ZTokenMinterRemoved";
-export const ETH_TX_SETTINGS_UPDATED = "SettingUpdated";
-export const ETH_TX_LENDING_POOL_PAUSED = "LendingPoolPaused";
-export const ETH_TX_LENDING_POOL_UNPAUSED = "LendingPoolUnpaused";
+// Interest Consensus
+export const ETH_TX_INTEREST_SUBMITTED = "InterestSubmitted"
+export const ETH_TX_INTEREST_ACCEPTED = "InterestAccepted"
+// Loan Terms Consensus
+export const ETH_TX_TERMS_SUBMITTED = "TermsSubmitted"
+export const ETH_TX_TERMS_ACCEPTED = "TermsAccepted"
+// Consensus
+export const ETH_TX_SIGNER_ADDED = "SignerAdded"
+export const ETH_TX_SIGNER_REMOVED = "SignerRemoved"
+// ZTokens
+export const ETH_TX_ZTOKEN_TRANSFER = "ZTokenTransfer"
+export const ETH_TX_ZTOKEN_APPROVAL = "ZTokenApproval"
+export const ETH_TX_ZTOKEN_MINTER_ADDED = "ZTokenMinterAdded"
+export const ETH_TX_ZTOKEN_MINTER_REMOVED = "ZTokenMinterRemoved"
 
 // Tokens consts
 export const TOKEN_DAI = "DAI";
 export const TOKEN_USDC = "USDC";
+
+// Consensus Contracts consts
+export const CONTRACT_LOAN_TERMS_CONSENSUS = "LoanTermsConsensus";
+export const CONTRACT_INTEREST_CONSENSUS = "InterestConsensus";
 
 // Interest Update Status consts
 export const INTEREST_UPDATE_REQUESTED = "Requested";

@@ -67,6 +67,40 @@ export class CollateralWithdrawn__Params {
   }
 }
 
+export class LoanLiquidated extends EthereumEvent {
+  get params(): LoanLiquidated__Params {
+    return new LoanLiquidated__Params(this);
+  }
+}
+
+export class LoanLiquidated__Params {
+  _event: LoanLiquidated;
+
+  constructor(event: LoanLiquidated) {
+    this._event = event;
+  }
+
+  get loanID(): BigInt {
+    return this._event.parameters[0].value.toBigInt();
+  }
+
+  get borrower(): Address {
+    return this._event.parameters[1].value.toAddress();
+  }
+
+  get liquidator(): Address {
+    return this._event.parameters[2].value.toAddress();
+  }
+
+  get collateralOut(): BigInt {
+    return this._event.parameters[3].value.toBigInt();
+  }
+
+  get tokensIn(): BigInt {
+    return this._event.parameters[4].value.toBigInt();
+  }
+}
+
 export class LoanRepaid extends EthereumEvent {
   get params(): LoanRepaid__Params {
     return new LoanRepaid__Params(this);
@@ -80,23 +114,23 @@ export class LoanRepaid__Params {
     this._event = event;
   }
 
-  get borrower(): Address {
-    return this._event.parameters[0].value.toAddress();
+  get loanID(): BigInt {
+    return this._event.parameters[0].value.toBigInt();
   }
 
-  get payer(): Address {
+  get borrower(): Address {
     return this._event.parameters[1].value.toAddress();
   }
 
-  get loanID(): BigInt {
+  get amountPaid(): BigInt {
     return this._event.parameters[2].value.toBigInt();
   }
 
-  get totalOwed(): BigInt {
-    return this._event.parameters[3].value.toBigInt();
+  get payer(): Address {
+    return this._event.parameters[3].value.toAddress();
   }
 
-  get paid(): BigInt {
+  get totalOwed(): BigInt {
     return this._event.parameters[4].value.toBigInt();
   }
 }
@@ -173,13 +207,13 @@ export class LoanTermsSet__Params {
   }
 }
 
-export class Loans__loansResultValue0Struct extends EthereumTuple {
+export class USDCLoans__loansResultValue0Struct extends EthereumTuple {
   get id(): BigInt {
     return this[0].toBigInt();
   }
 
-  get loanTerms(): Loans__loansResultValue0LoanTermsStruct {
-    return this[1].toTuple() as Loans__loansResultValue0LoanTermsStruct;
+  get loanTerms(): USDCLoans__loansResultValue0LoanTermsStruct {
+    return this[1].toTuple() as USDCLoans__loansResultValue0LoanTermsStruct;
   }
 
   get termsExpiry(): BigInt {
@@ -215,7 +249,7 @@ export class Loans__loansResultValue0Struct extends EthereumTuple {
   }
 }
 
-export class Loans__loansResultValue0LoanTermsStruct extends EthereumTuple {
+export class USDCLoans__loansResultValue0LoanTermsStruct extends EthereumTuple {
   get borrower(): Address {
     return this[0].toAddress();
   }
@@ -241,9 +275,9 @@ export class Loans__loansResultValue0LoanTermsStruct extends EthereumTuple {
   }
 }
 
-export class Loans extends SmartContract {
-  static bind(address: Address): Loans {
-    return new Loans("Loans", address);
+export class USDCLoans extends SmartContract {
+  static bind(address: Address): USDCLoans {
+    return new USDCLoans("USDCLoans", address);
   }
 
   getBorrowerLoans(borrower: Address): Array<BigInt> {
@@ -265,15 +299,15 @@ export class Loans extends SmartContract {
     return CallResult.fromValue(value[0].toBigIntArray());
   }
 
-  loans(loanID: BigInt): Loans__loansResultValue0Struct {
+  loans(loanID: BigInt): USDCLoans__loansResultValue0Struct {
     let result = super.call("loans", [
       EthereumValue.fromUnsignedBigInt(loanID)
     ]);
 
-    return result[0].toTuple() as Loans__loansResultValue0Struct;
+    return result[0].toTuple() as USDCLoans__loansResultValue0Struct;
   }
 
-  try_loans(loanID: BigInt): CallResult<Loans__loansResultValue0Struct> {
+  try_loans(loanID: BigInt): CallResult<USDCLoans__loansResultValue0Struct> {
     let result = super.tryCall("loans", [
       EthereumValue.fromUnsignedBigInt(loanID)
     ]);
@@ -282,7 +316,7 @@ export class Loans extends SmartContract {
     }
     let value = result.value;
     return CallResult.fromValue(
-      value[0].toTuple() as Loans__loansResultValue0Struct
+      value[0].toTuple() as USDCLoans__loansResultValue0Struct
     );
   }
 }
@@ -304,11 +338,11 @@ export class DepositCollateralCall__Inputs {
     this._call = call;
   }
 
-  get value0(): Address {
+  get borrower(): Address {
     return this._call.inputValues[0].value.toAddress();
   }
 
-  get value1(): BigInt {
+  get loanID(): BigInt {
     return this._call.inputValues[1].value.toBigInt();
   }
 }

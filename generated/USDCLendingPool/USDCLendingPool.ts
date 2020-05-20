@@ -15,6 +15,28 @@ import {
   CallResult
 } from "@graphprotocol/graph-ts";
 
+export class InterestWithdrawn extends EthereumEvent {
+  get params(): InterestWithdrawn__Params {
+    return new InterestWithdrawn__Params(this);
+  }
+}
+
+export class InterestWithdrawn__Params {
+  _event: InterestWithdrawn;
+
+  constructor(event: InterestWithdrawn) {
+    this._event = event;
+  }
+
+  get lender(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get amount(): BigInt {
+    return this._event.parameters[1].value.toBigInt();
+  }
+}
+
 export class PaymentLiquidated extends EthereumEvent {
   get params(): PaymentLiquidated__Params {
     return new PaymentLiquidated__Params(this);
@@ -103,9 +125,24 @@ export class TokenWithdrawn__Params {
   }
 }
 
-export class LendingPoolInterface extends SmartContract {
-  static bind(address: Address): LendingPoolInterface {
-    return new LendingPoolInterface("LendingPoolInterface", address);
+export class USDCLendingPool extends SmartContract {
+  static bind(address: Address): USDCLendingPool {
+    return new USDCLendingPool("USDCLendingPool", address);
+  }
+
+  lendingToken(): Address {
+    let result = super.call("lendingToken", []);
+
+    return result[0].toAddress();
+  }
+
+  try_lendingToken(): CallResult<Address> {
+    let result = super.tryCall("lendingToken", []);
+    if (result.reverted) {
+      return new CallResult();
+    }
+    let value = result.value;
+    return CallResult.fromValue(value[0].toAddress());
   }
 }
 
