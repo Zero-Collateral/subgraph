@@ -28,6 +28,8 @@ enum SettingName {
   SafetyInterval
   TermsExpiryTime
   LiquidateEthPrice
+  PausePlatform
+  UnpausePlatform
 }
 
 enum EthEvent {
