@@ -38,13 +38,14 @@ import {
   buildLoanId,
 } from "./commons";
 
-export function createLoanRepayment(token: string, event: LoanRepaidEvent): LoanRepayment {
+export function createLoanRepayment(token: string, loan:Loan, event: LoanRepaidEvent): LoanRepayment {
   let ethTransaction = createEthTransaction(event, ETH_TX_LOAN_REPAID);
   let loanID = buildLoanIdBigInt(token, event.params.loanID)
   let id = buildId(event);
   log.info("Creating loan repayment for loan id {}", [loanID]);
   let entity = new LoanRepayment(id);
   entity.transaction = ethTransaction.id;
+  entity.loan = loan.id
   entity.amount = event.params.amountPaid;
   entity.payer = event.params.payer;
   entity.blockNumber = event.block.number;
@@ -134,7 +135,7 @@ export function internalHandleLoanRepaid(token:string, event: LoanRepaidEvent): 
   log.info('Getting loan id {}.', [loanID])
   let loan = Loan.load(loanID)
   
-  let repayment = createLoanRepayment(token, event)
+  let repayment = createLoanRepayment(token, loan as Loan, event)
   let repayments = loan.repayments
 
   repayments.push(repayment.id)
@@ -173,6 +174,7 @@ export function internalHandleLoanLiquidated(token: string, event: LoanLiquidate
 
   let entity = new Liquidation(loanID)
   entity.transaction = ethTransaction.id
+  entity.loan = loan.id
   entity.liquidator = event.params.liquidator
   entity.collateralOut = event.params.collateralOut
   entity.tokensIn = event.params.tokensIn

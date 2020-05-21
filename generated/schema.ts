@@ -552,6 +552,15 @@ export class Liquidation extends Entity {
     this.set("transaction", Value.fromString(value));
   }
 
+  get loan(): string {
+    let value = this.get("loan");
+    return value.toString();
+  }
+
+  set loan(value: string) {
+    this.set("loan", Value.fromString(value));
+  }
+
   get liquidator(): Bytes {
     let value = this.get("liquidator");
     return value.toBytes();
@@ -635,6 +644,15 @@ export class LoanRepayment extends Entity {
 
   set transaction(value: string) {
     this.set("transaction", Value.fromString(value));
+  }
+
+  get loan(): string {
+    let value = this.get("loan");
+    return value.toString();
+  }
+
+  set loan(value: string) {
+    this.set("loan", Value.fromString(value));
   }
 
   get amount(): BigInt {

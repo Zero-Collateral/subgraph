@@ -153,6 +153,7 @@ type LoanTerm @entity {
 type Liquidation @entity {
   id: ID! # LoanID
   transaction: EthTransaction!
+  loan: Loan!
   liquidator: Bytes!
   collateralOut: BigInt!
   tokensIn: BigInt!
@@ -163,6 +164,7 @@ type Liquidation @entity {
 type LoanRepayment @entity {
   id: ID!
   transaction: EthTransaction!
+  loan: Loan!
   amount: BigInt!
   payer: Bytes!
   blockNumber: BigInt!
