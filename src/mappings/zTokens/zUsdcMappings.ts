@@ -13,7 +13,6 @@ import {
   updateZTokenBalancesFor,
 } from "../../utils/commons";
 import {
-  ETH_TX_TOKEN_DEPOSITED,
   ETH_TX_ZTOKEN_APPROVAL,
   ETH_TX_ZTOKEN_MINTER_ADDED,
   ETH_TX_ZTOKEN_MINTER_REMOVED,
@@ -21,13 +20,13 @@ import {
   ZTOKEN_STATUS_APPROVAL,
   ZTOKEN_STATUS_MINTER_ADDED,
   ZTOKEN_STATUS_MINTER_REMOVED,
-  ZTOKEN_ZDAI,
   ZTOKEN_ZUSDC,
+  ETH_TX_ZTOKEN_TRANSFER,
 } from "../../utils/consts";
 
 export function handleTransfer(event: TransferEvent): void {
   let id = buildId(event);
-  let ethTransaction = createEthTransaction(event, ETH_TX_TOKEN_DEPOSITED);
+  let ethTransaction = createEthTransaction(event, ETH_TX_ZTOKEN_TRANSFER);
 
   createZTokenChange(
     id,
