@@ -3,48 +3,87 @@ enum Token {
   USDC
 }
 
+enum ConsensusContract {
+  LoanTermsConsensus
+  InterestConsensus
+}
+
 enum ZToken {
   zDAI
   zUSDC
 }
 
 enum LendingPoolAction {
-  Deposit
-  Repay
-  Withdraw
-  Liquidate
+  Deposited
+  Withdrawn
+  Repaid
+  InterestWithdrawn
+  PaymentLiquidated
+}
+
+enum SettingName {
+  RequiredSubmissions
+  MaximumTolerance
+  ResponseExpiryLength
+  SafetyInterval
+  TermsExpiryTime
+  LiquidateEthPrice
+  PausePlatform
+  UnpausePlatform
 }
 
 enum EthEvent {
-  LoanCreated
+  # Loans
+  CollateralDeposited
+  CollateralWithdrawn
+  LoanTermsSet
+  LoanTakenOut
+  LoanRepaid
+  LoanLiquidated
+
+  # Lenders
+  AccruedInterestUpdated
+  AccruedInterestWithdrawn
+
+  # LendingPool
   TokenDeposited
   TokenWithdrawn
   TokenRepaid
+  InterestWithdrawn
   PaymentLiquidated
-  SignerAdded
-  SignerRemoved
-  CollateralWithdrawn
-  CollateralDeposited
+
+  # Settings
+  SettingUpdated
+  LendingPoolPaused
+  LendingPoolUnpaused
+  Paused
+  Unpaused
+  PauserAdded
+  PauserRemoved
+
+  # Interest Consensus
   InterestSubmitted
   InterestAccepted
-  AccruedInterestUpdated
-  AccruedInterestWithdrawn
-  InterestUpdateRequested
-  CancelInterestUpdate
+
+  # Loan Terms Consensus
+  TermsSubmitted
+  TermsAccepted
+
+  # Consensus
+  SignerAdded
+  SignerRemoved
+
+  # ZTokens
   ZTokenTransfer
   ZTokenApproval
   ZTokenMinterAdded
   ZTokenMinterRemoved
 }
 
-enum InterestUpdateStatusAction {
-  Requested
-  Canceled
-}
-
-enum AccruedInterestStatusAction {
-  Withdrawn
-  Updated
+enum LoanStatus {
+  TermsSet
+  Active
+  Closed
 }
 
 enum ZTokenStatusAction {
@@ -78,16 +117,56 @@ type Borrower @entity {
 
 type Loan @entity {
   id: ID!
+  token: Token!
   transaction: EthTransaction!
   borrower: Borrower!
+  recipient: Bytes!
+  terms: LoanTerm!
   startDate: BigInt! # https://github.com/graphql/graphql-js/issues/1003#issuecomment-324790647
+  endDate: BigInt!
+  amountBorrowed: BigInt!
+  status: LoanStatus!
+  repayments: [LoanRepayment!]!
+  totalRepaidAmount: BigInt!
+  totalOwedAmount: BigInt!
+  collateralDeposits: [CollateralDeposit!]!
+  totalCollateralDepositsAmount: BigInt!
+  collateralWithdrawns: [CollateralWithdraw!]!
+  totalCollateralWithdrawalsAmount: BigInt!
+  liquidation: Liquidation
+  blockNumber: BigInt!
+  timestamp: BigInt!
+}
+
+type LoanTerm @entity {
+  id: ID! # LoanID
+  transaction: EthTransaction!
   interestRate: BigInt!
   collateralRatio: BigInt! 
   maxLoanAmount: BigInt!
-  numberDays: BigInt!
-  amountBorrow: BigInt!
-  collateralDeposits: [CollateralDeposit!]!
-  collateralWithdrawns: [CollateralWithdraw!]!
+  duration: BigInt!
+  expiryAt: BigInt!
+  blockNumber: BigInt!
+  timestamp: BigInt!
+}
+
+type Liquidation @entity {
+  id: ID! # LoanID
+  transaction: EthTransaction!
+  loan: Loan!
+  liquidator: Bytes!
+  collateralOut: BigInt!
+  tokensIn: BigInt!
+  blockNumber: BigInt!
+  timestamp: BigInt!
+}
+
+type LoanRepayment @entity {
+  id: ID!
+  transaction: EthTransaction!
+  loan: Loan!
+  amount: BigInt!
+  payer: Bytes!
   blockNumber: BigInt!
   timestamp: BigInt!
 }
@@ -112,13 +191,7 @@ type CollateralWithdraw @entity {
   timestamp: BigInt!
 }
 
-type Signer @entity {
-  id: ID!
-  address: Bytes!
-  active: Boolean!
-}
-
-type LendingPoolStatus @entity {
+type LendingPoolChange @entity {
   id: ID!
   zToken: ZToken!
   lendingToken: Token!
@@ -132,44 +205,76 @@ type LendingPoolStatus @entity {
 
 type InterestSubmitted @entity {
   id: ID!
+  token: Token!
   transaction: EthTransaction!
   signer: Bytes!
   lender: Bytes!
-  blockNumber: BigInt!
   interest: BigInt!
+  endTime: BigInt!
+  blockNumber: BigInt!
   timestamp: BigInt!
 }
 
 type InterestAccepted @entity {
   id: ID!
+  token: Token!
   transaction: EthTransaction!
   lender: Bytes!
-  blockNumber: BigInt!
+  endTime: BigInt!
   interest: BigInt!
-  acceptedAt: BigInt!
-}
-
-type AccruedInterestStatus @entity {
-  id: ID!
-  transaction: EthTransaction!
-  lender: Bytes!
-  totalAmount: BigInt!
-  accruedInterest: BigInt!
-  action: AccruedInterestStatusAction!
   blockNumber: BigInt!
   timestamp: BigInt!
 }
 
-type InterestUpdateStatus @entity {
+type LoanTermsSubmitted @entity {
   id: ID!
+  token: Token!
   transaction: EthTransaction!
-  lender: Bytes!
+  signer: Bytes!
+  borrower: Bytes!
+  requestNonce: BigInt!
+  interestRate: BigInt!
+  collateralRatio: BigInt!
+  maxLoanAmount: BigInt!
   blockNumber: BigInt!
-  updatedAt: BigInt!
-  action: InterestUpdateStatusAction!
+  timestamp: BigInt!
 }
 
-type ZTokenBalance @entity {
+type LoanTermsAccepted @entity {
+  id: ID!
+  token: Token!
+  transaction: EthTransaction!
+  borrower: Bytes!
+  requestNonce: BigInt!
+  interestRate: BigInt!
+  collateralRatio: BigInt!
+  maxLoanAmount: BigInt!
+  blockNumber: BigInt!
+  timestamp: BigInt!
+}
+
+type AccruedInterestChange @entity {
+  id: ID!
+  token: Token!
+  transaction: EthTransaction!
+  lender: Bytes!
+  totalNotWithdrawn: BigInt!
+  totalAccruedInterest: BigInt!
+  blockNumber: BigInt!
+  timestamp: BigInt!
+}
+
+type AccruedInterestWithdrawalChange @entity {
+  id: ID!
+  token: Token!
+  transaction: EthTransaction!
+  recipient: Bytes!
+  amount: BigInt!
+  blockNumber: BigInt!
+  timestamp: BigInt!
+}
+
+type ZTokenStatus @entity {
   id: ID!
   amount: BigInt!
   zToken: ZToken!
@@ -178,7 +283,7 @@ type ZTokenBalance @entity {
   updatedAt: BigInt!
 }
 
-type ZTokenStatus @entity {
+type ZTokenChange @entity {
   id: ID!
   transaction: EthTransaction!
   amount: BigInt!
@@ -186,6 +291,81 @@ type ZTokenStatus @entity {
   from: Bytes!
   to: Bytes!
   action: ZTokenStatusAction!
+  blockNumber: BigInt!
+  timestamp: BigInt!
+}
+
+type SettingsStatus @entity {
+  id: ID!
+  settingName: SettingName!
+  value: BigInt!
+  blockNumber: BigInt!
+  timestamp: BigInt!
+}
+
+type SettingsChange @entity {
+  id: ID!
+  transaction: EthTransaction!
+  oldValue: BigInt!
+  newValue: BigInt!
+  from: Bytes!
+  settingName: SettingName!
+  blockNumber: BigInt!
+  timestamp: BigInt!
+}
+
+type LendingPoolPauseStatus @entity {
+  id: ID!
+  lendingPool: Bytes!
+  paused: Boolean!
+  blockNumber: BigInt!
+  timestamp: BigInt!
+}
+
+type LendingPoolPauseChange @entity {
+  id: ID!
+  transaction: EthTransaction!
+  paused: Boolean!
+  lendingPool: Bytes!
+  from: Bytes!
+  blockNumber: BigInt!
+  timestamp: BigInt!
+}
+
+type SignerStatus @entity {
+  id: ID!
+  token: Token!
+  contract: ConsensusContract!
+  account: Bytes!
+  removed: Boolean!
+  blockNumber: BigInt!
+  timestamp: BigInt!
+}
+
+type SignerChange @entity {
+  id: ID!
+  token: Token!
+  contract: ConsensusContract!
+  transaction: EthTransaction!
+  account: Bytes!
+  removed: Boolean!
+  blockNumber: BigInt!
+  timestamp: BigInt!
+}
+
+type PauserStatus @entity {
+  id: ID!
+  account: Bytes!
+  active: Boolean!
+  blockNumber: BigInt!
+  timestamp: BigInt!
+}
+
+type PauserChange @entity {
+  id: ID!
+  transaction: EthTransaction!
+  account: Bytes!
+  active: Boolean!
   blockNumber: BigInt!
   timestamp: BigInt!
 }
