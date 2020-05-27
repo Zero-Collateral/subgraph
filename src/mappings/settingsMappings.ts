@@ -41,7 +41,6 @@ export function handleLendingPoolPaused(event: LendingPoolPausedEvent): void {
   );
 
   updateOrCreateLendingPoolPauseStatus(
-    entity.id,
     true,
     event.params.lendingPoolAddress,
     event.block.number,
@@ -63,7 +62,6 @@ export function handleLendingPoolUnpaused(
   );
 
   updateOrCreateLendingPoolPauseStatus(
-    entity.id,
     false,
     event.params.lendingPoolAddress,
     event.block.number,

@@ -299,8 +299,8 @@ type SettingsStatus @entity {
   id: ID!
   settingName: SettingName!
   value: BigInt!
-  lastBlockNumber: BigInt!
-  lastTimestamp: BigInt!
+  blockNumber: BigInt!
+  timestamp: BigInt!
 }
 
 type SettingsChange @entity {
@@ -318,8 +318,8 @@ type LendingPoolPauseStatus @entity {
   id: ID!
   lendingPool: Bytes!
   paused: Boolean!
-  lastBlockNumber: BigInt!
-  lastTimestamp: BigInt!
+  blockNumber: BigInt!
+  timestamp: BigInt!
 }
 
 type LendingPoolPauseChange @entity {
@@ -338,8 +338,8 @@ type SignerStatus @entity {
   contract: ConsensusContract!
   account: Bytes!
   removed: Boolean!
-  lastBlockNumber: BigInt!
-  lastTimestamp: BigInt!
+  blockNumber: BigInt!
+  timestamp: BigInt!
 }
 
 type SignerChange @entity {
@@ -357,8 +357,8 @@ type PauserStatus @entity {
   id: ID!
   account: Bytes!
   active: Boolean!
-  lastBlockNumber: BigInt!
-  lastTimestamp: BigInt!
+  blockNumber: BigInt!
+  timestamp: BigInt!
 }
 
 type PauserChange @entity {

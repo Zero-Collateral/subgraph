@@ -183,6 +183,7 @@ export function internalHandleLoanLiquidated(token: string, event: LoanLiquidate
   entity.save()
   
   loan.liquidation = entity.id
+  loan.status = LOAN_STATUS_CLOSED
   loan.save()
 }
 

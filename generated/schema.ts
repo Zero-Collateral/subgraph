@@ -1813,22 +1813,22 @@ export class SettingsStatus extends Entity {
     this.set("value", Value.fromBigInt(value));
   }
 
-  get lastBlockNumber(): BigInt {
-    let value = this.get("lastBlockNumber");
+  get blockNumber(): BigInt {
+    let value = this.get("blockNumber");
     return value.toBigInt();
   }
 
-  set lastBlockNumber(value: BigInt) {
-    this.set("lastBlockNumber", Value.fromBigInt(value));
+  set blockNumber(value: BigInt) {
+    this.set("blockNumber", Value.fromBigInt(value));
   }
 
-  get lastTimestamp(): BigInt {
-    let value = this.get("lastTimestamp");
+  get timestamp(): BigInt {
+    let value = this.get("timestamp");
     return value.toBigInt();
   }
 
-  set lastTimestamp(value: BigInt) {
-    this.set("lastTimestamp", Value.fromBigInt(value));
+  set timestamp(value: BigInt) {
+    this.set("timestamp", Value.fromBigInt(value));
   }
 }
 
@@ -1980,22 +1980,22 @@ export class LendingPoolPauseStatus extends Entity {
     this.set("paused", Value.fromBoolean(value));
   }
 
-  get lastBlockNumber(): BigInt {
-    let value = this.get("lastBlockNumber");
+  get blockNumber(): BigInt {
+    let value = this.get("blockNumber");
     return value.toBigInt();
   }
 
-  set lastBlockNumber(value: BigInt) {
-    this.set("lastBlockNumber", Value.fromBigInt(value));
+  set blockNumber(value: BigInt) {
+    this.set("blockNumber", Value.fromBigInt(value));
   }
 
-  get lastTimestamp(): BigInt {
-    let value = this.get("lastTimestamp");
+  get timestamp(): BigInt {
+    let value = this.get("timestamp");
     return value.toBigInt();
   }
 
-  set lastTimestamp(value: BigInt) {
-    this.set("lastTimestamp", Value.fromBigInt(value));
+  set timestamp(value: BigInt) {
+    this.set("timestamp", Value.fromBigInt(value));
   }
 }
 
@@ -2156,22 +2156,22 @@ export class SignerStatus extends Entity {
     this.set("removed", Value.fromBoolean(value));
   }
 
-  get lastBlockNumber(): BigInt {
-    let value = this.get("lastBlockNumber");
+  get blockNumber(): BigInt {
+    let value = this.get("blockNumber");
     return value.toBigInt();
   }
 
-  set lastBlockNumber(value: BigInt) {
-    this.set("lastBlockNumber", Value.fromBigInt(value));
+  set blockNumber(value: BigInt) {
+    this.set("blockNumber", Value.fromBigInt(value));
   }
 
-  get lastTimestamp(): BigInt {
-    let value = this.get("lastTimestamp");
+  get timestamp(): BigInt {
+    let value = this.get("timestamp");
     return value.toBigInt();
   }
 
-  set lastTimestamp(value: BigInt) {
-    this.set("lastTimestamp", Value.fromBigInt(value));
+  set timestamp(value: BigInt) {
+    this.set("timestamp", Value.fromBigInt(value));
   }
 }
 
@@ -2317,22 +2317,22 @@ export class PauserStatus extends Entity {
     this.set("active", Value.fromBoolean(value));
   }
 
-  get lastBlockNumber(): BigInt {
-    let value = this.get("lastBlockNumber");
+  get blockNumber(): BigInt {
+    let value = this.get("blockNumber");
     return value.toBigInt();
   }
 
-  set lastBlockNumber(value: BigInt) {
-    this.set("lastBlockNumber", Value.fromBigInt(value));
+  set blockNumber(value: BigInt) {
+    this.set("blockNumber", Value.fromBigInt(value));
   }
 
-  get lastTimestamp(): BigInt {
-    let value = this.get("lastTimestamp");
+  get timestamp(): BigInt {
+    let value = this.get("timestamp");
     return value.toBigInt();
   }
 
-  set lastTimestamp(value: BigInt) {
-    this.set("lastTimestamp", Value.fromBigInt(value));
+  set timestamp(value: BigInt) {
+    this.set("timestamp", Value.fromBigInt(value));
   }
 }
 

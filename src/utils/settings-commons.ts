@@ -16,12 +16,12 @@ import {
 import { createEthTransaction, getTimestampInMillis, buildId } from "./commons";
 
 export function updateOrCreateLendingPoolPauseStatus(
-  id: string,
   paused: boolean,
   lendingPool: Bytes,
   blockNumber: BigInt,
   timestamp: BigInt
 ): void {
+  let id = lendingPool.toHexString();
   log.info("Getting or creating a lending pool pause status with id {}", [id]);
   let pauseEntity = LendingPoolPauseStatus.load(id);
   if (pauseEntity == null) {
@@ -29,8 +29,8 @@ export function updateOrCreateLendingPoolPauseStatus(
     pauseEntity.paused = paused;
   }
   pauseEntity.lendingPool = lendingPool;
-  pauseEntity.lastBlockNumber = blockNumber;
-  pauseEntity.lastTimestamp = timestamp;
+  pauseEntity.blockNumber = blockNumber;
+  pauseEntity.timestamp = timestamp;
   pauseEntity.save();
 }
 
@@ -40,7 +40,7 @@ export function creatingLendingPoolPauseChange(
   account: Address,
   event: EthereumEvent
 ): LendingPoolPauseChange {
-  let id = lendingPoolAddress.toHexString();
+  let id = buildId(event);
   log.info("Creating new lending pool pause change with id {}", [id]);
   let transactionType = paused
     ? ETH_TX_LENDING_POOL_PAUSED
@@ -111,8 +111,8 @@ export function updateOrCreatePauserStatus(
   }
   pauseEntity.account = account;
   pauseEntity.active = active;
-  pauseEntity.lastBlockNumber = event.block.number;
-  pauseEntity.lastTimestamp = getTimestampInMillis(event);
+  pauseEntity.blockNumber = event.block.number;
+  pauseEntity.timestamp = getTimestampInMillis(event);
   pauseEntity.save();
 }
 
@@ -142,7 +142,7 @@ export function internalHandleSettingUpdated(
     settingsEntity.settingName = settingName.toString();
   }
   settingsEntity.value = newValue;
-  settingsEntity.lastBlockNumber = event.block.number;
-  settingsEntity.lastTimestamp = getTimestampInMillis(event);
+  settingsEntity.blockNumber = event.block.number;
+  settingsEntity.timestamp = getTimestampInMillis(event);
   settingsEntity.save();
 }

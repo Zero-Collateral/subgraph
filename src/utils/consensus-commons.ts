@@ -61,8 +61,8 @@ export function internalHandleSigner(token: string, contract: string, removed: b
   entity.token = token
   entity.contract = contract
   entity.removed = removed
-  entity.lastBlockNumber = event.block.number
-  entity.lastTimestamp = getTimestampInMillis(event)
+  entity.blockNumber = event.block.number
+  entity.timestamp = getTimestampInMillis(event)
   entity.save()
 }
 
