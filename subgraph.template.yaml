@@ -1,14 +1,17 @@
-specVersion: 0.0.2
+# Settings / Consensus => Use ABI implementation
+# Others => Use ABI interface
+
+specVersion: 0.0.3
 schema:
   file: ./schema.graphql
 dataSources:
   # DAILoans
   - kind: ethereum/contract
     name: DAILoans
-    network: ropsten
+    network: {{network}}
     source:
-      startBlock: 7900000
-      address: "0x74F25414Fcfe1e86b453Cd4089eB46e2C0Da3ba7"
+      startBlock: {{startBlock}}
+      address: '{{Loans_zDAI}}'
       abi: DAILoans
     mapping:
       kind: ethereum/events
@@ -43,10 +46,10 @@ dataSources:
   # USDCLoans
   - kind: ethereum/contract
     name: USDCLoans
-    network: ropsten
+    network: {{network}}
     source:
-      startBlock: 7900000
-      address: "0xF908F681D083a4F4266E61D2De8D48D6e6C19119"
+      startBlock: {{startBlock}}
+      address: '{{Loans_zUSDC}}'
       abi: USDCLoans
     mapping:
       kind: ethereum/events
@@ -81,10 +84,10 @@ dataSources:
   # DAIInterestConsensus
   - kind: ethereum/contract
     name: DAIInterestConsensus
-    network: ropsten
+    network: {{network}}
     source:
-      startBlock: 7900000
-      address: "0x1690AD0D900C78252313a44414633b9BFBCd0786"
+      startBlock: {{startBlock}}
+      address: '{{InterestConsensus_zDAI}}'
       abi: DAIInterestConsensus
     mapping:
       kind: ethereum/events
@@ -112,10 +115,10 @@ dataSources:
   # USDCInterestConsensus
   - kind: ethereum/contract
     name: USDCInterestConsensus
-    network: ropsten
+    network: {{network}}
     source:
-      startBlock: 7900000
-      address: "0x19ff31697E3dE87D511AC8b5A4FB1a5f10577A8c"
+      startBlock: {{startBlock}}
+      address: '{{InterestConsensus_zUSDC}}'
       abi: USDCInterestConsensus
     mapping:
       kind: ethereum/events
@@ -143,10 +146,10 @@ dataSources:
   # DAILoanTermsConsensus
   - kind: ethereum/contract
     name: DAILoanTermsConsensus
-    network: ropsten
+    network: {{network}}
     source:
-      startBlock: 7900000
-      address: "0x598147d645eD6E0FBc4932859b45C3369B59fC9e"
+      startBlock: {{startBlock}}
+      address: '{{LoanTermsConsensus_zDAI}}'
       abi: DAILoanTermsConsensus
     mapping:
       kind: ethereum/events
@@ -174,10 +177,10 @@ dataSources:
   # USDCLoanTermsConsensus
   - kind: ethereum/contract
     name: USDCLoanTermsConsensus
-    network: ropsten
+    network: {{network}}
     source:
-      startBlock: 7900000
-      address: "0x3F41d3eC60163a59D828E09D7F13851A9c551583"
+      startBlock: {{startBlock}}
+      address: '{{LoanTermsConsensus_zUSDC}}'
       abi: USDCLoanTermsConsensus
     mapping:
       kind: ethereum/events
@@ -205,10 +208,10 @@ dataSources:
   # ZDAIToken
   - kind: ethereum/contract
     name: ZDAIToken
-    network: ropsten
+    network: {{network}}
     source:
-      startBlock: 7900000
-      address: "0xd8535CF3c4521ad666C4618E554F2279ED39E875"
+      startBlock: {{startBlock}}
+      address: '{{ZDAI}}'
       abi: ZToken
     mapping:
       kind: ethereum/events
@@ -234,10 +237,10 @@ dataSources:
   # ZUSDCToken
   - kind: ethereum/contract
     name: ZUSDCToken
-    network: ropsten
+    network: {{network}}
     source:
-      startBlock: 7900000
-      address: "0x74cb753a768649F33f6A2D63a9c173e310E04518"
+      startBlock: {{startBlock}}
+      address: '{{ZUSDC}}'
       abi: ZToken
     mapping:
       kind: ethereum/events
@@ -263,10 +266,10 @@ dataSources:
   # Settings
   - kind: ethereum/contract
     name: SettingsInterface
-    network: ropsten
+    network: {{network}}
     source:
-      startBlock: 7900000
-      address: "0xCfda83835ad5e405B5ffd3CC07cEBAA08b61fF60"
+      startBlock: {{startBlock}}
+      address: '{{Settings}}'
       abi: SettingsInterface
     mapping:
       kind: ethereum/events
@@ -300,10 +303,10 @@ dataSources:
   # DAILendingPool
   - kind: ethereum/contract
     name: DAILendingPool
-    network: ropsten
+    network: {{network}}
     source:
-      startBlock: 7900000
-      address: "0x84A69ab57ed18D9fa476c29dC69A59a9b16c79D9"
+      startBlock: {{startBlock}}
+      address: '{{LendingPool_zDAI}}'
       abi: DAILendingPool
     mapping:
       kind: ethereum/events
@@ -330,10 +333,10 @@ dataSources:
   # USDCLendingPool
   - kind: ethereum/contract
     name: USDCLendingPool
-    network: ropsten
+    network: {{network}}
     source:
-      startBlock: 7900000
-      address: "0x21464603C42F57e21A39d72aa5C821a7d60db65F"
+      startBlock: {{startBlock}}
+      address: '{{LendingPool_zUSDC}}'
       abi: USDCLendingPool
     mapping:
       kind: ethereum/events
@@ -360,10 +363,10 @@ dataSources:
   # DAILenders
   - kind: ethereum/contract
     name: DAILenders
-    network: ropsten
+    network: {{network}}
     source:
-      startBlock: 7900000
-      address: "0x7891284C96c124272528b7834E348Ed38dD8A58B"
+      startBlock: {{startBlock}}
+      address: '{{Lenders_zDAI}}'
       abi: DAILenders
     mapping:
       kind: ethereum/events
@@ -385,10 +388,10 @@ dataSources:
   # USDCLenders
   - kind: ethereum/contract
     name: USDCLenders
-    network: ropsten
+    network: {{network}}
     source:
-      startBlock: 7900000
-      address: "0x1b1FBBFa337339c3Bb8B28e7A61cb7c46cC83F52"
+      startBlock: {{startBlock}}
+      address: '{{Lenders_zUSDC}}'
       abi: USDCLenders
     mapping:
       kind: ethereum/events
@@ -407,6 +410,3 @@ dataSources:
         - event: AccruedInterestWithdrawn(indexed address,uint256)
           handler: handleAccruedInterestWithdrawn
       file: ./src/mappings/lenders/usdcLendersMappings.ts
-
-# Settings / Consensus => Use ABI implementation
-# Others => Use ABI interface

@@ -1,4 +1,4 @@
-import { log, BigInt, EthereumEvent } from "@graphprotocol/graph-ts";
+import { log, BigInt, ethereum } from "@graphprotocol/graph-ts";
 import {
   Borrower,
   LoanTerm,
@@ -79,7 +79,7 @@ export function createLoan(
   borrowerAddress: Address,
   recipient: Address,
   amountBorrowed: BigInt,
-  event: EthereumEvent
+  event: ethereum.Event
 ): Loan {
   log.info("Creating {} loan with id {} ", [token, loanID])
   let entity = new Loan(loanID)

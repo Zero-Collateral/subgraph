@@ -1,4 +1,4 @@
-import { Address, BigInt, EthereumEvent, log } from "@graphprotocol/graph-ts";
+import { Address, BigInt, ethereum, log } from "@graphprotocol/graph-ts";
 import { buildId, createEthTransaction, getTimestampInMillis } from "./commons";
 import {
   ETH_TX_ACCRUED_INTEREST_WITHDRAWN,
@@ -13,7 +13,7 @@ export function internalHandleAccruedInterestWithdrawn(
     token: string,
     recipient: Address,
     amount: BigInt,
-    event: EthereumEvent
+    event: ethereum.Event
 ): void {
   let id = buildId(event);
   log.info("Creating new accrued interest withdrawn id {}", [id]);
@@ -36,7 +36,7 @@ export function internalHandleAccruedInterestUpdated(
     lender: Address,
     totalNotWithdrawn: BigInt,
     totalAccruedInterest: BigInt,
-event: EthereumEvent
+    event: ethereum.Event
 ): void {
   let id = buildId(event);
   log.info("Creating new accrued interest updated with id {}", [id]);

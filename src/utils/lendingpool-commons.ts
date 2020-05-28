@@ -1,4 +1,4 @@
-import { log, BigInt, EthereumEvent } from "@graphprotocol/graph-ts";
+import { log, BigInt, ethereum } from "@graphprotocol/graph-ts";
 import {
   LendingPoolChange,
   EthTransaction,
@@ -44,7 +44,7 @@ export function internalHandleLendingPoolChange(
   action: string,
   account: Address,
   amount: BigInt,
-  event: EthereumEvent
+  event: ethereum.Event
 ): void {
   let id = buildId(event)
   let ethTransaction = createEthTransaction(event, transactionType)
