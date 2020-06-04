@@ -1,4 +1,4 @@
-import { log, EthereumEvent, BigInt } from "@graphprotocol/graph-ts";
+import { log, ethereum, BigInt } from "@graphprotocol/graph-ts";
 import {
   SignerStatus,
   SignerChange,
@@ -27,7 +27,7 @@ import {
   buildId,
 } from "./commons";
 
-export function createSignerChange(event: EthereumEvent, token: string, contract: string, account: Address, removed: boolean): void {
+export function createSignerChange(event: ethereum.Event, token: string, contract: string, account: Address, removed: boolean): void {
   let eventType = removed ? ETH_TX_SIGNER_REMOVED : ETH_TX_SIGNER_ADDED
   let id = buildSignerId(token, contract, account)
   log.info('Creating signer change (removed? {}) for id {}.', [removed.toString(), id])
@@ -43,7 +43,7 @@ export function createSignerChange(event: EthereumEvent, token: string, contract
   entity.save()
 }
 
-export function internalHandleSigner(token: string, contract: string, removed: boolean, account: Address, event: EthereumEvent): void {
+export function internalHandleSigner(token: string, contract: string, removed: boolean, account: Address, event: ethereum.Event): void {
   createSignerChange(
     event,
     token,
@@ -105,7 +105,7 @@ export function internalHandleLoanTermsSubmitted(
   interestRate: BigInt,
   collateralRatio: BigInt,
   maxLoanAmount: BigInt,
-  event: EthereumEvent
+  event: ethereum.Event
 ): void {
   let id = buildId(event)
   log.info('Creating new loan terms submitted ({}) with id {}', [token, id])
@@ -131,7 +131,7 @@ export function internalHandleLoanTermsAccepted(
   interestRate: BigInt,
   collateralRatio: BigInt,
   maxLoanAmount: BigInt,
-  event: EthereumEvent): void {
+  event: ethereum.Event): void {
   let id = buildId(event)
   log.info('Creating new loan terms accepted ({}) with id {}', [token, id])
   let ethTransaction = createEthTransaction(event, ETH_TX_TERMS_ACCEPTED)

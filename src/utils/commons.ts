@@ -1,4 +1,4 @@
-import { log, BigInt, EthereumEvent, Bytes } from "@graphprotocol/graph-ts";
+import { log, BigInt, ethereum, Bytes } from "@graphprotocol/graph-ts";
 import {
   Borrower,
   EthTransaction,
@@ -11,7 +11,7 @@ import {
 } from "./consts";
 import { Transfer as TransferEvent,  } from "../../generated/ZDAIToken/ZToken";
 
-export function getTimestampInMillis(event: EthereumEvent): BigInt {
+export function getTimestampInMillis(event: ethereum.Event): BigInt {
   return event.block.timestamp.times(BigInt.fromI32(1000));
 }
 
@@ -20,7 +20,7 @@ export function getTimeInMillis(time: BigInt): BigInt {
 }
 
 export function createEthTransaction(
-  event: EthereumEvent,
+  event: ethereum.Event,
   action: string
 ): EthTransaction {
   let id = event.transaction.hash.toHex() + "-" + event.logIndex.toString();
@@ -63,7 +63,7 @@ export function buildLoanId(token: string, loanID: string): string {
   return token + "-" + loanID;
 }
 
-export function buildId(event: EthereumEvent): string {
+export function buildId(event: ethereum.Event): string {
   return event.transaction.hash.toHex() + "-" + event.logIndex.toString();
 }
 

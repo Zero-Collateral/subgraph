@@ -1,4 +1,4 @@
-import { log, BigInt, EthereumEvent, Bytes } from "@graphprotocol/graph-ts";
+import { log, BigInt, ethereum, Bytes } from "@graphprotocol/graph-ts";
 import {
   LendingPoolPauseStatus,
   LendingPoolPauseChange,
@@ -38,7 +38,7 @@ export function creatingLendingPoolPauseChange(
   paused: boolean,
   lendingPoolAddress: Address,
   account: Address,
-  event: EthereumEvent
+  event: ethereum.Event
 ): LendingPoolPauseChange {
   let id = buildId(event);
   log.info("Creating new lending pool pause change with id {}", [id]);
@@ -62,7 +62,7 @@ export function createSettingChange(
   newValue: BigInt,
   from: Address,
   settingName: string,
-  event: EthereumEvent
+  event: ethereum.Event
 ): SettingsChange {
   let id = buildId(event);
   log.info("Creating new setting change with id {}", [id]);
@@ -83,7 +83,7 @@ export function createPauserChange(
   transactionType: string,
   account: Address,
   active: boolean,
-  event: EthereumEvent
+  event: ethereum.Event
 ): PauserChange {
   let id = buildId(event);
   log.info("Creating new setting change with id {}", [id]);
@@ -101,7 +101,7 @@ export function createPauserChange(
 export function updateOrCreatePauserStatus(
   account: Address,
   active: boolean,
-  event: EthereumEvent
+  event: ethereum.Event
 ): void {
   let id = account.toHexString();
   log.info("Getting or creating a pauser status with id {}", [id]);
@@ -121,7 +121,7 @@ export function internalHandleSettingUpdated(
   newValue: BigInt,
   from: Address,
   settingName: string,
-  event: EthereumEvent
+  event: ethereum.Event
 ): void {
   let id = buildId(event);
   log.info("Creating new setting change with id {}", [id]);

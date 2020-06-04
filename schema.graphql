@@ -191,6 +191,15 @@ type CollateralWithdraw @entity {
   timestamp: BigInt!
 }
 
+type LendingPoolStatus @entity {
+  id: ID!
+  zToken: ZToken!
+  lendingToken: Token!
+  amount: BigInt!
+  blockNumber: BigInt!
+  timestamp: BigInt!
+}
+
 type LendingPoolChange @entity {
   id: ID!
   zToken: ZToken!
