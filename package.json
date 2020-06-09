@@ -8,10 +8,8 @@
     "create-local": "graph create --node http://127.0.0.1:8020/ zero-collateral/zero-collateral",
     "remove-local": "graph remove --node http://127.0.0.1:8020/ zero-collateral/zero-collateral",
     "deploy-local": "graph deploy --node http://127.0.0.1:8020/ --ipfs http://localhost:5001 zero-collateral/zero-collateral",
-
     "prepare:ganache": "mustache config/ganache.json subgraph.template.yaml > subgraph.yaml",
     "prepare:ropsten": "mustache config/ropsten.json subgraph.template.yaml > subgraph.yaml",
-    
     "deploy:ganache": "yarn remove-local; yarn prepare:ganache && yarn create-local && yarn build && yarn deploy-local",
     "deploy:ropsten": "yarn prepare:ropsten && yarn build && yarn deploy"
   },
