@@ -33,5 +33,11 @@ At this moment, the scripts available are:
 - **yarn deploy:ganache**: build the subgraph.yaml file, and deploy it on a Ganache (local) instance.
 - **yarn deploy:ropsten**: build the subgraph.yaml file, and deploy it on a Ganache (local) instance.
 
+## Subgraphs
+
+Currently, you can play with our subgraph here:
+
+- [Ropsten](https://thegraph.com/explorer/subgraph/zero-collateral/zero-collateral).
+
 ---
 © Copyright 2020, Fabrx Labs
