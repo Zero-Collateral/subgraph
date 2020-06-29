@@ -21,50 +21,52 @@ import {
   ETH_TX_COLLATERAL_DEPOSITED,
 } from "./consts";
 import {
-  CollateralDeposited as CollateralDepositedEvent,
-  CollateralWithdrawn as CollateralWithdrawnEvent,
-  LoanRepaid as LoanRepaidEvent,
-  LoanTermsSet as LoanTermsSetEvent,
-  LoanTakenOut as LoanTakenOutEvent,
-  LoanLiquidated as LoanLiquidatedEvent,
-} from "../../generated/DAILoans/DAILoans";
-import {
   getOrCreateBorrower,
   getTimestampInMillis,
   getTimeInMillis,
   createEthTransaction,
   buildId,
-  buildLoanIdBigInt,
-  buildLoanId,
 } from "./commons";
 
-export function createLoanRepayment(token: string, loan:Loan, event: LoanRepaidEvent): LoanRepayment {
+export function createLoanRepayment(
+  loan:Loan,
+  amountPaid: BigInt,
+  payer: Address,
+  event: ethereum.Event
+): LoanRepayment {
   let ethTransaction = createEthTransaction(event, ETH_TX_LOAN_REPAID);
-  let loanID = buildLoanIdBigInt(token, event.params.loanID)
-  let id = buildId(event);
-  log.info("Creating loan repayment for loan id {}", [loanID]);
+  let id = buildId(event)
+  let loanID = loan.id
+  log.info("Creating loan repayment for loan id {}", [loanID])
   let entity = new LoanRepayment(id);
   entity.transaction = ethTransaction.id;
-  entity.loan = loan.id
-  entity.amount = event.params.amountPaid;
-  entity.payer = event.params.payer;
+  entity.loan = loanID
+  entity.amount = amountPaid
+  entity.payer = payer
   entity.blockNumber = event.block.number;
   entity.timestamp = getTimestampInMillis(event);
   entity.save();
   return entity;
 }
 
-export function createLoanTerms(event: LoanTermsSetEvent): LoanTerm {
+export function createLoanTerms(
+  loanID: string,
+  interestRate: BigInt,
+  collateralRatio: BigInt,
+  maxLoanAmount: BigInt,
+  duration: BigInt,
+  termsExpiry: BigInt,
+  event: ethereum.Event
+): LoanTerm {
   let ethTransaction = createEthTransaction(event, ETH_TX_LOAN_TERMS_SET);
-  let id = event.params.loanID.toBigDecimal().toString();
-  log.info("Creating loan terms for loan id {}", [id]);
-  let entity = new LoanTerm(id);
+  log.info("Creating loan terms for loan id {}", [loanID]);
+  let entity = new LoanTerm(loanID);
   entity.transaction = ethTransaction.id;
-  entity.interestRate = event.params.interestRate;
-  entity.collateralRatio = event.params.collateralRatio;
-  entity.maxLoanAmount = event.params.maxLoanAmount;
-  entity.duration = getTimeInMillis(event.params.duration);
-  entity.expiryAt = getTimeInMillis(event.params.termsExpiry);
+  entity.interestRate = interestRate;
+  entity.collateralRatio = collateralRatio;
+  entity.maxLoanAmount = maxLoanAmount;
+  entity.duration = getTimeInMillis(duration);
+  entity.expiryAt = getTimeInMillis(termsExpiry);
   entity.blockNumber = event.block.number;
   entity.timestamp = getTimestampInMillis(event);
   entity.save();
@@ -74,6 +76,7 @@ export function createLoanTerms(event: LoanTermsSetEvent): LoanTerm {
 export function createLoan(
   loanID: string, // It already contains the token
   token: string,
+  collateralToken: string,
   transactionId: string,
   loanTerms: LoanTerm,
   borrowerAddress: Address,
@@ -84,6 +87,7 @@ export function createLoan(
   log.info("Creating {} loan with id {} ", [token, loanID])
   let entity = new Loan(loanID)
   entity.token = token
+  entity.collateralToken = collateralToken
   entity.transaction = transactionId
   let borrower: Borrower = getOrCreateBorrower(borrowerAddress)
   entity.borrower = borrower.id
@@ -106,10 +110,13 @@ export function createLoan(
   return entity
 }
 
-export function internalHandleLoanTakenOut(token:string, event: LoanTakenOutEvent): void {
-  let loanID = buildLoanIdBigInt(token, event.params.loanID)
-
-  log.info('Processing {} LoanTakenOut - loan id {}', [token, loanID])
+export function internalHandleLoanTakenOut(
+  loanID: string,
+  borrowerAddress: Address, 
+  amountBorrowed: BigInt,
+  event: ethereum.Event
+): void {
+  log.info('Processing LoanTakenOut - loan id {}', [loanID])
   let ethTransaction = createEthTransaction(event, ETH_TX_LOAN_TAKEN_OUT)
   
   let loan = Loan.load(loanID)
@@ -117,67 +124,101 @@ export function internalHandleLoanTakenOut(token:string, event: LoanTakenOutEven
 
   loan.transaction = ethTransaction.id
   loan.status = LOAN_STATUS_ACTIVE
-  loan.amountBorrowed = event.params.amountBorrowed
+  loan.amountBorrowed = amountBorrowed
   loan.startDate = getTimestampInMillis(event)
   loan.endDate = loan.startDate.plus(loanTerms.duration)
   loan.save()
 
-  let borrower = getOrCreateBorrower(event.params.borrower)
-  log.info('Adding new loan {} to borrower {}', [loanID, event.params.borrower.toHexString()])
+  let borrower = getOrCreateBorrower(borrowerAddress)
+  log.info('Adding new loan {} to borrower {}', [loanID, borrowerAddress.toHexString()])
   let loans = borrower.loans
   loans.push(loanID)
   borrower.loans = loans
   borrower.save()
 }
 
-export function internalHandleLoanRepaid(token:string, event: LoanRepaidEvent): void {
-  let loanID = buildLoanIdBigInt(token, event.params.loanID)
+export function internalHandleLoanRepaid(
+  loanID: string,
+  amountPaid: BigInt,
+  totalOwed: BigInt,
+  payer: Address,
+  event: ethereum.Event
+): void {
   log.info('Getting loan id {}.', [loanID])
   let loan = Loan.load(loanID)
   
-  let repayment = createLoanRepayment(token, loan as Loan, event)
+  let repayment = createLoanRepayment(
+    loan as Loan,
+    amountPaid,
+    payer,
+    event
+  )
   let repayments = loan.repayments
 
   repayments.push(repayment.id)
   loan.repayments = repayments
-  let newStatus = event.params.totalOwed.isZero() ? LOAN_STATUS_CLOSED : LOAN_STATUS_ACTIVE;
+  let newStatus = totalOwed.isZero() ? LOAN_STATUS_CLOSED : LOAN_STATUS_ACTIVE;
   loan.status = newStatus
-  loan.totalRepaidAmount = loan.totalRepaidAmount.plus(event.params.amountPaid)
-  loan.totalOwedAmount = event.params.totalOwed
+  loan.totalRepaidAmount = loan.totalRepaidAmount.plus(amountPaid)
+  loan.totalOwedAmount = totalOwed
   loan.save()
 }
 
-export function internalHandleLoanTermsSet(token:string, event: LoanTermsSetEvent): void {
+export function internalHandleLoanTermsSet(
+  loanID: string,
+  token:string,
+  collateralToken: string,
+  borrower: Address,
+  recipient: Address,
+  interestRate: BigInt,
+  collateralRatio: BigInt,
+  maxLoanAmount: BigInt,
+  duration: BigInt,
+  termsExpiry: BigInt,
+  event: ethereum.Event
+): void {
   let ethTransaction = createEthTransaction(event, ETH_TX_LOAN_TERMS_SET)
-
-  let loanID = buildLoanIdBigInt(token, event.params.loanID)
-  let loanTerms = createLoanTerms(event)
+  let loanTerms = createLoanTerms(
+    loanID,
+    interestRate,
+    collateralRatio,
+    maxLoanAmount,
+    duration,
+    termsExpiry,
+    event
+  )
   createLoan(
     loanID,
     token,
+    collateralToken,
     ethTransaction.id,
     loanTerms,
-    event.params.borrower,
-    event.params.recipient,
+    borrower,
+    recipient,
     BigInt.fromI32(0),
     event,
   )
 }
 
-export function internalHandleLoanLiquidated(token: string, event: LoanLiquidatedEvent): void {
-  let loanID = buildLoanIdBigInt(token, event.params.loanID)
+export function internalHandleLoanLiquidated(
+  loanID: string,
+  liquidator: Address,
+  collateralOut: BigInt,
+  tokensIn: BigInt,
+  event: ethereum.Event
+): void {
   let loan = Loan.load(loanID)
 
-  log.info('Creating {} liquidation for loan id {}', [token, loan.id])
+  log.info('Creating liquidation for loan id {}', [loan.id])
 
   let ethTransaction = createEthTransaction(event, ETH_TX_LOAN_LIQUIDATED)
 
   let entity = new Liquidation(loanID)
   entity.transaction = ethTransaction.id
   entity.loan = loan.id
-  entity.liquidator = event.params.liquidator
-  entity.collateralOut = event.params.collateralOut
-  entity.tokensIn = event.params.tokensIn
+  entity.liquidator = liquidator
+  entity.collateralOut = collateralOut
+  entity.tokensIn = tokensIn
   entity.blockNumber = event.block.number
   entity.timestamp = getTimestampInMillis(event)
   entity.save()
@@ -188,22 +229,21 @@ export function internalHandleLoanLiquidated(token: string, event: LoanLiquidate
 }
 
 export function internalHandleCollateralWithdrawn(
-  token: string,
-  event: CollateralWithdrawnEvent
+  loanID: string,
+  borrower: Address,
+  withdrawalAmount: BigInt,
+  event: ethereum.Event
 ): void {
   let ethTransaction = createEthTransaction(event, ETH_TX_COLLATERAL_WITHDRAWN);
 
-  let loanID = buildLoanIdBigInt(token, event.params.loanID)
-  log.info(`Adding collateral withdrawn {} for loan id {}.`, [token, loanID]);
+  log.info(`Adding collateral withdrawn for loan id {}.`, [loanID]);
   let collateralWId =
     event.transaction.hash.toHex() + "-" + event.logIndex.toString();
   let entity = new CollateralWithdraw(collateralWId);
   entity.loan = loanID;
   entity.transaction = ethTransaction.id;
-  entity.borrower = getOrCreateBorrower(
-    event.params.borrower
-  ).address.toHexString();
-  entity.amount = event.params.withdrawalAmount;
+  entity.borrower = getOrCreateBorrower(borrower).address.toHexString();
+  entity.amount = withdrawalAmount;
   entity.blockNumber = ethTransaction.blockNumber;
   entity.timestamp = getTimestampInMillis(event);
   entity.save();
@@ -217,27 +257,26 @@ export function internalHandleCollateralWithdrawn(
   collateralWithdrawns.push(collateralWId);
   loan.collateralWithdrawns = collateralWithdrawns;
   loan.totalCollateralWithdrawalsAmount = loan.totalCollateralWithdrawalsAmount.plus(
-    event.params.withdrawalAmount
+    withdrawalAmount
   );
   loan.save();
 }
 
 export function internalHandleCollateralDeposited(
-  token: string,
-  event: CollateralDepositedEvent
+  loanID: string,
+  borrower: Address,
+  depositAmount: BigInt,
+  event: ethereum.Event
 ): void {
-  let loanID = buildLoanIdBigInt(token, event.params.loanID)
-  log.info("Adding collateral deposit {} for loan id {}", [token, loanID]);
+  log.info("Adding collateral deposit for loan id {}", [loanID]);
   let ethTransaction = createEthTransaction(event, ETH_TX_COLLATERAL_DEPOSITED);
 
   let collateralDId = buildId(event);
   let entity = new CollateralDeposit(collateralDId);
   entity.loan = loanID;
   entity.transaction = ethTransaction.id;
-  entity.borrower = getOrCreateBorrower(
-    event.params.borrower
-  ).address.toHexString();
-  entity.amount = event.params.depositAmount;
+  entity.borrower = getOrCreateBorrower(borrower).address.toHexString();
+  entity.amount = depositAmount;
   entity.blockNumber = ethTransaction.blockNumber;
   entity.timestamp = getTimestampInMillis(event);
   entity.save();
@@ -250,8 +289,6 @@ export function internalHandleCollateralDeposited(
   let collateralDeposits = loan.collateralDeposits;
   collateralDeposits.push(collateralDId);
   loan.collateralDeposits = collateralDeposits;
-  loan.totalCollateralDepositsAmount = loan.totalCollateralDepositsAmount.plus(
-    event.params.depositAmount
-  );
+  loan.totalCollateralDepositsAmount = loan.totalCollateralDepositsAmount.plus(depositAmount);
   loan.save();
 }

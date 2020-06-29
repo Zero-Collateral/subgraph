@@ -239,6 +239,15 @@ export class Loan extends Entity {
     this.set("token", Value.fromString(value));
   }
 
+  get collateralToken(): string {
+    let value = this.get("collateralToken");
+    return value.toString();
+  }
+
+  set collateralToken(value: string) {
+    this.set("collateralToken", Value.fromString(value));
+  }
+
   get transaction(): string {
     let value = this.get("transaction");
     return value.toString();
@@ -910,6 +919,15 @@ export class LendingPoolStatus extends Entity {
     this.set("lendingToken", Value.fromString(value));
   }
 
+  get collateralToken(): string {
+    let value = this.get("collateralToken");
+    return value.toString();
+  }
+
+  set collateralToken(value: string) {
+    this.set("collateralToken", Value.fromString(value));
+  }
+
   get amount(): BigInt {
     let value = this.get("amount");
     return value.toBigInt();
@@ -984,6 +1002,15 @@ export class LendingPoolChange extends Entity {
 
   set lendingToken(value: string) {
     this.set("lendingToken", Value.fromString(value));
+  }
+
+  get collateralToken(): string {
+    let value = this.get("collateralToken");
+    return value.toString();
+  }
+
+  set collateralToken(value: string) {
+    this.set("collateralToken", Value.fromString(value));
   }
 
   get transaction(): string {
@@ -1078,6 +1105,15 @@ export class InterestSubmitted extends Entity {
 
   set token(value: string) {
     this.set("token", Value.fromString(value));
+  }
+
+  get collateralToken(): string {
+    let value = this.get("collateralToken");
+    return value.toString();
+  }
+
+  set collateralToken(value: string) {
+    this.set("collateralToken", Value.fromString(value));
   }
 
   get transaction(): string {
@@ -1183,6 +1219,15 @@ export class InterestAccepted extends Entity {
     this.set("token", Value.fromString(value));
   }
 
+  get collateralToken(): string {
+    let value = this.get("collateralToken");
+    return value.toString();
+  }
+
+  set collateralToken(value: string) {
+    this.set("collateralToken", Value.fromString(value));
+  }
+
   get transaction(): string {
     let value = this.get("transaction");
     return value.toString();
@@ -1275,6 +1320,15 @@ export class LoanTermsSubmitted extends Entity {
 
   set token(value: string) {
     this.set("token", Value.fromString(value));
+  }
+
+  get collateralToken(): string {
+    let value = this.get("collateralToken");
+    return value.toString();
+  }
+
+  set collateralToken(value: string) {
+    this.set("collateralToken", Value.fromString(value));
   }
 
   get transaction(): string {
@@ -1398,6 +1452,15 @@ export class LoanTermsAccepted extends Entity {
     this.set("token", Value.fromString(value));
   }
 
+  get collateralToken(): string {
+    let value = this.get("collateralToken");
+    return value.toString();
+  }
+
+  set collateralToken(value: string) {
+    this.set("collateralToken", Value.fromString(value));
+  }
+
   get transaction(): string {
     let value = this.get("transaction");
     return value.toString();
@@ -1516,6 +1579,15 @@ export class AccruedInterestChange extends Entity {
     this.set("token", Value.fromString(value));
   }
 
+  get collateralToken(): string {
+    let value = this.get("collateralToken");
+    return value.toString();
+  }
+
+  set collateralToken(value: string) {
+    this.set("collateralToken", Value.fromString(value));
+  }
+
   get transaction(): string {
     let value = this.get("transaction");
     return value.toString();
@@ -1614,6 +1686,15 @@ export class AccruedInterestWithdrawalChange extends Entity {
 
   set token(value: string) {
     this.set("token", Value.fromString(value));
+  }
+
+  get collateralToken(): string {
+    let value = this.get("collateralToken");
+    return value.toString();
+  }
+
+  set collateralToken(value: string) {
+    this.set("collateralToken", Value.fromString(value));
   }
 
   get transaction(): string {
@@ -2205,6 +2286,15 @@ export class SignerStatus extends Entity {
     this.set("token", Value.fromString(value));
   }
 
+  get collateralToken(): string {
+    let value = this.get("collateralToken");
+    return value.toString();
+  }
+
+  set collateralToken(value: string) {
+    this.set("collateralToken", Value.fromString(value));
+  }
+
   get contract(): string {
     let value = this.get("contract");
     return value.toString();
@@ -2288,6 +2378,15 @@ export class SignerChange extends Entity {
 
   set token(value: string) {
     this.set("token", Value.fromString(value));
+  }
+
+  get collateralToken(): string {
+    let value = this.get("collateralToken");
+    return value.toString();
+  }
+
+  set collateralToken(value: string) {
+    this.set("collateralToken", Value.fromString(value));
   }
 
   get contract(): string {
@@ -2467,6 +2566,79 @@ export class PauserChange extends Entity {
 
   set active(value: boolean) {
     this.set("active", Value.fromBoolean(value));
+  }
+
+  get blockNumber(): BigInt {
+    let value = this.get("blockNumber");
+    return value.toBigInt();
+  }
+
+  set blockNumber(value: BigInt) {
+    this.set("blockNumber", Value.fromBigInt(value));
+  }
+
+  get timestamp(): BigInt {
+    let value = this.get("timestamp");
+    return value.toBigInt();
+  }
+
+  set timestamp(value: BigInt) {
+    this.set("timestamp", Value.fromBigInt(value));
+  }
+}
+
+export class CTokenExchangeRateChange extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(
+      id !== null,
+      "Cannot save CTokenExchangeRateChange entity without an ID"
+    );
+    assert(
+      id.kind == ValueKind.STRING,
+      "Cannot save CTokenExchangeRateChange entity with non-string ID. " +
+        'Considering using .toHex() to convert the "id" to a string.'
+    );
+    store.set("CTokenExchangeRateChange", id.toString(), this);
+  }
+
+  static load(id: string): CTokenExchangeRateChange | null {
+    return store.get(
+      "CTokenExchangeRateChange",
+      id
+    ) as CTokenExchangeRateChange | null;
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get cToken(): string {
+    let value = this.get("cToken");
+    return value.toString();
+  }
+
+  set cToken(value: string) {
+    this.set("cToken", Value.fromString(value));
+  }
+
+  get exchangeRate(): BigInt {
+    let value = this.get("exchangeRate");
+    return value.toBigInt();
+  }
+
+  set exchangeRate(value: BigInt) {
+    this.set("exchangeRate", Value.fromBigInt(value));
   }
 
   get blockNumber(): BigInt {

@@ -1,6 +1,16 @@
+enum CToken {
+  CDAI
+  CUSDC
+}
+
 enum Token {
   DAI
   USDC
+}
+
+enum CollateralToken {
+  ETH
+  LINK
 }
 
 enum ConsensusContract {
@@ -118,6 +128,7 @@ type Borrower @entity {
 type Loan @entity {
   id: ID!
   token: Token!
+  collateralToken: CollateralToken!
   transaction: EthTransaction!
   borrower: Borrower!
   recipient: Bytes!
@@ -195,6 +206,7 @@ type LendingPoolStatus @entity {
   id: ID!
   zToken: ZToken!
   lendingToken: Token!
+  collateralToken: CollateralToken!
   amount: BigInt!
   blockNumber: BigInt!
   timestamp: BigInt!
@@ -204,6 +216,7 @@ type LendingPoolChange @entity {
   id: ID!
   zToken: ZToken!
   lendingToken: Token!
+  collateralToken: CollateralToken!
   transaction: EthTransaction!
   address: Bytes!
   amount: BigInt!
@@ -215,6 +228,7 @@ type LendingPoolChange @entity {
 type InterestSubmitted @entity {
   id: ID!
   token: Token!
+  collateralToken: CollateralToken!
   transaction: EthTransaction!
   signer: Bytes!
   lender: Bytes!
@@ -227,6 +241,7 @@ type InterestSubmitted @entity {
 type InterestAccepted @entity {
   id: ID!
   token: Token!
+  collateralToken: CollateralToken!
   transaction: EthTransaction!
   lender: Bytes!
   endTime: BigInt!
@@ -238,6 +253,7 @@ type InterestAccepted @entity {
 type LoanTermsSubmitted @entity {
   id: ID!
   token: Token!
+  collateralToken: CollateralToken!
   transaction: EthTransaction!
   signer: Bytes!
   borrower: Bytes!
@@ -252,6 +268,7 @@ type LoanTermsSubmitted @entity {
 type LoanTermsAccepted @entity {
   id: ID!
   token: Token!
+  collateralToken: CollateralToken!
   transaction: EthTransaction!
   borrower: Bytes!
   requestNonce: BigInt!
@@ -265,6 +282,7 @@ type LoanTermsAccepted @entity {
 type AccruedInterestChange @entity {
   id: ID!
   token: Token!
+  collateralToken: CollateralToken!
   transaction: EthTransaction!
   lender: Bytes!
   totalNotWithdrawn: BigInt!
@@ -276,6 +294,7 @@ type AccruedInterestChange @entity {
 type AccruedInterestWithdrawalChange @entity {
   id: ID!
   token: Token!
+  collateralToken: CollateralToken!
   transaction: EthTransaction!
   recipient: Bytes!
   amount: BigInt!
@@ -344,6 +363,7 @@ type LendingPoolPauseChange @entity {
 type SignerStatus @entity {
   id: ID!
   token: Token!
+  collateralToken: CollateralToken!
   contract: ConsensusContract!
   account: Bytes!
   removed: Boolean!
@@ -354,6 +374,7 @@ type SignerStatus @entity {
 type SignerChange @entity {
   id: ID!
   token: Token!
+  collateralToken: CollateralToken!
   contract: ConsensusContract!
   transaction: EthTransaction!
   account: Bytes!
@@ -375,6 +396,14 @@ type PauserChange @entity {
   transaction: EthTransaction!
   account: Bytes!
   active: Boolean!
+  blockNumber: BigInt!
+  timestamp: BigInt!
+}
+
+type CTokenExchangeRateChange @entity {
+  id: ID!
+  cToken: CToken!
+  exchangeRate: BigInt!
   blockNumber: BigInt!
   timestamp: BigInt!
 }

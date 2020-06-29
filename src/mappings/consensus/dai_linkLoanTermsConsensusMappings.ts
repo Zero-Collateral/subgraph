@@ -3,8 +3,8 @@ import {
   TermsSubmitted as TermsSubmittedEvent,
   SignerAdded as SignerAddedEvent,
   SignerRemoved as SignerRemovedEvent,
-} from "../../../generated/USDCLoanTermsConsensus/USDCLoanTermsConsensus";
-import { TOKEN_USDC, CONTRACT_LOAN_TERMS_CONSENSUS } from "../../utils/consts";
+} from "../../../generated/DAI_LINK_LoanTermsConsensus/DAILoanTermsConsensus";
+import { TOKEN_DAI, CONTRACT_LOAN_TERMS_CONSENSUS, COLLATERAL_TOKEN_LINK } from "../../utils/consts";
 import {
   internalHandleSigner,
   internalHandleLoanTermsSubmitted,
@@ -13,7 +13,8 @@ import {
 
 export function handleTermsSubmitted(event: TermsSubmittedEvent): void {
   internalHandleLoanTermsSubmitted(
-    TOKEN_USDC,
+    TOKEN_DAI,
+    COLLATERAL_TOKEN_LINK,
     event.params.signer,
     event.params.borrower,
     event.params.requestNonce,
@@ -26,7 +27,8 @@ export function handleTermsSubmitted(event: TermsSubmittedEvent): void {
 
 export function handleTermsAccepted(event: TermsAcceptedEvent): void {
   internalHandleLoanTermsAccepted(
-    TOKEN_USDC,
+    TOKEN_DAI,
+    COLLATERAL_TOKEN_LINK,
     event.params.borrower,
     event.params.requestNonce,
     event.params.interestRate,
@@ -38,7 +40,8 @@ export function handleTermsAccepted(event: TermsAcceptedEvent): void {
 
 export function handleSignerAdded(event: SignerAddedEvent): void {
   internalHandleSigner(
-    TOKEN_USDC,
+    TOKEN_DAI,
+    COLLATERAL_TOKEN_LINK,
     CONTRACT_LOAN_TERMS_CONSENSUS,
     false,
     event.params.account,
@@ -48,7 +51,8 @@ export function handleSignerAdded(event: SignerAddedEvent): void {
 
 export function handleSignerRemoved(event: SignerRemovedEvent): void {
   internalHandleSigner(
-    TOKEN_USDC,
+    TOKEN_DAI,
+    COLLATERAL_TOKEN_LINK,
     CONTRACT_LOAN_TERMS_CONSENSUS,
     true,
     event.params.account,

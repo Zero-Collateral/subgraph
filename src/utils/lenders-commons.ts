@@ -11,35 +11,38 @@ import {
 
 export function internalHandleAccruedInterestWithdrawn(
     token: string,
+    collateralToken: string,
     recipient: Address,
     amount: BigInt,
     event: ethereum.Event
 ): void {
-  let id = buildId(event);
-  log.info("Creating new accrued interest withdrawn id {}", [id]);
+  let id = buildId(event)
+  log.info("Creating new accrued interest withdrawn ({} / {}) with id {}", [token, collateralToken, id])
   let ethTransaction = createEthTransaction(
     event,
     ETH_TX_ACCRUED_INTEREST_WITHDRAWN
-  );
-  let entity = new AccruedInterestWithdrawalChange(id);
+  )
+  let entity = new AccruedInterestWithdrawalChange(id)
   entity.transaction = ethTransaction.id;
   entity.token = token
-  entity.recipient = recipient;
-  entity.amount = amount;
-  entity.blockNumber = event.block.number;
-  entity.timestamp = getTimestampInMillis(event);
-  entity.save();
+  entity.collateralToken = collateralToken
+  entity.recipient = recipient
+  entity.amount = amount
+  entity.blockNumber = event.block.number
+  entity.timestamp = getTimestampInMillis(event)
+  entity.save()
 }
 
 export function internalHandleAccruedInterestUpdated(
     token: string,
+    collateralToken: string,
     lender: Address,
     totalNotWithdrawn: BigInt,
     totalAccruedInterest: BigInt,
     event: ethereum.Event
 ): void {
   let id = buildId(event);
-  log.info("Creating new accrued interest updated with id {}", [id]);
+  log.info("Creating new accrued interest updated ({} / {}) with id {}", [token, collateralToken, id]);
   let ethTransaction = createEthTransaction(
     event,
     ETH_TX_ACCRUED_INTEREST_UPDATED
@@ -47,6 +50,7 @@ export function internalHandleAccruedInterestUpdated(
   let entity = new AccruedInterestChange(id);
   entity.transaction = ethTransaction.id;
   entity.token = token
+  entity.collateralToken = collateralToken
   entity.lender = lender;
   entity.totalNotWithdrawn = totalNotWithdrawn;
   entity.totalAccruedInterest = totalAccruedInterest;
