@@ -1,6 +1,14 @@
 // See enums in schema.graphql
 export const EMPTY_ADDRESS_STRING = "0x0000000000000000000000000000000000000000";
 
+// Collateral Tokens consts
+export const COLLATERAL_TOKEN_ETH = "ETH";
+export const COLLATERAL_TOKEN_LINK = "LINK";
+
+// cTokens consts
+export const CTOKEN_CDAI = "CDAI";
+export const CTOKEN_CUSDC = "CUSDC";
+
 // zTokens consts
 export const ZTOKEN_ZDAI = "zDAI";
 export const ZTOKEN_ZUSDC = "zUSDC";

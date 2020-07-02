@@ -55,16 +55,20 @@ export function getOrCreateBorrower(address: Address): Borrower {
   return borrower as Borrower;
 }
 
-export function buildLoanIdBigInt(token: string, loanID: BigInt): string {
-  return buildLoanId(token, loanID.toString());
+export function buildLoanIdBigInt(token: string, collateralToken: string, loanID: BigInt): string {
+  return buildLoanId(token, collateralToken, loanID.toString());
 }
 
-export function buildLoanId(token: string, loanID: string): string {
-  return token + "-" + loanID;
+export function buildLoanId(token: string, collateralToken: string, loanID: string): string {
+  return token + "-" + collateralToken + "-" + loanID;
 }
 
 export function buildId(event: ethereum.Event): string {
   return event.transaction.hash.toHex() + "-" + event.logIndex.toString();
+}
+
+export function buildBlockId(block: ethereum.Block): string {
+  return block.hash.toHex() + "-" + block.number.toString() + "-" + block.timestamp.toString();
 }
 
 export function buildSignerId(token: string, contract: string, account: Address): string {

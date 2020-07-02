@@ -1,18 +1,19 @@
 import {
   AccruedInterestUpdated as AccruedInterestUpdatedEvent,
   AccruedInterestWithdrawn as AccruedInterestWithdrawnEvent,
-} from "../../../generated/DAILenders/DAILenders";
+} from "../../../generated/DAI_ETH_Lenders/DAILenders";
 import {
   internalHandleAccruedInterestWithdrawn,
   internalHandleAccruedInterestUpdated,
 } from "../../utils/lenders-commons";
-import { TOKEN_DAI } from "../../utils/consts";
+import { TOKEN_DAI, COLLATERAL_TOKEN_ETH } from "../../utils/consts";
 
 export function handleAccruedInterestUpdated(
   event: AccruedInterestUpdatedEvent
 ): void {
   internalHandleAccruedInterestUpdated(
     TOKEN_DAI,
+    COLLATERAL_TOKEN_ETH,
     event.params.lender,
     event.params.totalNotWithdrawn,
     event.params.totalAccruedInterest,
@@ -25,6 +26,7 @@ export function handleAccruedInterestWithdrawn(
 ): void {
   internalHandleAccruedInterestWithdrawn(
     TOKEN_DAI,
+    COLLATERAL_TOKEN_ETH,
     event.params.recipient,
     event.params.amount,
     event

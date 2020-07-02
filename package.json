@@ -4,6 +4,8 @@
   "scripts": {
     "codegen": "graph codegen",
     "build": "graph build",
+    "build:ganache": "yarn prepare:ganache && graph build",
+    "build:ropsten": "yarn prepare:ropsten && graph build",
     "deploy": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ zero-collateral/zero-collateral",
     "create-local": "graph create --node http://127.0.0.1:8020/ zero-collateral/zero-collateral",
     "create-docker": "graph create --node http://$GRAPH_HOST:$GRAPH_PORT/ zero-collateral/zero-collateral",

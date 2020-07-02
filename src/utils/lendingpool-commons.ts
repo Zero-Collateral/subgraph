@@ -12,36 +12,40 @@ export function createLendingPoolChange(
   id: string,
   zToken: string,
   lendingToken: string,
+  collateralToken: string,
   action: string,
   address: Address,
   amount: BigInt,
   transaction: EthTransaction
 ): void {
   log.info(
-    "Creating lending pool change {} ({}/{}) for address / amount {} / {}",
+    "Creating lending pool change {} ({}/{}/{}) for address / amount {} / {}",
     [
       action.toString(),
       zToken,
       lendingToken,
+      collateralToken,
       address.toHexString(),
       amount.toString(),
     ]
-  );
-  let daiPoolAction = new LendingPoolChange(id);
-  daiPoolAction.zToken = zToken;
-  daiPoolAction.lendingToken = lendingToken;
-  daiPoolAction.action = action;
-  daiPoolAction.address = address;
-  daiPoolAction.amount = amount;
-  daiPoolAction.transaction = transaction.id;
-  daiPoolAction.blockNumber = transaction.blockNumber;
-  daiPoolAction.timestamp = transaction.timestamp;
-  daiPoolAction.save();
+  )
+  let daiPoolAction = new LendingPoolChange(id)
+  daiPoolAction.zToken = zToken
+  daiPoolAction.collateralToken = collateralToken
+  daiPoolAction.lendingToken = lendingToken
+  daiPoolAction.action = action
+  daiPoolAction.address = address
+  daiPoolAction.amount = amount
+  daiPoolAction.transaction = transaction.id
+  daiPoolAction.blockNumber = transaction.blockNumber
+  daiPoolAction.timestamp = transaction.timestamp
+  daiPoolAction.save()
 }
 
 export function updateOrCreateLendingPoolStatus(
   zToken: string,
   lendingToken: string,
+  collateralToken: string,
   sum: boolean,
   amount: BigInt,
   transaction: EthTransaction
@@ -59,6 +63,7 @@ export function updateOrCreateLendingPoolStatus(
     entity = new LendingPoolStatus(id)
     entity.zToken = zToken
     entity.lendingToken = lendingToken
+    entity.collateralToken = collateralToken
     entity.amount = BigInt.fromI32(0)
   }
   if(sum) {
@@ -85,6 +90,7 @@ export function internalHandleLendingPoolChange(
   transactionType: string,
   zToken: string,
   token: string,
+  collateralToken: string,
   action: string,
   account: Address,
   amount: BigInt,
@@ -97,6 +103,7 @@ export function internalHandleLendingPoolChange(
     id,
     zToken,
     token,
+    collateralToken,
     action,
     account,
     amount,
@@ -107,6 +114,7 @@ export function internalHandleLendingPoolChange(
   updateOrCreateLendingPoolStatus(
     zToken,
     token,
+    collateralToken,
     actionsMap.get(action),
     amount,
     ethTransaction
