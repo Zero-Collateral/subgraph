@@ -468,7 +468,7 @@ dataSources:
     name: SettingsInterface
     network: {{network}}
     source:
-      startBlock: {{startBlock}}
+      startBlock: {{startBlock_Settings}}
       address: '{{Settings}}'
       abi: SettingsInterface
     mapping:
@@ -481,9 +481,14 @@ dataSources:
         - LendingPoolPauseChange
         - LendingPoolPauseStatus
         - EthTransaction
+        - CTokenExchangeRateChange
+        - AssetSettingsStatus
+        - AssetSettingsChange
       abis:
         - name: SettingsInterface
           file: ./abis/Settings.json
+        - name: CErc20Interface
+          file: ./abis/CErc20Interface.json
       eventHandlers:
         - event: SettingUpdated(indexed bytes32,indexed address,uint256,uint256)
           handler: handleSettingUpdated
@@ -499,6 +504,12 @@ dataSources:
           handler: handlePauserAdded
         - event: PauserRemoved(indexed address)
           handler: handlePauserRemoved
+        - event: AssetSettingsCreated(indexed address,indexed address,indexed address,uint256,uint256)
+          handler: handleAssetSettingsCreated
+        - event: AssetSettingsUpdated(indexed address,indexed address,indexed address,uint256,uint256)
+          handler: handleAssetSettingsUpdated
+      blockHandlers:
+        - handler: handleCTokenExchangeRateProcessBlock
       file: ./src/mappings/settingsMappings.ts
   # 16 DAI_ETH_LendingPool
   - kind: ethereum/contract

@@ -2659,3 +2659,182 @@ export class CTokenExchangeRateChange extends Entity {
     this.set("timestamp", Value.fromBigInt(value));
   }
 }
+
+export class AssetSettingsStatus extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id !== null, "Cannot save AssetSettingsStatus entity without an ID");
+    assert(
+      id.kind == ValueKind.STRING,
+      "Cannot save AssetSettingsStatus entity with non-string ID. " +
+        'Considering using .toHex() to convert the "id" to a string.'
+    );
+    store.set("AssetSettingsStatus", id.toString(), this);
+  }
+
+  static load(id: string): AssetSettingsStatus | null {
+    return store.get("AssetSettingsStatus", id) as AssetSettingsStatus | null;
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get tokenAddress(): Bytes {
+    let value = this.get("tokenAddress");
+    return value.toBytes();
+  }
+
+  set tokenAddress(value: Bytes) {
+    this.set("tokenAddress", Value.fromBytes(value));
+  }
+
+  get cTokenAddress(): Bytes {
+    let value = this.get("cTokenAddress");
+    return value.toBytes();
+  }
+
+  set cTokenAddress(value: Bytes) {
+    this.set("cTokenAddress", Value.fromBytes(value));
+  }
+
+  get rateProcessFrequence(): BigInt {
+    let value = this.get("rateProcessFrequence");
+    return value.toBigInt();
+  }
+
+  set rateProcessFrequence(value: BigInt) {
+    this.set("rateProcessFrequence", Value.fromBigInt(value));
+  }
+
+  get maxLendingAmount(): BigInt {
+    let value = this.get("maxLendingAmount");
+    return value.toBigInt();
+  }
+
+  set maxLendingAmount(value: BigInt) {
+    this.set("maxLendingAmount", Value.fromBigInt(value));
+  }
+
+  get timestamp(): BigInt {
+    let value = this.get("timestamp");
+    return value.toBigInt();
+  }
+
+  set timestamp(value: BigInt) {
+    this.set("timestamp", Value.fromBigInt(value));
+  }
+
+  get blockNumber(): BigInt {
+    let value = this.get("blockNumber");
+    return value.toBigInt();
+  }
+
+  set blockNumber(value: BigInt) {
+    this.set("blockNumber", Value.fromBigInt(value));
+  }
+}
+
+export class AssetSettingsChange extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id !== null, "Cannot save AssetSettingsChange entity without an ID");
+    assert(
+      id.kind == ValueKind.STRING,
+      "Cannot save AssetSettingsChange entity with non-string ID. " +
+        'Considering using .toHex() to convert the "id" to a string.'
+    );
+    store.set("AssetSettingsChange", id.toString(), this);
+  }
+
+  static load(id: string): AssetSettingsChange | null {
+    return store.get("AssetSettingsChange", id) as AssetSettingsChange | null;
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get sender(): Bytes {
+    let value = this.get("sender");
+    return value.toBytes();
+  }
+
+  set sender(value: Bytes) {
+    this.set("sender", Value.fromBytes(value));
+  }
+
+  get tokenAddress(): Bytes {
+    let value = this.get("tokenAddress");
+    return value.toBytes();
+  }
+
+  set tokenAddress(value: Bytes) {
+    this.set("tokenAddress", Value.fromBytes(value));
+  }
+
+  get cTokenAddress(): Bytes {
+    let value = this.get("cTokenAddress");
+    return value.toBytes();
+  }
+
+  set cTokenAddress(value: Bytes) {
+    this.set("cTokenAddress", Value.fromBytes(value));
+  }
+
+  get rateProcessFrequence(): BigInt {
+    let value = this.get("rateProcessFrequence");
+    return value.toBigInt();
+  }
+
+  set rateProcessFrequence(value: BigInt) {
+    this.set("rateProcessFrequence", Value.fromBigInt(value));
+  }
+
+  get maxLendingAmount(): BigInt {
+    let value = this.get("maxLendingAmount");
+    return value.toBigInt();
+  }
+
+  set maxLendingAmount(value: BigInt) {
+    this.set("maxLendingAmount", Value.fromBigInt(value));
+  }
+
+  get timestamp(): BigInt {
+    let value = this.get("timestamp");
+    return value.toBigInt();
+  }
+
+  set timestamp(value: BigInt) {
+    this.set("timestamp", Value.fromBigInt(value));
+  }
+
+  get blockNumber(): BigInt {
+    let value = this.get("blockNumber");
+    return value.toBigInt();
+  }
+
+  set blockNumber(value: BigInt) {
+    this.set("blockNumber", Value.fromBigInt(value));
+  }
+}

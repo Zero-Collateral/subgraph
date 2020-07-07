@@ -1,6 +1,6 @@
 enum CToken {
-  CDAI
-  CUSDC
+  cDAI
+  cUSDC
 }
 
 enum Token {
@@ -406,4 +406,25 @@ type CTokenExchangeRateChange @entity {
   exchangeRate: BigInt!
   blockNumber: BigInt!
   timestamp: BigInt!
+}
+
+type AssetSettingsStatus @entity {
+  id: ID!
+  tokenAddress: Bytes!
+  cTokenAddress: Bytes!
+  rateProcessFrequence: BigInt!
+  maxLendingAmount: BigInt!
+  timestamp: BigInt!
+  blockNumber: BigInt!
+}
+
+type AssetSettingsChange @entity {
+  id: ID!
+  sender: Bytes!
+  tokenAddress: Bytes!
+  cTokenAddress: Bytes!
+  rateProcessFrequence: BigInt!
+  maxLendingAmount: BigInt!
+  timestamp: BigInt!
+  blockNumber: BigInt!
 }

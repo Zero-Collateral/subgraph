@@ -10,6 +10,74 @@ import {
   BigInt
 } from "@graphprotocol/graph-ts";
 
+export class AssetSettingsCreated extends ethereum.Event {
+  get params(): AssetSettingsCreated__Params {
+    return new AssetSettingsCreated__Params(this);
+  }
+}
+
+export class AssetSettingsCreated__Params {
+  _event: AssetSettingsCreated;
+
+  constructor(event: AssetSettingsCreated) {
+    this._event = event;
+  }
+
+  get sender(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get lendingToken(): Address {
+    return this._event.parameters[1].value.toAddress();
+  }
+
+  get cToken(): Address {
+    return this._event.parameters[2].value.toAddress();
+  }
+
+  get maxLendingAmount(): BigInt {
+    return this._event.parameters[3].value.toBigInt();
+  }
+
+  get rateProcessFrequency(): BigInt {
+    return this._event.parameters[4].value.toBigInt();
+  }
+}
+
+export class AssetSettingsUpdated extends ethereum.Event {
+  get params(): AssetSettingsUpdated__Params {
+    return new AssetSettingsUpdated__Params(this);
+  }
+}
+
+export class AssetSettingsUpdated__Params {
+  _event: AssetSettingsUpdated;
+
+  constructor(event: AssetSettingsUpdated) {
+    this._event = event;
+  }
+
+  get sender(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get lendingToken(): Address {
+    return this._event.parameters[1].value.toAddress();
+  }
+
+  get cToken(): Address {
+    return this._event.parameters[2].value.toAddress();
+  }
+
+  get newMaxLendingAmount(): BigInt {
+    return this._event.parameters[3].value.toBigInt();
+  }
+
+  get newRateProcessFrequency(): BigInt {
+    return this._event.parameters[4].value.toBigInt();
+  }
+}
+
 export class LendingPoolPaused extends ethereum.Event {
   get params(): LendingPoolPaused__Params {
     return new LendingPoolPaused__Params(this);
@@ -156,6 +224,40 @@ export class Unpaused__Params {
   }
 }
 
+export class SettingsInterface__assetSettingsResult {
+  value0: Address;
+  value1: BigInt;
+  value2: BigInt;
+
+  constructor(value0: Address, value1: BigInt, value2: BigInt) {
+    this.value0 = value0;
+    this.value1 = value1;
+    this.value2 = value2;
+  }
+
+  toMap(): TypedMap<string, ethereum.Value> {
+    let map = new TypedMap<string, ethereum.Value>();
+    map.set("value0", ethereum.Value.fromAddress(this.value0));
+    map.set("value1", ethereum.Value.fromUnsignedBigInt(this.value1));
+    map.set("value2", ethereum.Value.fromUnsignedBigInt(this.value2));
+    return map;
+  }
+}
+
+export class SettingsInterface__getAssetSettingsResultValue0Struct extends ethereum.Tuple {
+  get cTokenAddress(): Address {
+    return this[0].toAddress();
+  }
+
+  get maxLendingAmount(): BigInt {
+    return this[1].toBigInt();
+  }
+
+  get rateProcessFrequency(): BigInt {
+    return this[2].toBigInt();
+  }
+}
+
 export class SettingsInterface extends ethereum.SmartContract {
   static bind(address: Address): SettingsInterface {
     return new SettingsInterface("SettingsInterface", address);
@@ -253,20 +355,20 @@ export class SettingsInterface extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toBytes());
   }
 
-  SAFETY_INTERVAL_LENGTH_SETTING(): Bytes {
+  SAFETY_INTERVAL_SETTING(): Bytes {
     let result = super.call(
-      "SAFETY_INTERVAL_LENGTH_SETTING",
-      "SAFETY_INTERVAL_LENGTH_SETTING():(bytes32)",
+      "SAFETY_INTERVAL_SETTING",
+      "SAFETY_INTERVAL_SETTING():(bytes32)",
       []
     );
 
     return result[0].toBytes();
   }
 
-  try_SAFETY_INTERVAL_LENGTH_SETTING(): ethereum.CallResult<Bytes> {
+  try_SAFETY_INTERVAL_SETTING(): ethereum.CallResult<Bytes> {
     let result = super.tryCall(
-      "SAFETY_INTERVAL_LENGTH_SETTING",
-      "SAFETY_INTERVAL_LENGTH_SETTING():(bytes32)",
+      "SAFETY_INTERVAL_SETTING",
+      "SAFETY_INTERVAL_SETTING():(bytes32)",
       []
     );
     if (result.reverted) {
@@ -297,6 +399,60 @@ export class SettingsInterface extends ethereum.SmartContract {
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(value[0].toBytes());
+  }
+
+  assetSettings(param0: Address): SettingsInterface__assetSettingsResult {
+    let result = super.call(
+      "assetSettings",
+      "assetSettings(address):(address,uint256,uint256)",
+      [ethereum.Value.fromAddress(param0)]
+    );
+
+    return new SettingsInterface__assetSettingsResult(
+      result[0].toAddress(),
+      result[1].toBigInt(),
+      result[2].toBigInt()
+    );
+  }
+
+  try_assetSettings(
+    param0: Address
+  ): ethereum.CallResult<SettingsInterface__assetSettingsResult> {
+    let result = super.tryCall(
+      "assetSettings",
+      "assetSettings(address):(address,uint256,uint256)",
+      [ethereum.Value.fromAddress(param0)]
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(
+      new SettingsInterface__assetSettingsResult(
+        value[0].toAddress(),
+        value[1].toBigInt(),
+        value[2].toBigInt()
+      )
+    );
+  }
+
+  assets(param0: BigInt): Address {
+    let result = super.call("assets", "assets(uint256):(address)", [
+      ethereum.Value.fromUnsignedBigInt(param0)
+    ]);
+
+    return result[0].toAddress();
+  }
+
+  try_assets(param0: BigInt): ethereum.CallResult<Address> {
+    let result = super.tryCall("assets", "assets(uint256):(address)", [
+      ethereum.Value.fromUnsignedBigInt(param0)
+    ]);
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toAddress());
   }
 
   isPauser(account: Address): boolean {
@@ -490,6 +646,97 @@ export class SettingsInterface extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toBigInt());
   }
 
+  hasAssetSettings(lendingTokenAddress: Address): boolean {
+    let result = super.call(
+      "hasAssetSettings",
+      "hasAssetSettings(address):(bool)",
+      [ethereum.Value.fromAddress(lendingTokenAddress)]
+    );
+
+    return result[0].toBoolean();
+  }
+
+  try_hasAssetSettings(
+    lendingTokenAddress: Address
+  ): ethereum.CallResult<boolean> {
+    let result = super.tryCall(
+      "hasAssetSettings",
+      "hasAssetSettings(address):(bool)",
+      [ethereum.Value.fromAddress(lendingTokenAddress)]
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBoolean());
+  }
+
+  getAssetSettings(
+    lendingTokenAddress: Address
+  ): SettingsInterface__getAssetSettingsResultValue0Struct {
+    let result = super.call(
+      "getAssetSettings",
+      "getAssetSettings(address):((address,uint256,uint256))",
+      [ethereum.Value.fromAddress(lendingTokenAddress)]
+    );
+
+    return result[0].toTuple() as SettingsInterface__getAssetSettingsResultValue0Struct;
+  }
+
+  try_getAssetSettings(
+    lendingTokenAddress: Address
+  ): ethereum.CallResult<
+    SettingsInterface__getAssetSettingsResultValue0Struct
+  > {
+    let result = super.tryCall(
+      "getAssetSettings",
+      "getAssetSettings(address):((address,uint256,uint256))",
+      [ethereum.Value.fromAddress(lendingTokenAddress)]
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(
+      value[0].toTuple() as SettingsInterface__getAssetSettingsResultValue0Struct
+    );
+  }
+
+  exceedsMaxLendingAmount(
+    lendingTokenAddress: Address,
+    amount: BigInt
+  ): boolean {
+    let result = super.call(
+      "exceedsMaxLendingAmount",
+      "exceedsMaxLendingAmount(address,uint256):(bool)",
+      [
+        ethereum.Value.fromAddress(lendingTokenAddress),
+        ethereum.Value.fromUnsignedBigInt(amount)
+      ]
+    );
+
+    return result[0].toBoolean();
+  }
+
+  try_exceedsMaxLendingAmount(
+    lendingTokenAddress: Address,
+    amount: BigInt
+  ): ethereum.CallResult<boolean> {
+    let result = super.tryCall(
+      "exceedsMaxLendingAmount",
+      "exceedsMaxLendingAmount(address,uint256):(bool)",
+      [
+        ethereum.Value.fromAddress(lendingTokenAddress),
+        ethereum.Value.fromUnsignedBigInt(amount)
+      ]
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBoolean());
+  }
+
   isPaused(): boolean {
     let result = super.call("isPaused", "isPaused():(bool)", []);
 
@@ -503,6 +750,21 @@ export class SettingsInterface extends ethereum.SmartContract {
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(value[0].toBoolean());
+  }
+
+  getAssets(): Array<Address> {
+    let result = super.call("getAssets", "getAssets():(address[])", []);
+
+    return result[0].toAddressArray();
+  }
+
+  try_getAssets(): ethereum.CallResult<Array<Address>> {
+    let result = super.tryCall("getAssets", "getAssets():(address[])", []);
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toAddressArray());
   }
 }
 
@@ -900,6 +1162,90 @@ export class UnpauseLendingPoolCall__Outputs {
   _call: UnpauseLendingPoolCall;
 
   constructor(call: UnpauseLendingPoolCall) {
+    this._call = call;
+  }
+}
+
+export class CreateAssetSettingsCall extends ethereum.Call {
+  get inputs(): CreateAssetSettingsCall__Inputs {
+    return new CreateAssetSettingsCall__Inputs(this);
+  }
+
+  get outputs(): CreateAssetSettingsCall__Outputs {
+    return new CreateAssetSettingsCall__Outputs(this);
+  }
+}
+
+export class CreateAssetSettingsCall__Inputs {
+  _call: CreateAssetSettingsCall;
+
+  constructor(call: CreateAssetSettingsCall) {
+    this._call = call;
+  }
+
+  get lendingTokenAddress(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+
+  get cTokenAddress(): Address {
+    return this._call.inputValues[1].value.toAddress();
+  }
+
+  get newMaxLendingAmount(): BigInt {
+    return this._call.inputValues[2].value.toBigInt();
+  }
+
+  get newRateProcessFrequency(): BigInt {
+    return this._call.inputValues[3].value.toBigInt();
+  }
+}
+
+export class CreateAssetSettingsCall__Outputs {
+  _call: CreateAssetSettingsCall;
+
+  constructor(call: CreateAssetSettingsCall) {
+    this._call = call;
+  }
+}
+
+export class UpdateAssetSettingsCall extends ethereum.Call {
+  get inputs(): UpdateAssetSettingsCall__Inputs {
+    return new UpdateAssetSettingsCall__Inputs(this);
+  }
+
+  get outputs(): UpdateAssetSettingsCall__Outputs {
+    return new UpdateAssetSettingsCall__Outputs(this);
+  }
+}
+
+export class UpdateAssetSettingsCall__Inputs {
+  _call: UpdateAssetSettingsCall;
+
+  constructor(call: UpdateAssetSettingsCall) {
+    this._call = call;
+  }
+
+  get lendingTokenAddress(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+
+  get cTokenAddress(): Address {
+    return this._call.inputValues[1].value.toAddress();
+  }
+
+  get newMaxLendingAmount(): BigInt {
+    return this._call.inputValues[2].value.toBigInt();
+  }
+
+  get newRateProcessFrequency(): BigInt {
+    return this._call.inputValues[3].value.toBigInt();
+  }
+}
+
+export class UpdateAssetSettingsCall__Outputs {
+  _call: UpdateAssetSettingsCall;
+
+  constructor(call: UpdateAssetSettingsCall) {
     this._call = call;
   }
 }
