@@ -13,6 +13,7 @@ import {
   internalHandleSigner,
   internalHandleLoanTermsSubmitted,
   internalHandleLoanTermsAccepted,
+  internalHandleBorrowerNoncesChange,
 } from "../../utils/consensus-commons";
 
 export function handleTermsSubmitted(event: TermsSubmittedEvent): void {
@@ -30,7 +31,7 @@ export function handleTermsSubmitted(event: TermsSubmittedEvent): void {
 }
 
 export function handleTermsAccepted(event: TermsAcceptedEvent): void {
-  internalHandleLoanTermsAccepted(
+  let loanTermsAccepted = internalHandleLoanTermsAccepted(
     TOKEN_USDC,
     COLLATERAL_TOKEN_LINK,
     event.params.borrower,
@@ -40,6 +41,12 @@ export function handleTermsAccepted(event: TermsAcceptedEvent): void {
     event.params.maxLoanAmount,
     event
   );
+
+  internalHandleBorrowerNoncesChange(
+    TOKEN_USDC,
+    COLLATERAL_TOKEN_LINK,
+    loanTermsAccepted
+  )
 }
 
 export function handleSignerAdded(event: SignerAddedEvent): void {

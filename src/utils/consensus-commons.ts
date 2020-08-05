@@ -6,6 +6,8 @@ import {
   InterestAccepted,
   LoanTermsSubmitted,
   LoanTermsAccepted,
+  BorrowerNoncesChange,
+  LenderNoncesChange,
 } from "../../generated/schema";
 import { Address } from "@graphprotocol/graph-ts";
 import {
@@ -107,7 +109,7 @@ export function internalHandleInterestAccepted(
   interest: BigInt,
   endTime: BigInt,
   event: ethereum.Event
-): void {
+): InterestAccepted {
   let id = buildId(event)
   log.info("Creating new interest accepted ({} / {}) with id {}", [token, collateralToken, id])
   let ethTransaction = createEthTransaction(event, ETH_TX_INTEREST_ACCEPTED)
@@ -121,6 +123,7 @@ export function internalHandleInterestAccepted(
   entity.blockNumber = event.block.number
   entity.timestamp = getTimestampInMillis(event)
   entity.save()
+  return entity
 }
 
 export function internalHandleLoanTermsSubmitted(
@@ -161,7 +164,7 @@ export function internalHandleLoanTermsAccepted(
   collateralRatio: BigInt,
   maxLoanAmount: BigInt,
   event: ethereum.Event
-): void {
+): LoanTermsAccepted {
   let id = buildId(event);
   log.info("Creating new loan terms accepted ({}) with id {}", [token, id]);
   let ethTransaction = createEthTransaction(event, ETH_TX_TERMS_ACCEPTED);
@@ -177,4 +180,45 @@ export function internalHandleLoanTermsAccepted(
   entity.blockNumber = event.block.number;
   entity.timestamp = getTimestampInMillis(event);
   entity.save();
+  return entity;
+}
+
+export function internalHandleBorrowerNoncesChange(
+  token: string,
+  collateralToken: string,
+  loanTermsAccepted: LoanTermsAccepted
+): void {
+  let borrower = loanTermsAccepted.borrower
+  let requestNonce = loanTermsAccepted.requestNonce
+  log.info("Creating new borrower nonce change: Market: {}/{} - Borrower {} - Nonce: {}", [token, collateralToken, borrower.toHexString(), requestNonce.toString()]);
+  
+  let id = loanTermsAccepted.id
+  let entity = new BorrowerNoncesChange(id);
+  entity.borrower = borrower
+  entity.token = token
+  entity.collateralToken = collateralToken
+  entity.nonce = requestNonce
+  entity.timestamp = loanTermsAccepted.timestamp
+  entity.blockNumber = loanTermsAccepted.blockNumber
+  entity.save()
+}
+
+export function internalHandleLenderNoncesChange(
+  token: string,
+  collateralToken: string,
+  interestAccepted: InterestAccepted
+): void {
+  let lender = interestAccepted.lender
+  let requestNonce = interestAccepted.requestNonce
+  log.info("Creating new lender nonce change: Market: {}/{} - Lender {} - Nonce: {}", [token, collateralToken, lender.toHexString(), requestNonce.toString()]);
+  
+  let id = interestAccepted.id
+  let entity = new LenderNoncesChange(id);
+  entity.lender = lender
+  entity.token = token
+  entity.collateralToken = collateralToken
+  entity.nonce = requestNonce
+  entity.timestamp = interestAccepted.timestamp
+  entity.blockNumber = interestAccepted.blockNumber
+  entity.save()
 }

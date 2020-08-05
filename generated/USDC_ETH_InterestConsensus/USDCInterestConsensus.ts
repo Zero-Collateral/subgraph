@@ -27,12 +27,16 @@ export class InterestAccepted__Params {
     return this._event.parameters[0].value.toAddress();
   }
 
-  get endTime(): BigInt {
+  get requestNonce(): BigInt {
     return this._event.parameters[1].value.toBigInt();
   }
 
-  get interest(): BigInt {
+  get endTime(): BigInt {
     return this._event.parameters[2].value.toBigInt();
+  }
+
+  get interest(): BigInt {
+    return this._event.parameters[3].value.toBigInt();
   }
 }
 
@@ -57,12 +61,38 @@ export class InterestSubmitted__Params {
     return this._event.parameters[1].value.toAddress();
   }
 
-  get endTime(): BigInt {
+  get requestNonce(): BigInt {
     return this._event.parameters[2].value.toBigInt();
   }
 
-  get interest(): BigInt {
+  get endTime(): BigInt {
     return this._event.parameters[3].value.toBigInt();
+  }
+
+  get interest(): BigInt {
+    return this._event.parameters[4].value.toBigInt();
+  }
+}
+
+export class OwnershipTransferred extends ethereum.Event {
+  get params(): OwnershipTransferred__Params {
+    return new OwnershipTransferred__Params(this);
+  }
+}
+
+export class OwnershipTransferred__Params {
+  _event: OwnershipTransferred;
+
+  constructor(event: OwnershipTransferred) {
+    this._event = event;
+  }
+
+  get previousOwner(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get newOwner(): Address {
+    return this._event.parameters[1].value.toAddress();
   }
 }
 
@@ -130,16 +160,24 @@ export class USDCInterestConsensus__processRequestInputRequestStruct extends eth
     return this[0].toAddress();
   }
 
-  get startTime(): BigInt {
-    return this[1].toBigInt();
+  get consensusAddress(): Address {
+    return this[1].toAddress();
   }
 
-  get endTime(): BigInt {
+  get requestNonce(): BigInt {
     return this[2].toBigInt();
   }
 
-  get requestTime(): BigInt {
+  get startTime(): BigInt {
     return this[3].toBigInt();
+  }
+
+  get endTime(): BigInt {
+    return this[4].toBigInt();
+  }
+
+  get requestTime(): BigInt {
+    return this[5].toBigInt();
   }
 }
 
@@ -148,16 +186,20 @@ export class USDCInterestConsensus__processRequestInputResponsesStruct extends e
     return this[0].toAddress();
   }
 
-  get responseTime(): BigInt {
-    return this[1].toBigInt();
+  get consensusAddress(): Address {
+    return this[1].toAddress();
   }
 
-  get interest(): BigInt {
+  get responseTime(): BigInt {
     return this[2].toBigInt();
   }
 
+  get interest(): BigInt {
+    return this[3].toBigInt();
+  }
+
   get signature(): USDCInterestConsensus__processRequestInputResponsesSignatureStruct {
-    return this[3].toTuple() as USDCInterestConsensus__processRequestInputResponsesSignatureStruct;
+    return this[4].toTuple() as USDCInterestConsensus__processRequestInputResponsesSignatureStruct;
   }
 }
 
@@ -184,14 +226,18 @@ export class USDCInterestConsensus extends ethereum.SmartContract {
     return new USDCInterestConsensus("USDCInterestConsensus", address);
   }
 
-  caller(): Address {
-    let result = super.call("caller", "caller():(address)", []);
+  callerAddress(): Address {
+    let result = super.call("callerAddress", "callerAddress():(address)", []);
 
     return result[0].toAddress();
   }
 
-  try_caller(): ethereum.CallResult<Address> {
-    let result = super.tryCall("caller", "caller():(address)", []);
+  try_callerAddress(): ethereum.CallResult<Address> {
+    let result = super.tryCall(
+      "callerAddress",
+      "callerAddress():(address)",
+      []
+    );
     if (result.reverted) {
       return new ethereum.CallResult();
     }
@@ -296,6 +342,21 @@ export class USDCInterestConsensus extends ethereum.SmartContract {
     );
   }
 
+  isOwner(): boolean {
+    let result = super.call("isOwner", "isOwner():(bool)", []);
+
+    return result[0].toBoolean();
+  }
+
+  try_isOwner(): ethereum.CallResult<boolean> {
+    let result = super.tryCall("isOwner", "isOwner():(bool)", []);
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBoolean());
+  }
+
   isSigner(account: Address): boolean {
     let result = super.call("isSigner", "isSigner(address):(bool)", [
       ethereum.Value.fromAddress(account)
@@ -308,6 +369,53 @@ export class USDCInterestConsensus extends ethereum.SmartContract {
     let result = super.tryCall("isSigner", "isSigner(address):(bool)", [
       ethereum.Value.fromAddress(account)
     ]);
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBoolean());
+  }
+
+  owner(): Address {
+    let result = super.call("owner", "owner():(address)", []);
+
+    return result[0].toAddress();
+  }
+
+  try_owner(): ethereum.CallResult<Address> {
+    let result = super.tryCall("owner", "owner():(address)", []);
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toAddress());
+  }
+
+  requestNonceTaken(param0: Address, param1: BigInt): boolean {
+    let result = super.call(
+      "requestNonceTaken",
+      "requestNonceTaken(address,uint256):(bool)",
+      [
+        ethereum.Value.fromAddress(param0),
+        ethereum.Value.fromUnsignedBigInt(param1)
+      ]
+    );
+
+    return result[0].toBoolean();
+  }
+
+  try_requestNonceTaken(
+    param0: Address,
+    param1: BigInt
+  ): ethereum.CallResult<boolean> {
+    let result = super.tryCall(
+      "requestNonceTaken",
+      "requestNonceTaken(address,uint256):(bool)",
+      [
+        ethereum.Value.fromAddress(param0),
+        ethereum.Value.fromUnsignedBigInt(param1)
+      ]
+    );
     if (result.reverted) {
       return new ethereum.CallResult();
     }
@@ -368,7 +476,7 @@ export class USDCInterestConsensus extends ethereum.SmartContract {
   ): BigInt {
     let result = super.call(
       "processRequest",
-      "processRequest((address,uint256,uint256,uint256),tuple[]):(uint256)",
+      "processRequest((address,address,uint256,uint256,uint256,uint256),tuple[]):(uint256)",
       [
         ethereum.Value.fromTuple(request),
         ethereum.Value.fromTupleArray(responses)
@@ -384,7 +492,7 @@ export class USDCInterestConsensus extends ethereum.SmartContract {
   ): ethereum.CallResult<BigInt> {
     let result = super.tryCall(
       "processRequest",
-      "processRequest((address,uint256,uint256,uint256),tuple[]):(uint256)",
+      "processRequest((address,address,uint256,uint256,uint256,uint256),tuple[]):(uint256)",
       [
         ethereum.Value.fromTuple(request),
         ethereum.Value.fromTupleArray(responses)
@@ -445,11 +553,11 @@ export class InitializeCall__Inputs {
     this._call = call;
   }
 
-  get callerAddress(): Address {
+  get aCallerAddress(): Address {
     return this._call.inputValues[0].value.toAddress();
   }
 
-  get settingAddress(): Address {
+  get aSettingAddress(): Address {
     return this._call.inputValues[1].value.toAddress();
   }
 }
@@ -462,28 +570,88 @@ export class InitializeCall__Outputs {
   }
 }
 
-export class RenounceSignerCall extends ethereum.Call {
-  get inputs(): RenounceSignerCall__Inputs {
-    return new RenounceSignerCall__Inputs(this);
+export class RemoveSignerCall extends ethereum.Call {
+  get inputs(): RemoveSignerCall__Inputs {
+    return new RemoveSignerCall__Inputs(this);
   }
 
-  get outputs(): RenounceSignerCall__Outputs {
-    return new RenounceSignerCall__Outputs(this);
+  get outputs(): RemoveSignerCall__Outputs {
+    return new RemoveSignerCall__Outputs(this);
   }
 }
 
-export class RenounceSignerCall__Inputs {
-  _call: RenounceSignerCall;
+export class RemoveSignerCall__Inputs {
+  _call: RemoveSignerCall;
 
-  constructor(call: RenounceSignerCall) {
+  constructor(call: RemoveSignerCall) {
+    this._call = call;
+  }
+
+  get account(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+}
+
+export class RemoveSignerCall__Outputs {
+  _call: RemoveSignerCall;
+
+  constructor(call: RemoveSignerCall) {
     this._call = call;
   }
 }
 
-export class RenounceSignerCall__Outputs {
-  _call: RenounceSignerCall;
+export class RenounceOwnershipCall extends ethereum.Call {
+  get inputs(): RenounceOwnershipCall__Inputs {
+    return new RenounceOwnershipCall__Inputs(this);
+  }
 
-  constructor(call: RenounceSignerCall) {
+  get outputs(): RenounceOwnershipCall__Outputs {
+    return new RenounceOwnershipCall__Outputs(this);
+  }
+}
+
+export class RenounceOwnershipCall__Inputs {
+  _call: RenounceOwnershipCall;
+
+  constructor(call: RenounceOwnershipCall) {
+    this._call = call;
+  }
+}
+
+export class RenounceOwnershipCall__Outputs {
+  _call: RenounceOwnershipCall;
+
+  constructor(call: RenounceOwnershipCall) {
+    this._call = call;
+  }
+}
+
+export class TransferOwnershipCall extends ethereum.Call {
+  get inputs(): TransferOwnershipCall__Inputs {
+    return new TransferOwnershipCall__Inputs(this);
+  }
+
+  get outputs(): TransferOwnershipCall__Outputs {
+    return new TransferOwnershipCall__Outputs(this);
+  }
+}
+
+export class TransferOwnershipCall__Inputs {
+  _call: TransferOwnershipCall;
+
+  constructor(call: TransferOwnershipCall) {
+    this._call = call;
+  }
+
+  get newOwner(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+}
+
+export class TransferOwnershipCall__Outputs {
+  _call: TransferOwnershipCall;
+
+  constructor(call: TransferOwnershipCall) {
     this._call = call;
   }
 }
@@ -533,16 +701,24 @@ export class ProcessRequestCallRequestStruct extends ethereum.Tuple {
     return this[0].toAddress();
   }
 
-  get startTime(): BigInt {
-    return this[1].toBigInt();
+  get consensusAddress(): Address {
+    return this[1].toAddress();
   }
 
-  get endTime(): BigInt {
+  get requestNonce(): BigInt {
     return this[2].toBigInt();
   }
 
-  get requestTime(): BigInt {
+  get startTime(): BigInt {
     return this[3].toBigInt();
+  }
+
+  get endTime(): BigInt {
+    return this[4].toBigInt();
+  }
+
+  get requestTime(): BigInt {
+    return this[5].toBigInt();
   }
 }
 
@@ -551,16 +727,20 @@ export class ProcessRequestCallResponsesStruct extends ethereum.Tuple {
     return this[0].toAddress();
   }
 
-  get responseTime(): BigInt {
-    return this[1].toBigInt();
+  get consensusAddress(): Address {
+    return this[1].toAddress();
   }
 
-  get interest(): BigInt {
+  get responseTime(): BigInt {
     return this[2].toBigInt();
   }
 
+  get interest(): BigInt {
+    return this[3].toBigInt();
+  }
+
   get signature(): ProcessRequestCallResponsesSignatureStruct {
-    return this[3].toTuple() as ProcessRequestCallResponsesSignatureStruct;
+    return this[4].toTuple() as ProcessRequestCallResponsesSignatureStruct;
   }
 }
 

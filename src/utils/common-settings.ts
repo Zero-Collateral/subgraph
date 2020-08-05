@@ -5,8 +5,7 @@ import { getTimestampInMillis, buildId } from "./commons";
 export function getOrCreateAssetSettingsStatus(
     lendingToken: Address,
     cToken: Address,
-    rateProcessFrequency: BigInt,
-    maxLendingAmount: BigInt,
+    maxLoanAmount: BigInt,
     event: ethereum.Event
   ): AssetSettingsStatus {
     let id = lendingToken.toHexString()
@@ -16,8 +15,7 @@ export function getOrCreateAssetSettingsStatus(
     }
     entity.tokenAddress = lendingToken
     entity.cTokenAddress = cToken
-    entity.rateProcessFrequence = rateProcessFrequency
-    entity.maxLendingAmount = maxLendingAmount
+    entity.maxLoanAmount = maxLoanAmount
     entity.timestamp = getTimestampInMillis(event)
     entity.blockNumber = event.block.number
     entity.save()
@@ -28,8 +26,7 @@ export function getOrCreateAssetSettingsStatus(
     sender: Address,
     lendingToken: Address,
     cToken: Address,
-    rateProcessFrequency: BigInt,
-    maxLendingAmount: BigInt,
+    maxLoanAmount: BigInt,
     event: ethereum.Event
   ): AssetSettingsChange {
     let id = buildId(event)
@@ -37,8 +34,7 @@ export function getOrCreateAssetSettingsStatus(
     entity.sender = sender
     entity.tokenAddress = lendingToken
     entity.cTokenAddress = cToken
-    entity.rateProcessFrequence = rateProcessFrequency
-    entity.maxLendingAmount = maxLendingAmount
+    entity.maxLoanAmount = maxLoanAmount
     entity.timestamp = getTimestampInMillis(event)
     entity.blockNumber = event.block.number
     entity.save()

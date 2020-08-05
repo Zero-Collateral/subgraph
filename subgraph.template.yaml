@@ -179,9 +179,9 @@ dataSources:
         - name: DAIInterestConsensus
           file: ./abis/InterestConsensus.json
       eventHandlers:
-        - event: InterestSubmitted(indexed address,indexed address,uint256,uint256)
+        - event: InterestSubmitted(indexed address,indexed address,uint256,uint256,uint256)
           handler: handleInterestSubmitted
-        - event: InterestAccepted(indexed address,uint256,uint256)
+        - event: InterestAccepted(indexed address,uint256,uint256,uint256)
           handler: handleInterestAccepted
         - event: SignerAdded(indexed address)
           handler: handleSignerAdded
@@ -210,9 +210,9 @@ dataSources:
         - name: DAIInterestConsensus
           file: ./abis/InterestConsensus.json
       eventHandlers:
-        - event: InterestSubmitted(indexed address,indexed address,uint256,uint256)
+        - event: InterestSubmitted(indexed address,indexed address,uint256,uint256,uint256)
           handler: handleInterestSubmitted
-        - event: InterestAccepted(indexed address,uint256,uint256)
+        - event: InterestAccepted(indexed address,uint256,uint256,uint256)
           handler: handleInterestAccepted
         - event: SignerAdded(indexed address)
           handler: handleSignerAdded
@@ -241,9 +241,9 @@ dataSources:
         - name: USDCInterestConsensus
           file: ./abis/InterestConsensus.json
       eventHandlers:
-        - event: InterestSubmitted(indexed address,indexed address,uint256,uint256)
+        - event: InterestSubmitted(indexed address,indexed address,uint256,uint256,uint256)
           handler: handleInterestSubmitted
-        - event: InterestAccepted(indexed address,uint256,uint256)
+        - event: InterestAccepted(indexed address,uint256,uint256,uint256)
           handler: handleInterestAccepted
         - event: SignerAdded(indexed address)
           handler: handleSignerAdded
@@ -272,9 +272,9 @@ dataSources:
         - name: USDCInterestConsensus
           file: ./abis/InterestConsensus.json
       eventHandlers:
-        - event: InterestSubmitted(indexed address,indexed address,uint256,uint256)
+        - event: InterestSubmitted(indexed address,indexed address,uint256,uint256,uint256)
           handler: handleInterestSubmitted
-        - event: InterestAccepted(indexed address,uint256,uint256)
+        - event: InterestAccepted(indexed address,uint256,uint256,uint256)
           handler: handleInterestAccepted
         - event: SignerAdded(indexed address)
           handler: handleSignerAdded
@@ -508,8 +508,6 @@ dataSources:
           handler: handleAssetSettingsCreated
         - event: AssetSettingsUpdated(indexed address,indexed address,indexed address,uint256,uint256)
           handler: handleAssetSettingsUpdated
-      blockHandlers:
-        - handler: handleCTokenExchangeRateProcessBlock
       file: ./src/mappings/settingsMappings.ts
   # 16 DAI_ETH_LendingPool
   - kind: ethereum/contract
