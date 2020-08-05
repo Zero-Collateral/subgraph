@@ -175,6 +175,7 @@ dataSources:
         - SignerChange
         - InterestSubmitted
         - InterestAccepted
+        - LenderNoncesChange
       abis:
         - name: DAIInterestConsensus
           file: ./abis/InterestConsensus.json
@@ -206,6 +207,7 @@ dataSources:
         - SignerChange
         - InterestSubmitted
         - InterestAccepted
+        - LenderNoncesChange
       abis:
         - name: DAIInterestConsensus
           file: ./abis/InterestConsensus.json
@@ -237,6 +239,7 @@ dataSources:
         - SignerChange
         - InterestSubmitted
         - InterestAccepted
+        - LenderNoncesChange
       abis:
         - name: USDCInterestConsensus
           file: ./abis/InterestConsensus.json
@@ -268,6 +271,7 @@ dataSources:
         - SignerChange
         - InterestSubmitted
         - InterestAccepted
+        - LenderNoncesChange
       abis:
         - name: USDCInterestConsensus
           file: ./abis/InterestConsensus.json
@@ -299,6 +303,7 @@ dataSources:
         - SignerChange
         - LoanTermsSubmitted
         - LoanTermsAccepted
+        - BorrowerNoncesChange
       abis:
         - name: DAILoanTermsConsensus
           file: ./abis/LoanTermsConsensus.json
@@ -330,6 +335,7 @@ dataSources:
         - SignerChange
         - LoanTermsSubmitted
         - LoanTermsAccepted
+        - BorrowerNoncesChange
       abis:
         - name: DAILoanTermsConsensus
           file: ./abis/LoanTermsConsensus.json
@@ -361,6 +367,7 @@ dataSources:
         - SignerChange
         - LoanTermsSubmitted
         - LoanTermsAccepted
+        - BorrowerNoncesChange
       abis:
         - name: USDCLoanTermsConsensus
           file: ./abis/LoanTermsConsensus.json
@@ -392,6 +399,7 @@ dataSources:
         - SignerChange
         - LoanTermsSubmitted
         - LoanTermsAccepted
+        - BorrowerNoncesChange
       abis:
         - name: USDCLoanTermsConsensus
           file: ./abis/LoanTermsConsensus.json
