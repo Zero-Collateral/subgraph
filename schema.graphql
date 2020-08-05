@@ -396,6 +396,7 @@ type AssetSettingsStatus @entity {
   tokenAddress: Bytes!
   cTokenAddress: Bytes!
   maxLoanAmount: BigInt!
+  removed: Boolean!
   timestamp: BigInt!
   blockNumber: BigInt!
 }
@@ -404,8 +405,9 @@ type AssetSettingsChange @entity {
   id: ID!
   sender: Bytes!
   tokenAddress: Bytes!
-  cTokenAddress: Bytes!
-  maxLoanAmount: BigInt!
+  propertyChanged: String!
+  oldValue: String!
+  newValue: String!
   timestamp: BigInt!
   blockNumber: BigInt!
 }

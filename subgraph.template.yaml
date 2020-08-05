@@ -504,10 +504,14 @@ dataSources:
           handler: handlePauserAdded
         - event: PauserRemoved(indexed address)
           handler: handlePauserRemoved
-        - event: AssetSettingsCreated(indexed address,indexed address,indexed address,uint256,uint256)
+        - event: AssetSettingsCreated(indexed address,indexed address,address,uint256)
           handler: handleAssetSettingsCreated
-        - event: AssetSettingsUpdated(indexed address,indexed address,indexed address,uint256,uint256)
-          handler: handleAssetSettingsUpdated
+        - event: AssetSettingsAddressUpdated(indexed bytes32,indexed address,indexed address,address,address)
+          handler: handleAssetSettingsAddressUpdated
+        - event: AssetSettingsUintUpdated(indexed bytes32,indexed address,indexed address,uint256,uint256)
+          handler: handleAssetSettingsUintUpdated
+        - event: AssetSettingsRemoved(indexed address,indexed address)
+          handler: handleAssetSettingsRemoved
       file: ./src/mappings/settingsMappings.ts
   # 16 DAI_ETH_LendingPool
   - kind: ethereum/contract

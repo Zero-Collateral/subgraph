@@ -2662,6 +2662,15 @@ export class AssetSettingsStatus extends Entity {
     this.set("maxLoanAmount", Value.fromBigInt(value));
   }
 
+  get removed(): boolean {
+    let value = this.get("removed");
+    return value.toBoolean();
+  }
+
+  set removed(value: boolean) {
+    this.set("removed", Value.fromBoolean(value));
+  }
+
   get timestamp(): BigInt {
     let value = this.get("timestamp");
     return value.toBigInt();
@@ -2729,22 +2738,31 @@ export class AssetSettingsChange extends Entity {
     this.set("tokenAddress", Value.fromBytes(value));
   }
 
-  get cTokenAddress(): Bytes {
-    let value = this.get("cTokenAddress");
-    return value.toBytes();
+  get propertyChanged(): string {
+    let value = this.get("propertyChanged");
+    return value.toString();
   }
 
-  set cTokenAddress(value: Bytes) {
-    this.set("cTokenAddress", Value.fromBytes(value));
+  set propertyChanged(value: string) {
+    this.set("propertyChanged", Value.fromString(value));
   }
 
-  get maxLoanAmount(): BigInt {
-    let value = this.get("maxLoanAmount");
-    return value.toBigInt();
+  get oldValue(): string {
+    let value = this.get("oldValue");
+    return value.toString();
   }
 
-  set maxLoanAmount(value: BigInt) {
-    this.set("maxLoanAmount", Value.fromBigInt(value));
+  set oldValue(value: string) {
+    this.set("oldValue", Value.fromString(value));
+  }
+
+  get newValue(): string {
+    let value = this.get("newValue");
+    return value.toString();
+  }
+
+  set newValue(value: string) {
+    this.set("newValue", Value.fromString(value));
   }
 
   get timestamp(): BigInt {
