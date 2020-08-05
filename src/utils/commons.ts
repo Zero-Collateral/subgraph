@@ -78,7 +78,7 @@ export function buildSignerId(token: string, contract: string, account: Address)
 export function createZTokenChange(
   id: string,
   amount: BigInt,
-  zToken: string,
+  platformToken: string,
   from: Address,
   to: Address,
   action: string,
@@ -87,7 +87,7 @@ export function createZTokenChange(
   let entity = new ZTokenChange(id);
   entity.transaction = ethTransaction.id;
   entity.amount = amount;
-  entity.zToken = zToken;
+  entity.platformToken = platformToken;
   entity.from = from;
   entity.to = to;
   entity.action = action;
@@ -112,7 +112,7 @@ export function getOrCreateZTokenStatus(holder: Address): ZTokenStatus {
 }
 
 export function updateZTokenBalancesFor(
-  zToken: string,
+  platformToken: string,
   event: TransferEvent
 ): void {
   log.info("Updating ZToken balance for holders {} / {} ", [
@@ -123,10 +123,10 @@ export function updateZTokenBalancesFor(
     let fromEntity = getOrCreateZTokenStatus(event.params.from);
     log.info(
       "Updating ZToken balance for holder {} (from). Current balance {} {}",
-      [event.params.from.toHexString(), fromEntity.amount.toString(), zToken]
+      [event.params.from.toHexString(), fromEntity.amount.toString(), platformToken]
     );
     fromEntity.amount = fromEntity.amount.minus(event.params.value);
-    fromEntity.zToken = zToken;
+    fromEntity.platformToken = platformToken;
     fromEntity.blockNumber = event.block.number;
     fromEntity.updatedAt = getTimestampInMillis(event);
     fromEntity.save();
@@ -135,10 +135,10 @@ export function updateZTokenBalancesFor(
     let toEntity = getOrCreateZTokenStatus(event.params.to);
     log.info(
       "Updating ZToken balance for holder {} (to). Current balance {} {}",
-      [event.params.to.toHexString(), toEntity.amount.toString(), zToken]
+      [event.params.to.toHexString(), toEntity.amount.toString(), platformToken]
     );
     toEntity.amount = toEntity.amount.plus(event.params.value);
-    toEntity.zToken = zToken;
+    toEntity.platformToken = platformToken;
     toEntity.blockNumber = event.block.number;
     toEntity.updatedAt = getTimestampInMillis(event);
     toEntity.save();

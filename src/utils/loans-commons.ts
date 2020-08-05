@@ -7,6 +7,7 @@ import {
   Liquidation,
   CollateralWithdraw,
   CollateralDeposit,
+  OracleAddressChange,
 } from "../../generated/schema";
 import { Address } from "@graphprotocol/graph-ts";
 import {
@@ -19,6 +20,7 @@ import {
   LOAN_STATUS_CLOSED,
   ETH_TX_COLLATERAL_WITHDRAWN,
   ETH_TX_COLLATERAL_DEPOSITED,
+  ETH_TX_PRICE_ORACLE_UPDATED,
 } from "./consts";
 import {
   getOrCreateBorrower,
@@ -291,4 +293,30 @@ export function internalHandleCollateralDeposited(
   loan.collateralDeposits = collateralDeposits;
   loan.totalCollateralDepositsAmount = loan.totalCollateralDepositsAmount.plus(depositAmount);
   loan.save();
+}
+
+export function internalHandlePriceOracleUpdated(
+  token:string,
+  collateralToken: string,
+  sender: Address,
+  oldOracleAddress: Address,
+  newOracleAddress: Address,
+  event: ethereum.Event
+): void {
+  log.info("Creatinng new price oracle change for market {}/{}", [token, collateralToken]);
+  let ethTransaction = createEthTransaction(event, ETH_TX_PRICE_ORACLE_UPDATED);
+
+  let id = buildId(event);
+  let entity = new OracleAddressChange(id);
+  entity.sender = sender
+  entity.lendingToken = token
+  entity.collateralToken = collateralToken
+  entity.transaction = ethTransaction.id
+  entity.oldOracleAddress = oldOracleAddress
+  entity.newOracleAddress = newOracleAddress
+  entity.blockNumber = ethTransaction.blockNumber;
+  entity.timestamp = getTimestampInMillis(event);
+  entity.save();
+
+  
 }

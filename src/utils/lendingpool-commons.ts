@@ -10,7 +10,7 @@ import { LENDING_POOL_DEPOSITED, LENDING_POOL_REPAID, LENDING_POOL_WITHDRAWN, LE
 
 export function createLendingPoolChange(
   id: string,
-  zToken: string,
+  platformToken: string,
   lendingToken: string,
   collateralToken: string,
   action: string,
@@ -22,7 +22,7 @@ export function createLendingPoolChange(
     "Creating lending pool change {} ({}/{}/{}) for address / amount {} / {}",
     [
       action.toString(),
-      zToken,
+      platformToken,
       lendingToken,
       collateralToken,
       address.toHexString(),
@@ -30,7 +30,7 @@ export function createLendingPoolChange(
     ]
   )
   let daiPoolAction = new LendingPoolChange(id)
-  daiPoolAction.zToken = zToken
+  daiPoolAction.platformToken = platformToken
   daiPoolAction.collateralToken = collateralToken
   daiPoolAction.lendingToken = lendingToken
   daiPoolAction.action = action
@@ -43,7 +43,7 @@ export function createLendingPoolChange(
 }
 
 export function updateOrCreateLendingPoolStatus(
-  zToken: string,
+  platformToken: string,
   lendingToken: string,
   collateralToken: string,
   sum: boolean,
@@ -53,15 +53,15 @@ export function updateOrCreateLendingPoolStatus(
   log.info(
     "Getting/Creating lending pool supply status for {} / {}",
     [
-      zToken,
+      platformToken,
       lendingToken,
     ]
   );
-  let id = zToken + "-" + lendingToken;
+  let id = platformToken + "-" + lendingToken;
   let entity = LendingPoolStatus.load(id)
   if(entity == null) {
     entity = new LendingPoolStatus(id)
-    entity.zToken = zToken
+    entity.platformToken = platformToken
     entity.lendingToken = lendingToken
     entity.collateralToken = collateralToken
     entity.amount = BigInt.fromI32(0)
@@ -88,7 +88,7 @@ export function getActionsMap():Map<string, boolean> {
 
 export function internalHandleLendingPoolChange(
   transactionType: string,
-  zToken: string,
+  platformToken: string,
   token: string,
   collateralToken: string,
   action: string,
@@ -101,7 +101,7 @@ export function internalHandleLendingPoolChange(
 
   createLendingPoolChange(
     id,
-    zToken,
+    platformToken,
     token,
     collateralToken,
     action,
@@ -112,7 +112,7 @@ export function internalHandleLendingPoolChange(
   let actionsMap = getActionsMap();
 
   updateOrCreateLendingPoolStatus(
-    zToken,
+    platformToken,
     token,
     collateralToken,
     actionsMap.get(action),

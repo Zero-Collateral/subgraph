@@ -901,13 +901,13 @@ export class LendingPoolStatus extends Entity {
     this.set("id", Value.fromString(value));
   }
 
-  get zToken(): string {
-    let value = this.get("zToken");
+  get platformToken(): string {
+    let value = this.get("platformToken");
     return value.toString();
   }
 
-  set zToken(value: string) {
-    this.set("zToken", Value.fromString(value));
+  set platformToken(value: string) {
+    this.set("platformToken", Value.fromString(value));
   }
 
   get lendingToken(): string {
@@ -986,13 +986,13 @@ export class LendingPoolChange extends Entity {
     this.set("id", Value.fromString(value));
   }
 
-  get zToken(): string {
-    let value = this.get("zToken");
+  get platformToken(): string {
+    let value = this.get("platformToken");
     return value.toString();
   }
 
-  set zToken(value: string) {
-    this.set("zToken", Value.fromString(value));
+  set platformToken(value: string) {
+    this.set("platformToken", Value.fromString(value));
   }
 
   get lendingToken(): string {
@@ -1800,13 +1800,13 @@ export class ZTokenStatus extends Entity {
     this.set("amount", Value.fromBigInt(value));
   }
 
-  get zToken(): string {
-    let value = this.get("zToken");
+  get platformToken(): string {
+    let value = this.get("platformToken");
     return value.toString();
   }
 
-  set zToken(value: string) {
-    this.set("zToken", Value.fromString(value));
+  set platformToken(value: string) {
+    this.set("platformToken", Value.fromString(value));
   }
 
   get account(): Bytes {
@@ -1885,13 +1885,13 @@ export class ZTokenChange extends Entity {
     this.set("amount", Value.fromBigInt(value));
   }
 
-  get zToken(): string {
-    let value = this.get("zToken");
+  get platformToken(): string {
+    let value = this.get("platformToken");
     return value.toString();
   }
 
-  set zToken(value: string) {
-    this.set("zToken", Value.fromString(value));
+  set platformToken(value: string) {
+    this.set("platformToken", Value.fromString(value));
   }
 
   get from(): Bytes {
@@ -2954,5 +2954,108 @@ export class LenderNoncesChange extends Entity {
 
   set blockNumber(value: BigInt) {
     this.set("blockNumber", Value.fromBigInt(value));
+  }
+}
+
+export class OracleAddressChange extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id !== null, "Cannot save OracleAddressChange entity without an ID");
+    assert(
+      id.kind == ValueKind.STRING,
+      "Cannot save OracleAddressChange entity with non-string ID. " +
+        'Considering using .toHex() to convert the "id" to a string.'
+    );
+    store.set("OracleAddressChange", id.toString(), this);
+  }
+
+  static load(id: string): OracleAddressChange | null {
+    return store.get("OracleAddressChange", id) as OracleAddressChange | null;
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get sender(): Bytes {
+    let value = this.get("sender");
+    return value.toBytes();
+  }
+
+  set sender(value: Bytes) {
+    this.set("sender", Value.fromBytes(value));
+  }
+
+  get lendingToken(): string {
+    let value = this.get("lendingToken");
+    return value.toString();
+  }
+
+  set lendingToken(value: string) {
+    this.set("lendingToken", Value.fromString(value));
+  }
+
+  get collateralToken(): string {
+    let value = this.get("collateralToken");
+    return value.toString();
+  }
+
+  set collateralToken(value: string) {
+    this.set("collateralToken", Value.fromString(value));
+  }
+
+  get transaction(): string {
+    let value = this.get("transaction");
+    return value.toString();
+  }
+
+  set transaction(value: string) {
+    this.set("transaction", Value.fromString(value));
+  }
+
+  get oldOracleAddress(): Bytes {
+    let value = this.get("oldOracleAddress");
+    return value.toBytes();
+  }
+
+  set oldOracleAddress(value: Bytes) {
+    this.set("oldOracleAddress", Value.fromBytes(value));
+  }
+
+  get newOracleAddress(): Bytes {
+    let value = this.get("newOracleAddress");
+    return value.toBytes();
+  }
+
+  set newOracleAddress(value: Bytes) {
+    this.set("newOracleAddress", Value.fromBytes(value));
+  }
+
+  get blockNumber(): BigInt {
+    let value = this.get("blockNumber");
+    return value.toBigInt();
+  }
+
+  set blockNumber(value: BigInt) {
+    this.set("blockNumber", Value.fromBigInt(value));
+  }
+
+  get timestamp(): BigInt {
+    let value = this.get("timestamp");
+    return value.toBigInt();
+  }
+
+  set timestamp(value: BigInt) {
+    this.set("timestamp", Value.fromBigInt(value));
   }
 }
