@@ -25,8 +25,8 @@ export function updateOrCreateLendingPoolPauseStatus(
   let pauseEntity = LendingPoolPauseStatus.load(id);
   if (pauseEntity == null) {
     pauseEntity = new LendingPoolPauseStatus(id);
-    pauseEntity.paused = paused;
   }
+  pauseEntity.paused = paused;
   pauseEntity.lendingPool = lendingPool;
   pauseEntity.blockNumber = blockNumber;
   pauseEntity.timestamp = timestamp;
