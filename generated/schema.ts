@@ -1940,7 +1940,7 @@ export class ZTokenChange extends Entity {
   }
 }
 
-export class SettingsStatus extends Entity {
+export class PlatformSettingsStatus extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
@@ -1948,17 +1948,23 @@ export class SettingsStatus extends Entity {
 
   save(): void {
     let id = this.get("id");
-    assert(id !== null, "Cannot save SettingsStatus entity without an ID");
+    assert(
+      id !== null,
+      "Cannot save PlatformSettingsStatus entity without an ID"
+    );
     assert(
       id.kind == ValueKind.STRING,
-      "Cannot save SettingsStatus entity with non-string ID. " +
+      "Cannot save PlatformSettingsStatus entity with non-string ID. " +
         'Considering using .toHex() to convert the "id" to a string.'
     );
-    store.set("SettingsStatus", id.toString(), this);
+    store.set("PlatformSettingsStatus", id.toString(), this);
   }
 
-  static load(id: string): SettingsStatus | null {
-    return store.get("SettingsStatus", id) as SettingsStatus | null;
+  static load(id: string): PlatformSettingsStatus | null {
+    return store.get(
+      "PlatformSettingsStatus",
+      id
+    ) as PlatformSettingsStatus | null;
   }
 
   get id(): string {
@@ -1988,6 +1994,33 @@ export class SettingsStatus extends Entity {
     this.set("value", Value.fromBigInt(value));
   }
 
+  get min(): BigInt {
+    let value = this.get("min");
+    return value.toBigInt();
+  }
+
+  set min(value: BigInt) {
+    this.set("min", Value.fromBigInt(value));
+  }
+
+  get max(): BigInt {
+    let value = this.get("max");
+    return value.toBigInt();
+  }
+
+  set max(value: BigInt) {
+    this.set("max", Value.fromBigInt(value));
+  }
+
+  get removed(): boolean {
+    let value = this.get("removed");
+    return value.toBoolean();
+  }
+
+  set removed(value: boolean) {
+    this.set("removed", Value.fromBoolean(value));
+  }
+
   get blockNumber(): BigInt {
     let value = this.get("blockNumber");
     return value.toBigInt();
@@ -2007,7 +2040,7 @@ export class SettingsStatus extends Entity {
   }
 }
 
-export class SettingsChange extends Entity {
+export class PlatformSettingsChange extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
@@ -2015,17 +2048,23 @@ export class SettingsChange extends Entity {
 
   save(): void {
     let id = this.get("id");
-    assert(id !== null, "Cannot save SettingsChange entity without an ID");
+    assert(
+      id !== null,
+      "Cannot save PlatformSettingsChange entity without an ID"
+    );
     assert(
       id.kind == ValueKind.STRING,
-      "Cannot save SettingsChange entity with non-string ID. " +
+      "Cannot save PlatformSettingsChange entity with non-string ID. " +
         'Considering using .toHex() to convert the "id" to a string.'
     );
-    store.set("SettingsChange", id.toString(), this);
+    store.set("PlatformSettingsChange", id.toString(), this);
   }
 
-  static load(id: string): SettingsChange | null {
-    return store.get("SettingsChange", id) as SettingsChange | null;
+  static load(id: string): PlatformSettingsChange | null {
+    return store.get(
+      "PlatformSettingsChange",
+      id
+    ) as PlatformSettingsChange | null;
   }
 
   get id(): string {

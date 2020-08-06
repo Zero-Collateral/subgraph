@@ -130,6 +130,88 @@ export class AssetSettingsUintUpdated__Params {
   }
 }
 
+export class ComponentVersionCreated extends ethereum.Event {
+  get params(): ComponentVersionCreated__Params {
+    return new ComponentVersionCreated__Params(this);
+  }
+}
+
+export class ComponentVersionCreated__Params {
+  _event: ComponentVersionCreated;
+
+  constructor(event: ComponentVersionCreated) {
+    this._event = event;
+  }
+
+  get account(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get componentName(): Bytes {
+    return this._event.parameters[1].value.toBytes();
+  }
+
+  get minVersion(): BigInt {
+    return this._event.parameters[2].value.toBigInt();
+  }
+}
+
+export class ComponentVersionRemoved extends ethereum.Event {
+  get params(): ComponentVersionRemoved__Params {
+    return new ComponentVersionRemoved__Params(this);
+  }
+}
+
+export class ComponentVersionRemoved__Params {
+  _event: ComponentVersionRemoved;
+
+  constructor(event: ComponentVersionRemoved) {
+    this._event = event;
+  }
+
+  get account(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get componentName(): Bytes {
+    return this._event.parameters[1].value.toBytes();
+  }
+
+  get previousVersion(): BigInt {
+    return this._event.parameters[2].value.toBigInt();
+  }
+}
+
+export class ComponentVersionUpdated extends ethereum.Event {
+  get params(): ComponentVersionUpdated__Params {
+    return new ComponentVersionUpdated__Params(this);
+  }
+}
+
+export class ComponentVersionUpdated__Params {
+  _event: ComponentVersionUpdated;
+
+  constructor(event: ComponentVersionUpdated) {
+    this._event = event;
+  }
+
+  get account(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get componentName(): Bytes {
+    return this._event.parameters[1].value.toBytes();
+  }
+
+  get oldVersion(): BigInt {
+    return this._event.parameters[2].value.toBigInt();
+  }
+
+  get newVersion(): BigInt {
+    return this._event.parameters[3].value.toBigInt();
+  }
+}
+
 export class LendingPoolPaused extends ethereum.Event {
   get params(): LendingPoolPaused__Params {
     return new LendingPoolPaused__Params(this);
@@ -228,16 +310,76 @@ export class PauserRemoved__Params {
   }
 }
 
-export class SettingUpdated extends ethereum.Event {
-  get params(): SettingUpdated__Params {
-    return new SettingUpdated__Params(this);
+export class PlatformSettingCreated extends ethereum.Event {
+  get params(): PlatformSettingCreated__Params {
+    return new PlatformSettingCreated__Params(this);
   }
 }
 
-export class SettingUpdated__Params {
-  _event: SettingUpdated;
+export class PlatformSettingCreated__Params {
+  _event: PlatformSettingCreated;
 
-  constructor(event: SettingUpdated) {
+  constructor(event: PlatformSettingCreated) {
+    this._event = event;
+  }
+
+  get settingName(): Bytes {
+    return this._event.parameters[0].value.toBytes();
+  }
+
+  get sender(): Address {
+    return this._event.parameters[1].value.toAddress();
+  }
+
+  get value(): BigInt {
+    return this._event.parameters[2].value.toBigInt();
+  }
+
+  get minValue(): BigInt {
+    return this._event.parameters[3].value.toBigInt();
+  }
+
+  get maxValue(): BigInt {
+    return this._event.parameters[4].value.toBigInt();
+  }
+}
+
+export class PlatformSettingRemoved extends ethereum.Event {
+  get params(): PlatformSettingRemoved__Params {
+    return new PlatformSettingRemoved__Params(this);
+  }
+}
+
+export class PlatformSettingRemoved__Params {
+  _event: PlatformSettingRemoved;
+
+  constructor(event: PlatformSettingRemoved) {
+    this._event = event;
+  }
+
+  get settingName(): Bytes {
+    return this._event.parameters[0].value.toBytes();
+  }
+
+  get lastValue(): BigInt {
+    return this._event.parameters[1].value.toBigInt();
+  }
+
+  get sender(): Address {
+    return this._event.parameters[2].value.toAddress();
+  }
+}
+
+export class PlatformSettingUpdated extends ethereum.Event {
+  get params(): PlatformSettingUpdated__Params {
+    return new PlatformSettingUpdated__Params(this);
+  }
+}
+
+export class PlatformSettingUpdated__Params {
+  _event: PlatformSettingUpdated;
+
+  constructor(event: PlatformSettingUpdated) {
     this._event = event;
   }
 
@@ -293,6 +435,47 @@ export class SettingsInterface__assetSettingsResult {
   }
 }
 
+export class SettingsInterface__platformSettingsResult {
+  value0: BigInt;
+  value1: BigInt;
+  value2: BigInt;
+  value3: boolean;
+
+  constructor(value0: BigInt, value1: BigInt, value2: BigInt, value3: boolean) {
+    this.value0 = value0;
+    this.value1 = value1;
+    this.value2 = value2;
+    this.value3 = value3;
+  }
+
+  toMap(): TypedMap<string, ethereum.Value> {
+    let map = new TypedMap<string, ethereum.Value>();
+    map.set("value0", ethereum.Value.fromUnsignedBigInt(this.value0));
+    map.set("value1", ethereum.Value.fromUnsignedBigInt(this.value1));
+    map.set("value2", ethereum.Value.fromUnsignedBigInt(this.value2));
+    map.set("value3", ethereum.Value.fromBoolean(this.value3));
+    return map;
+  }
+}
+
+export class SettingsInterface__getPlatformSettingResultValue0Struct extends ethereum.Tuple {
+  get value(): BigInt {
+    return this[0].toBigInt();
+  }
+
+  get min(): BigInt {
+    return this[1].toBigInt();
+  }
+
+  get max(): BigInt {
+    return this[2].toBigInt();
+  }
+
+  get exists(): boolean {
+    return this[3].toBoolean();
+  }
+}
+
 export class SettingsInterface__getAssetSettingsResultValue0Struct extends ethereum.Tuple {
   get cTokenAddress(): Address {
     return this[0].toAddress();
@@ -331,75 +514,6 @@ export class SettingsInterface extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toBytes());
   }
 
-  LIQUIDATE_ETH_PRICE_SETTING(): Bytes {
-    let result = super.call(
-      "LIQUIDATE_ETH_PRICE_SETTING",
-      "LIQUIDATE_ETH_PRICE_SETTING():(bytes32)",
-      []
-    );
-
-    return result[0].toBytes();
-  }
-
-  try_LIQUIDATE_ETH_PRICE_SETTING(): ethereum.CallResult<Bytes> {
-    let result = super.tryCall(
-      "LIQUIDATE_ETH_PRICE_SETTING",
-      "LIQUIDATE_ETH_PRICE_SETTING():(bytes32)",
-      []
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBytes());
-  }
-
-  MAXIMUM_LOAN_DURATION_SETTING(): Bytes {
-    let result = super.call(
-      "MAXIMUM_LOAN_DURATION_SETTING",
-      "MAXIMUM_LOAN_DURATION_SETTING():(bytes32)",
-      []
-    );
-
-    return result[0].toBytes();
-  }
-
-  try_MAXIMUM_LOAN_DURATION_SETTING(): ethereum.CallResult<Bytes> {
-    let result = super.tryCall(
-      "MAXIMUM_LOAN_DURATION_SETTING",
-      "MAXIMUM_LOAN_DURATION_SETTING():(bytes32)",
-      []
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBytes());
-  }
-
-  MAXIMUM_TOLERANCE_SETTING(): Bytes {
-    let result = super.call(
-      "MAXIMUM_TOLERANCE_SETTING",
-      "MAXIMUM_TOLERANCE_SETTING():(bytes32)",
-      []
-    );
-
-    return result[0].toBytes();
-  }
-
-  try_MAXIMUM_TOLERANCE_SETTING(): ethereum.CallResult<Bytes> {
-    let result = super.tryCall(
-      "MAXIMUM_TOLERANCE_SETTING",
-      "MAXIMUM_TOLERANCE_SETTING():(bytes32)",
-      []
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBytes());
-  }
-
   MAX_LOAN_AMOUNT_ASSET_SETTING(): Bytes {
     let result = super.call(
       "MAX_LOAN_AMOUNT_ASSET_SETTING",
@@ -414,98 +528,6 @@ export class SettingsInterface extends ethereum.SmartContract {
     let result = super.tryCall(
       "MAX_LOAN_AMOUNT_ASSET_SETTING",
       "MAX_LOAN_AMOUNT_ASSET_SETTING():(bytes32)",
-      []
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBytes());
-  }
-
-  REQUIRED_SUBMISSIONS_SETTING(): Bytes {
-    let result = super.call(
-      "REQUIRED_SUBMISSIONS_SETTING",
-      "REQUIRED_SUBMISSIONS_SETTING():(bytes32)",
-      []
-    );
-
-    return result[0].toBytes();
-  }
-
-  try_REQUIRED_SUBMISSIONS_SETTING(): ethereum.CallResult<Bytes> {
-    let result = super.tryCall(
-      "REQUIRED_SUBMISSIONS_SETTING",
-      "REQUIRED_SUBMISSIONS_SETTING():(bytes32)",
-      []
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBytes());
-  }
-
-  RESPONSE_EXPIRY_LENGTH_SETTING(): Bytes {
-    let result = super.call(
-      "RESPONSE_EXPIRY_LENGTH_SETTING",
-      "RESPONSE_EXPIRY_LENGTH_SETTING():(bytes32)",
-      []
-    );
-
-    return result[0].toBytes();
-  }
-
-  try_RESPONSE_EXPIRY_LENGTH_SETTING(): ethereum.CallResult<Bytes> {
-    let result = super.tryCall(
-      "RESPONSE_EXPIRY_LENGTH_SETTING",
-      "RESPONSE_EXPIRY_LENGTH_SETTING():(bytes32)",
-      []
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBytes());
-  }
-
-  SAFETY_INTERVAL_SETTING(): Bytes {
-    let result = super.call(
-      "SAFETY_INTERVAL_SETTING",
-      "SAFETY_INTERVAL_SETTING():(bytes32)",
-      []
-    );
-
-    return result[0].toBytes();
-  }
-
-  try_SAFETY_INTERVAL_SETTING(): ethereum.CallResult<Bytes> {
-    let result = super.tryCall(
-      "SAFETY_INTERVAL_SETTING",
-      "SAFETY_INTERVAL_SETTING():(bytes32)",
-      []
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBytes());
-  }
-
-  TERMS_EXPIRY_TIME_SETTING(): Bytes {
-    let result = super.call(
-      "TERMS_EXPIRY_TIME_SETTING",
-      "TERMS_EXPIRY_TIME_SETTING():(bytes32)",
-      []
-    );
-
-    return result[0].toBytes();
-  }
-
-  try_TERMS_EXPIRY_TIME_SETTING(): ethereum.CallResult<Bytes> {
-    let result = super.tryCall(
-      "TERMS_EXPIRY_TIME_SETTING",
-      "TERMS_EXPIRY_TIME_SETTING():(bytes32)",
       []
     );
     if (result.reverted) {
@@ -567,6 +589,29 @@ export class SettingsInterface extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toAddress());
   }
 
+  componentVersions(param0: Bytes): BigInt {
+    let result = super.call(
+      "componentVersions",
+      "componentVersions(bytes32):(uint32)",
+      [ethereum.Value.fromFixedBytes(param0)]
+    );
+
+    return result[0].toBigInt();
+  }
+
+  try_componentVersions(param0: Bytes): ethereum.CallResult<BigInt> {
+    let result = super.tryCall(
+      "componentVersions",
+      "componentVersions(bytes32):(uint32)",
+      [ethereum.Value.fromFixedBytes(param0)]
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBigInt());
+  }
+
   isPauser(account: Address): boolean {
     let result = super.call("isPauser", "isPauser(address):(bool)", [
       ethereum.Value.fromAddress(account)
@@ -609,75 +654,6 @@ export class SettingsInterface extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toBoolean());
   }
 
-  liquidateEthPrice(): BigInt {
-    let result = super.call(
-      "liquidateEthPrice",
-      "liquidateEthPrice():(uint256)",
-      []
-    );
-
-    return result[0].toBigInt();
-  }
-
-  try_liquidateEthPrice(): ethereum.CallResult<BigInt> {
-    let result = super.tryCall(
-      "liquidateEthPrice",
-      "liquidateEthPrice():(uint256)",
-      []
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBigInt());
-  }
-
-  maximumLoanDuration(): BigInt {
-    let result = super.call(
-      "maximumLoanDuration",
-      "maximumLoanDuration():(uint256)",
-      []
-    );
-
-    return result[0].toBigInt();
-  }
-
-  try_maximumLoanDuration(): ethereum.CallResult<BigInt> {
-    let result = super.tryCall(
-      "maximumLoanDuration",
-      "maximumLoanDuration():(uint256)",
-      []
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBigInt());
-  }
-
-  maximumTolerance(): BigInt {
-    let result = super.call(
-      "maximumTolerance",
-      "maximumTolerance():(uint256)",
-      []
-    );
-
-    return result[0].toBigInt();
-  }
-
-  try_maximumTolerance(): ethereum.CallResult<BigInt> {
-    let result = super.tryCall(
-      "maximumTolerance",
-      "maximumTolerance():(uint256)",
-      []
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBigInt());
-  }
-
   paused(): boolean {
     let result = super.call("paused", "paused():(bool)", []);
 
@@ -693,92 +669,141 @@ export class SettingsInterface extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toBoolean());
   }
 
-  requiredSubmissions(): BigInt {
+  platformSettings(param0: Bytes): SettingsInterface__platformSettingsResult {
     let result = super.call(
-      "requiredSubmissions",
-      "requiredSubmissions():(uint256)",
-      []
+      "platformSettings",
+      "platformSettings(bytes32):(uint256,uint256,uint256,bool)",
+      [ethereum.Value.fromFixedBytes(param0)]
     );
 
-    return result[0].toBigInt();
+    return new SettingsInterface__platformSettingsResult(
+      result[0].toBigInt(),
+      result[1].toBigInt(),
+      result[2].toBigInt(),
+      result[3].toBoolean()
+    );
   }
 
-  try_requiredSubmissions(): ethereum.CallResult<BigInt> {
+  try_platformSettings(
+    param0: Bytes
+  ): ethereum.CallResult<SettingsInterface__platformSettingsResult> {
     let result = super.tryCall(
-      "requiredSubmissions",
-      "requiredSubmissions():(uint256)",
-      []
+      "platformSettings",
+      "platformSettings(bytes32):(uint256,uint256,uint256,bool)",
+      [ethereum.Value.fromFixedBytes(param0)]
     );
     if (result.reverted) {
       return new ethereum.CallResult();
     }
     let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBigInt());
+    return ethereum.CallResult.fromValue(
+      new SettingsInterface__platformSettingsResult(
+        value[0].toBigInt(),
+        value[1].toBigInt(),
+        value[2].toBigInt(),
+        value[3].toBoolean()
+      )
+    );
   }
 
-  responseExpiryLength(): BigInt {
+  getPlatformSetting(
+    settingName: Bytes
+  ): SettingsInterface__getPlatformSettingResultValue0Struct {
     let result = super.call(
-      "responseExpiryLength",
-      "responseExpiryLength():(uint256)",
-      []
+      "getPlatformSetting",
+      "getPlatformSetting(bytes32):((uint256,uint256,uint256,bool))",
+      [ethereum.Value.fromFixedBytes(settingName)]
     );
 
-    return result[0].toBigInt();
+    return result[0].toTuple() as SettingsInterface__getPlatformSettingResultValue0Struct;
   }
 
-  try_responseExpiryLength(): ethereum.CallResult<BigInt> {
+  try_getPlatformSetting(
+    settingName: Bytes
+  ): ethereum.CallResult<
+    SettingsInterface__getPlatformSettingResultValue0Struct
+  > {
     let result = super.tryCall(
-      "responseExpiryLength",
-      "responseExpiryLength():(uint256)",
-      []
+      "getPlatformSetting",
+      "getPlatformSetting(bytes32):((uint256,uint256,uint256,bool))",
+      [ethereum.Value.fromFixedBytes(settingName)]
     );
     if (result.reverted) {
       return new ethereum.CallResult();
     }
     let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBigInt());
-  }
-
-  safetyInterval(): BigInt {
-    let result = super.call("safetyInterval", "safetyInterval():(uint256)", []);
-
-    return result[0].toBigInt();
-  }
-
-  try_safetyInterval(): ethereum.CallResult<BigInt> {
-    let result = super.tryCall(
-      "safetyInterval",
-      "safetyInterval():(uint256)",
-      []
+    return ethereum.CallResult.fromValue(
+      value[0].toTuple() as SettingsInterface__getPlatformSettingResultValue0Struct
     );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBigInt());
   }
 
-  termsExpiryTime(): BigInt {
+  getComponentVersion(componentName: Bytes): BigInt {
     let result = super.call(
-      "termsExpiryTime",
-      "termsExpiryTime():(uint256)",
-      []
+      "getComponentVersion",
+      "getComponentVersion(bytes32):(uint32)",
+      [ethereum.Value.fromFixedBytes(componentName)]
     );
 
     return result[0].toBigInt();
   }
 
-  try_termsExpiryTime(): ethereum.CallResult<BigInt> {
+  try_getComponentVersion(componentName: Bytes): ethereum.CallResult<BigInt> {
     let result = super.tryCall(
-      "termsExpiryTime",
-      "termsExpiryTime():(uint256)",
-      []
+      "getComponentVersion",
+      "getComponentVersion(bytes32):(uint32)",
+      [ethereum.Value.fromFixedBytes(componentName)]
     );
     if (result.reverted) {
       return new ethereum.CallResult();
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(value[0].toBigInt());
+  }
+
+  getPlatformSettingValue(settingName: Bytes): BigInt {
+    let result = super.call(
+      "getPlatformSettingValue",
+      "getPlatformSettingValue(bytes32):(uint256)",
+      [ethereum.Value.fromFixedBytes(settingName)]
+    );
+
+    return result[0].toBigInt();
+  }
+
+  try_getPlatformSettingValue(settingName: Bytes): ethereum.CallResult<BigInt> {
+    let result = super.tryCall(
+      "getPlatformSettingValue",
+      "getPlatformSettingValue(bytes32):(uint256)",
+      [ethereum.Value.fromFixedBytes(settingName)]
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBigInt());
+  }
+
+  hasPlatformSetting(settingName: Bytes): boolean {
+    let result = super.call(
+      "hasPlatformSetting",
+      "hasPlatformSetting(bytes32):(bool)",
+      [ethereum.Value.fromFixedBytes(settingName)]
+    );
+
+    return result[0].toBoolean();
+  }
+
+  try_hasPlatformSetting(settingName: Bytes): ethereum.CallResult<boolean> {
+    let result = super.tryCall(
+      "hasPlatformSetting",
+      "hasPlatformSetting(bytes32):(bool)",
+      [ethereum.Value.fromFixedBytes(settingName)]
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBoolean());
   }
 
   isPaused(): boolean {
@@ -896,60 +921,6 @@ export class SettingsInterface extends ethereum.SmartContract {
   }
 }
 
-export class ConstructorCall extends ethereum.Call {
-  get inputs(): ConstructorCall__Inputs {
-    return new ConstructorCall__Inputs(this);
-  }
-
-  get outputs(): ConstructorCall__Outputs {
-    return new ConstructorCall__Outputs(this);
-  }
-}
-
-export class ConstructorCall__Inputs {
-  _call: ConstructorCall;
-
-  constructor(call: ConstructorCall) {
-    this._call = call;
-  }
-
-  get aRequiredSubmissions(): BigInt {
-    return this._call.inputValues[0].value.toBigInt();
-  }
-
-  get aMaximumTolerance(): BigInt {
-    return this._call.inputValues[1].value.toBigInt();
-  }
-
-  get aResponseExpiryLength(): BigInt {
-    return this._call.inputValues[2].value.toBigInt();
-  }
-
-  get aSafetyInterval(): BigInt {
-    return this._call.inputValues[3].value.toBigInt();
-  }
-
-  get aTermsExpiryTime(): BigInt {
-    return this._call.inputValues[4].value.toBigInt();
-  }
-
-  get aLiquidateEthPrice(): BigInt {
-    return this._call.inputValues[5].value.toBigInt();
-  }
-
-  get aMaximumLoanDuration(): BigInt {
-    return this._call.inputValues[6].value.toBigInt();
-  }
-}
-
-export class ConstructorCall__Outputs {
-  _call: ConstructorCall;
-
-  constructor(call: ConstructorCall) {
-    this._call = call;
-  }
-}
-
 export class AddPauserCall extends ethereum.Call {
   get inputs(): AddPauserCall__Inputs {
     return new AddPauserCall__Inputs(this);
@@ -1058,212 +1029,206 @@ export class UnpauseCall__Outputs {
   }
 }
 
-export class SetRequiredSubmissionsCall extends ethereum.Call {
-  get inputs(): SetRequiredSubmissionsCall__Inputs {
-    return new SetRequiredSubmissionsCall__Inputs(this);
+export class CreatePlatformSettingCall extends ethereum.Call {
+  get inputs(): CreatePlatformSettingCall__Inputs {
+    return new CreatePlatformSettingCall__Inputs(this);
   }
 
-  get outputs(): SetRequiredSubmissionsCall__Outputs {
-    return new SetRequiredSubmissionsCall__Outputs(this);
+  get outputs(): CreatePlatformSettingCall__Outputs {
+    return new CreatePlatformSettingCall__Outputs(this);
   }
 }
 
-export class SetRequiredSubmissionsCall__Inputs {
-  _call: SetRequiredSubmissionsCall;
+export class CreatePlatformSettingCall__Inputs {
+  _call: CreatePlatformSettingCall;
 
-  constructor(call: SetRequiredSubmissionsCall) {
+  constructor(call: CreatePlatformSettingCall) {
     this._call = call;
   }
 
-  get newRequiredSubmissions(): BigInt {
-    return this._call.inputValues[0].value.toBigInt();
+  get settingName(): Bytes {
+    return this._call.inputValues[0].value.toBytes();
+  }
+
+  get value(): BigInt {
+    return this._call.inputValues[1].value.toBigInt();
+  }
+
+  get minValue(): BigInt {
+    return this._call.inputValues[2].value.toBigInt();
+  }
+
+  get maxValue(): BigInt {
+    return this._call.inputValues[3].value.toBigInt();
   }
 }
 
-export class SetRequiredSubmissionsCall__Outputs {
-  _call: SetRequiredSubmissionsCall;
+export class CreatePlatformSettingCall__Outputs {
+  _call: CreatePlatformSettingCall;
 
-  constructor(call: SetRequiredSubmissionsCall) {
-    this._call = call;
-  }
-}
-
-export class SetMaximumToleranceCall extends ethereum.Call {
-  get inputs(): SetMaximumToleranceCall__Inputs {
-    return new SetMaximumToleranceCall__Inputs(this);
-  }
-
-  get outputs(): SetMaximumToleranceCall__Outputs {
-    return new SetMaximumToleranceCall__Outputs(this);
-  }
-}
-
-export class SetMaximumToleranceCall__Inputs {
-  _call: SetMaximumToleranceCall;
-
-  constructor(call: SetMaximumToleranceCall) {
-    this._call = call;
-  }
-
-  get newMaximumTolerance(): BigInt {
-    return this._call.inputValues[0].value.toBigInt();
-  }
-}
-
-export class SetMaximumToleranceCall__Outputs {
-  _call: SetMaximumToleranceCall;
-
-  constructor(call: SetMaximumToleranceCall) {
+  constructor(call: CreatePlatformSettingCall) {
     this._call = call;
   }
 }
 
-export class SetResponseExpiryLengthCall extends ethereum.Call {
-  get inputs(): SetResponseExpiryLengthCall__Inputs {
-    return new SetResponseExpiryLengthCall__Inputs(this);
+export class UpdatePlatformSettingCall extends ethereum.Call {
+  get inputs(): UpdatePlatformSettingCall__Inputs {
+    return new UpdatePlatformSettingCall__Inputs(this);
   }
 
-  get outputs(): SetResponseExpiryLengthCall__Outputs {
-    return new SetResponseExpiryLengthCall__Outputs(this);
+  get outputs(): UpdatePlatformSettingCall__Outputs {
+    return new UpdatePlatformSettingCall__Outputs(this);
   }
 }
 
-export class SetResponseExpiryLengthCall__Inputs {
-  _call: SetResponseExpiryLengthCall;
+export class UpdatePlatformSettingCall__Inputs {
+  _call: UpdatePlatformSettingCall;
 
-  constructor(call: SetResponseExpiryLengthCall) {
+  constructor(call: UpdatePlatformSettingCall) {
     this._call = call;
   }
 
-  get newResponseExpiryLength(): BigInt {
-    return this._call.inputValues[0].value.toBigInt();
+  get settingName(): Bytes {
+    return this._call.inputValues[0].value.toBytes();
+  }
+
+  get newValue(): BigInt {
+    return this._call.inputValues[1].value.toBigInt();
   }
 }
 
-export class SetResponseExpiryLengthCall__Outputs {
-  _call: SetResponseExpiryLengthCall;
+export class UpdatePlatformSettingCall__Outputs {
+  _call: UpdatePlatformSettingCall;
 
-  constructor(call: SetResponseExpiryLengthCall) {
-    this._call = call;
-  }
-}
-
-export class SetSafetyIntervalCall extends ethereum.Call {
-  get inputs(): SetSafetyIntervalCall__Inputs {
-    return new SetSafetyIntervalCall__Inputs(this);
-  }
-
-  get outputs(): SetSafetyIntervalCall__Outputs {
-    return new SetSafetyIntervalCall__Outputs(this);
-  }
-}
-
-export class SetSafetyIntervalCall__Inputs {
-  _call: SetSafetyIntervalCall;
-
-  constructor(call: SetSafetyIntervalCall) {
-    this._call = call;
-  }
-
-  get newSafetyInterval(): BigInt {
-    return this._call.inputValues[0].value.toBigInt();
-  }
-}
-
-export class SetSafetyIntervalCall__Outputs {
-  _call: SetSafetyIntervalCall;
-
-  constructor(call: SetSafetyIntervalCall) {
+  constructor(call: UpdatePlatformSettingCall) {
     this._call = call;
   }
 }
 
-export class SetTermsExpiryTimeCall extends ethereum.Call {
-  get inputs(): SetTermsExpiryTimeCall__Inputs {
-    return new SetTermsExpiryTimeCall__Inputs(this);
+export class RemovePlatformSettingCall extends ethereum.Call {
+  get inputs(): RemovePlatformSettingCall__Inputs {
+    return new RemovePlatformSettingCall__Inputs(this);
   }
 
-  get outputs(): SetTermsExpiryTimeCall__Outputs {
-    return new SetTermsExpiryTimeCall__Outputs(this);
+  get outputs(): RemovePlatformSettingCall__Outputs {
+    return new RemovePlatformSettingCall__Outputs(this);
   }
 }
 
-export class SetTermsExpiryTimeCall__Inputs {
-  _call: SetTermsExpiryTimeCall;
+export class RemovePlatformSettingCall__Inputs {
+  _call: RemovePlatformSettingCall;
 
-  constructor(call: SetTermsExpiryTimeCall) {
+  constructor(call: RemovePlatformSettingCall) {
     this._call = call;
   }
 
-  get newTermsExpiryTime(): BigInt {
-    return this._call.inputValues[0].value.toBigInt();
+  get settingName(): Bytes {
+    return this._call.inputValues[0].value.toBytes();
   }
 }
 
-export class SetTermsExpiryTimeCall__Outputs {
-  _call: SetTermsExpiryTimeCall;
+export class RemovePlatformSettingCall__Outputs {
+  _call: RemovePlatformSettingCall;
 
-  constructor(call: SetTermsExpiryTimeCall) {
-    this._call = call;
-  }
-}
-
-export class SetLiquidateEthPriceCall extends ethereum.Call {
-  get inputs(): SetLiquidateEthPriceCall__Inputs {
-    return new SetLiquidateEthPriceCall__Inputs(this);
-  }
-
-  get outputs(): SetLiquidateEthPriceCall__Outputs {
-    return new SetLiquidateEthPriceCall__Outputs(this);
-  }
-}
-
-export class SetLiquidateEthPriceCall__Inputs {
-  _call: SetLiquidateEthPriceCall;
-
-  constructor(call: SetLiquidateEthPriceCall) {
-    this._call = call;
-  }
-
-  get newLiquidateEthPrice(): BigInt {
-    return this._call.inputValues[0].value.toBigInt();
-  }
-}
-
-export class SetLiquidateEthPriceCall__Outputs {
-  _call: SetLiquidateEthPriceCall;
-
-  constructor(call: SetLiquidateEthPriceCall) {
+  constructor(call: RemovePlatformSettingCall) {
     this._call = call;
   }
 }
 
-export class SetMaximumLoanDurationCall extends ethereum.Call {
-  get inputs(): SetMaximumLoanDurationCall__Inputs {
-    return new SetMaximumLoanDurationCall__Inputs(this);
+export class CreateComponentVersionCall extends ethereum.Call {
+  get inputs(): CreateComponentVersionCall__Inputs {
+    return new CreateComponentVersionCall__Inputs(this);
   }
 
-  get outputs(): SetMaximumLoanDurationCall__Outputs {
-    return new SetMaximumLoanDurationCall__Outputs(this);
+  get outputs(): CreateComponentVersionCall__Outputs {
+    return new CreateComponentVersionCall__Outputs(this);
   }
 }
 
-export class SetMaximumLoanDurationCall__Inputs {
-  _call: SetMaximumLoanDurationCall;
+export class CreateComponentVersionCall__Inputs {
+  _call: CreateComponentVersionCall;
 
-  constructor(call: SetMaximumLoanDurationCall) {
+  constructor(call: CreateComponentVersionCall) {
     this._call = call;
   }
 
-  get newMaximumLoanDuration(): BigInt {
-    return this._call.inputValues[0].value.toBigInt();
+  get componentName(): Bytes {
+    return this._call.inputValues[0].value.toBytes();
+  }
+
+  get minVersion(): BigInt {
+    return this._call.inputValues[1].value.toBigInt();
   }
 }
 
-export class SetMaximumLoanDurationCall__Outputs {
-  _call: SetMaximumLoanDurationCall;
+export class CreateComponentVersionCall__Outputs {
+  _call: CreateComponentVersionCall;
 
-  constructor(call: SetMaximumLoanDurationCall) {
+  constructor(call: CreateComponentVersionCall) {
+    this._call = call;
+  }
+}
+
+export class RemoveComponentVersionCall extends ethereum.Call {
+  get inputs(): RemoveComponentVersionCall__Inputs {
+    return new RemoveComponentVersionCall__Inputs(this);
+  }
+
+  get outputs(): RemoveComponentVersionCall__Outputs {
+    return new RemoveComponentVersionCall__Outputs(this);
+  }
+}
+
+export class RemoveComponentVersionCall__Inputs {
+  _call: RemoveComponentVersionCall;
+
+  constructor(call: RemoveComponentVersionCall) {
+    this._call = call;
+  }
+
+  get componentName(): Bytes {
+    return this._call.inputValues[0].value.toBytes();
+  }
+}
+
+export class RemoveComponentVersionCall__Outputs {
+  _call: RemoveComponentVersionCall;
+
+  constructor(call: RemoveComponentVersionCall) {
+    this._call = call;
+  }
+}
+
+export class UpdateComponentVersionCall extends ethereum.Call {
+  get inputs(): UpdateComponentVersionCall__Inputs {
+    return new UpdateComponentVersionCall__Inputs(this);
+  }
+
+  get outputs(): UpdateComponentVersionCall__Outputs {
+    return new UpdateComponentVersionCall__Outputs(this);
+  }
+}
+
+export class UpdateComponentVersionCall__Inputs {
+  _call: UpdateComponentVersionCall;
+
+  constructor(call: UpdateComponentVersionCall) {
+    this._call = call;
+  }
+
+  get componentName(): Bytes {
+    return this._call.inputValues[0].value.toBytes();
+  }
+
+  get newVersion(): BigInt {
+    return this._call.inputValues[1].value.toBigInt();
+  }
+}
+
+export class UpdateComponentVersionCall__Outputs {
+  _call: UpdateComponentVersionCall;
+
+  constructor(call: UpdateComponentVersionCall) {
     this._call = call;
   }
 }

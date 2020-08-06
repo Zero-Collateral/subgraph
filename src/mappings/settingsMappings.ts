@@ -1,6 +1,8 @@
 import { log, BigInt, Bytes } from "@graphprotocol/graph-ts";
 import {
-  SettingUpdated as SettingUpdatedEvent,
+  PlatformSettingCreated as PlatformSettingCreatedEvent,
+  PlatformSettingRemoved as PlatformSettingRemovedEvent,
+  PlatformSettingUpdated as PlatformSettingUpdatedEvent,
   LendingPoolPaused as LendingPoolPausedEvent,
   LendingPoolUnpaused as LendingPoolUnpausedEvent,
   Paused as PausedEvent,
@@ -20,24 +22,77 @@ import {
   ASSET_SETTINGS_CTOKEN_ADDRESS,
   ASSET_SETTINGS_MAX_LOAN_AMOUNT,
   ASSET_SETTINGS_REMOVED,
+  ETH_TX_PLATFORM_SETTING_CREATED,
+  ETH_TX_PLATFORM_PAUSED,
+  ETH_TX_PLATFORM_UNPAUSED,
+  ETH_TX_PLATFORM_SETTING_UPDATED,
+  ETH_TX_PLATFORM_SETTING_REMOVED,
 } from "../utils/consts";
 import {
   creatingLendingPoolPauseChange,
   updateOrCreateLendingPoolPauseStatus,
-  internalHandleSettingUpdated,
   createPauserChange,
   updateOrCreatePauserStatus,
+  createPlatformSettingChange,
+  updateOrCreatePlatformSettingsStatus,
 } from "../utils/settings-commons";
 import { createAssetSettingsChange, getOrCreateAssetSettingsStatus, updateBigIntAssetSettingsStatus, updateAddressAssetSettingsStatus } from "../utils/common-settings";
 
-export function handleSettingUpdated(event: SettingUpdatedEvent): void {
-  internalHandleSettingUpdated(
+export function handlePlatformSettingCreated(event: PlatformSettingCreatedEvent): void {
+  createPlatformSettingChange(
+    BigInt.fromI32(0),
+    event.params.value,
+    event.params.sender,
+    event.params.settingName.toString(),
+    ETH_TX_PLATFORM_SETTING_CREATED,
+    event,
+  )
+  updateOrCreatePlatformSettingsStatus(
+    event.params.settingName.toString(),
+    event.params.minValue,
+    event.params.maxValue,
+    false,
+    event.params.value,
+    event
+  )
+}
+
+export function handlePlatformSettingUpdated(event: PlatformSettingUpdatedEvent): void {
+  createPlatformSettingChange(
     event.params.oldValue,
     event.params.newValue,
     event.params.sender,
     event.params.settingName.toString(),
+    ETH_TX_PLATFORM_SETTING_UPDATED,
+    event,
+  )
+  updateOrCreatePlatformSettingsStatus(
+    event.params.settingName.toString(),
+    event.params.newValue,// We haven't got the min/max value at this point. So we pass the newValue, but it only modify the new value internally.
+    event.params.newValue,// We haven't got the min/max value at this point. So we pass the newValue, but it only modify the new value internally.
+    false,
+    event.params.newValue,
     event
-  );
+  )
+}
+
+export function handlePlatformSettingRemoved(event: PlatformSettingRemovedEvent): void {
+  createPlatformSettingChange(
+    event.params.lastValue,
+    BigInt.fromI32(0),
+    event.params.sender,
+    event.params.settingName.toString(),
+    ETH_TX_PLATFORM_SETTING_REMOVED,
+    event,
+  )
+  updateOrCreatePlatformSettingsStatus(
+    event.params.settingName.toString(),
+    BigInt.fromI32(0),// We haven't got the min/max value at this point. So we pass the newValue, but it only modify the new value internally.
+    BigInt.fromI32(0),// We haven't got the min/max value at this point. So we pass the newValue, but it only modify the new value internally.
+    true,
+    event.params.lastValue,
+    event
+  )
 }
 
 export function handleLendingPoolPaused(event: LendingPoolPausedEvent): void {
@@ -77,23 +132,41 @@ export function handleLendingPoolUnpaused(
   );
 }
 export function handlePaused(event: PausedEvent): void {
-  internalHandleSettingUpdated(
+  createPlatformSettingChange(
     BigInt.fromI32(0),
     BigInt.fromI32(1),
     event.params.account,
     "PausePlatform",
+    ETH_TX_PLATFORM_PAUSED,
+    event,
+  )
+  updateOrCreatePlatformSettingsStatus(
+    "PausePlatform",
+    BigInt.fromI32(0),
+    BigInt.fromI32(1),
+    false,
+    BigInt.fromI32(1),
     event
-  );
+  )
 }
 
 export function handleUnpaused(event: UnpausedEvent): void {
-  internalHandleSettingUpdated(
+  createPlatformSettingChange(
     BigInt.fromI32(1),
     BigInt.fromI32(0),
     event.params.account,
-    "UnpausePlatform",
+    "PausePlatform",
+    ETH_TX_PLATFORM_UNPAUSED,
+    event,
+  )
+  updateOrCreatePlatformSettingsStatus(
+    "PausePlatform",
+    BigInt.fromI32(0),
+    BigInt.fromI32(1),
+    false,
+    BigInt.fromI32(0),
     event
-  );
+  )
 }
 
 export function handlePauserAdded(event: PauserAddedEvent): void {
