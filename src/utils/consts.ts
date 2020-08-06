@@ -89,3 +89,8 @@ export const ZTOKEN_STATUS_MINTER_REMOVED = "MinterRemoved";
 export const LOAN_STATUS_TERMS_SET = "TermsSet";
 export const LOAN_STATUS_ACTIVE = "Active";
 export const LOAN_STATUS_CLOSED = "Closed";
+
+// Asset Settings Property Consts
+export const ASSET_SETTINGS_CTOKEN_ADDRESS:string = 'CTokenAddress';
+export const ASSET_SETTINGS_MAX_LOAN_AMOUNT:string = 'MaxLoanAmount';
+export const ASSET_SETTINGS_REMOVED:string = 'Removed';

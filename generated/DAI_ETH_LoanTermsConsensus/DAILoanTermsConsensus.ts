@@ -10,6 +10,28 @@ import {
   BigInt
 } from "@graphprotocol/graph-ts";
 
+export class OwnershipTransferred extends ethereum.Event {
+  get params(): OwnershipTransferred__Params {
+    return new OwnershipTransferred__Params(this);
+  }
+}
+
+export class OwnershipTransferred__Params {
+  _event: OwnershipTransferred;
+
+  constructor(event: OwnershipTransferred) {
+    this._event = event;
+  }
+
+  get previousOwner(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get newOwner(): Address {
+    return this._event.parameters[1].value.toAddress();
+  }
+}
+
 export class SignerAdded extends ethereum.Event {
   get params(): SignerAdded__Params {
     return new SignerAdded__Params(this);
@@ -225,20 +247,24 @@ export class DAILoanTermsConsensus__processRequestInputRequestStruct extends eth
     return this[1].toAddress();
   }
 
-  get requestNonce(): BigInt {
-    return this[2].toBigInt();
+  get consensusAddress(): Address {
+    return this[2].toAddress();
   }
 
-  get amount(): BigInt {
+  get requestNonce(): BigInt {
     return this[3].toBigInt();
   }
 
-  get duration(): BigInt {
+  get amount(): BigInt {
     return this[4].toBigInt();
   }
 
-  get requestTime(): BigInt {
+  get duration(): BigInt {
     return this[5].toBigInt();
+  }
+
+  get requestTime(): BigInt {
+    return this[6].toBigInt();
   }
 }
 
@@ -247,24 +273,28 @@ export class DAILoanTermsConsensus__processRequestInputResponsesStruct extends e
     return this[0].toAddress();
   }
 
-  get responseTime(): BigInt {
-    return this[1].toBigInt();
+  get consensusAddress(): Address {
+    return this[1].toAddress();
   }
 
-  get interestRate(): BigInt {
+  get responseTime(): BigInt {
     return this[2].toBigInt();
   }
 
-  get collateralRatio(): BigInt {
+  get interestRate(): BigInt {
     return this[3].toBigInt();
   }
 
-  get maxLoanAmount(): BigInt {
+  get collateralRatio(): BigInt {
     return this[4].toBigInt();
   }
 
+  get maxLoanAmount(): BigInt {
+    return this[5].toBigInt();
+  }
+
   get signature(): DAILoanTermsConsensus__processRequestInputResponsesSignatureStruct {
-    return this[5].toTuple() as DAILoanTermsConsensus__processRequestInputResponsesSignatureStruct;
+    return this[6].toTuple() as DAILoanTermsConsensus__processRequestInputResponsesSignatureStruct;
   }
 }
 
@@ -291,14 +321,18 @@ export class DAILoanTermsConsensus extends ethereum.SmartContract {
     return new DAILoanTermsConsensus("DAILoanTermsConsensus", address);
   }
 
-  caller(): Address {
-    let result = super.call("caller", "caller():(address)", []);
+  callerAddress(): Address {
+    let result = super.call("callerAddress", "callerAddress():(address)", []);
 
     return result[0].toAddress();
   }
 
-  try_caller(): ethereum.CallResult<Address> {
-    let result = super.tryCall("caller", "caller():(address)", []);
+  try_callerAddress(): ethereum.CallResult<Address> {
+    let result = super.tryCall(
+      "callerAddress",
+      "callerAddress():(address)",
+      []
+    );
     if (result.reverted) {
       return new ethereum.CallResult();
     }
@@ -356,6 +390,21 @@ export class DAILoanTermsConsensus extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toBoolean());
   }
 
+  isOwner(): boolean {
+    let result = super.call("isOwner", "isOwner():(bool)", []);
+
+    return result[0].toBoolean();
+  }
+
+  try_isOwner(): ethereum.CallResult<boolean> {
+    let result = super.tryCall("isOwner", "isOwner():(bool)", []);
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBoolean());
+  }
+
   isSigner(account: Address): boolean {
     let result = super.call("isSigner", "isSigner(address):(bool)", [
       ethereum.Value.fromAddress(account)
@@ -373,6 +422,21 @@ export class DAILoanTermsConsensus extends ethereum.SmartContract {
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(value[0].toBoolean());
+  }
+
+  owner(): Address {
+    let result = super.call("owner", "owner():(address)", []);
+
+    return result[0].toAddress();
+  }
+
+  try_owner(): ethereum.CallResult<Address> {
+    let result = super.tryCall("owner", "owner():(address)", []);
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toAddress());
   }
 
   requestNonceTaken(param0: Address, param1: BigInt): boolean {
@@ -505,7 +569,7 @@ export class DAILoanTermsConsensus extends ethereum.SmartContract {
   ): DAILoanTermsConsensus__processRequestResult {
     let result = super.call(
       "processRequest",
-      "processRequest((address,address,uint256,uint256,uint256,uint256),tuple[]):(uint256,uint256,uint256)",
+      "processRequest((address,address,address,uint256,uint256,uint256,uint256),tuple[]):(uint256,uint256,uint256)",
       [
         ethereum.Value.fromTuple(request),
         ethereum.Value.fromTupleArray(responses)
@@ -525,7 +589,7 @@ export class DAILoanTermsConsensus extends ethereum.SmartContract {
   ): ethereum.CallResult<DAILoanTermsConsensus__processRequestResult> {
     let result = super.tryCall(
       "processRequest",
-      "processRequest((address,address,uint256,uint256,uint256,uint256),tuple[]):(uint256,uint256,uint256)",
+      "processRequest((address,address,address,uint256,uint256,uint256,uint256),tuple[]):(uint256,uint256,uint256)",
       [
         ethereum.Value.fromTuple(request),
         ethereum.Value.fromTupleArray(responses)
@@ -592,11 +656,11 @@ export class InitializeCall__Inputs {
     this._call = call;
   }
 
-  get callerAddress(): Address {
+  get aCallerAddress(): Address {
     return this._call.inputValues[0].value.toAddress();
   }
 
-  get settingAddress(): Address {
+  get aSettingAddress(): Address {
     return this._call.inputValues[1].value.toAddress();
   }
 }
@@ -609,28 +673,88 @@ export class InitializeCall__Outputs {
   }
 }
 
-export class RenounceSignerCall extends ethereum.Call {
-  get inputs(): RenounceSignerCall__Inputs {
-    return new RenounceSignerCall__Inputs(this);
+export class RemoveSignerCall extends ethereum.Call {
+  get inputs(): RemoveSignerCall__Inputs {
+    return new RemoveSignerCall__Inputs(this);
   }
 
-  get outputs(): RenounceSignerCall__Outputs {
-    return new RenounceSignerCall__Outputs(this);
+  get outputs(): RemoveSignerCall__Outputs {
+    return new RemoveSignerCall__Outputs(this);
   }
 }
 
-export class RenounceSignerCall__Inputs {
-  _call: RenounceSignerCall;
+export class RemoveSignerCall__Inputs {
+  _call: RemoveSignerCall;
 
-  constructor(call: RenounceSignerCall) {
+  constructor(call: RemoveSignerCall) {
+    this._call = call;
+  }
+
+  get account(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+}
+
+export class RemoveSignerCall__Outputs {
+  _call: RemoveSignerCall;
+
+  constructor(call: RemoveSignerCall) {
     this._call = call;
   }
 }
 
-export class RenounceSignerCall__Outputs {
-  _call: RenounceSignerCall;
+export class RenounceOwnershipCall extends ethereum.Call {
+  get inputs(): RenounceOwnershipCall__Inputs {
+    return new RenounceOwnershipCall__Inputs(this);
+  }
 
-  constructor(call: RenounceSignerCall) {
+  get outputs(): RenounceOwnershipCall__Outputs {
+    return new RenounceOwnershipCall__Outputs(this);
+  }
+}
+
+export class RenounceOwnershipCall__Inputs {
+  _call: RenounceOwnershipCall;
+
+  constructor(call: RenounceOwnershipCall) {
+    this._call = call;
+  }
+}
+
+export class RenounceOwnershipCall__Outputs {
+  _call: RenounceOwnershipCall;
+
+  constructor(call: RenounceOwnershipCall) {
+    this._call = call;
+  }
+}
+
+export class TransferOwnershipCall extends ethereum.Call {
+  get inputs(): TransferOwnershipCall__Inputs {
+    return new TransferOwnershipCall__Inputs(this);
+  }
+
+  get outputs(): TransferOwnershipCall__Outputs {
+    return new TransferOwnershipCall__Outputs(this);
+  }
+}
+
+export class TransferOwnershipCall__Inputs {
+  _call: TransferOwnershipCall;
+
+  constructor(call: TransferOwnershipCall) {
+    this._call = call;
+  }
+
+  get newOwner(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+}
+
+export class TransferOwnershipCall__Outputs {
+  _call: TransferOwnershipCall;
+
+  constructor(call: TransferOwnershipCall) {
     this._call = call;
   }
 }
@@ -692,20 +816,24 @@ export class ProcessRequestCallRequestStruct extends ethereum.Tuple {
     return this[1].toAddress();
   }
 
-  get requestNonce(): BigInt {
-    return this[2].toBigInt();
+  get consensusAddress(): Address {
+    return this[2].toAddress();
   }
 
-  get amount(): BigInt {
+  get requestNonce(): BigInt {
     return this[3].toBigInt();
   }
 
-  get duration(): BigInt {
+  get amount(): BigInt {
     return this[4].toBigInt();
   }
 
-  get requestTime(): BigInt {
+  get duration(): BigInt {
     return this[5].toBigInt();
+  }
+
+  get requestTime(): BigInt {
+    return this[6].toBigInt();
   }
 }
 
@@ -714,24 +842,28 @@ export class ProcessRequestCallResponsesStruct extends ethereum.Tuple {
     return this[0].toAddress();
   }
 
-  get responseTime(): BigInt {
-    return this[1].toBigInt();
+  get consensusAddress(): Address {
+    return this[1].toAddress();
   }
 
-  get interestRate(): BigInt {
+  get responseTime(): BigInt {
     return this[2].toBigInt();
   }
 
-  get collateralRatio(): BigInt {
+  get interestRate(): BigInt {
     return this[3].toBigInt();
   }
 
-  get maxLoanAmount(): BigInt {
+  get collateralRatio(): BigInt {
     return this[4].toBigInt();
   }
 
+  get maxLoanAmount(): BigInt {
+    return this[5].toBigInt();
+  }
+
   get signature(): ProcessRequestCallResponsesSignatureStruct {
-    return this[5].toTuple() as ProcessRequestCallResponsesSignatureStruct;
+    return this[6].toTuple() as ProcessRequestCallResponsesSignatureStruct;
   }
 }
 

@@ -175,13 +175,14 @@ dataSources:
         - SignerChange
         - InterestSubmitted
         - InterestAccepted
+        - LenderNoncesChange
       abis:
         - name: DAIInterestConsensus
           file: ./abis/InterestConsensus.json
       eventHandlers:
-        - event: InterestSubmitted(indexed address,indexed address,uint256,uint256)
+        - event: InterestSubmitted(indexed address,indexed address,uint256,uint256,uint256)
           handler: handleInterestSubmitted
-        - event: InterestAccepted(indexed address,uint256,uint256)
+        - event: InterestAccepted(indexed address,uint256,uint256,uint256)
           handler: handleInterestAccepted
         - event: SignerAdded(indexed address)
           handler: handleSignerAdded
@@ -206,13 +207,14 @@ dataSources:
         - SignerChange
         - InterestSubmitted
         - InterestAccepted
+        - LenderNoncesChange
       abis:
         - name: DAIInterestConsensus
           file: ./abis/InterestConsensus.json
       eventHandlers:
-        - event: InterestSubmitted(indexed address,indexed address,uint256,uint256)
+        - event: InterestSubmitted(indexed address,indexed address,uint256,uint256,uint256)
           handler: handleInterestSubmitted
-        - event: InterestAccepted(indexed address,uint256,uint256)
+        - event: InterestAccepted(indexed address,uint256,uint256,uint256)
           handler: handleInterestAccepted
         - event: SignerAdded(indexed address)
           handler: handleSignerAdded
@@ -237,13 +239,14 @@ dataSources:
         - SignerChange
         - InterestSubmitted
         - InterestAccepted
+        - LenderNoncesChange
       abis:
         - name: USDCInterestConsensus
           file: ./abis/InterestConsensus.json
       eventHandlers:
-        - event: InterestSubmitted(indexed address,indexed address,uint256,uint256)
+        - event: InterestSubmitted(indexed address,indexed address,uint256,uint256,uint256)
           handler: handleInterestSubmitted
-        - event: InterestAccepted(indexed address,uint256,uint256)
+        - event: InterestAccepted(indexed address,uint256,uint256,uint256)
           handler: handleInterestAccepted
         - event: SignerAdded(indexed address)
           handler: handleSignerAdded
@@ -268,13 +271,14 @@ dataSources:
         - SignerChange
         - InterestSubmitted
         - InterestAccepted
+        - LenderNoncesChange
       abis:
         - name: USDCInterestConsensus
           file: ./abis/InterestConsensus.json
       eventHandlers:
-        - event: InterestSubmitted(indexed address,indexed address,uint256,uint256)
+        - event: InterestSubmitted(indexed address,indexed address,uint256,uint256,uint256)
           handler: handleInterestSubmitted
-        - event: InterestAccepted(indexed address,uint256,uint256)
+        - event: InterestAccepted(indexed address,uint256,uint256,uint256)
           handler: handleInterestAccepted
         - event: SignerAdded(indexed address)
           handler: handleSignerAdded
@@ -299,6 +303,7 @@ dataSources:
         - SignerChange
         - LoanTermsSubmitted
         - LoanTermsAccepted
+        - BorrowerNoncesChange
       abis:
         - name: DAILoanTermsConsensus
           file: ./abis/LoanTermsConsensus.json
@@ -330,6 +335,7 @@ dataSources:
         - SignerChange
         - LoanTermsSubmitted
         - LoanTermsAccepted
+        - BorrowerNoncesChange
       abis:
         - name: DAILoanTermsConsensus
           file: ./abis/LoanTermsConsensus.json
@@ -361,6 +367,7 @@ dataSources:
         - SignerChange
         - LoanTermsSubmitted
         - LoanTermsAccepted
+        - BorrowerNoncesChange
       abis:
         - name: USDCLoanTermsConsensus
           file: ./abis/LoanTermsConsensus.json
@@ -392,6 +399,7 @@ dataSources:
         - SignerChange
         - LoanTermsSubmitted
         - LoanTermsAccepted
+        - BorrowerNoncesChange
       abis:
         - name: USDCLoanTermsConsensus
           file: ./abis/LoanTermsConsensus.json
@@ -468,7 +476,7 @@ dataSources:
     name: SettingsInterface
     network: {{network}}
     source:
-      startBlock: {{startBlock}}
+      startBlock: {{startBlock_Settings}}
       address: '{{Settings}}'
       abi: SettingsInterface
     mapping:
@@ -481,9 +489,14 @@ dataSources:
         - LendingPoolPauseChange
         - LendingPoolPauseStatus
         - EthTransaction
+        - CTokenExchangeRateChange
+        - AssetSettingsStatus
+        - AssetSettingsChange
       abis:
         - name: SettingsInterface
           file: ./abis/Settings.json
+        - name: CErc20Interface
+          file: ./abis/CErc20Interface.json
       eventHandlers:
         - event: SettingUpdated(indexed bytes32,indexed address,uint256,uint256)
           handler: handleSettingUpdated
@@ -499,6 +512,14 @@ dataSources:
           handler: handlePauserAdded
         - event: PauserRemoved(indexed address)
           handler: handlePauserRemoved
+        - event: AssetSettingsCreated(indexed address,indexed address,address,uint256)
+          handler: handleAssetSettingsCreated
+        - event: AssetSettingsAddressUpdated(indexed bytes32,indexed address,indexed address,address,address)
+          handler: handleAssetSettingsAddressUpdated
+        - event: AssetSettingsUintUpdated(indexed bytes32,indexed address,indexed address,uint256,uint256)
+          handler: handleAssetSettingsUintUpdated
+        - event: AssetSettingsRemoved(indexed address,indexed address)
+          handler: handleAssetSettingsRemoved
       file: ./src/mappings/settingsMappings.ts
   # 16 DAI_ETH_LendingPool
   - kind: ethereum/contract

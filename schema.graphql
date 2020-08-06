@@ -1,6 +1,6 @@
 enum CToken {
-  CDAI
-  CUSDC
+  cDAI
+  cUSDC
 }
 
 enum Token {
@@ -29,17 +29,6 @@ enum LendingPoolAction {
   Repaid
   InterestWithdrawn
   PaymentLiquidated
-}
-
-enum SettingName {
-  RequiredSubmissions
-  MaximumTolerance
-  ResponseExpiryLength
-  SafetyInterval
-  TermsExpiryTime
-  LiquidateEthPrice
-  PausePlatform
-  UnpausePlatform
 }
 
 enum EthEvent {
@@ -232,6 +221,7 @@ type InterestSubmitted @entity {
   transaction: EthTransaction!
   signer: Bytes!
   lender: Bytes!
+  requestNonce: BigInt!
   interest: BigInt!
   endTime: BigInt!
   blockNumber: BigInt!
@@ -244,6 +234,7 @@ type InterestAccepted @entity {
   collateralToken: CollateralToken!
   transaction: EthTransaction!
   lender: Bytes!
+  requestNonce: BigInt!
   endTime: BigInt!
   interest: BigInt!
   blockNumber: BigInt!
@@ -325,7 +316,7 @@ type ZTokenChange @entity {
 
 type SettingsStatus @entity {
   id: ID!
-  settingName: SettingName!
+  settingName: String!
   value: BigInt!
   blockNumber: BigInt!
   timestamp: BigInt!
@@ -337,7 +328,7 @@ type SettingsChange @entity {
   oldValue: BigInt!
   newValue: BigInt!
   from: Bytes!
-  settingName: SettingName!
+  settingName: String!
   blockNumber: BigInt!
   timestamp: BigInt!
 }
@@ -400,10 +391,43 @@ type PauserChange @entity {
   timestamp: BigInt!
 }
 
-type CTokenExchangeRateChange @entity {
+type AssetSettingsStatus @entity {
   id: ID!
-  cToken: CToken!
-  exchangeRate: BigInt!
-  blockNumber: BigInt!
+  tokenAddress: Bytes!
+  cTokenAddress: Bytes!
+  maxLoanAmount: BigInt!
+  removed: Boolean!
   timestamp: BigInt!
+  blockNumber: BigInt!
+}
+
+type AssetSettingsChange @entity {
+  id: ID!
+  sender: Bytes!
+  tokenAddress: Bytes!
+  propertyChanged: String!
+  oldValue: String!
+  newValue: String!
+  timestamp: BigInt!
+  blockNumber: BigInt!
+}
+
+type BorrowerNoncesChange @entity {
+  id: ID!
+  token: Token!
+  collateralToken: CollateralToken!
+  borrower: Bytes!
+  nonce: BigInt!
+  timestamp: BigInt!
+  blockNumber: BigInt!
+}
+
+type LenderNoncesChange @entity {
+  id: ID!
+  token: Token!
+  collateralToken: CollateralToken!
+  lender: Bytes!
+  nonce: BigInt!
+  timestamp: BigInt!
+  blockNumber: BigInt!
 }

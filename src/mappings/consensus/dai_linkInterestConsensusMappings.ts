@@ -13,6 +13,7 @@ import {
   internalHandleSigner,
   internalHandleInterestSubmitted,
   internalHandleInterestAccepted,
+  internalHandleLenderNoncesChange,
 } from "../../utils/consensus-commons";
 
 export function handleInterestSubmitted(event: InterestSubmittedEvent): void {
@@ -27,7 +28,7 @@ export function handleInterestSubmitted(event: InterestSubmittedEvent): void {
 }
 
 export function handleInterestAccepted(event: InterestAcceptedEvent): void {
-  internalHandleInterestAccepted(
+  let interestAccepted = internalHandleInterestAccepted(
     TOKEN_DAI,
     COLLATERAL_TOKEN_LINK,
     event.params.lender,
@@ -35,6 +36,11 @@ export function handleInterestAccepted(event: InterestAcceptedEvent): void {
     event.params.endTime,
     event
   );
+  internalHandleLenderNoncesChange(
+    TOKEN_DAI,
+    COLLATERAL_TOKEN_LINK,
+    interestAccepted
+  )
 }
 
 export function handleSignerAdded(event: SignerAddedEvent): void {
