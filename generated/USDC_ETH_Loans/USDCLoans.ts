@@ -202,6 +202,32 @@ export class LoanTermsSet__Params {
   }
 }
 
+export class PriceOracleUpdated extends ethereum.Event {
+  get params(): PriceOracleUpdated__Params {
+    return new PriceOracleUpdated__Params(this);
+  }
+}
+
+export class PriceOracleUpdated__Params {
+  _event: PriceOracleUpdated;
+
+  constructor(event: PriceOracleUpdated) {
+    this._event = event;
+  }
+
+  get sender(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get oldPriceOracle(): Address {
+    return this._event.parameters[1].value.toAddress();
+  }
+
+  get newPriceOracle(): Address {
+    return this._event.parameters[2].value.toAddress();
+  }
+}
+
 export class USDCLoans__loansResultValue0Struct extends ethereum.Tuple {
   get id(): BigInt {
     return this[0].toBigInt();
@@ -235,12 +261,16 @@ export class USDCLoans__loansResultValue0Struct extends ethereum.Tuple {
     return this[7].toBigInt();
   }
 
+  get borrowedAmount(): BigInt {
+    return this[8].toBigInt();
+  }
+
   get status(): i32 {
-    return this[8].toI32();
+    return this[9].toI32();
   }
 
   get liquidated(): boolean {
-    return this[9].toBoolean();
+    return this[10].toBoolean();
   }
 }
 
@@ -267,6 +297,29 @@ export class USDCLoans__loansResultValue0LoanTermsStruct extends ethereum.Tuple 
 
   get duration(): BigInt {
     return this[5].toBigInt();
+  }
+}
+
+export class USDCLoans__getCollateralInfoResult {
+  value0: BigInt;
+  value1: BigInt;
+  value2: BigInt;
+  value3: boolean;
+
+  constructor(value0: BigInt, value1: BigInt, value2: BigInt, value3: boolean) {
+    this.value0 = value0;
+    this.value1 = value1;
+    this.value2 = value2;
+    this.value3 = value3;
+  }
+
+  toMap(): TypedMap<string, ethereum.Value> {
+    let map = new TypedMap<string, ethereum.Value>();
+    map.set("value0", ethereum.Value.fromUnsignedBigInt(this.value0));
+    map.set("value1", ethereum.Value.fromUnsignedBigInt(this.value1));
+    map.set("value2", ethereum.Value.fromUnsignedBigInt(this.value2));
+    map.set("value3", ethereum.Value.fromBoolean(this.value3));
+    return map;
   }
 }
 
@@ -301,7 +354,7 @@ export class USDCLoans extends ethereum.SmartContract {
   loans(loanID: BigInt): USDCLoans__loansResultValue0Struct {
     let result = super.call(
       "loans",
-      "loans(uint256):((uint256,(address,address,uint256,uint256,uint256,uint256),uint256,uint256,uint256,uint256,uint256,uint256,uint8,bool))",
+      "loans(uint256):((uint256,(address,address,uint256,uint256,uint256,uint256),uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint8,bool))",
       [ethereum.Value.fromUnsignedBigInt(loanID)]
     );
 
@@ -313,7 +366,7 @@ export class USDCLoans extends ethereum.SmartContract {
   ): ethereum.CallResult<USDCLoans__loansResultValue0Struct> {
     let result = super.tryCall(
       "loans",
-      "loans(uint256):((uint256,(address,address,uint256,uint256,uint256,uint256),uint256,uint256,uint256,uint256,uint256,uint256,uint8,bool))",
+      "loans(uint256):((uint256,(address,address,uint256,uint256,uint256,uint256),uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint8,bool))",
       [ethereum.Value.fromUnsignedBigInt(loanID)]
     );
     if (result.reverted) {
@@ -322,6 +375,153 @@ export class USDCLoans extends ethereum.SmartContract {
     let value = result.value;
     return ethereum.CallResult.fromValue(
       value[0].toTuple() as USDCLoans__loansResultValue0Struct
+    );
+  }
+
+  priceOracle(): Address {
+    let result = super.call("priceOracle", "priceOracle():(address)", []);
+
+    return result[0].toAddress();
+  }
+
+  try_priceOracle(): ethereum.CallResult<Address> {
+    let result = super.tryCall("priceOracle", "priceOracle():(address)", []);
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toAddress());
+  }
+
+  lendingPool(): Address {
+    let result = super.call("lendingPool", "lendingPool():(address)", []);
+
+    return result[0].toAddress();
+  }
+
+  try_lendingPool(): ethereum.CallResult<Address> {
+    let result = super.tryCall("lendingPool", "lendingPool():(address)", []);
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toAddress());
+  }
+
+  lendingToken(): Address {
+    let result = super.call("lendingToken", "lendingToken():(address)", []);
+
+    return result[0].toAddress();
+  }
+
+  try_lendingToken(): ethereum.CallResult<Address> {
+    let result = super.tryCall("lendingToken", "lendingToken():(address)", []);
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toAddress());
+  }
+
+  totalCollateral(): BigInt {
+    let result = super.call(
+      "totalCollateral",
+      "totalCollateral():(uint256)",
+      []
+    );
+
+    return result[0].toBigInt();
+  }
+
+  try_totalCollateral(): ethereum.CallResult<BigInt> {
+    let result = super.tryCall(
+      "totalCollateral",
+      "totalCollateral():(uint256)",
+      []
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBigInt());
+  }
+
+  loanIDCounter(): BigInt {
+    let result = super.call("loanIDCounter", "loanIDCounter():(uint256)", []);
+
+    return result[0].toBigInt();
+  }
+
+  try_loanIDCounter(): ethereum.CallResult<BigInt> {
+    let result = super.tryCall(
+      "loanIDCounter",
+      "loanIDCounter():(uint256)",
+      []
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBigInt());
+  }
+
+  collateralToken(): Address {
+    let result = super.call(
+      "collateralToken",
+      "collateralToken():(address)",
+      []
+    );
+
+    return result[0].toAddress();
+  }
+
+  try_collateralToken(): ethereum.CallResult<Address> {
+    let result = super.tryCall(
+      "collateralToken",
+      "collateralToken():(address)",
+      []
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toAddress());
+  }
+
+  getCollateralInfo(loanID: BigInt): USDCLoans__getCollateralInfoResult {
+    let result = super.call(
+      "getCollateralInfo",
+      "getCollateralInfo(uint256):(uint256,uint256,uint256,bool)",
+      [ethereum.Value.fromUnsignedBigInt(loanID)]
+    );
+
+    return new USDCLoans__getCollateralInfoResult(
+      result[0].toBigInt(),
+      result[1].toBigInt(),
+      result[2].toBigInt(),
+      result[3].toBoolean()
+    );
+  }
+
+  try_getCollateralInfo(
+    loanID: BigInt
+  ): ethereum.CallResult<USDCLoans__getCollateralInfoResult> {
+    let result = super.tryCall(
+      "getCollateralInfo",
+      "getCollateralInfo(uint256):(uint256,uint256,uint256,bool)",
+      [ethereum.Value.fromUnsignedBigInt(loanID)]
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(
+      new USDCLoans__getCollateralInfoResult(
+        value[0].toBigInt(),
+        value[1].toBigInt(),
+        value[2].toBigInt(),
+        value[3].toBoolean()
+      )
     );
   }
 }
@@ -349,6 +549,10 @@ export class DepositCollateralCall__Inputs {
 
   get loanID(): BigInt {
     return this._call.inputValues[1].value.toBigInt();
+  }
+
+  get amount(): BigInt {
+    return this._call.inputValues[2].value.toBigInt();
   }
 }
 
@@ -394,43 +598,47 @@ export class WithdrawCollateralCall__Outputs {
   }
 }
 
-export class SetLoanTermsCall extends ethereum.Call {
-  get inputs(): SetLoanTermsCall__Inputs {
-    return new SetLoanTermsCall__Inputs(this);
+export class CreateLoanWithTermsCall extends ethereum.Call {
+  get inputs(): CreateLoanWithTermsCall__Inputs {
+    return new CreateLoanWithTermsCall__Inputs(this);
   }
 
-  get outputs(): SetLoanTermsCall__Outputs {
-    return new SetLoanTermsCall__Outputs(this);
+  get outputs(): CreateLoanWithTermsCall__Outputs {
+    return new CreateLoanWithTermsCall__Outputs(this);
   }
 }
 
-export class SetLoanTermsCall__Inputs {
-  _call: SetLoanTermsCall;
+export class CreateLoanWithTermsCall__Inputs {
+  _call: CreateLoanWithTermsCall;
 
-  constructor(call: SetLoanTermsCall) {
+  constructor(call: CreateLoanWithTermsCall) {
     this._call = call;
   }
 
-  get request(): SetLoanTermsCallRequestStruct {
-    return this._call.inputValues[0].value.toTuple() as SetLoanTermsCallRequestStruct;
+  get request(): CreateLoanWithTermsCallRequestStruct {
+    return this._call.inputValues[0].value.toTuple() as CreateLoanWithTermsCallRequestStruct;
   }
 
-  get responses(): Array<SetLoanTermsCallResponsesStruct> {
+  get responses(): Array<CreateLoanWithTermsCallResponsesStruct> {
     return this._call.inputValues[1].value.toTupleArray<
-      SetLoanTermsCallResponsesStruct
+      CreateLoanWithTermsCallResponsesStruct
     >();
   }
+
+  get collateralAmount(): BigInt {
+    return this._call.inputValues[2].value.toBigInt();
+  }
 }
 
-export class SetLoanTermsCall__Outputs {
-  _call: SetLoanTermsCall;
+export class CreateLoanWithTermsCall__Outputs {
+  _call: CreateLoanWithTermsCall;
 
-  constructor(call: SetLoanTermsCall) {
+  constructor(call: CreateLoanWithTermsCall) {
     this._call = call;
   }
 }
 
-export class SetLoanTermsCallRequestStruct extends ethereum.Tuple {
+export class CreateLoanWithTermsCallRequestStruct extends ethereum.Tuple {
   get borrower(): Address {
     return this[0].toAddress();
   }
@@ -439,50 +647,58 @@ export class SetLoanTermsCallRequestStruct extends ethereum.Tuple {
     return this[1].toAddress();
   }
 
-  get requestNonce(): BigInt {
-    return this[2].toBigInt();
+  get consensusAddress(): Address {
+    return this[2].toAddress();
   }
 
-  get amount(): BigInt {
+  get requestNonce(): BigInt {
     return this[3].toBigInt();
   }
 
-  get duration(): BigInt {
+  get amount(): BigInt {
     return this[4].toBigInt();
   }
 
-  get requestTime(): BigInt {
+  get duration(): BigInt {
     return this[5].toBigInt();
+  }
+
+  get requestTime(): BigInt {
+    return this[6].toBigInt();
   }
 }
 
-export class SetLoanTermsCallResponsesStruct extends ethereum.Tuple {
+export class CreateLoanWithTermsCallResponsesStruct extends ethereum.Tuple {
   get signer(): Address {
     return this[0].toAddress();
   }
 
-  get responseTime(): BigInt {
-    return this[1].toBigInt();
+  get consensusAddress(): Address {
+    return this[1].toAddress();
   }
 
-  get interestRate(): BigInt {
+  get responseTime(): BigInt {
     return this[2].toBigInt();
   }
 
-  get collateralRatio(): BigInt {
+  get interestRate(): BigInt {
     return this[3].toBigInt();
   }
 
-  get maxLoanAmount(): BigInt {
+  get collateralRatio(): BigInt {
     return this[4].toBigInt();
   }
 
-  get signature(): SetLoanTermsCallResponsesSignatureStruct {
-    return this[5].toTuple() as SetLoanTermsCallResponsesSignatureStruct;
+  get maxLoanAmount(): BigInt {
+    return this[5].toBigInt();
+  }
+
+  get signature(): CreateLoanWithTermsCallResponsesSignatureStruct {
+    return this[6].toTuple() as CreateLoanWithTermsCallResponsesSignatureStruct;
   }
 }
 
-export class SetLoanTermsCallResponsesSignatureStruct extends ethereum.Tuple {
+export class CreateLoanWithTermsCallResponsesSignatureStruct extends ethereum.Tuple {
   get signerNonce(): BigInt {
     return this[0].toBigInt();
   }
@@ -594,6 +810,36 @@ export class LiquidateLoanCall__Outputs {
   _call: LiquidateLoanCall;
 
   constructor(call: LiquidateLoanCall) {
+    this._call = call;
+  }
+}
+
+export class SetPriceOracleCall extends ethereum.Call {
+  get inputs(): SetPriceOracleCall__Inputs {
+    return new SetPriceOracleCall__Inputs(this);
+  }
+
+  get outputs(): SetPriceOracleCall__Outputs {
+    return new SetPriceOracleCall__Outputs(this);
+  }
+}
+
+export class SetPriceOracleCall__Inputs {
+  _call: SetPriceOracleCall;
+
+  constructor(call: SetPriceOracleCall) {
+    this._call = call;
+  }
+
+  get newPriceOracle(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+}
+
+export class SetPriceOracleCall__Outputs {
+  _call: SetPriceOracleCall;
+
+  constructor(call: SetPriceOracleCall) {
     this._call = call;
   }
 }
