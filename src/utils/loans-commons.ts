@@ -303,7 +303,7 @@ export function internalHandlePriceOracleUpdated(
   newOracleAddress: Address,
   event: ethereum.Event
 ): void {
-  log.info("Creatinng new price oracle change for market {}/{}", [token, collateralToken]);
+  log.info("Creating new price oracle change for market {}/{}", [token, collateralToken]);
   let ethTransaction = createEthTransaction(event, ETH_TX_PRICE_ORACLE_UPDATED);
 
   let id = buildId(event);
