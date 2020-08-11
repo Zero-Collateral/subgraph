@@ -2,8 +2,8 @@ import { log, BigInt, ethereum, Bytes } from "@graphprotocol/graph-ts";
 import {
   LendingPoolPauseStatus,
   LendingPoolPauseChange,
-  SettingsStatus,
-  SettingsChange,
+  PlatformSettingsStatus,
+  PlatformSettingsChange,
   PauserChange,
   PauserStatus,
 } from "../../generated/schema";
@@ -11,7 +11,6 @@ import { Address } from "@graphprotocol/graph-ts";
 import {
   ETH_TX_LENDING_POOL_PAUSED,
   ETH_TX_LENDING_POOL_UNPAUSED,
-  ETH_TX_SETTING_UPDATED,
 } from "./consts";
 import { createEthTransaction, getTimestampInMillis, buildId } from "./commons";
 
@@ -26,8 +25,8 @@ export function updateOrCreateLendingPoolPauseStatus(
   let pauseEntity = LendingPoolPauseStatus.load(id);
   if (pauseEntity == null) {
     pauseEntity = new LendingPoolPauseStatus(id);
-    pauseEntity.paused = paused;
   }
+  pauseEntity.paused = paused;
   pauseEntity.lendingPool = lendingPool;
   pauseEntity.blockNumber = blockNumber;
   pauseEntity.timestamp = timestamp;
@@ -57,17 +56,18 @@ export function creatingLendingPoolPauseChange(
   return entity;
 }
 
-export function createSettingChange(
+export function createPlatformSettingChange(
   oldValue: BigInt,
   newValue: BigInt,
   from: Address,
   settingName: string,
+  transactionName: string,
   event: ethereum.Event
-): SettingsChange {
+): PlatformSettingsChange {
   let id = buildId(event);
-  log.info("Creating new setting change with id {}", [id]);
-  let ethTransaction = createEthTransaction(event, ETH_TX_SETTING_UPDATED);
-  let entity = new SettingsChange(id);
+  log.info("Creating new platform setting change with id {}", [id]);
+  let ethTransaction = createEthTransaction(event, transactionName);
+  let entity = new PlatformSettingsChange(id);
   entity.transaction = ethTransaction.id;
   entity.oldValue = oldValue;
   entity.newValue = newValue;
@@ -116,33 +116,27 @@ export function updateOrCreatePauserStatus(
   pauseEntity.save();
 }
 
-export function internalHandleSettingUpdated(
-  oldValue: BigInt,
-  newValue: BigInt,
-  from: Address,
+export function updateOrCreatePlatformSettingsStatus(
   settingName: string,
+  minValue: BigInt,
+  maxValue: BigInt,
+  removed: boolean,
+  value: BigInt,
   event: ethereum.Event
 ): void {
-  let id = buildId(event);
-  log.info("Creating new setting change with id {}", [id]);
+  log.info("Update or create new platform setting status for {}", [settingName]);
 
-  let entity = createSettingChange(
-    oldValue,
-    newValue,
-    from,
-    settingName.toString(),
-    event
-  );
-
-  let settingsId = entity.settingName;
-  log.info("Getting or creating a setting status with id {}", [settingsId]);
-  let settingsEntity = SettingsStatus.load(settingsId);
-  if (settingsEntity == null) {
-    settingsEntity = new SettingsStatus(settingsId);
-    settingsEntity.settingName = settingName.toString();
+  log.info("Getting or creating a setting status with id {}", [settingName]);
+  let entity = PlatformSettingsStatus.load(settingName);
+  if (entity == null) {
+    entity = new PlatformSettingsStatus(settingName);
+    entity.settingName = settingName.toString();
+    entity.min = minValue
+    entity.max = maxValue
   }
-  settingsEntity.value = newValue;
-  settingsEntity.blockNumber = event.block.number;
-  settingsEntity.timestamp = getTimestampInMillis(event);
-  settingsEntity.save();
+  entity.removed = removed
+  entity.value = value
+  entity.blockNumber = event.block.number;
+  entity.timestamp = getTimestampInMillis(event);
+  entity.save();
 }

@@ -246,15 +246,18 @@ type ZTokenChange @entity {
   timestamp: BigInt!
 }
 
-type SettingsStatus @entity {
+type PlatformSettingsStatus @entity {
   id: ID!
   settingName: String!
   value: BigInt!
+  min: BigInt!
+  max: BigInt!
+  removed: Boolean!
   blockNumber: BigInt!
   timestamp: BigInt!
 }
 
-type SettingsChange @entity {
+type PlatformSettingsChange @entity {
   id: ID!
   transaction: EthTransaction!
   oldValue: BigInt!
