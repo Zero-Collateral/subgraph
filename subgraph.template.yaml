@@ -11,7 +11,7 @@ dataSources:
     network: {{network}}
     source:
       startBlock: {{startBlock}}
-      address: '{{ETH_Loans_zDAI}}'
+      address: '{{ETH_Loans_tDAI}}'
       abi: DAILoans
     mapping:
       kind: ethereum/events
@@ -52,7 +52,7 @@ dataSources:
     network: {{network}}
     source:
       startBlock: {{startBlock}}
-      address: '{{LINK_Loans_zDAI}}'
+      address: '{{LINK_Loans_tDAI}}'
       abi: DAILoans
     mapping:
       kind: ethereum/events
@@ -93,7 +93,7 @@ dataSources:
     network: {{network}}
     source:
       startBlock: {{startBlock}}
-      address: '{{ETH_Loans_zUSDC}}'
+      address: '{{ETH_Loans_tUSDC}}'
       abi: USDCLoans
     mapping:
       kind: ethereum/events
@@ -134,7 +134,7 @@ dataSources:
     network: {{network}}
     source:
       startBlock: {{startBlock}}
-      address: '{{LINK_Loans_zUSDC}}'
+      address: '{{LINK_Loans_tUSDC}}'
       abi: USDCLoans
     mapping:
       kind: ethereum/events
@@ -175,7 +175,7 @@ dataSources:
     network: {{network}}
     source:
       startBlock: {{startBlock}}
-      address: '{{ETH_InterestConsensus_zDAI}}'
+      address: '{{ETH_InterestConsensus_tDAI}}'
       abi: DAIInterestConsensus
     mapping:
       kind: ethereum/events
@@ -207,7 +207,7 @@ dataSources:
     network: {{network}}
     source:
       startBlock: {{startBlock}}
-      address: '{{LINK_InterestConsensus_zDAI}}'
+      address: '{{LINK_InterestConsensus_tDAI}}'
       abi: DAIInterestConsensus
     mapping:
       kind: ethereum/events
@@ -239,7 +239,7 @@ dataSources:
     network: {{network}}
     source:
       startBlock: {{startBlock}}
-      address: '{{ETH_InterestConsensus_zUSDC}}'
+      address: '{{ETH_InterestConsensus_tUSDC}}'
       abi: USDCInterestConsensus
     mapping:
       kind: ethereum/events
@@ -271,7 +271,7 @@ dataSources:
     network: {{network}}
     source:
       startBlock: {{startBlock}}
-      address: '{{LINK_InterestConsensus_zUSDC}}'
+      address: '{{LINK_InterestConsensus_tUSDC}}'
       abi: USDCInterestConsensus
     mapping:
       kind: ethereum/events
@@ -303,7 +303,7 @@ dataSources:
     network: {{network}}
     source:
       startBlock: {{startBlock}}
-      address: '{{ETH_LoanTermsConsensus_zDAI}}'
+      address: '{{ETH_LoanTermsConsensus_tDAI}}'
       abi: DAILoanTermsConsensus
     mapping:
       kind: ethereum/events
@@ -335,7 +335,7 @@ dataSources:
     network: {{network}}
     source:
       startBlock: {{startBlock}}
-      address: '{{LINK_LoanTermsConsensus_zDAI}}'
+      address: '{{LINK_LoanTermsConsensus_tDAI}}'
       abi: DAILoanTermsConsensus
     mapping:
       kind: ethereum/events
@@ -367,7 +367,7 @@ dataSources:
     network: {{network}}
     source:
       startBlock: {{startBlock}}
-      address: '{{ETH_LoanTermsConsensus_zUSDC}}'
+      address: '{{ETH_LoanTermsConsensus_tUSDC}}'
       abi: USDCLoanTermsConsensus
     mapping:
       kind: ethereum/events
@@ -399,7 +399,7 @@ dataSources:
     network: {{network}}
     source:
       startBlock: {{startBlock}}
-      address: '{{LINK_LoanTermsConsensus_zUSDC}}'
+      address: '{{LINK_LoanTermsConsensus_tUSDC}}'
       abi: USDCLoanTermsConsensus
     mapping:
       kind: ethereum/events
@@ -425,25 +425,25 @@ dataSources:
         - event: SignerRemoved(indexed address)
           handler: handleSignerRemoved
       file: ./src/mappings/consensus/usdc_linkLoanTermsConsensusMappings.ts
-  # 13 ZDAIToken
+  # 13 TDAIToken
   - kind: ethereum/contract
-    name: ZDAIToken
+    name: TDAIToken
     network: {{network}}
     source:
       startBlock: {{startBlock}}
-      address: '{{ZDAI}}'
-      abi: ZToken
+      address: '{{TDAI}}'
+      abi: TToken
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.3
       language: wasm/assemblyscript
       entities:
         - EthTransaction
-        - ZTokenChange
-        - ZTokenStatus
+        - TTokenChange
+        - TTokenStatus
       abis:
-        - name: ZToken
-          file: ./abis/ZToken.json
+        - name: TToken
+          file: ./abis/TToken.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
@@ -453,26 +453,26 @@ dataSources:
           handler: handleMinterAdded
         - event: MinterRemoved(indexed address)
           handler: handleMinterRemoved
-      file: ./src/mappings/zTokens/zDaiMappings.ts
-  # 14 ZUSDCToken
+      file: ./src/mappings/tTokens/tDaiMappings.ts
+  # 14 TUSDCToken
   - kind: ethereum/contract
-    name: ZUSDCToken
+    name: TUSDCToken
     network: {{network}}
     source:
       startBlock: {{startBlock}}
-      address: '{{ZUSDC}}'
-      abi: ZToken
+      address: '{{TUSDC}}'
+      abi: TToken
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.3
       language: wasm/assemblyscript
       entities:
         - EthTransaction
-        - ZTokenChange
-        - ZTokenStatus
+        - TTokenChange
+        - TTokenStatus
       abis:
-        - name: ZToken
-          file: ./abis/ZToken.json
+        - name: TToken
+          file: ./abis/TToken.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
@@ -482,7 +482,7 @@ dataSources:
           handler: handleMinterAdded
         - event: MinterRemoved(indexed address)
           handler: handleMinterRemoved
-      file: ./src/mappings/zTokens/zUSDCMappings.ts
+      file: ./src/mappings/tTokens/tUSDCMappings.ts
   # 15 Settings
   - kind: ethereum/contract
     name: SettingsInterface
@@ -543,7 +543,7 @@ dataSources:
     network: {{network}}
     source:
       startBlock: {{startBlock}}
-      address: '{{ETH_LendingPool_zDAI}}'
+      address: '{{ETH_LendingPool_tDAI}}'
       abi: DAILendingPool
     mapping:
       kind: ethereum/events
@@ -573,7 +573,7 @@ dataSources:
     network: {{network}}
     source:
       startBlock: {{startBlock}}
-      address: '{{LINK_LendingPool_zDAI}}'
+      address: '{{LINK_LendingPool_tDAI}}'
       abi: DAILendingPool
     mapping:
       kind: ethereum/events
@@ -603,7 +603,7 @@ dataSources:
     network: {{network}}
     source:
       startBlock: {{startBlock}}
-      address: '{{ETH_LendingPool_zUSDC}}'
+      address: '{{ETH_LendingPool_tUSDC}}'
       abi: USDCLendingPool
     mapping:
       kind: ethereum/events
@@ -633,7 +633,7 @@ dataSources:
     network: {{network}}
     source:
       startBlock: {{startBlock}}
-      address: '{{LINK_LendingPool_zUSDC}}'
+      address: '{{LINK_LendingPool_tUSDC}}'
       abi: USDCLendingPool
     mapping:
       kind: ethereum/events
@@ -663,7 +663,7 @@ dataSources:
     network: {{network}}
     source:
       startBlock: {{startBlock}}
-      address: '{{ETH_Lenders_zDAI}}'
+      address: '{{ETH_Lenders_tDAI}}'
       abi: DAILenders
     mapping:
       kind: ethereum/events
@@ -688,7 +688,7 @@ dataSources:
     network: {{network}}
     source:
       startBlock: {{startBlock}}
-      address: '{{LINK_Lenders_zDAI}}'
+      address: '{{LINK_Lenders_tDAI}}'
       abi: DAILenders
     mapping:
       kind: ethereum/events
@@ -713,7 +713,7 @@ dataSources:
     network: {{network}}
     source:
       startBlock: {{startBlock}}
-      address: '{{ETH_Lenders_zUSDC}}'
+      address: '{{ETH_Lenders_tUSDC}}'
       abi: USDCLenders
     mapping:
       kind: ethereum/events
@@ -738,7 +738,7 @@ dataSources:
     network: {{network}}
     source:
       startBlock: {{startBlock}}
-      address: '{{LINK_Lenders_zUSDC}}'
+      address: '{{LINK_Lenders_tUSDC}}'
       abi: USDCLenders
     mapping:
       kind: ethereum/events

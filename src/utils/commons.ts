@@ -2,14 +2,14 @@ import { log, BigInt, ethereum, Bytes } from "@graphprotocol/graph-ts";
 import {
   Borrower,
   EthTransaction,
-  ZTokenChange,
-  ZTokenStatus,
+  TTokenChange,
+  TTokenStatus,
 } from "../../generated/schema";
 import { Address } from "@graphprotocol/graph-ts";
 import {
   EMPTY_ADDRESS_STRING,
 } from "./consts";
-import { Transfer as TransferEvent,  } from "../../generated/ZDAIToken/ZToken";
+import { Transfer as TransferEvent,  } from "../../generated/TDAIToken/TToken";
 
 export function getTimestampInMillis(event: ethereum.Event): BigInt {
   return event.block.timestamp.times(BigInt.fromI32(1000));
@@ -75,7 +75,7 @@ export function buildSignerId(token: string, contract: string, account: Address)
   return token + "-" + contract + "-" + account.toHexString();
 }
 
-export function createZTokenChange(
+export function createTTokenChange(
   id: string,
   amount: BigInt,
   platformToken: string,
@@ -84,7 +84,7 @@ export function createZTokenChange(
   action: string,
   ethTransaction: EthTransaction
 ): void {
-  let entity = new ZTokenChange(id);
+  let entity = new TTokenChange(id);
   entity.transaction = ethTransaction.id;
   entity.amount = amount;
   entity.platformToken = platformToken;
@@ -96,33 +96,33 @@ export function createZTokenChange(
   entity.save();
 }
 
-export function getOrCreateZTokenStatus(holder: Address): ZTokenStatus {
+export function getOrCreateTTokenStatus(holder: Address): TTokenStatus {
   let id = holder.toHexString();
-  log.info("Loading ztoken status for holder {}", [id]);
-  let entity = ZTokenStatus.load(id);
+  log.info("Loading tToken status for holder {}", [id]);
+  let entity = TTokenStatus.load(id);
   if (entity == null) {
-    log.info("Creating new ztoken status for holder {}", [id]);
-    entity = new ZTokenStatus(id);
+    log.info("Creating new tToken status for holder {}", [id]);
+    entity = new TTokenStatus(id);
     entity.amount = BigInt.fromI32(0);
     entity.account = holder;
     entity.blockNumber = BigInt.fromI32(0);
     entity.updatedAt = BigInt.fromI32(0);
   }
-  return entity as ZTokenStatus;
+  return entity as TTokenStatus;
 }
 
-export function updateZTokenBalancesFor(
+export function updateTTokenBalancesFor(
   platformToken: string,
   event: TransferEvent
 ): void {
-  log.info("Updating ZToken balance for holders {} / {} ", [
+  log.info("Updating tToken balance for holders {} / {} ", [
     event.params.from.toHexString(),
     event.params.to.toHexString(),
   ]);
   if (event.params.from.toHexString() != EMPTY_ADDRESS_STRING) {
-    let fromEntity = getOrCreateZTokenStatus(event.params.from);
+    let fromEntity = getOrCreateTTokenStatus(event.params.from);
     log.info(
-      "Updating ZToken balance for holder {} (from). Current balance {} {}",
+      "Updating tToken balance for holder {} (from). Current balance {} {}",
       [event.params.from.toHexString(), fromEntity.amount.toString(), platformToken]
     );
     fromEntity.amount = fromEntity.amount.minus(event.params.value);
@@ -132,9 +132,9 @@ export function updateZTokenBalancesFor(
     fromEntity.save();
   }
   if (event.params.to.toHexString() != EMPTY_ADDRESS_STRING) {
-    let toEntity = getOrCreateZTokenStatus(event.params.to);
+    let toEntity = getOrCreateTTokenStatus(event.params.to);
     log.info(
-      "Updating ZToken balance for holder {} (to). Current balance {} {}",
+      "Updating tToken balance for holder {} (to). Current balance {} {}",
       [event.params.to.toHexString(), toEntity.amount.toString(), platformToken]
     );
     toEntity.amount = toEntity.amount.plus(event.params.value);

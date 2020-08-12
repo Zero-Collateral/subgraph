@@ -9,9 +9,9 @@ export const COLLATERAL_TOKEN_LINK = "LINK";
 export const CTOKEN_CDAI = "CDAI";
 export const CTOKEN_CUSDC = "CUSDC";
 
-// zTokens consts
-export const ZTOKEN_ZDAI = "zDAI";
-export const ZTOKEN_ZUSDC = "zUSDC";
+// tTokens consts
+export const TTOKEN_TDAI = "tDAI";
+export const TTOKEN_TUSDC = "tUSDC";
 
 // LendingPool consts
 export const LENDING_POOL_DEPOSITED = 'Deposited';
@@ -60,11 +60,11 @@ export const ETH_TX_TERMS_ACCEPTED = "TermsAccepted"
 // Consensus
 export const ETH_TX_SIGNER_ADDED = "SignerAdded"
 export const ETH_TX_SIGNER_REMOVED = "SignerRemoved"
-// ZTokens
-export const ETH_TX_ZTOKEN_TRANSFER = "ZTokenTransfer"
-export const ETH_TX_ZTOKEN_APPROVAL = "ZTokenApproval"
-export const ETH_TX_ZTOKEN_MINTER_ADDED = "ZTokenMinterAdded"
-export const ETH_TX_ZTOKEN_MINTER_REMOVED = "ZTokenMinterRemoved"
+// tTokens
+export const ETH_TX_TTOKEN_TRANSFER = "TTokenTransfer"
+export const ETH_TX_TTOKEN_APPROVAL = "TTokenApproval"
+export const ETH_TX_TTOKEN_MINTER_ADDED = "TTokenMinterAdded"
+export const ETH_TX_TTOKEN_MINTER_REMOVED = "TTokenMinterRemoved"
 
 // Tokens consts
 export const TOKEN_DAI = "DAI";
@@ -82,11 +82,11 @@ export const INTEREST_UPDATE_CANCELED = "Canceled";
 export const ACCRUED_INTEREST_STATUS_WITHDRAWN = "Withdrawn";
 export const ACCRUED_INTEREST_STATUS_UPDATED = "Updated";
 
-// ZToken Status consts
-export const ZTOKEN_STATUS_TRANSFER = "Transfer";
-export const ZTOKEN_STATUS_APPROVAL = "Approval";
-export const ZTOKEN_STATUS_MINTER_ADDED = "MinterAdded";
-export const ZTOKEN_STATUS_MINTER_REMOVED = "MinterRemoved";
+// tToken Status consts
+export const TTOKEN_STATUS_TRANSFER = "Transfer";
+export const TTOKEN_STATUS_APPROVAL = "Approval";
+export const TTOKEN_STATUS_MINTER_ADDED = "MinterAdded";
+export const TTOKEN_STATUS_MINTER_REMOVED = "MinterRemoved";
 
 // Loan Status consts
 export const LOAN_STATUS_TERMS_SET = "TermsSet";

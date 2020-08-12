@@ -225,7 +225,7 @@ type AccruedInterestWithdrawalChange @entity {
   timestamp: BigInt!
 }
 
-type ZTokenStatus @entity {
+type TTokenStatus @entity {
   id: ID!
   amount: BigInt!
   platformToken: String!
@@ -234,7 +234,7 @@ type ZTokenStatus @entity {
   updatedAt: BigInt!
 }
 
-type ZTokenChange @entity {
+type TTokenChange @entity {
   id: ID!
   transaction: EthTransaction!
   amount: BigInt!

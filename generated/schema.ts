@@ -1761,7 +1761,7 @@ export class AccruedInterestWithdrawalChange extends Entity {
   }
 }
 
-export class ZTokenStatus extends Entity {
+export class TTokenStatus extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
@@ -1769,17 +1769,17 @@ export class ZTokenStatus extends Entity {
 
   save(): void {
     let id = this.get("id");
-    assert(id !== null, "Cannot save ZTokenStatus entity without an ID");
+    assert(id !== null, "Cannot save TTokenStatus entity without an ID");
     assert(
       id.kind == ValueKind.STRING,
-      "Cannot save ZTokenStatus entity with non-string ID. " +
+      "Cannot save TTokenStatus entity with non-string ID. " +
         'Considering using .toHex() to convert the "id" to a string.'
     );
-    store.set("ZTokenStatus", id.toString(), this);
+    store.set("TTokenStatus", id.toString(), this);
   }
 
-  static load(id: string): ZTokenStatus | null {
-    return store.get("ZTokenStatus", id) as ZTokenStatus | null;
+  static load(id: string): TTokenStatus | null {
+    return store.get("TTokenStatus", id) as TTokenStatus | null;
   }
 
   get id(): string {
@@ -1837,7 +1837,7 @@ export class ZTokenStatus extends Entity {
   }
 }
 
-export class ZTokenChange extends Entity {
+export class TTokenChange extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
@@ -1845,17 +1845,17 @@ export class ZTokenChange extends Entity {
 
   save(): void {
     let id = this.get("id");
-    assert(id !== null, "Cannot save ZTokenChange entity without an ID");
+    assert(id !== null, "Cannot save TTokenChange entity without an ID");
     assert(
       id.kind == ValueKind.STRING,
-      "Cannot save ZTokenChange entity with non-string ID. " +
+      "Cannot save TTokenChange entity with non-string ID. " +
         'Considering using .toHex() to convert the "id" to a string.'
     );
-    store.set("ZTokenChange", id.toString(), this);
+    store.set("TTokenChange", id.toString(), this);
   }
 
-  static load(id: string): ZTokenChange | null {
-    return store.get("ZTokenChange", id) as ZTokenChange | null;
+  static load(id: string): TTokenChange | null {
+    return store.get("TTokenChange", id) as TTokenChange | null;
   }
 
   get id(): string {

@@ -175,16 +175,24 @@ export class SetAccruedInterestCallRequestStruct extends ethereum.Tuple {
     return this[0].toAddress();
   }
 
-  get startTime(): BigInt {
-    return this[1].toBigInt();
+  get consensusAddress(): Address {
+    return this[1].toAddress();
   }
 
-  get endTime(): BigInt {
+  get requestNonce(): BigInt {
     return this[2].toBigInt();
   }
 
-  get requestTime(): BigInt {
+  get startTime(): BigInt {
     return this[3].toBigInt();
+  }
+
+  get endTime(): BigInt {
+    return this[4].toBigInt();
+  }
+
+  get requestTime(): BigInt {
+    return this[5].toBigInt();
   }
 }
 
@@ -193,16 +201,20 @@ export class SetAccruedInterestCallResponsesStruct extends ethereum.Tuple {
     return this[0].toAddress();
   }
 
-  get responseTime(): BigInt {
-    return this[1].toBigInt();
+  get consensusAddress(): Address {
+    return this[1].toAddress();
   }
 
-  get interest(): BigInt {
+  get responseTime(): BigInt {
     return this[2].toBigInt();
   }
 
+  get interest(): BigInt {
+    return this[3].toBigInt();
+  }
+
   get signature(): SetAccruedInterestCallResponsesSignatureStruct {
-    return this[3].toTuple() as SetAccruedInterestCallResponsesSignatureStruct;
+    return this[4].toTuple() as SetAccruedInterestCallResponsesSignatureStruct;
   }
 }
 

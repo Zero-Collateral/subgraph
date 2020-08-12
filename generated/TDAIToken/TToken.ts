@@ -98,9 +98,9 @@ export class Transfer__Params {
   }
 }
 
-export class ZToken extends ethereum.SmartContract {
-  static bind(address: Address): ZToken {
-    return new ZToken("ZToken", address);
+export class TToken extends ethereum.SmartContract {
+  static bind(address: Address): TToken {
+    return new TToken("TToken", address);
   }
 
   allowance(owner: Address, spender: Address): BigInt {

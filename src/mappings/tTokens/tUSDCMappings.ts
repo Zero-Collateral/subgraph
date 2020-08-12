@@ -4,80 +4,80 @@ import {
   Approval as ApprovalEvent,
   MinterAdded as MinterAddedEvent,
   MinterRemoved as MinterRemovedEvent,
-} from "../../../generated/ZUSDCToken/ZToken";
-import { Transfer as ZDAITransferEvent } from "../../../generated/ZDAIToken/ZToken";
+} from "../../../generated/TUSDCToken/TToken";
+import { Transfer as TDAITransferEvent } from "../../../generated/TDAIToken/TToken";
 import {
   createEthTransaction,
   buildId,
-  createZTokenChange,
-  updateZTokenBalancesFor,
+  createTTokenChange,
+  updateTTokenBalancesFor,
 } from "../../utils/commons";
 import {
-  ETH_TX_ZTOKEN_APPROVAL,
-  ETH_TX_ZTOKEN_MINTER_ADDED,
-  ETH_TX_ZTOKEN_MINTER_REMOVED,
-  ZTOKEN_STATUS_TRANSFER,
-  ZTOKEN_STATUS_APPROVAL,
-  ZTOKEN_STATUS_MINTER_ADDED,
-  ZTOKEN_STATUS_MINTER_REMOVED,
-  ZTOKEN_ZUSDC,
-  ETH_TX_ZTOKEN_TRANSFER,
+  ETH_TX_TTOKEN_APPROVAL,
+  ETH_TX_TTOKEN_MINTER_ADDED,
+  ETH_TX_TTOKEN_MINTER_REMOVED,
+  TTOKEN_STATUS_TRANSFER,
+  TTOKEN_STATUS_APPROVAL,
+  TTOKEN_STATUS_MINTER_ADDED,
+  TTOKEN_STATUS_MINTER_REMOVED,
+  TTOKEN_TUSDC,
+  ETH_TX_TTOKEN_TRANSFER,
 } from "../../utils/consts";
 
 export function handleTransfer(event: TransferEvent): void {
   let id = buildId(event);
-  let ethTransaction = createEthTransaction(event, ETH_TX_ZTOKEN_TRANSFER);
+  let ethTransaction = createEthTransaction(event, ETH_TX_TTOKEN_TRANSFER);
 
-  createZTokenChange(
+  createTTokenChange(
     id,
     event.params.value,
-    ZTOKEN_ZUSDC,
+    TTOKEN_TUSDC,
     event.params.from,
     event.params.to,
-    ZTOKEN_STATUS_TRANSFER,
+    TTOKEN_STATUS_TRANSFER,
     ethTransaction
   )
-  updateZTokenBalancesFor(ZTOKEN_ZUSDC, event as ZDAITransferEvent)
+  updateTTokenBalancesFor(TTOKEN_TUSDC, event as TDAITransferEvent)
 }
 
 export function handleApproval(event: ApprovalEvent): void {
   let id = buildId(event);
-  let ethTransaction = createEthTransaction(event, ETH_TX_ZTOKEN_APPROVAL);
-  createZTokenChange(
+  let ethTransaction = createEthTransaction(event, ETH_TX_TTOKEN_APPROVAL);
+  createTTokenChange(
     id,
     event.params.value,
-    ZTOKEN_ZUSDC,
+    TTOKEN_TUSDC,
     event.params.owner,
     event.params.spender,
-    ZTOKEN_STATUS_APPROVAL,
+    TTOKEN_STATUS_APPROVAL,
     ethTransaction
   )
 }
 
 export function handleMinterAdded(event: MinterAddedEvent): void {
   let id = buildId(event);
-  let ethTransaction = createEthTransaction(event, ETH_TX_ZTOKEN_MINTER_ADDED);
-  createZTokenChange(
+  let ethTransaction = createEthTransaction(event, ETH_TX_TTOKEN_MINTER_ADDED);
+  createTTokenChange(
     id,
     BigInt.fromI32(0),
-    ZTOKEN_ZUSDC,
+    TTOKEN_TUSDC,
     event.params.account,
     event.params.account,
-    ZTOKEN_STATUS_MINTER_ADDED,
+    TTOKEN_STATUS_MINTER_ADDED,
     ethTransaction
   )
 }
 
 export function handleMinterRemoved(event: MinterRemovedEvent): void {
   let id = buildId(event);
-  let ethTransaction = createEthTransaction(event, ETH_TX_ZTOKEN_MINTER_REMOVED);
-  createZTokenChange(
+  let ethTransaction = createEthTransaction(event, ETH_TX_TTOKEN_MINTER_REMOVED);
+  createTTokenChange(
     id,
     BigInt.fromI32(0),
-    ZTOKEN_ZUSDC,
+    TTOKEN_TUSDC,
     event.params.account,
     event.params.account,
-    ZTOKEN_STATUS_MINTER_REMOVED,
+    TTOKEN_STATUS_MINTER_REMOVED,
     ethTransaction
   )
 }
