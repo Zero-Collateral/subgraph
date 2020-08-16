@@ -173,7 +173,7 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.5.17+commit.d19bba13\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"lender\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"totalNotWithdrawn\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"totalAccruedInterest\",\"type\":\"uint256\"}],\"name\":\"AccruedInterestUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"AccruedInterestWithdrawn\",\"type\":\"event\"},{\"constant\":false,\"inputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"lender\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"consensusAddress\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"requestNonce\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"startTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"endTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"requestTime\",\"type\":\"uint256\"}],\"internalType\":\"struct TellerCommon.InterestRequest\",\"name\":\"request\",\"type\":\"tuple\"},{\"components\":[{\"internalType\":\"address\",\"name\":\"signer\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"consensusAddress\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"responseTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"interest\",\"type\":\"uint256\"},{\"components\":[{\"internalType\":\"uint256\",\"name\":\"signerNonce\",\"type\":\"uint256\"},{\"internalType\":\"uint8\",\"name\":\"v\",\"type\":\"uint8\"},{\"internalType\":\"bytes32\",\"name\":\"r\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"s\",\"type\":\"bytes32\"}],\"internalType\":\"struct TellerCommon.Signature\",\"name\":\"signature\",\"type\":\"tuple\"}],\"internalType\":\"struct TellerCommon.InterestResponse[]\",\"name\":\"responses\",\"type\":\"tuple[]\"}],\"name\":\"setAccruedInterest\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"withdrawInterest\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"author\":\"develop@teller.finance\",\"methods\":{\"setAccruedInterest((address,address,uint256,uint256,uint256,uint256),(address,address,uint256,uint256,(uint256,uint8,bytes32,bytes32))[])\":{\"params\":{\"request\":\"interest request sent by the lender.\",\"responses\":\"node responses to get a consensus value for the interest.\"}},\"withdrawInterest(address,uint256)\":{\"params\":{\"amount\":\"to track.\",\"recipient\":\"address.\"},\"return\":\"the interest amount to withdraw.\"}}},\"userdoc\":{\"methods\":{\"setAccruedInterest((address,address,uint256,uint256,uint256,uint256),(address,address,uint256,uint256,(uint256,uint8,bytes32,bytes32))[])\":{\"notice\":\"It sets the accrued interest for a lender.\"},\"withdrawInterest(address,uint256)\":{\"notice\":\"It tracks the interest amount for a recipient/lender.\"}},\"notice\":\"This interface defines the functions for interactions between lenders and the interests.\"}},\"settings\":{\"compilationTarget\":{\"/Users/guillesalazar/Repos/ZeroCollateral/smart-contracts-v1/contracts/interfaces/LendersInterface.sol\":\"LendersInterface\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/guillesalazar/Repos/ZeroCollateral/smart-contracts-v1/contracts/interfaces/LendersInterface.sol\":{\"keccak256\":\"0xa473d837ab5511c2d1dca97c04e3a95a148db8d13b7b3691e6358db4ac9069d1\",\"urls\":[\"bzz-raw://16a7aea7e304bd8230537af6852dbe70b2f403aac1d86b8fd5662fa1ed86df59\",\"dweb:/ipfs/QmTKczwwh2BaTyWxCeY8M73gKru2HKCV6NP4w2nqdgtcEK\"]},\"/Users/guillesalazar/Repos/ZeroCollateral/smart-contracts-v1/contracts/util/NumbersList.sol\":{\"keccak256\":\"0xbd50a1cd3d89fbc25e3afff5ca36e2c9813479b0e3d9ffafd2b9272f2351d06e\",\"urls\":[\"bzz-raw://97de3f69da2a5c3827b1812277b07b8de62d25b453a0aea57e0de0d092220111\",\"dweb:/ipfs/QmWv3pKFiz4Csiok3xmVA2jqPzApFLyscHdDesW5JjQram\"]},\"/Users/guillesalazar/Repos/ZeroCollateral/smart-contracts-v1/contracts/util/TellerCommon.sol\":{\"keccak256\":\"0xda558a7be3a4627cd9ff56fbe3d63298736fe1a3404e43643d550d5804a2a8f2\",\"urls\":[\"bzz-raw://cc4717624b9629d887f7ecec8028cec88be37288c65868d731246bc142146b0e\",\"dweb:/ipfs/QmYVsm241oyNEYcqN8rgEX5HTP9D6iroTwdAU63cV3QjPv\"]},\"@openzeppelin/contracts/math/SafeMath.sol\":{\"keccak256\":\"0x640b6dee7a4b830bdfd52b5031a07fc2b12209f5b2e29e5d364a7d37f69d8076\",\"urls\":[\"bzz-raw://31113152e1ddb78fe7a4197f247591ca894e93f916867beb708d8e747b6cc74f\",\"dweb:/ipfs/QmbZaJyXdpsYGykVhHH9qpVGQg9DGCxE2QufbCUy3daTgq\"]}},\"version\":1}",
+  "metadata": "{\"compiler\":{\"version\":\"0.5.17+commit.d19bba13\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"lender\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"totalNotWithdrawn\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"totalAccruedInterest\",\"type\":\"uint256\"}],\"name\":\"AccruedInterestUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"AccruedInterestWithdrawn\",\"type\":\"event\"},{\"constant\":false,\"inputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"lender\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"consensusAddress\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"requestNonce\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"startTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"endTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"requestTime\",\"type\":\"uint256\"}],\"internalType\":\"struct TellerCommon.InterestRequest\",\"name\":\"request\",\"type\":\"tuple\"},{\"components\":[{\"internalType\":\"address\",\"name\":\"signer\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"consensusAddress\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"responseTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"interest\",\"type\":\"uint256\"},{\"components\":[{\"internalType\":\"uint256\",\"name\":\"signerNonce\",\"type\":\"uint256\"},{\"internalType\":\"uint8\",\"name\":\"v\",\"type\":\"uint8\"},{\"internalType\":\"bytes32\",\"name\":\"r\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"s\",\"type\":\"bytes32\"}],\"internalType\":\"struct TellerCommon.Signature\",\"name\":\"signature\",\"type\":\"tuple\"}],\"internalType\":\"struct TellerCommon.InterestResponse[]\",\"name\":\"responses\",\"type\":\"tuple[]\"}],\"name\":\"setAccruedInterest\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"withdrawInterest\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"author\":\"develop@teller.finance\",\"methods\":{\"setAccruedInterest((address,address,uint256,uint256,uint256,uint256),(address,address,uint256,uint256,(uint256,uint8,bytes32,bytes32))[])\":{\"params\":{\"request\":\"interest request sent by the lender.\",\"responses\":\"node responses to get a consensus value for the interest.\"}},\"withdrawInterest(address,uint256)\":{\"params\":{\"amount\":\"to track.\",\"recipient\":\"address.\"},\"return\":\"the interest amount to withdraw.\"}}},\"userdoc\":{\"methods\":{\"setAccruedInterest((address,address,uint256,uint256,uint256,uint256),(address,address,uint256,uint256,(uint256,uint8,bytes32,bytes32))[])\":{\"notice\":\"It sets the accrued interest for a lender.\"},\"withdrawInterest(address,uint256)\":{\"notice\":\"It tracks the interest amount for a recipient/lender.\"}},\"notice\":\"This interface defines the functions for interactions between lenders and the interests.\"}},\"settings\":{\"compilationTarget\":{\"/Users/guillesalazar/Repos/ZeroCollateral/smart-contracts-v1/contracts/interfaces/LendersInterface.sol\":\"LendersInterface\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/guillesalazar/Repos/ZeroCollateral/smart-contracts-v1/contracts/interfaces/LendersInterface.sol\":{\"keccak256\":\"0xa473d837ab5511c2d1dca97c04e3a95a148db8d13b7b3691e6358db4ac9069d1\",\"urls\":[\"bzz-raw://16a7aea7e304bd8230537af6852dbe70b2f403aac1d86b8fd5662fa1ed86df59\",\"dweb:/ipfs/QmTKczwwh2BaTyWxCeY8M73gKru2HKCV6NP4w2nqdgtcEK\"]},\"/Users/guillesalazar/Repos/ZeroCollateral/smart-contracts-v1/contracts/util/NumbersList.sol\":{\"keccak256\":\"0x33f686b21e818638451068c9e256ce61aa2e728be597b14b55ebafb16786400d\",\"urls\":[\"bzz-raw://2077d779fd76bb2c02251a74cc78bfea756961e5ac3561279c8d6e9bc8133705\",\"dweb:/ipfs/QmVZzmtDAJqJBGAJSuxWdnu2LgSMVH8UDxoaweqDseSyKT\"]},\"/Users/guillesalazar/Repos/ZeroCollateral/smart-contracts-v1/contracts/util/TellerCommon.sol\":{\"keccak256\":\"0xda558a7be3a4627cd9ff56fbe3d63298736fe1a3404e43643d550d5804a2a8f2\",\"urls\":[\"bzz-raw://cc4717624b9629d887f7ecec8028cec88be37288c65868d731246bc142146b0e\",\"dweb:/ipfs/QmYVsm241oyNEYcqN8rgEX5HTP9D6iroTwdAU63cV3QjPv\"]},\"@openzeppelin/contracts-ethereum-package/contracts/math/SafeMath.sol\":{\"keccak256\":\"0x640b6dee7a4b830bdfd52b5031a07fc2b12209f5b2e29e5d364a7d37f69d8076\",\"urls\":[\"bzz-raw://31113152e1ddb78fe7a4197f247591ca894e93f916867beb708d8e747b6cc74f\",\"dweb:/ipfs/QmbZaJyXdpsYGykVhHH9qpVGQg9DGCxE2QufbCUy3daTgq\"]}},\"version\":1}",
   "bytecode": "0x",
   "deployedBytecode": "0x",
   "sourceMap": "",
@@ -184,39 +184,39 @@
     "absolutePath": "/Users/guillesalazar/Repos/ZeroCollateral/smart-contracts-v1/contracts/interfaces/LendersInterface.sol",
     "exportedSymbols": {
       "LendersInterface": [
-        4665
+        6956
       ]
     },
-    "id": 4666,
+    "id": 6957,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 4631,
+        "id": 6922,
         "literals": [
           "solidity",
           "0.5",
           ".17"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:23:18"
+        "src": "0:23:26"
       },
       {
-        "id": 4632,
+        "id": 6923,
         "literals": [
           "experimental",
           "ABIEncoderV2"
         ],
         "nodeType": "PragmaDirective",
-        "src": "24:33:18"
+        "src": "24:33:26"
       },
       {
         "absolutePath": "/Users/guillesalazar/Repos/ZeroCollateral/smart-contracts-v1/contracts/util/TellerCommon.sol",
         "file": "../util/TellerCommon.sol",
-        "id": 4633,
+        "id": 6924,
         "nodeType": "ImportDirective",
-        "scope": 4666,
-        "sourceUnit": 9337,
-        "src": "59:34:18",
+        "scope": 6957,
+        "sourceUnit": 12295,
+        "src": "59:34:26",
         "symbolAliases": [],
         "unitAlias": ""
       },
@@ -226,9 +226,9 @@
         "contractKind": "interface",
         "documentation": "@notice This interface defines the functions for interactions between lenders and the interests.\n@author develop@teller.finance",
         "fullyImplemented": false,
-        "id": 4665,
+        "id": 6956,
         "linearizedBaseContracts": [
-          4665
+          6956
         ],
         "name": "LendersInterface",
         "nodeType": "ContractDefinition",
@@ -236,23 +236,23 @@
           {
             "body": null,
             "documentation": "@notice It tracks the interest amount for a recipient/lender.\n@param recipient address.\n@param amount to track.\n@return the interest amount to withdraw.",
-            "id": 4642,
+            "id": 6933,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "withdrawInterest",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 4638,
+              "id": 6929,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 4635,
+                  "id": 6926,
                   "name": "recipient",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4642,
-                  "src": "501:17:18",
+                  "scope": 6933,
+                  "src": "501:17:26",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -260,10 +260,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 4634,
+                    "id": 6925,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "501:7:18",
+                    "src": "501:7:26",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -275,11 +275,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 4637,
+                  "id": 6928,
                   "name": "amount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4642,
-                  "src": "520:14:18",
+                  "scope": 6933,
+                  "src": "520:14:26",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -287,10 +287,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 4636,
+                    "id": 6927,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "520:7:18",
+                    "src": "520:7:26",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -300,19 +300,19 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "500:35:18"
+              "src": "500:35:26"
             },
             "returnParameters": {
-              "id": 4641,
+              "id": 6932,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 4640,
+                  "id": 6931,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4642,
-                  "src": "570:7:18",
+                  "scope": 6933,
+                  "src": "570:7:26",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -320,10 +320,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 4639,
+                    "id": 6930,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "570:7:18",
+                    "src": "570:7:26",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -333,10 +333,10 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "569:9:18"
+              "src": "569:9:26"
             },
-            "scope": 4665,
-            "src": "475:104:18",
+            "scope": 6956,
+            "src": "475:104:26",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "external"
@@ -344,38 +344,38 @@
           {
             "body": null,
             "documentation": "@notice It sets the accrued interest for a lender.\n@param request interest request sent by the lender.\n@param responses node responses to get a consensus value for the interest.",
-            "id": 4650,
+            "id": 6941,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "setAccruedInterest",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 4648,
+              "id": 6939,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 4644,
+                  "id": 6935,
                   "name": "request",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4650,
-                  "src": "840:45:18",
+                  "scope": 6941,
+                  "src": "840:45:26",
                   "stateVariable": false,
                   "storageLocation": "calldata",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_struct$_InterestRequest_$9251_calldata_ptr",
+                    "typeIdentifier": "t_struct$_InterestRequest_$12209_calldata_ptr",
                     "typeString": "struct TellerCommon.InterestRequest"
                   },
                   "typeName": {
                     "contractScope": null,
-                    "id": 4643,
+                    "id": 6934,
                     "name": "TellerCommon.InterestRequest",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 9251,
-                    "src": "840:28:18",
+                    "referencedDeclaration": 12209,
+                    "src": "840:28:26",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_struct$_InterestRequest_$9251_storage_ptr",
+                      "typeIdentifier": "t_struct$_InterestRequest_$12209_storage_ptr",
                       "typeString": "struct TellerCommon.InterestRequest"
                     }
                   },
@@ -384,36 +384,36 @@
                 },
                 {
                   "constant": false,
-                  "id": 4647,
+                  "id": 6938,
                   "name": "responses",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4650,
-                  "src": "895:50:18",
+                  "scope": 6941,
+                  "src": "895:50:26",
                   "stateVariable": false,
                   "storageLocation": "calldata",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_array$_t_struct$_InterestResponse_$9262_calldata_$dyn_calldata_ptr",
+                    "typeIdentifier": "t_array$_t_struct$_InterestResponse_$12220_calldata_$dyn_calldata_ptr",
                     "typeString": "struct TellerCommon.InterestResponse[]"
                   },
                   "typeName": {
                     "baseType": {
                       "contractScope": null,
-                      "id": 4645,
+                      "id": 6936,
                       "name": "TellerCommon.InterestResponse",
                       "nodeType": "UserDefinedTypeName",
-                      "referencedDeclaration": 9262,
-                      "src": "895:29:18",
+                      "referencedDeclaration": 12220,
+                      "src": "895:29:26",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_struct$_InterestResponse_$9262_storage_ptr",
+                        "typeIdentifier": "t_struct$_InterestResponse_$12220_storage_ptr",
                         "typeString": "struct TellerCommon.InterestResponse"
                       }
                     },
-                    "id": 4646,
+                    "id": 6937,
                     "length": null,
                     "nodeType": "ArrayTypeName",
-                    "src": "895:31:18",
+                    "src": "895:31:26",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_array$_t_struct$_InterestResponse_$9262_storage_$dyn_storage_ptr",
+                      "typeIdentifier": "t_array$_t_struct$_InterestResponse_$12220_storage_$dyn_storage_ptr",
                       "typeString": "struct TellerCommon.InterestResponse[]"
                     }
                   },
@@ -421,16 +421,16 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "830:121:18"
+              "src": "830:121:26"
             },
             "returnParameters": {
-              "id": 4649,
+              "id": 6940,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "960:0:18"
+              "src": "960:0:26"
             },
-            "scope": 4665,
-            "src": "803:158:18",
+            "scope": 6956,
+            "src": "803:158:26",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "external"
@@ -438,21 +438,21 @@
           {
             "anonymous": false,
             "documentation": "@notice This event is emitted when an accrued interest is updated.\n@param lender address.\n@param totalNotWithdrawn total amount not withdrawn by the lender.\n@param totalAccruedInterest total accrued interest amount.",
-            "id": 4658,
+            "id": 6949,
             "name": "AccruedInterestUpdated",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 4657,
+              "id": 6948,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 4652,
+                  "id": 6943,
                   "indexed": true,
                   "name": "lender",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4658,
-                  "src": "1269:22:18",
+                  "scope": 6949,
+                  "src": "1269:22:26",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -460,10 +460,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 4651,
+                    "id": 6942,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1269:7:18",
+                    "src": "1269:7:26",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -475,12 +475,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 4654,
+                  "id": 6945,
                   "indexed": false,
                   "name": "totalNotWithdrawn",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4658,
-                  "src": "1301:25:18",
+                  "scope": 6949,
+                  "src": "1301:25:26",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -488,10 +488,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 4653,
+                    "id": 6944,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1301:7:18",
+                    "src": "1301:7:26",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -502,12 +502,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 4656,
+                  "id": 6947,
                   "indexed": false,
                   "name": "totalAccruedInterest",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4658,
-                  "src": "1336:28:18",
+                  "scope": 6949,
+                  "src": "1336:28:26",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -515,10 +515,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 4655,
+                    "id": 6946,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1336:7:18",
+                    "src": "1336:7:26",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -528,28 +528,28 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1259:111:18"
+              "src": "1259:111:26"
             },
-            "src": "1231:140:18"
+            "src": "1231:140:26"
           },
           {
             "anonymous": false,
             "documentation": "@notice This event is emitted when a lender withdraws an accrued interest amount.\n@param recipient lender address.\n@param amount withdrawn.",
-            "id": 4664,
+            "id": 6955,
             "name": "AccruedInterestWithdrawn",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 4663,
+              "id": 6954,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 4660,
+                  "id": 6951,
                   "indexed": true,
                   "name": "recipient",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4664,
-                  "src": "1588:25:18",
+                  "scope": 6955,
+                  "src": "1588:25:26",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -557,10 +557,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 4659,
+                    "id": 6950,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1588:7:18",
+                    "src": "1588:7:26",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -572,12 +572,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 4662,
+                  "id": 6953,
                   "indexed": false,
                   "name": "amount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4664,
-                  "src": "1615:14:18",
+                  "scope": 6955,
+                  "src": "1615:14:26",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -585,10 +585,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 4661,
+                    "id": 6952,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1615:7:18",
+                    "src": "1615:7:26",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -598,54 +598,54 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1587:43:18"
+              "src": "1587:43:26"
             },
-            "src": "1557:74:18"
+            "src": "1557:74:26"
           }
         ],
-        "scope": 4666,
-        "src": "241:1392:18"
+        "scope": 6957,
+        "src": "241:1392:26"
       }
     ],
-    "src": "0:1634:18"
+    "src": "0:1634:26"
   },
   "legacyAST": {
     "absolutePath": "/Users/guillesalazar/Repos/ZeroCollateral/smart-contracts-v1/contracts/interfaces/LendersInterface.sol",
     "exportedSymbols": {
       "LendersInterface": [
-        4665
+        6956
       ]
     },
-    "id": 4666,
+    "id": 6957,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 4631,
+        "id": 6922,
         "literals": [
           "solidity",
           "0.5",
           ".17"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:23:18"
+        "src": "0:23:26"
       },
       {
-        "id": 4632,
+        "id": 6923,
         "literals": [
           "experimental",
           "ABIEncoderV2"
         ],
         "nodeType": "PragmaDirective",
-        "src": "24:33:18"
+        "src": "24:33:26"
       },
       {
         "absolutePath": "/Users/guillesalazar/Repos/ZeroCollateral/smart-contracts-v1/contracts/util/TellerCommon.sol",
         "file": "../util/TellerCommon.sol",
-        "id": 4633,
+        "id": 6924,
         "nodeType": "ImportDirective",
-        "scope": 4666,
-        "sourceUnit": 9337,
-        "src": "59:34:18",
+        "scope": 6957,
+        "sourceUnit": 12295,
+        "src": "59:34:26",
         "symbolAliases": [],
         "unitAlias": ""
       },
@@ -655,9 +655,9 @@
         "contractKind": "interface",
         "documentation": "@notice This interface defines the functions for interactions between lenders and the interests.\n@author develop@teller.finance",
         "fullyImplemented": false,
-        "id": 4665,
+        "id": 6956,
         "linearizedBaseContracts": [
-          4665
+          6956
         ],
         "name": "LendersInterface",
         "nodeType": "ContractDefinition",
@@ -665,23 +665,23 @@
           {
             "body": null,
             "documentation": "@notice It tracks the interest amount for a recipient/lender.\n@param recipient address.\n@param amount to track.\n@return the interest amount to withdraw.",
-            "id": 4642,
+            "id": 6933,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "withdrawInterest",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 4638,
+              "id": 6929,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 4635,
+                  "id": 6926,
                   "name": "recipient",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4642,
-                  "src": "501:17:18",
+                  "scope": 6933,
+                  "src": "501:17:26",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -689,10 +689,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 4634,
+                    "id": 6925,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "501:7:18",
+                    "src": "501:7:26",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -704,11 +704,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 4637,
+                  "id": 6928,
                   "name": "amount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4642,
-                  "src": "520:14:18",
+                  "scope": 6933,
+                  "src": "520:14:26",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -716,10 +716,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 4636,
+                    "id": 6927,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "520:7:18",
+                    "src": "520:7:26",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -729,19 +729,19 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "500:35:18"
+              "src": "500:35:26"
             },
             "returnParameters": {
-              "id": 4641,
+              "id": 6932,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 4640,
+                  "id": 6931,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4642,
-                  "src": "570:7:18",
+                  "scope": 6933,
+                  "src": "570:7:26",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -749,10 +749,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 4639,
+                    "id": 6930,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "570:7:18",
+                    "src": "570:7:26",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -762,10 +762,10 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "569:9:18"
+              "src": "569:9:26"
             },
-            "scope": 4665,
-            "src": "475:104:18",
+            "scope": 6956,
+            "src": "475:104:26",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "external"
@@ -773,38 +773,38 @@
           {
             "body": null,
             "documentation": "@notice It sets the accrued interest for a lender.\n@param request interest request sent by the lender.\n@param responses node responses to get a consensus value for the interest.",
-            "id": 4650,
+            "id": 6941,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "setAccruedInterest",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 4648,
+              "id": 6939,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 4644,
+                  "id": 6935,
                   "name": "request",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4650,
-                  "src": "840:45:18",
+                  "scope": 6941,
+                  "src": "840:45:26",
                   "stateVariable": false,
                   "storageLocation": "calldata",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_struct$_InterestRequest_$9251_calldata_ptr",
+                    "typeIdentifier": "t_struct$_InterestRequest_$12209_calldata_ptr",
                     "typeString": "struct TellerCommon.InterestRequest"
                   },
                   "typeName": {
                     "contractScope": null,
-                    "id": 4643,
+                    "id": 6934,
                     "name": "TellerCommon.InterestRequest",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 9251,
-                    "src": "840:28:18",
+                    "referencedDeclaration": 12209,
+                    "src": "840:28:26",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_struct$_InterestRequest_$9251_storage_ptr",
+                      "typeIdentifier": "t_struct$_InterestRequest_$12209_storage_ptr",
                       "typeString": "struct TellerCommon.InterestRequest"
                     }
                   },
@@ -813,36 +813,36 @@
                 },
                 {
                   "constant": false,
-                  "id": 4647,
+                  "id": 6938,
                   "name": "responses",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4650,
-                  "src": "895:50:18",
+                  "scope": 6941,
+                  "src": "895:50:26",
                   "stateVariable": false,
                   "storageLocation": "calldata",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_array$_t_struct$_InterestResponse_$9262_calldata_$dyn_calldata_ptr",
+                    "typeIdentifier": "t_array$_t_struct$_InterestResponse_$12220_calldata_$dyn_calldata_ptr",
                     "typeString": "struct TellerCommon.InterestResponse[]"
                   },
                   "typeName": {
                     "baseType": {
                       "contractScope": null,
-                      "id": 4645,
+                      "id": 6936,
                       "name": "TellerCommon.InterestResponse",
                       "nodeType": "UserDefinedTypeName",
-                      "referencedDeclaration": 9262,
-                      "src": "895:29:18",
+                      "referencedDeclaration": 12220,
+                      "src": "895:29:26",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_struct$_InterestResponse_$9262_storage_ptr",
+                        "typeIdentifier": "t_struct$_InterestResponse_$12220_storage_ptr",
                         "typeString": "struct TellerCommon.InterestResponse"
                       }
                     },
-                    "id": 4646,
+                    "id": 6937,
                     "length": null,
                     "nodeType": "ArrayTypeName",
-                    "src": "895:31:18",
+                    "src": "895:31:26",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_array$_t_struct$_InterestResponse_$9262_storage_$dyn_storage_ptr",
+                      "typeIdentifier": "t_array$_t_struct$_InterestResponse_$12220_storage_$dyn_storage_ptr",
                       "typeString": "struct TellerCommon.InterestResponse[]"
                     }
                   },
@@ -850,16 +850,16 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "830:121:18"
+              "src": "830:121:26"
             },
             "returnParameters": {
-              "id": 4649,
+              "id": 6940,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "960:0:18"
+              "src": "960:0:26"
             },
-            "scope": 4665,
-            "src": "803:158:18",
+            "scope": 6956,
+            "src": "803:158:26",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "external"
@@ -867,21 +867,21 @@
           {
             "anonymous": false,
             "documentation": "@notice This event is emitted when an accrued interest is updated.\n@param lender address.\n@param totalNotWithdrawn total amount not withdrawn by the lender.\n@param totalAccruedInterest total accrued interest amount.",
-            "id": 4658,
+            "id": 6949,
             "name": "AccruedInterestUpdated",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 4657,
+              "id": 6948,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 4652,
+                  "id": 6943,
                   "indexed": true,
                   "name": "lender",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4658,
-                  "src": "1269:22:18",
+                  "scope": 6949,
+                  "src": "1269:22:26",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -889,10 +889,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 4651,
+                    "id": 6942,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1269:7:18",
+                    "src": "1269:7:26",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -904,12 +904,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 4654,
+                  "id": 6945,
                   "indexed": false,
                   "name": "totalNotWithdrawn",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4658,
-                  "src": "1301:25:18",
+                  "scope": 6949,
+                  "src": "1301:25:26",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -917,10 +917,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 4653,
+                    "id": 6944,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1301:7:18",
+                    "src": "1301:7:26",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -931,12 +931,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 4656,
+                  "id": 6947,
                   "indexed": false,
                   "name": "totalAccruedInterest",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4658,
-                  "src": "1336:28:18",
+                  "scope": 6949,
+                  "src": "1336:28:26",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -944,10 +944,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 4655,
+                    "id": 6946,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1336:7:18",
+                    "src": "1336:7:26",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -957,28 +957,28 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1259:111:18"
+              "src": "1259:111:26"
             },
-            "src": "1231:140:18"
+            "src": "1231:140:26"
           },
           {
             "anonymous": false,
             "documentation": "@notice This event is emitted when a lender withdraws an accrued interest amount.\n@param recipient lender address.\n@param amount withdrawn.",
-            "id": 4664,
+            "id": 6955,
             "name": "AccruedInterestWithdrawn",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 4663,
+              "id": 6954,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 4660,
+                  "id": 6951,
                   "indexed": true,
                   "name": "recipient",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4664,
-                  "src": "1588:25:18",
+                  "scope": 6955,
+                  "src": "1588:25:26",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -986,10 +986,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 4659,
+                    "id": 6950,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1588:7:18",
+                    "src": "1588:7:26",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -1001,12 +1001,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 4662,
+                  "id": 6953,
                   "indexed": false,
                   "name": "amount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4664,
-                  "src": "1615:14:18",
+                  "scope": 6955,
+                  "src": "1615:14:26",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1014,10 +1014,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 4661,
+                    "id": 6952,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1615:7:18",
+                    "src": "1615:7:26",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -1027,24 +1027,24 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1587:43:18"
+              "src": "1587:43:26"
             },
-            "src": "1557:74:18"
+            "src": "1557:74:26"
           }
         ],
-        "scope": 4666,
-        "src": "241:1392:18"
+        "scope": 6957,
+        "src": "241:1392:26"
       }
     ],
-    "src": "0:1634:18"
+    "src": "0:1634:26"
   },
   "compiler": {
     "name": "solc",
     "version": "0.5.17+commit.d19bba13.Emscripten.clang"
   },
   "networks": {},
-  "schemaVersion": "3.0.23",
-  "updatedAt": "2020-08-12T16:48:45.257Z",
+  "schemaVersion": "3.2.0",
+  "updatedAt": "2020-08-15T22:31:55.148Z",
   "devdoc": {
     "author": "develop@teller.finance",
     "methods": {

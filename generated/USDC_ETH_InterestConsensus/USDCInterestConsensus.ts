@@ -295,6 +295,29 @@ export class USDCInterestConsensus extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toBytes());
   }
 
+  REQUEST_LOAN_TERMS_RATE_LIMIT_SETTING(): Bytes {
+    let result = super.call(
+      "REQUEST_LOAN_TERMS_RATE_LIMIT_SETTING",
+      "REQUEST_LOAN_TERMS_RATE_LIMIT_SETTING():(bytes32)",
+      []
+    );
+
+    return result[0].toBytes();
+  }
+
+  try_REQUEST_LOAN_TERMS_RATE_LIMIT_SETTING(): ethereum.CallResult<Bytes> {
+    let result = super.tryCall(
+      "REQUEST_LOAN_TERMS_RATE_LIMIT_SETTING",
+      "REQUEST_LOAN_TERMS_RATE_LIMIT_SETTING():(bytes32)",
+      []
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBytes());
+  }
+
   REQUIRED_SUBMISSIONS_SETTING(): Bytes {
     let result = super.call(
       "REQUIRED_SUBMISSIONS_SETTING",
@@ -728,6 +751,32 @@ export class InitializeCall__Inputs {
   constructor(call: InitializeCall) {
     this._call = call;
   }
+}
+
+export class InitializeCall__Outputs {
+  _call: InitializeCall;
+
+  constructor(call: InitializeCall) {
+    this._call = call;
+  }
+}
+
+export class Initialize1Call extends ethereum.Call {
+  get inputs(): Initialize1Call__Inputs {
+    return new Initialize1Call__Inputs(this);
+  }
+
+  get outputs(): Initialize1Call__Outputs {
+    return new Initialize1Call__Outputs(this);
+  }
+}
+
+export class Initialize1Call__Inputs {
+  _call: Initialize1Call;
+
+  constructor(call: Initialize1Call) {
+    this._call = call;
+  }
 
   get aCallerAddress(): Address {
     return this._call.inputValues[0].value.toAddress();
@@ -742,10 +791,40 @@ export class InitializeCall__Inputs {
   }
 }
 
-export class InitializeCall__Outputs {
-  _call: InitializeCall;
+export class Initialize1Call__Outputs {
+  _call: Initialize1Call;
 
-  constructor(call: InitializeCall) {
+  constructor(call: Initialize1Call) {
+    this._call = call;
+  }
+}
+
+export class Initialize2Call extends ethereum.Call {
+  get inputs(): Initialize2Call__Inputs {
+    return new Initialize2Call__Inputs(this);
+  }
+
+  get outputs(): Initialize2Call__Outputs {
+    return new Initialize2Call__Outputs(this);
+  }
+}
+
+export class Initialize2Call__Inputs {
+  _call: Initialize2Call;
+
+  constructor(call: Initialize2Call) {
+    this._call = call;
+  }
+
+  get sender(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+}
+
+export class Initialize2Call__Outputs {
+  _call: Initialize2Call;
+
+  constructor(call: Initialize2Call) {
     this._call = call;
   }
 }

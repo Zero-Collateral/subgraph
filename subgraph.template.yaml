@@ -11,7 +11,7 @@ dataSources:
     network: {{network}}
     source:
       startBlock: {{startBlock}}
-      address: '{{ETH_Loans_tDAI}}'
+      address: '{{ETH_Loans_tDAI_Proxy}}'
       abi: DAILoans
     mapping:
       kind: ethereum/events
@@ -52,7 +52,7 @@ dataSources:
     network: {{network}}
     source:
       startBlock: {{startBlock}}
-      address: '{{LINK_Loans_tDAI}}'
+      address: '{{LINK_Loans_tDAI_Proxy}}'
       abi: DAILoans
     mapping:
       kind: ethereum/events
@@ -93,7 +93,7 @@ dataSources:
     network: {{network}}
     source:
       startBlock: {{startBlock}}
-      address: '{{ETH_Loans_tUSDC}}'
+      address: '{{ETH_Loans_tUSDC_Proxy}}'
       abi: USDCLoans
     mapping:
       kind: ethereum/events
@@ -134,7 +134,7 @@ dataSources:
     network: {{network}}
     source:
       startBlock: {{startBlock}}
-      address: '{{LINK_Loans_tUSDC}}'
+      address: '{{LINK_Loans_tUSDC_Proxy}}'
       abi: USDCLoans
     mapping:
       kind: ethereum/events
@@ -175,7 +175,7 @@ dataSources:
     network: {{network}}
     source:
       startBlock: {{startBlock}}
-      address: '{{ETH_InterestConsensus_tDAI}}'
+      address: '{{ETH_InterestConsensus_tDAI_Proxy}}'
       abi: DAIInterestConsensus
     mapping:
       kind: ethereum/events
@@ -207,7 +207,7 @@ dataSources:
     network: {{network}}
     source:
       startBlock: {{startBlock}}
-      address: '{{LINK_InterestConsensus_tDAI}}'
+      address: '{{LINK_InterestConsensus_tDAI_Proxy}}'
       abi: DAIInterestConsensus
     mapping:
       kind: ethereum/events
@@ -239,7 +239,7 @@ dataSources:
     network: {{network}}
     source:
       startBlock: {{startBlock}}
-      address: '{{ETH_InterestConsensus_tUSDC}}'
+      address: '{{ETH_InterestConsensus_tUSDC_Proxy}}'
       abi: USDCInterestConsensus
     mapping:
       kind: ethereum/events
@@ -271,7 +271,7 @@ dataSources:
     network: {{network}}
     source:
       startBlock: {{startBlock}}
-      address: '{{LINK_InterestConsensus_tUSDC}}'
+      address: '{{LINK_InterestConsensus_tUSDC_Proxy}}'
       abi: USDCInterestConsensus
     mapping:
       kind: ethereum/events
@@ -303,7 +303,7 @@ dataSources:
     network: {{network}}
     source:
       startBlock: {{startBlock}}
-      address: '{{ETH_LoanTermsConsensus_tDAI}}'
+      address: '{{ETH_LoanTermsConsensus_tDAI_Proxy}}'
       abi: DAILoanTermsConsensus
     mapping:
       kind: ethereum/events
@@ -335,7 +335,7 @@ dataSources:
     network: {{network}}
     source:
       startBlock: {{startBlock}}
-      address: '{{LINK_LoanTermsConsensus_tDAI}}'
+      address: '{{LINK_LoanTermsConsensus_tDAI_Proxy}}'
       abi: DAILoanTermsConsensus
     mapping:
       kind: ethereum/events
@@ -367,7 +367,7 @@ dataSources:
     network: {{network}}
     source:
       startBlock: {{startBlock}}
-      address: '{{ETH_LoanTermsConsensus_tUSDC}}'
+      address: '{{ETH_LoanTermsConsensus_tUSDC_Proxy}}'
       abi: USDCLoanTermsConsensus
     mapping:
       kind: ethereum/events
@@ -399,7 +399,7 @@ dataSources:
     network: {{network}}
     source:
       startBlock: {{startBlock}}
-      address: '{{LINK_LoanTermsConsensus_tUSDC}}'
+      address: '{{LINK_LoanTermsConsensus_tUSDC_Proxy}}'
       abi: USDCLoanTermsConsensus
     mapping:
       kind: ethereum/events
@@ -489,7 +489,7 @@ dataSources:
     network: {{network}}
     source:
       startBlock: {{startBlock}}
-      address: '{{Settings}}'
+      address: '{{Settings_Proxy}}'
       abi: SettingsInterface
     mapping:
       kind: ethereum/events
@@ -543,7 +543,7 @@ dataSources:
     network: {{network}}
     source:
       startBlock: {{startBlock}}
-      address: '{{ETH_LendingPool_tDAI}}'
+      address: '{{ETH_LendingPool_tDAI_Proxy}}'
       abi: DAILendingPool
     mapping:
       kind: ethereum/events
@@ -573,7 +573,7 @@ dataSources:
     network: {{network}}
     source:
       startBlock: {{startBlock}}
-      address: '{{LINK_LendingPool_tDAI}}'
+      address: '{{LINK_LendingPool_tDAI_Proxy}}'
       abi: DAILendingPool
     mapping:
       kind: ethereum/events
@@ -603,7 +603,7 @@ dataSources:
     network: {{network}}
     source:
       startBlock: {{startBlock}}
-      address: '{{ETH_LendingPool_tUSDC}}'
+      address: '{{ETH_LendingPool_tUSDC_Proxy}}'
       abi: USDCLendingPool
     mapping:
       kind: ethereum/events
@@ -633,7 +633,7 @@ dataSources:
     network: {{network}}
     source:
       startBlock: {{startBlock}}
-      address: '{{LINK_LendingPool_tUSDC}}'
+      address: '{{LINK_LendingPool_tUSDC_Proxy}}'
       abi: USDCLendingPool
     mapping:
       kind: ethereum/events
@@ -663,7 +663,7 @@ dataSources:
     network: {{network}}
     source:
       startBlock: {{startBlock}}
-      address: '{{ETH_Lenders_tDAI}}'
+      address: '{{ETH_Lenders_tDAI_Proxy}}'
       abi: DAILenders
     mapping:
       kind: ethereum/events
@@ -688,7 +688,7 @@ dataSources:
     network: {{network}}
     source:
       startBlock: {{startBlock}}
-      address: '{{LINK_Lenders_tDAI}}'
+      address: '{{LINK_Lenders_tDAI_Proxy}}'
       abi: DAILenders
     mapping:
       kind: ethereum/events
@@ -713,7 +713,7 @@ dataSources:
     network: {{network}}
     source:
       startBlock: {{startBlock}}
-      address: '{{ETH_Lenders_tUSDC}}'
+      address: '{{ETH_Lenders_tUSDC_Proxy}}'
       abi: USDCLenders
     mapping:
       kind: ethereum/events
@@ -738,7 +738,7 @@ dataSources:
     network: {{network}}
     source:
       startBlock: {{startBlock}}
-      address: '{{LINK_Lenders_tUSDC}}'
+      address: '{{LINK_Lenders_tUSDC_Proxy}}'
       abi: USDCLenders
     mapping:
       kind: ethereum/events

@@ -10,6 +10,32 @@ import {
   BigInt
 } from "@graphprotocol/graph-ts";
 
+export class InterestValidatorUpdated extends ethereum.Event {
+  get params(): InterestValidatorUpdated__Params {
+    return new InterestValidatorUpdated__Params(this);
+  }
+}
+
+export class InterestValidatorUpdated__Params {
+  _event: InterestValidatorUpdated;
+
+  constructor(event: InterestValidatorUpdated) {
+    this._event = event;
+  }
+
+  get sender(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get oldInterestValidator(): Address {
+    return this._event.parameters[1].value.toAddress();
+  }
+
+  get newInterestValidator(): Address {
+    return this._event.parameters[2].value.toAddress();
+  }
+}
+
 export class InterestWithdrawn extends ethereum.Event {
   get params(): InterestWithdrawn__Params {
     return new InterestWithdrawn__Params(this);
@@ -133,6 +159,29 @@ export class DAILendingPool extends ethereum.SmartContract {
 
   try_lendingToken(): ethereum.CallResult<Address> {
     let result = super.tryCall("lendingToken", "lendingToken():(address)", []);
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toAddress());
+  }
+
+  interestValidator(): Address {
+    let result = super.call(
+      "interestValidator",
+      "interestValidator():(address)",
+      []
+    );
+
+    return result[0].toAddress();
+  }
+
+  try_interestValidator(): ethereum.CallResult<Address> {
+    let result = super.tryCall(
+      "interestValidator",
+      "interestValidator():(address)",
+      []
+    );
     if (result.reverted) {
       return new ethereum.CallResult();
     }
@@ -329,6 +378,36 @@ export class WithdrawInterestCall__Outputs {
   _call: WithdrawInterestCall;
 
   constructor(call: WithdrawInterestCall) {
+    this._call = call;
+  }
+}
+
+export class SetInterestValidatorCall extends ethereum.Call {
+  get inputs(): SetInterestValidatorCall__Inputs {
+    return new SetInterestValidatorCall__Inputs(this);
+  }
+
+  get outputs(): SetInterestValidatorCall__Outputs {
+    return new SetInterestValidatorCall__Outputs(this);
+  }
+}
+
+export class SetInterestValidatorCall__Inputs {
+  _call: SetInterestValidatorCall;
+
+  constructor(call: SetInterestValidatorCall) {
+    this._call = call;
+  }
+
+  get newInterestValidator(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+}
+
+export class SetInterestValidatorCall__Outputs {
+  _call: SetInterestValidatorCall;
+
+  constructor(call: SetInterestValidatorCall) {
     this._call = call;
   }
 }
