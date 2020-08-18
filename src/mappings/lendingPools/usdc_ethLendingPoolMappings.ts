@@ -17,7 +17,7 @@ import {
   ETH_TX_PAYMENT_LIQUIDATED,
   ETH_TX_INTEREST_WITHDRAWN,
   TOKEN_USDC,
-  ZTOKEN_ZUSDC,
+  TTOKEN_TUSDC,
   COLLATERAL_TOKEN_ETH,
 } from "../../utils/consts";
 import { internalHandleLendingPoolChange } from "../../utils/lendingpool-commons";
@@ -25,7 +25,7 @@ import { internalHandleLendingPoolChange } from "../../utils/lendingpool-commons
 export function handleInterestWithdrawn(event: InterestWithdrawnEvent): void {
   internalHandleLendingPoolChange(
     ETH_TX_INTEREST_WITHDRAWN,
-    ZTOKEN_ZUSDC,
+    TTOKEN_TUSDC,
     TOKEN_USDC,
     COLLATERAL_TOKEN_ETH,
     LENDING_POOL_INTEREST_WITHDRAWN,
@@ -38,7 +38,7 @@ export function handleInterestWithdrawn(event: InterestWithdrawnEvent): void {
 export function handleTokenDeposited(event: TokenDepositedEvent): void {
   internalHandleLendingPoolChange(
     ETH_TX_TOKEN_DEPOSITED,
-    ZTOKEN_ZUSDC,
+    TTOKEN_TUSDC,
     TOKEN_USDC,
     COLLATERAL_TOKEN_ETH,
     LENDING_POOL_DEPOSITED,
@@ -51,7 +51,7 @@ export function handleTokenDeposited(event: TokenDepositedEvent): void {
 export function handleTokenWithdrawn(event: TokenWithdrawnEvent): void {
   internalHandleLendingPoolChange(
     ETH_TX_TOKEN_WITHDRAWN,
-    ZTOKEN_ZUSDC,
+    TTOKEN_TUSDC,
     TOKEN_USDC,
     COLLATERAL_TOKEN_ETH,
     LENDING_POOL_WITHDRAWN,
@@ -64,7 +64,7 @@ export function handleTokenWithdrawn(event: TokenWithdrawnEvent): void {
 export function handleDaiRepaid(event: TokenRepaidEvent): void {
   internalHandleLendingPoolChange(
     ETH_TX_TOKEN_REPAID,
-    ZTOKEN_ZUSDC,
+    TTOKEN_TUSDC,
     TOKEN_USDC,
     COLLATERAL_TOKEN_ETH,
     LENDING_POOL_REPAID,
@@ -77,7 +77,7 @@ export function handleDaiRepaid(event: TokenRepaidEvent): void {
 export function handlePaymentLiquidated(event: PaymentLiquidatedEvent): void {
   internalHandleLendingPoolChange(
     ETH_TX_PAYMENT_LIQUIDATED,
-    ZTOKEN_ZUSDC,
+    TTOKEN_TUSDC,
     TOKEN_USDC,
     COLLATERAL_TOKEN_ETH,
     LENDING_POOL_LIQUIDATED,

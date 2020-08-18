@@ -130,88 +130,6 @@ export class AssetSettingsUintUpdated__Params {
   }
 }
 
-export class ComponentVersionCreated extends ethereum.Event {
-  get params(): ComponentVersionCreated__Params {
-    return new ComponentVersionCreated__Params(this);
-  }
-}
-
-export class ComponentVersionCreated__Params {
-  _event: ComponentVersionCreated;
-
-  constructor(event: ComponentVersionCreated) {
-    this._event = event;
-  }
-
-  get account(): Address {
-    return this._event.parameters[0].value.toAddress();
-  }
-
-  get componentName(): Bytes {
-    return this._event.parameters[1].value.toBytes();
-  }
-
-  get minVersion(): BigInt {
-    return this._event.parameters[2].value.toBigInt();
-  }
-}
-
-export class ComponentVersionRemoved extends ethereum.Event {
-  get params(): ComponentVersionRemoved__Params {
-    return new ComponentVersionRemoved__Params(this);
-  }
-}
-
-export class ComponentVersionRemoved__Params {
-  _event: ComponentVersionRemoved;
-
-  constructor(event: ComponentVersionRemoved) {
-    this._event = event;
-  }
-
-  get account(): Address {
-    return this._event.parameters[0].value.toAddress();
-  }
-
-  get componentName(): Bytes {
-    return this._event.parameters[1].value.toBytes();
-  }
-
-  get previousVersion(): BigInt {
-    return this._event.parameters[2].value.toBigInt();
-  }
-}
-
-export class ComponentVersionUpdated extends ethereum.Event {
-  get params(): ComponentVersionUpdated__Params {
-    return new ComponentVersionUpdated__Params(this);
-  }
-}
-
-export class ComponentVersionUpdated__Params {
-  _event: ComponentVersionUpdated;
-
-  constructor(event: ComponentVersionUpdated) {
-    this._event = event;
-  }
-
-  get account(): Address {
-    return this._event.parameters[0].value.toAddress();
-  }
-
-  get componentName(): Bytes {
-    return this._event.parameters[1].value.toBytes();
-  }
-
-  get oldVersion(): BigInt {
-    return this._event.parameters[2].value.toBigInt();
-  }
-
-  get newVersion(): BigInt {
-    return this._event.parameters[3].value.toBigInt();
-  }
-}
-
 export class LendingPoolPaused extends ethereum.Event {
   get params(): LendingPoolPaused__Params {
     return new LendingPoolPaused__Params(this);
@@ -589,29 +507,6 @@ export class SettingsInterface extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toAddress());
   }
 
-  componentVersions(param0: Bytes): BigInt {
-    let result = super.call(
-      "componentVersions",
-      "componentVersions(bytes32):(uint32)",
-      [ethereum.Value.fromFixedBytes(param0)]
-    );
-
-    return result[0].toBigInt();
-  }
-
-  try_componentVersions(param0: Bytes): ethereum.CallResult<BigInt> {
-    let result = super.tryCall(
-      "componentVersions",
-      "componentVersions(bytes32):(uint32)",
-      [ethereum.Value.fromFixedBytes(param0)]
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBigInt());
-  }
-
   isPauser(account: Address): boolean {
     let result = super.call("isPauser", "isPauser(address):(bool)", [
       ethereum.Value.fromAddress(account)
@@ -735,29 +630,6 @@ export class SettingsInterface extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(
       value[0].toTuple() as SettingsInterface__getPlatformSettingResultValue0Struct
     );
-  }
-
-  getComponentVersion(componentName: Bytes): BigInt {
-    let result = super.call(
-      "getComponentVersion",
-      "getComponentVersion(bytes32):(uint32)",
-      [ethereum.Value.fromFixedBytes(componentName)]
-    );
-
-    return result[0].toBigInt();
-  }
-
-  try_getComponentVersion(componentName: Bytes): ethereum.CallResult<BigInt> {
-    let result = super.tryCall(
-      "getComponentVersion",
-      "getComponentVersion(bytes32):(uint32)",
-      [ethereum.Value.fromFixedBytes(componentName)]
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBigInt());
   }
 
   getPlatformSettingValue(settingName: Bytes): BigInt {
@@ -951,6 +823,36 @@ export class AddPauserCall__Outputs {
   }
 }
 
+export class InitializeCall extends ethereum.Call {
+  get inputs(): InitializeCall__Inputs {
+    return new InitializeCall__Inputs(this);
+  }
+
+  get outputs(): InitializeCall__Outputs {
+    return new InitializeCall__Outputs(this);
+  }
+}
+
+export class InitializeCall__Inputs {
+  _call: InitializeCall;
+
+  constructor(call: InitializeCall) {
+    this._call = call;
+  }
+
+  get sender(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+}
+
+export class InitializeCall__Outputs {
+  _call: InitializeCall;
+
+  constructor(call: InitializeCall) {
+    this._call = call;
+  }
+}
+
 export class PauseCall extends ethereum.Call {
   get inputs(): PauseCall__Inputs {
     return new PauseCall__Inputs(this);
@@ -1131,104 +1033,6 @@ export class RemovePlatformSettingCall__Outputs {
   _call: RemovePlatformSettingCall;
 
   constructor(call: RemovePlatformSettingCall) {
-    this._call = call;
-  }
-}
-
-export class CreateComponentVersionCall extends ethereum.Call {
-  get inputs(): CreateComponentVersionCall__Inputs {
-    return new CreateComponentVersionCall__Inputs(this);
-  }
-
-  get outputs(): CreateComponentVersionCall__Outputs {
-    return new CreateComponentVersionCall__Outputs(this);
-  }
-}
-
-export class CreateComponentVersionCall__Inputs {
-  _call: CreateComponentVersionCall;
-
-  constructor(call: CreateComponentVersionCall) {
-    this._call = call;
-  }
-
-  get componentName(): Bytes {
-    return this._call.inputValues[0].value.toBytes();
-  }
-
-  get minVersion(): BigInt {
-    return this._call.inputValues[1].value.toBigInt();
-  }
-}
-
-export class CreateComponentVersionCall__Outputs {
-  _call: CreateComponentVersionCall;
-
-  constructor(call: CreateComponentVersionCall) {
-    this._call = call;
-  }
-}
-
-export class RemoveComponentVersionCall extends ethereum.Call {
-  get inputs(): RemoveComponentVersionCall__Inputs {
-    return new RemoveComponentVersionCall__Inputs(this);
-  }
-
-  get outputs(): RemoveComponentVersionCall__Outputs {
-    return new RemoveComponentVersionCall__Outputs(this);
-  }
-}
-
-export class RemoveComponentVersionCall__Inputs {
-  _call: RemoveComponentVersionCall;
-
-  constructor(call: RemoveComponentVersionCall) {
-    this._call = call;
-  }
-
-  get componentName(): Bytes {
-    return this._call.inputValues[0].value.toBytes();
-  }
-}
-
-export class RemoveComponentVersionCall__Outputs {
-  _call: RemoveComponentVersionCall;
-
-  constructor(call: RemoveComponentVersionCall) {
-    this._call = call;
-  }
-}
-
-export class UpdateComponentVersionCall extends ethereum.Call {
-  get inputs(): UpdateComponentVersionCall__Inputs {
-    return new UpdateComponentVersionCall__Inputs(this);
-  }
-
-  get outputs(): UpdateComponentVersionCall__Outputs {
-    return new UpdateComponentVersionCall__Outputs(this);
-  }
-}
-
-export class UpdateComponentVersionCall__Inputs {
-  _call: UpdateComponentVersionCall;
-
-  constructor(call: UpdateComponentVersionCall) {
-    this._call = call;
-  }
-
-  get componentName(): Bytes {
-    return this._call.inputValues[0].value.toBytes();
-  }
-
-  get newVersion(): BigInt {
-    return this._call.inputValues[1].value.toBigInt();
-  }
-}
-
-export class UpdateComponentVersionCall__Outputs {
-  _call: UpdateComponentVersionCall;
-
-  constructor(call: UpdateComponentVersionCall) {
     this._call = call;
   }
 }

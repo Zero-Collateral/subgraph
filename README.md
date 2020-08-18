@@ -1,11 +1,11 @@
-# Zero Collateral Subgraph
+# Teller Protocol Subgraph
 
-This is the official Subgraph for the Zero Collateral [smart contracts](https://github.com/Zero-Collateral/zero-collateral-v1).
+This is the official Subgraph for the Teller Protocol [smart contracts](https://github.com/teller-protocol/teller-protocol-v1).
 
 ## Resources
 
-Website → https://zerocollateral.com/
-Twitter → https://twitter.com/zer0collateral 
+Website → https://teller.finance/
+Twitter → https://twitter.com/useteller 
 Blog → https://medium.com/fabrx-blockchain
 Discord → https://discord.gg/z3AJ9F
 
@@ -37,7 +37,7 @@ At this moment, the scripts available are:
 
 Currently, you can play with our subgraph here:
 
-- [Ropsten](https://thegraph.com/explorer/subgraph/zero-collateral/zero-collateral).
+- [Ropsten](https://thegraph.com/explorer/subgraph/teller-protocol/teller-protocol).
 
 ---
 © Copyright 2020, Fabrx Labs
