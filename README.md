@@ -37,7 +37,7 @@ At this moment, the scripts available are:
 
 Currently, you can play with our subgraph here:
 
-- [Ropsten](https://thegraph.com/explorer/subgraph/teller-protocol/teller-protocol).
+- [Mainnet](https://thegraph.com/explorer/subgraph/teller-protocol/subgraph-mainnet).
 
 ---
 © Copyright 2020, Fabrx Labs
