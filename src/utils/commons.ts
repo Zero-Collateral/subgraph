@@ -2,14 +2,13 @@ import { log, BigInt, ethereum, Bytes } from "@graphprotocol/graph-ts";
 import {
   Borrower,
   EthTransaction,
-  TTokenChange,
-  TTokenStatus,
+  TTokenHolderBalancesChange,
+  TTokenHolderBalancesStatus,
 } from "../../generated/schema";
 import { Address } from "@graphprotocol/graph-ts";
 import {
   EMPTY_ADDRESS_STRING,
 } from "./consts";
-import { Transfer as TransferEvent,  } from "../../generated/TDAIToken/TToken";
 
 export function getTimestampInMillis(event: ethereum.Event): BigInt {
   return event.block.timestamp.times(BigInt.fromI32(1000));
@@ -75,7 +74,7 @@ export function buildSignerId(token: string, contract: string, account: Address)
   return token + "-" + contract + "-" + account.toHexString();
 }
 
-export function createTTokenChange(
+export function createTTokenHolderBalancesChange(
   id: string,
   amount: BigInt,
   platformToken: string,
@@ -84,7 +83,7 @@ export function createTTokenChange(
   action: string,
   ethTransaction: EthTransaction
 ): void {
-  let entity = new TTokenChange(id);
+  let entity = new TTokenHolderBalancesChange(id);
   entity.transaction = ethTransaction.id;
   entity.amount = amount;
   entity.platformToken = platformToken;
@@ -96,49 +95,51 @@ export function createTTokenChange(
   entity.save();
 }
 
-export function getOrCreateTTokenStatus(holder: Address): TTokenStatus {
-  let id = holder.toHexString();
-  log.info("Loading tToken status for holder {}", [id]);
-  let entity = TTokenStatus.load(id);
+export function getOrCreateTTokenHolderBalancesStatus(platformToken: string, holder: Address): TTokenHolderBalancesStatus {
+  let id = platformToken + "_" + holder.toHexString()
+  log.info("Loading tToken {} balance status for holder {}", [platformToken, holder.toHexString()])
+  let entity = TTokenHolderBalancesStatus.load(id)
   if (entity == null) {
-    log.info("Creating new tToken status for holder {}", [id]);
-    entity = new TTokenStatus(id);
-    entity.amount = BigInt.fromI32(0);
-    entity.account = holder;
-    entity.blockNumber = BigInt.fromI32(0);
-    entity.updatedAt = BigInt.fromI32(0);
+    log.info("Creating new tToken {} balances status for holder {}", [platformToken, holder.toHexString()])
+    entity = new TTokenHolderBalancesStatus(id)
+    entity.balance = BigInt.fromI32(0)
+    entity.holder = holder
+    entity.platformToken = platformToken
+    entity.blockNumber = BigInt.fromI32(0)
+    entity.updatedAt = BigInt.fromI32(0)
   }
-  return entity as TTokenStatus;
+  return entity as TTokenHolderBalancesStatus;
 }
 
-export function updateTTokenBalancesFor(
+export function updateTTokenHolderBalancesFor(
   platformToken: string,
-  event: TransferEvent
+  from: Address,
+  value: BigInt,
+  to: Address,
+  event: ethereum.Event
 ): void {
   log.info("Updating tToken balance for holders {} / {} ", [
-    event.params.from.toHexString(),
-    event.params.to.toHexString(),
+    from.toHexString(),
+    to.toHexString(),
   ]);
-  if (event.params.from.toHexString() != EMPTY_ADDRESS_STRING) {
-    let fromEntity = getOrCreateTTokenStatus(event.params.from);
+  if (from.toHexString() != EMPTY_ADDRESS_STRING) {
+    let fromEntity = getOrCreateTTokenHolderBalancesStatus(platformToken, from);
     log.info(
       "Updating tToken balance for holder {} (from). Current balance {} {}",
-      [event.params.from.toHexString(), fromEntity.amount.toString(), platformToken]
+      [from.toHexString(), fromEntity.balance.toString(), platformToken]
     );
-    fromEntity.amount = fromEntity.amount.minus(event.params.value);
-    fromEntity.platformToken = platformToken;
+    fromEntity.balance = fromEntity.balance.minus(value);
     fromEntity.blockNumber = event.block.number;
     fromEntity.updatedAt = getTimestampInMillis(event);
     fromEntity.save();
   }
-  if (event.params.to.toHexString() != EMPTY_ADDRESS_STRING) {
-    let toEntity = getOrCreateTTokenStatus(event.params.to);
+  if (to.toHexString() != EMPTY_ADDRESS_STRING) {
+    let toEntity = getOrCreateTTokenHolderBalancesStatus(platformToken, to);
     log.info(
       "Updating tToken balance for holder {} (to). Current balance {} {}",
-      [event.params.to.toHexString(), toEntity.amount.toString(), platformToken]
+      [to.toHexString(), toEntity.balance.toString(), platformToken]
     );
-    toEntity.amount = toEntity.amount.plus(event.params.value);
-    toEntity.platformToken = platformToken;
+    toEntity.balance = toEntity.balance.plus(value);
     toEntity.blockNumber = event.block.number;
     toEntity.updatedAt = getTimestampInMillis(event);
     toEntity.save();

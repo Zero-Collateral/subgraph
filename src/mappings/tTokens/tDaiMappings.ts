@@ -1,4 +1,4 @@
-import { BigInt, Address } from "@graphprotocol/graph-ts"
+import { BigInt } from "@graphprotocol/graph-ts"
 import {
   Transfer as TransferEvent,
   Approval as ApprovalEvent,
@@ -8,8 +8,8 @@ import {
 import {
   createEthTransaction,
   buildId,
-  createTTokenChange,
-  updateTTokenBalancesFor,
+  createTTokenHolderBalancesChange,
+  updateTTokenHolderBalancesFor,
 } from "../../utils/commons";
 import {
   ETH_TX_TTOKEN_APPROVAL,
@@ -27,7 +27,7 @@ export function handleTransfer(event: TransferEvent): void {
   let id = buildId(event);
   let ethTransaction = createEthTransaction(event, ETH_TX_TTOKEN_TRANSFER);
 
-  createTTokenChange(
+  createTTokenHolderBalancesChange(
     id,
     event.params.value,
     TTOKEN_TDAI,
@@ -36,13 +36,19 @@ export function handleTransfer(event: TransferEvent): void {
     TTOKEN_STATUS_TRANSFER,
     ethTransaction
   )
-  updateTTokenBalancesFor(TTOKEN_TDAI, event)
+  updateTTokenHolderBalancesFor(
+    TTOKEN_TDAI,
+    event.params.from,
+    event.params.value,
+    event.params.to,
+    event
+  )
 }
 
 export function handleApproval(event: ApprovalEvent): void {
   let id = buildId(event);
   let ethTransaction = createEthTransaction(event, ETH_TX_TTOKEN_APPROVAL);
-  createTTokenChange(
+  createTTokenHolderBalancesChange(
     id,
     event.params.value,
     TTOKEN_TDAI,
@@ -56,7 +62,7 @@ export function handleApproval(event: ApprovalEvent): void {
 export function handleMinterAdded(event: MinterAddedEvent): void {
   let id = buildId(event);
   let ethTransaction = createEthTransaction(event, ETH_TX_TTOKEN_MINTER_ADDED);
-  createTTokenChange(
+  createTTokenHolderBalancesChange(
     id,
     BigInt.fromI32(0),
     TTOKEN_TDAI,
@@ -70,7 +76,7 @@ export function handleMinterAdded(event: MinterAddedEvent): void {
 export function handleMinterRemoved(event: MinterRemovedEvent): void {
   let id = buildId(event);
   let ethTransaction = createEthTransaction(event, ETH_TX_TTOKEN_MINTER_REMOVED);
-  createTTokenChange(
+  createTTokenHolderBalancesChange(
     id,
     BigInt.fromI32(0),
     TTOKEN_TDAI,

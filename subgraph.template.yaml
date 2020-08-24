@@ -468,8 +468,8 @@ dataSources:
       language: wasm/assemblyscript
       entities:
         - EthTransaction
-        - TTokenChange
-        - TTokenStatus
+        - TTokenHolderBalancesChange
+        - TTokenHolderBalancesStatus
       abis:
         - name: TToken
           file: ./abis/TToken.json
