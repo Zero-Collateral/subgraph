@@ -225,24 +225,51 @@ type AccruedInterestWithdrawalChange @entity {
   timestamp: BigInt!
 }
 
-type TTokenStatus @entity {
+####################################################################################
+#
+# It contains the last tToken holder balances.
+# Each row represents the current holder balance for a given tToken.
+#
+####################################################################################
+type TTokenHolderBalancesStatus @entity {
+  "TToken address and holder address."
   id: ID!
-  amount: BigInt!
+  "Current holder balance for the given platform token (tToken)."
+  balance: BigInt!
+  "TToken symbol"
   platformToken: String!
-  account: Bytes!
+  "Holder address."
+  holder: Bytes!
+  "Blocknumber the holder balance was most recently updated."
   blockNumber: BigInt!
+  "Timestamp the holder balance was most recently updated."
   updatedAt: BigInt!
 }
 
-type TTokenChange @entity {
+####################################################################################
+#
+# It contains all the tToken changes (like transfers, approvals).
+# Each change (transaction) represents a row in the entity.
+#
+####################################################################################
+type TTokenHolderBalancesChange @entity {
+  "Transaction hash and event index."
   id: ID!
+  "Transaction info about the change."
   transaction: EthTransaction!
+  "TToken amount involved in the transaction."
   amount: BigInt!
+  "The TToken name involved in the transaction."
   platformToken: String!
+  "TToken holder address that sent the transaction."
   from: Bytes!
+  "Address that received the change."
   to: Bytes!
+  "Enum that identifies the token action."
   action: TokenStatusAction!
+  "Blocknumber where the transaction was executed."
   blockNumber: BigInt!
+  "Timestamp when the transaction was executed."
   timestamp: BigInt!
 }
 

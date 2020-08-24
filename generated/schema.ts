@@ -1761,7 +1761,7 @@ export class AccruedInterestWithdrawalChange extends Entity {
   }
 }
 
-export class TTokenStatus extends Entity {
+export class TTokenHolderBalancesStatus extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
@@ -1769,17 +1769,23 @@ export class TTokenStatus extends Entity {
 
   save(): void {
     let id = this.get("id");
-    assert(id !== null, "Cannot save TTokenStatus entity without an ID");
+    assert(
+      id !== null,
+      "Cannot save TTokenHolderBalancesStatus entity without an ID"
+    );
     assert(
       id.kind == ValueKind.STRING,
-      "Cannot save TTokenStatus entity with non-string ID. " +
+      "Cannot save TTokenHolderBalancesStatus entity with non-string ID. " +
         'Considering using .toHex() to convert the "id" to a string.'
     );
-    store.set("TTokenStatus", id.toString(), this);
+    store.set("TTokenHolderBalancesStatus", id.toString(), this);
   }
 
-  static load(id: string): TTokenStatus | null {
-    return store.get("TTokenStatus", id) as TTokenStatus | null;
+  static load(id: string): TTokenHolderBalancesStatus | null {
+    return store.get(
+      "TTokenHolderBalancesStatus",
+      id
+    ) as TTokenHolderBalancesStatus | null;
   }
 
   get id(): string {
@@ -1791,13 +1797,13 @@ export class TTokenStatus extends Entity {
     this.set("id", Value.fromString(value));
   }
 
-  get amount(): BigInt {
-    let value = this.get("amount");
+  get balance(): BigInt {
+    let value = this.get("balance");
     return value.toBigInt();
   }
 
-  set amount(value: BigInt) {
-    this.set("amount", Value.fromBigInt(value));
+  set balance(value: BigInt) {
+    this.set("balance", Value.fromBigInt(value));
   }
 
   get platformToken(): string {
@@ -1809,13 +1815,13 @@ export class TTokenStatus extends Entity {
     this.set("platformToken", Value.fromString(value));
   }
 
-  get account(): Bytes {
-    let value = this.get("account");
+  get holder(): Bytes {
+    let value = this.get("holder");
     return value.toBytes();
   }
 
-  set account(value: Bytes) {
-    this.set("account", Value.fromBytes(value));
+  set holder(value: Bytes) {
+    this.set("holder", Value.fromBytes(value));
   }
 
   get blockNumber(): BigInt {
@@ -1837,7 +1843,7 @@ export class TTokenStatus extends Entity {
   }
 }
 
-export class TTokenChange extends Entity {
+export class TTokenHolderBalancesChange extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
@@ -1845,17 +1851,23 @@ export class TTokenChange extends Entity {
 
   save(): void {
     let id = this.get("id");
-    assert(id !== null, "Cannot save TTokenChange entity without an ID");
+    assert(
+      id !== null,
+      "Cannot save TTokenHolderBalancesChange entity without an ID"
+    );
     assert(
       id.kind == ValueKind.STRING,
-      "Cannot save TTokenChange entity with non-string ID. " +
+      "Cannot save TTokenHolderBalancesChange entity with non-string ID. " +
         'Considering using .toHex() to convert the "id" to a string.'
     );
-    store.set("TTokenChange", id.toString(), this);
+    store.set("TTokenHolderBalancesChange", id.toString(), this);
   }
 
-  static load(id: string): TTokenChange | null {
-    return store.get("TTokenChange", id) as TTokenChange | null;
+  static load(id: string): TTokenHolderBalancesChange | null {
+    return store.get(
+      "TTokenHolderBalancesChange",
+      id
+    ) as TTokenHolderBalancesChange | null;
   }
 
   get id(): string {
