@@ -33,7 +33,7 @@ dataSources:
       eventHandlers:
         - event: LoanTermsSet(indexed uint256,indexed address,indexed address,uint256,uint256,uint256,uint256,uint256)
           handler: handleLoanTermsSet
-        - event: LoanTakenOut(indexed uint256,indexed address,uint256)
+        - event: LoanTakenOut(indexed uint256,indexed address,indexed address,uint256)
           handler: handleLoanTakenOut
         - event: LoanRepaid(indexed uint256,indexed address,uint256,address,uint256)
           handler: handleLoanRepaid
@@ -74,7 +74,7 @@ dataSources:
       eventHandlers:
         - event: LoanTermsSet(indexed uint256,indexed address,indexed address,uint256,uint256,uint256,uint256,uint256)
           handler: handleLoanTermsSet
-        - event: LoanTakenOut(indexed uint256,indexed address,uint256)
+        - event: LoanTakenOut(indexed uint256,indexed address,indexed address,uint256)
           handler: handleLoanTakenOut
         - event: LoanRepaid(indexed uint256,indexed address,uint256,address,uint256)
           handler: handleLoanRepaid
@@ -115,7 +115,7 @@ dataSources:
       eventHandlers:
         - event: LoanTermsSet(indexed uint256,indexed address,indexed address,uint256,uint256,uint256,uint256,uint256)
           handler: handleLoanTermsSet
-        - event: LoanTakenOut(indexed uint256,indexed address,uint256)
+        - event: LoanTakenOut(indexed uint256,indexed address,indexed address,uint256)
           handler: handleLoanTakenOut
         - event: LoanRepaid(indexed uint256,indexed address,uint256,address,uint256)
           handler: handleLoanRepaid
@@ -156,7 +156,7 @@ dataSources:
       eventHandlers:
         - event: LoanTermsSet(indexed uint256,indexed address,indexed address,uint256,uint256,uint256,uint256,uint256)
           handler: handleLoanTermsSet
-        - event: LoanTakenOut(indexed uint256,indexed address,uint256)
+        - event: LoanTakenOut(indexed uint256,indexed address,indexed address,uint256)
           handler: handleLoanTakenOut
         - event: LoanRepaid(indexed uint256,indexed address,uint256,address,uint256)
           handler: handleLoanRepaid

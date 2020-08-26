@@ -8,6 +8,7 @@ import {
   CollateralWithdraw,
   CollateralDeposit,
   OracleAddressChange,
+  Escrow,
 } from "../../generated/schema";
 import { Address } from "@graphprotocol/graph-ts";
 import {
@@ -112,9 +113,22 @@ export function createLoan(
   return entity
 }
 
+export function createEscrow(escrowAddress: Address, loan: Loan): Escrow {
+  let id = escrowAddress.toHexString();
+  log.info("Creating an escrow (id: {}) associated to the loan {} ", [id, loan.id])
+  let entity = new Escrow(id)
+  entity.transaction = loan.transaction
+  entity.loan = loan.id
+  entity.blockNumber = loan.blockNumber
+  entity.timestamp = loan.timestamp
+  entity.save()
+  return entity
+}
+
 export function internalHandleLoanTakenOut(
   loanID: string,
-  borrowerAddress: Address, 
+  borrowerAddress: Address,
+  escrowAddress: Address,
   amountBorrowed: BigInt,
   event: ethereum.Event
 ): void {
@@ -129,6 +143,9 @@ export function internalHandleLoanTakenOut(
   loan.amountBorrowed = amountBorrowed
   loan.startDate = getTimestampInMillis(event)
   loan.endDate = loan.startDate.plus(loanTerms.duration)
+
+  let escrow = createEscrow(escrowAddress, loan as Loan)
+  loan.escrow = escrow.id
   loan.save()
 
   let borrower = getOrCreateBorrower(borrowerAddress)

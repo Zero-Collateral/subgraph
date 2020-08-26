@@ -151,8 +151,12 @@ export class LoanTakenOut__Params {
     return this._event.parameters[1].value.toAddress();
   }
 
+  get escrow(): Address {
+    return this._event.parameters[2].value.toAddress();
+  }
+
   get amountBorrowed(): BigInt {
-    return this._event.parameters[2].value.toBigInt();
+    return this._event.parameters[3].value.toBigInt();
   }
 }
 
@@ -265,12 +269,16 @@ export class USDCLoans__loansResultValue0Struct extends ethereum.Tuple {
     return this[8].toBigInt();
   }
 
+  get escrow(): Address {
+    return this[9].toAddress();
+  }
+
   get status(): i32 {
-    return this[9].toI32();
+    return this[10].toI32();
   }
 
   get liquidated(): boolean {
-    return this[10].toBoolean();
+    return this[11].toBoolean();
   }
 }
 
@@ -354,7 +362,7 @@ export class USDCLoans extends ethereum.SmartContract {
   loans(loanID: BigInt): USDCLoans__loansResultValue0Struct {
     let result = super.call(
       "loans",
-      "loans(uint256):((uint256,(address,address,uint256,uint256,uint256,uint256),uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint8,bool))",
+      "loans(uint256):((uint256,(address,address,uint256,uint256,uint256,uint256),uint256,uint256,uint256,uint256,uint256,uint256,uint256,address,uint8,bool))",
       [ethereum.Value.fromUnsignedBigInt(loanID)]
     );
 
@@ -366,7 +374,7 @@ export class USDCLoans extends ethereum.SmartContract {
   ): ethereum.CallResult<USDCLoans__loansResultValue0Struct> {
     let result = super.tryCall(
       "loans",
-      "loans(uint256):((uint256,(address,address,uint256,uint256,uint256,uint256),uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint8,bool))",
+      "loans(uint256):((uint256,(address,address,uint256,uint256,uint256,uint256),uint256,uint256,uint256,uint256,uint256,uint256,uint256,address,uint8,bool))",
       [ethereum.Value.fromUnsignedBigInt(loanID)]
     );
     if (result.reverted) {

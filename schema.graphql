@@ -57,7 +57,9 @@ type Loan @entity {
   startDate: BigInt! # https://github.com/graphql/graphql-js/issues/1003#issuecomment-324790647
   endDate: BigInt!
   amountBorrowed: BigInt!
+  "Current loan status."
   status: LoanStatus!
+  "All the repayments made to this loan."
   repayments: [LoanRepayment!]!
   totalRepaidAmount: BigInt!
   totalOwedAmount: BigInt!
@@ -66,7 +68,29 @@ type Loan @entity {
   collateralWithdrawns: [CollateralWithdraw!]!
   totalCollateralWithdrawalsAmount: BigInt!
   liquidation: Liquidation
+  "Represents the escrow contract that is created when the loan is taken out by the borrower or recipient. A loan can have only one escrow."
+  escrow: Escrow
+  "Blocknumber the loan was most recently updated."
   blockNumber: BigInt!
+  "Timestamp the loan was most recently updated."
+  timestamp: BigInt!
+}
+
+####################################################################################
+#
+# It contains the Escrow information related to a given loan (after it is taken out).
+#
+####################################################################################
+type Escrow @entity {
+  "It includes the market (borrowed and collateral token names) and loan ID. See Loan#ID field."
+  id: ID!
+  "The ETH transaction when the escrow was created (loan was taken out)."
+  transaction: EthTransaction!
+  "The loan reference to which this escrow is associated to."
+  loan: Loan! @relation
+  "Blocknumber the escrow was most recently updated."
+  blockNumber: BigInt!
+  "Timestamp the escrow was most recently updated."
   timestamp: BigInt!
 }
 
