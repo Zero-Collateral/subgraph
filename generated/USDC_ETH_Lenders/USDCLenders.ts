@@ -235,3 +235,45 @@ export class SetAccruedInterestCallResponsesSignatureStruct extends ethereum.Tup
     return this[3].toBytes();
   }
 }
+
+export class InitializeCall extends ethereum.Call {
+  get inputs(): InitializeCall__Inputs {
+    return new InitializeCall__Inputs(this);
+  }
+
+  get outputs(): InitializeCall__Outputs {
+    return new InitializeCall__Outputs(this);
+  }
+}
+
+export class InitializeCall__Inputs {
+  _call: InitializeCall;
+
+  constructor(call: InitializeCall) {
+    this._call = call;
+  }
+
+  get tTokenAddress(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+
+  get lendingPoolAddress(): Address {
+    return this._call.inputValues[1].value.toAddress();
+  }
+
+  get interestConsensusAddress(): Address {
+    return this._call.inputValues[2].value.toAddress();
+  }
+
+  get settingAddress(): Address {
+    return this._call.inputValues[3].value.toAddress();
+  }
+}
+
+export class InitializeCall__Outputs {
+  _call: InitializeCall;
+
+  constructor(call: InitializeCall) {
+    this._call = call;
+  }
+}

@@ -308,26 +308,21 @@ export class USDCLoans__loansResultValue0LoanTermsStruct extends ethereum.Tuple 
   }
 }
 
-export class USDCLoans__getCollateralInfoResult {
-  value0: BigInt;
-  value1: BigInt;
-  value2: BigInt;
-  value3: boolean;
-
-  constructor(value0: BigInt, value1: BigInt, value2: BigInt, value3: boolean) {
-    this.value0 = value0;
-    this.value1 = value1;
-    this.value2 = value2;
-    this.value3 = value3;
+export class USDCLoans__getCollateralInfoResultValue0Struct extends ethereum.Tuple {
+  get collateral(): BigInt {
+    return this[0].toBigInt();
   }
 
-  toMap(): TypedMap<string, ethereum.Value> {
-    let map = new TypedMap<string, ethereum.Value>();
-    map.set("value0", ethereum.Value.fromUnsignedBigInt(this.value0));
-    map.set("value1", ethereum.Value.fromUnsignedBigInt(this.value1));
-    map.set("value2", ethereum.Value.fromUnsignedBigInt(this.value2));
-    map.set("value3", ethereum.Value.fromBoolean(this.value3));
-    return map;
+  get neededInLendingTokens(): BigInt {
+    return this[1].toBigInt();
+  }
+
+  get neededInCollateralTokens(): BigInt {
+    return this[2].toBigInt();
+  }
+
+  get moreCollateralRequired(): boolean {
+    return this[3].toBoolean();
   }
 }
 
@@ -496,27 +491,68 @@ export class USDCLoans extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toAddress());
   }
 
-  getCollateralInfo(loanID: BigInt): USDCLoans__getCollateralInfoResult {
+  canLiquidateLoan(loanID: BigInt): boolean {
     let result = super.call(
-      "getCollateralInfo",
-      "getCollateralInfo(uint256):(uint256,uint256,uint256,bool)",
+      "canLiquidateLoan",
+      "canLiquidateLoan(uint256):(bool)",
       [ethereum.Value.fromUnsignedBigInt(loanID)]
     );
 
-    return new USDCLoans__getCollateralInfoResult(
-      result[0].toBigInt(),
-      result[1].toBigInt(),
-      result[2].toBigInt(),
-      result[3].toBoolean()
+    return result[0].toBoolean();
+  }
+
+  try_canLiquidateLoan(loanID: BigInt): ethereum.CallResult<boolean> {
+    let result = super.tryCall(
+      "canLiquidateLoan",
+      "canLiquidateLoan(uint256):(bool)",
+      [ethereum.Value.fromUnsignedBigInt(loanID)]
     );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBoolean());
+  }
+
+  getTotalOwed(loanID: BigInt): BigInt {
+    let result = super.call("getTotalOwed", "getTotalOwed(uint256):(uint256)", [
+      ethereum.Value.fromUnsignedBigInt(loanID)
+    ]);
+
+    return result[0].toBigInt();
+  }
+
+  try_getTotalOwed(loanID: BigInt): ethereum.CallResult<BigInt> {
+    let result = super.tryCall(
+      "getTotalOwed",
+      "getTotalOwed(uint256):(uint256)",
+      [ethereum.Value.fromUnsignedBigInt(loanID)]
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBigInt());
+  }
+
+  getCollateralInfo(
+    loanID: BigInt
+  ): USDCLoans__getCollateralInfoResultValue0Struct {
+    let result = super.call(
+      "getCollateralInfo",
+      "getCollateralInfo(uint256):((uint256,uint256,uint256,bool))",
+      [ethereum.Value.fromUnsignedBigInt(loanID)]
+    );
+
+    return result[0].toTuple() as USDCLoans__getCollateralInfoResultValue0Struct;
   }
 
   try_getCollateralInfo(
     loanID: BigInt
-  ): ethereum.CallResult<USDCLoans__getCollateralInfoResult> {
+  ): ethereum.CallResult<USDCLoans__getCollateralInfoResultValue0Struct> {
     let result = super.tryCall(
       "getCollateralInfo",
-      "getCollateralInfo(uint256):(uint256,uint256,uint256,bool)",
+      "getCollateralInfo(uint256):((uint256,uint256,uint256,bool))",
       [ethereum.Value.fromUnsignedBigInt(loanID)]
     );
     if (result.reverted) {
@@ -524,13 +560,23 @@ export class USDCLoans extends ethereum.SmartContract {
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(
-      new USDCLoans__getCollateralInfoResult(
-        value[0].toBigInt(),
-        value[1].toBigInt(),
-        value[2].toBigInt(),
-        value[3].toBoolean()
-      )
+      value[0].toTuple() as USDCLoans__getCollateralInfoResultValue0Struct
     );
+  }
+
+  settings(): Address {
+    let result = super.call("settings", "settings():(address)", []);
+
+    return result[0].toAddress();
+  }
+
+  try_settings(): ethereum.CallResult<Address> {
+    let result = super.tryCall("settings", "settings():(address)", []);
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toAddress());
   }
 }
 
@@ -848,6 +894,52 @@ export class SetPriceOracleCall__Outputs {
   _call: SetPriceOracleCall;
 
   constructor(call: SetPriceOracleCall) {
+    this._call = call;
+  }
+}
+
+export class InitializeCall extends ethereum.Call {
+  get inputs(): InitializeCall__Inputs {
+    return new InitializeCall__Inputs(this);
+  }
+
+  get outputs(): InitializeCall__Outputs {
+    return new InitializeCall__Outputs(this);
+  }
+}
+
+export class InitializeCall__Inputs {
+  _call: InitializeCall;
+
+  constructor(call: InitializeCall) {
+    this._call = call;
+  }
+
+  get priceOracleAddress(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+
+  get lendingPoolAddress(): Address {
+    return this._call.inputValues[1].value.toAddress();
+  }
+
+  get loanTermsConsensusAddress(): Address {
+    return this._call.inputValues[2].value.toAddress();
+  }
+
+  get settingsAddress(): Address {
+    return this._call.inputValues[3].value.toAddress();
+  }
+
+  get collateralTokenAddress(): Address {
+    return this._call.inputValues[4].value.toAddress();
+  }
+}
+
+export class InitializeCall__Outputs {
+  _call: InitializeCall;
+
+  constructor(call: InitializeCall) {
     this._call = call;
   }
 }
