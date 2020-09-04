@@ -78,7 +78,7 @@ type Loan @entity {
 
 ####################################################################################
 #
-# It contains the Escrow information related to a given loan (after it is taken out).
+# It contains the Escrow information related to a given loan (after it was taken out).
 #
 ####################################################################################
 type Escrow @entity {
