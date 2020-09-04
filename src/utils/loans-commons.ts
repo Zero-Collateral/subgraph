@@ -9,6 +9,7 @@ import {
   CollateralDeposit,
   OracleAddressChange,
   Escrow,
+  EthTransaction,
 } from "../../generated/schema";
 import { Address } from "@graphprotocol/graph-ts";
 import {
@@ -29,6 +30,8 @@ import {
   getTimeInMillis,
   createEthTransaction,
   buildId,
+  updateTTokenTotalLentFor,
+  updateTTokenTotalRepaidFor,
 } from "./commons";
 
 export function createLoanRepayment(
@@ -127,6 +130,7 @@ export function createEscrow(escrowAddress: Address, loan: Loan): Escrow {
 
 export function internalHandleLoanTakenOut(
   loanID: string,
+  tToken: Address,
   borrowerAddress: Address,
   escrowAddress: Address,
   amountBorrowed: BigInt,
@@ -154,9 +158,16 @@ export function internalHandleLoanTakenOut(
   loans.push(loanID)
   borrower.loans = loans
   borrower.save()
+
+  updateTTokenTotalLentFor(
+    tToken,
+    amountBorrowed,
+    ethTransaction
+  )
 }
 
 export function internalHandleLoanRepaid(
+  tToken: Address,
   loanID: string,
   amountPaid: BigInt,
   totalOwed: BigInt,
@@ -181,6 +192,13 @@ export function internalHandleLoanRepaid(
   loan.totalRepaidAmount = loan.totalRepaidAmount.plus(amountPaid)
   loan.totalOwedAmount = totalOwed
   loan.save()
+
+  let ethTransaction = EthTransaction.load(repayment.transaction) as EthTransaction
+  updateTTokenTotalRepaidFor(
+    tToken,
+    amountPaid,
+    ethTransaction
+  )
 }
 
 export function internalHandleLoanTermsSet(

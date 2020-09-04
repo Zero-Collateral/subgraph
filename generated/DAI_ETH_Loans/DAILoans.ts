@@ -578,6 +578,36 @@ export class DAILoans extends ethereum.SmartContract {
     let value = result.value;
     return ethereum.CallResult.fromValue(value[0].toAddress());
   }
+
+  tToken(): Address {
+    let result = super.call("tToken", "tToken():(address)", []);
+
+    return result[0].toAddress();
+  }
+
+  try_tToken(): ethereum.CallResult<Address> {
+    let result = super.tryCall("tToken", "tToken():(address)", []);
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toAddress());
+  }
+
+  cToken(): Address {
+    let result = super.call("cToken", "cToken():(address)", []);
+
+    return result[0].toAddress();
+  }
+
+  try_cToken(): ethereum.CallResult<Address> {
+    let result = super.tryCall("cToken", "cToken():(address)", []);
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toAddress());
+  }
 }
 
 export class DepositCollateralCall extends ethereum.Call {

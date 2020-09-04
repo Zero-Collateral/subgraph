@@ -10,6 +10,7 @@ import {
   buildId,
   createTTokenHolderBalancesChange,
   updateTTokenHolderBalancesFor,
+  updateTTokenTotalSupplyFor,
 } from "../../utils/commons";
 import {
   ETH_TX_TTOKEN_APPROVAL,
@@ -42,6 +43,13 @@ export function handleTransfer(event: TransferEvent): void {
     event.params.value,
     event.params.to,
     event
+  )
+  updateTTokenTotalSupplyFor(
+    event.address,
+    event.params.from,
+    event.params.to,
+    event.params.value,
+    ethTransaction,
   )
 }
 

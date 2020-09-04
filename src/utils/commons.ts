@@ -4,6 +4,7 @@ import {
   EthTransaction,
   TTokenHolderBalancesChange,
   TTokenHolderBalancesStatus,
+  TTokenTotalValuesStatus,
 } from "../../generated/schema";
 import { Address } from "@graphprotocol/graph-ts";
 import {
@@ -144,4 +145,75 @@ export function updateTTokenHolderBalancesFor(
     toEntity.updatedAt = getTimestampInMillis(event);
     toEntity.save();
   }
+}
+
+export function getOrCreateTTokenTotalValuesStatusFor(tToken: Address, ethTransaction: EthTransaction): TTokenTotalValuesStatus {
+  let id = tToken.toHexString();
+  let entity = TTokenTotalValuesStatus.load(id);
+  if (entity == null) {
+    entity = new TTokenTotalValuesStatus(id);
+    entity.ttoken = tToken;
+    entity.totalSupply = BigInt.fromI32(0);
+    entity.totalLent = BigInt.fromI32(0);
+    entity.totalRepaid = BigInt.fromI32(0);
+    entity.blockNumber = ethTransaction.blockNumber;
+    entity.timestamp = ethTransaction.timestamp;
+    entity.save();
+  }
+  return entity as TTokenTotalValuesStatus;
+}
+
+export function updateTTokenTotalSupplyFor(
+  tToken: Address,
+  from: Address,
+  to: Address,
+  amount: BigInt,
+  ethTransaction: EthTransaction,
+): TTokenTotalValuesStatus {
+  let entity = getOrCreateTTokenTotalValuesStatusFor(tToken, ethTransaction);
+  let isMinting = from.toHexString() == EMPTY_ADDRESS_STRING
+  let isBurning = to.toHexString() == EMPTY_ADDRESS_STRING
+  if (isBurning && isMinting) {
+    // TODO Once the Alert entities, add a new alert. Both addresses 'from' and 'to' are empty.
+  }
+  if (isMinting) {
+    entity.totalSupply = entity.totalSupply.plus(amount);
+  }
+  if (isBurning) {
+    entity.totalSupply = entity.totalSupply.minus(amount);
+  }
+  entity.blockNumber = ethTransaction.blockNumber;
+  entity.timestamp = ethTransaction.timestamp;
+  entity.save();
+
+  return entity as TTokenTotalValuesStatus
+}
+
+export function updateTTokenTotalLentFor(
+  tToken: Address,
+  amount: BigInt,
+  ethTransaction: EthTransaction,
+): TTokenTotalValuesStatus {
+  let entity = getOrCreateTTokenTotalValuesStatusFor(tToken, ethTransaction);
+  log.info("Updating ttoken {} total lent with amount {} ({})", [tToken.toHexString(), amount.toString(), ethTransaction.event])
+  entity.totalLent = entity.totalLent.plus(amount);
+  entity.blockNumber = ethTransaction.blockNumber;
+  entity.timestamp = ethTransaction.timestamp;
+  entity.save();
+
+  return entity as TTokenTotalValuesStatus
+}
+
+export function updateTTokenTotalRepaidFor(
+  tToken: Address,
+  amount: BigInt,
+  ethTransaction: EthTransaction,
+): TTokenTotalValuesStatus {
+  let entity = getOrCreateTTokenTotalValuesStatusFor(tToken, ethTransaction);
+  log.info("Updating ttoken {} total repaid with amount {} ({})", [tToken.toHexString(), amount.toString(), ethTransaction.event])
+  entity.totalRepaid = entity.totalRepaid.plus(amount);
+  entity.blockNumber = ethTransaction.blockNumber;
+  entity.timestamp = ethTransaction.timestamp;
+  entity.save();
+  return entity as TTokenTotalValuesStatus
 }

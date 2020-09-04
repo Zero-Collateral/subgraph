@@ -429,3 +429,25 @@ type OracleAddressChange @entity {
   blockNumber: BigInt!
   timestamp: BigInt!
 }
+
+####################################################################################
+#
+# It contains the total values (supply, and lent) per TToken asset.
+#
+####################################################################################
+type TTokenTotalValuesStatus @entity {
+  "It is the TToken address."
+  id: ID!
+  "The TToken address."
+  ttoken: Bytes!
+  "The current total supply for the given TToken."
+  totalSupply: BigInt!
+  "The current total lent for the given TToken."
+  totalLent: BigInt!
+  "The current total repaid amount for the given TToken."
+  totalRepaid: BigInt!
+  "Blocknumber the total supply was most recently updated."
+  blockNumber: BigInt!
+  "Timestamp the total supply was most recently updated."
+  timestamp: BigInt!
+}

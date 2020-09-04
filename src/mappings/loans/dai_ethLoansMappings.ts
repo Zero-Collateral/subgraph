@@ -17,7 +17,15 @@ import {
   internalHandleCollateralWithdrawn,
   internalHandlePriceOracleUpdated,
 } from "../../utils/loans-commons";
-import { buildLoanId, buildId } from "../../utils/commons";
+import { buildLoanId } from "../../utils/commons";
+import { DAILoans } from "../../../generated/DAI_ETH_Loans/DAILoans";
+import { Address } from "@graphprotocol/graph-ts";
+
+function getTTokenAddress(loansAddress: Address): Address {
+  let loans = DAILoans.bind(loansAddress);
+  let tTokenAddress = loans.tToken();
+  return tTokenAddress;
+}
 
 export function handleCollateralDeposited(
   event: CollateralDepositedEvent
@@ -80,6 +88,7 @@ export function handleLoanTakenOut(event: LoanTakenOutEvent): void {
   );
   internalHandleLoanTakenOut(
     loanID,
+    getTTokenAddress(event.address),
     event.params.borrower,
     event.params.escrow,
     event.params.amountBorrowed,
@@ -94,6 +103,7 @@ export function handleLoanRepaid(event: LoanRepaidEvent): void {
     event.params.loanID.toString()
   );
   internalHandleLoanRepaid(
+    getTTokenAddress(event.address),
     loanID,
     event.params.amountPaid,
     event.params.totalOwed,
