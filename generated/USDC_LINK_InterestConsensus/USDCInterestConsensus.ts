@@ -226,190 +226,6 @@ export class USDCInterestConsensus extends ethereum.SmartContract {
     return new USDCInterestConsensus("USDCInterestConsensus", address);
   }
 
-  LIQUIDATE_ETH_PRICE_SETTING(): Bytes {
-    let result = super.call(
-      "LIQUIDATE_ETH_PRICE_SETTING",
-      "LIQUIDATE_ETH_PRICE_SETTING():(bytes32)",
-      []
-    );
-
-    return result[0].toBytes();
-  }
-
-  try_LIQUIDATE_ETH_PRICE_SETTING(): ethereum.CallResult<Bytes> {
-    let result = super.tryCall(
-      "LIQUIDATE_ETH_PRICE_SETTING",
-      "LIQUIDATE_ETH_PRICE_SETTING():(bytes32)",
-      []
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBytes());
-  }
-
-  MAXIMUM_LOAN_DURATION_SETTING(): Bytes {
-    let result = super.call(
-      "MAXIMUM_LOAN_DURATION_SETTING",
-      "MAXIMUM_LOAN_DURATION_SETTING():(bytes32)",
-      []
-    );
-
-    return result[0].toBytes();
-  }
-
-  try_MAXIMUM_LOAN_DURATION_SETTING(): ethereum.CallResult<Bytes> {
-    let result = super.tryCall(
-      "MAXIMUM_LOAN_DURATION_SETTING",
-      "MAXIMUM_LOAN_DURATION_SETTING():(bytes32)",
-      []
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBytes());
-  }
-
-  MAXIMUM_TOLERANCE_SETTING(): Bytes {
-    let result = super.call(
-      "MAXIMUM_TOLERANCE_SETTING",
-      "MAXIMUM_TOLERANCE_SETTING():(bytes32)",
-      []
-    );
-
-    return result[0].toBytes();
-  }
-
-  try_MAXIMUM_TOLERANCE_SETTING(): ethereum.CallResult<Bytes> {
-    let result = super.tryCall(
-      "MAXIMUM_TOLERANCE_SETTING",
-      "MAXIMUM_TOLERANCE_SETTING():(bytes32)",
-      []
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBytes());
-  }
-
-  REQUEST_LOAN_TERMS_RATE_LIMIT_SETTING(): Bytes {
-    let result = super.call(
-      "REQUEST_LOAN_TERMS_RATE_LIMIT_SETTING",
-      "REQUEST_LOAN_TERMS_RATE_LIMIT_SETTING():(bytes32)",
-      []
-    );
-
-    return result[0].toBytes();
-  }
-
-  try_REQUEST_LOAN_TERMS_RATE_LIMIT_SETTING(): ethereum.CallResult<Bytes> {
-    let result = super.tryCall(
-      "REQUEST_LOAN_TERMS_RATE_LIMIT_SETTING",
-      "REQUEST_LOAN_TERMS_RATE_LIMIT_SETTING():(bytes32)",
-      []
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBytes());
-  }
-
-  REQUIRED_SUBMISSIONS_SETTING(): Bytes {
-    let result = super.call(
-      "REQUIRED_SUBMISSIONS_SETTING",
-      "REQUIRED_SUBMISSIONS_SETTING():(bytes32)",
-      []
-    );
-
-    return result[0].toBytes();
-  }
-
-  try_REQUIRED_SUBMISSIONS_SETTING(): ethereum.CallResult<Bytes> {
-    let result = super.tryCall(
-      "REQUIRED_SUBMISSIONS_SETTING",
-      "REQUIRED_SUBMISSIONS_SETTING():(bytes32)",
-      []
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBytes());
-  }
-
-  RESPONSE_EXPIRY_LENGTH_SETTING(): Bytes {
-    let result = super.call(
-      "RESPONSE_EXPIRY_LENGTH_SETTING",
-      "RESPONSE_EXPIRY_LENGTH_SETTING():(bytes32)",
-      []
-    );
-
-    return result[0].toBytes();
-  }
-
-  try_RESPONSE_EXPIRY_LENGTH_SETTING(): ethereum.CallResult<Bytes> {
-    let result = super.tryCall(
-      "RESPONSE_EXPIRY_LENGTH_SETTING",
-      "RESPONSE_EXPIRY_LENGTH_SETTING():(bytes32)",
-      []
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBytes());
-  }
-
-  SAFETY_INTERVAL_SETTING(): Bytes {
-    let result = super.call(
-      "SAFETY_INTERVAL_SETTING",
-      "SAFETY_INTERVAL_SETTING():(bytes32)",
-      []
-    );
-
-    return result[0].toBytes();
-  }
-
-  try_SAFETY_INTERVAL_SETTING(): ethereum.CallResult<Bytes> {
-    let result = super.tryCall(
-      "SAFETY_INTERVAL_SETTING",
-      "SAFETY_INTERVAL_SETTING():(bytes32)",
-      []
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBytes());
-  }
-
-  TERMS_EXPIRY_TIME_SETTING(): Bytes {
-    let result = super.call(
-      "TERMS_EXPIRY_TIME_SETTING",
-      "TERMS_EXPIRY_TIME_SETTING():(bytes32)",
-      []
-    );
-
-    return result[0].toBytes();
-  }
-
-  try_TERMS_EXPIRY_TIME_SETTING(): ethereum.CallResult<Bytes> {
-    let result = super.tryCall(
-      "TERMS_EXPIRY_TIME_SETTING",
-      "TERMS_EXPIRY_TIME_SETTING():(bytes32)",
-      []
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBytes());
-  }
-
   callerAddress(): Address {
     let result = super.call("callerAddress", "callerAddress():(address)", []);
 
@@ -422,6 +238,21 @@ export class USDCInterestConsensus extends ethereum.SmartContract {
       "callerAddress():(address)",
       []
     );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toAddress());
+  }
+
+  consts(): Address {
+    let result = super.call("consts", "consts():(address)", []);
+
+    return result[0].toAddress();
+  }
+
+  try_consts(): ethereum.CallResult<Address> {
+    let result = super.tryCall("consts", "consts():(address)", []);
     if (result.reverted) {
       return new ethereum.CallResult();
     }
@@ -558,21 +389,6 @@ export class USDCInterestConsensus extends ethereum.SmartContract {
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(value[0].toBoolean());
-  }
-
-  markets(): Address {
-    let result = super.call("markets", "markets():(address)", []);
-
-    return result[0].toAddress();
-  }
-
-  try_markets(): ethereum.CallResult<Address> {
-    let result = super.tryCall("markets", "markets():(address)", []);
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toAddress());
   }
 
   owner(): Address {
@@ -735,6 +551,36 @@ export class AddSignerCall__Outputs {
   }
 }
 
+export class AddSignersCall extends ethereum.Call {
+  get inputs(): AddSignersCall__Inputs {
+    return new AddSignersCall__Inputs(this);
+  }
+
+  get outputs(): AddSignersCall__Outputs {
+    return new AddSignersCall__Outputs(this);
+  }
+}
+
+export class AddSignersCall__Inputs {
+  _call: AddSignersCall;
+
+  constructor(call: AddSignersCall) {
+    this._call = call;
+  }
+
+  get accounts(): Array<Address> {
+    return this._call.inputValues[0].value.toAddressArray();
+  }
+}
+
+export class AddSignersCall__Outputs {
+  _call: AddSignersCall;
+
+  constructor(call: AddSignersCall) {
+    this._call = call;
+  }
+}
+
 export class InitializeCall extends ethereum.Call {
   get inputs(): InitializeCall__Inputs {
     return new InitializeCall__Inputs(this);
@@ -778,15 +624,15 @@ export class Initialize1Call__Inputs {
     this._call = call;
   }
 
-  get aCallerAddress(): Address {
+  get owner(): Address {
     return this._call.inputValues[0].value.toAddress();
   }
 
-  get aSettingAddress(): Address {
+  get aCallerAddress(): Address {
     return this._call.inputValues[1].value.toAddress();
   }
 
-  get aMarketsAddress(): Address {
+  get aSettingAddress(): Address {
     return this._call.inputValues[2].value.toAddress();
   }
 }

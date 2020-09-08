@@ -165,29 +165,6 @@ export class USDCLendingPool extends ethereum.SmartContract {
     let value = result.value;
     return ethereum.CallResult.fromValue(value[0].toAddress());
   }
-
-  interestValidator(): Address {
-    let result = super.call(
-      "interestValidator",
-      "interestValidator():(address)",
-      []
-    );
-
-    return result[0].toAddress();
-  }
-
-  try_interestValidator(): ethereum.CallResult<Address> {
-    let result = super.tryCall(
-      "interestValidator",
-      "interestValidator():(address)",
-      []
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toAddress());
-  }
 }
 
 export class DepositCall extends ethereum.Call {
@@ -382,32 +359,52 @@ export class WithdrawInterestCall__Outputs {
   }
 }
 
-export class SetInterestValidatorCall extends ethereum.Call {
-  get inputs(): SetInterestValidatorCall__Inputs {
-    return new SetInterestValidatorCall__Inputs(this);
+export class InitializeCall extends ethereum.Call {
+  get inputs(): InitializeCall__Inputs {
+    return new InitializeCall__Inputs(this);
   }
 
-  get outputs(): SetInterestValidatorCall__Outputs {
-    return new SetInterestValidatorCall__Outputs(this);
+  get outputs(): InitializeCall__Outputs {
+    return new InitializeCall__Outputs(this);
   }
 }
 
-export class SetInterestValidatorCall__Inputs {
-  _call: SetInterestValidatorCall;
+export class InitializeCall__Inputs {
+  _call: InitializeCall;
 
-  constructor(call: SetInterestValidatorCall) {
+  constructor(call: InitializeCall) {
     this._call = call;
   }
 
-  get newInterestValidator(): Address {
+  get tTokenAddress(): Address {
     return this._call.inputValues[0].value.toAddress();
+  }
+
+  get lendingTokenAddress(): Address {
+    return this._call.inputValues[1].value.toAddress();
+  }
+
+  get lendersAddress(): Address {
+    return this._call.inputValues[2].value.toAddress();
+  }
+
+  get loansAddress(): Address {
+    return this._call.inputValues[3].value.toAddress();
+  }
+
+  get cTokenAddress(): Address {
+    return this._call.inputValues[4].value.toAddress();
+  }
+
+  get settingsAddress(): Address {
+    return this._call.inputValues[5].value.toAddress();
   }
 }
 
-export class SetInterestValidatorCall__Outputs {
-  _call: SetInterestValidatorCall;
+export class InitializeCall__Outputs {
+  _call: InitializeCall;
 
-  constructor(call: SetInterestValidatorCall) {
+  constructor(call: InitializeCall) {
     this._call = call;
   }
 }

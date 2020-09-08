@@ -400,6 +400,90 @@ export class Loan extends Entity {
     }
   }
 
+  get escrow(): string | null {
+    let value = this.get("escrow");
+    if (value === null) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set escrow(value: string | null) {
+    if (value === null) {
+      this.unset("escrow");
+    } else {
+      this.set("escrow", Value.fromString(value as string));
+    }
+  }
+
+  get blockNumber(): BigInt {
+    let value = this.get("blockNumber");
+    return value.toBigInt();
+  }
+
+  set blockNumber(value: BigInt) {
+    this.set("blockNumber", Value.fromBigInt(value));
+  }
+
+  get timestamp(): BigInt {
+    let value = this.get("timestamp");
+    return value.toBigInt();
+  }
+
+  set timestamp(value: BigInt) {
+    this.set("timestamp", Value.fromBigInt(value));
+  }
+}
+
+export class Escrow extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id !== null, "Cannot save Escrow entity without an ID");
+    assert(
+      id.kind == ValueKind.STRING,
+      "Cannot save Escrow entity with non-string ID. " +
+        'Considering using .toHex() to convert the "id" to a string.'
+    );
+    store.set("Escrow", id.toString(), this);
+  }
+
+  static load(id: string): Escrow | null {
+    return store.get("Escrow", id) as Escrow | null;
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get transaction(): string {
+    let value = this.get("transaction");
+    return value.toString();
+  }
+
+  set transaction(value: string) {
+    this.set("transaction", Value.fromString(value));
+  }
+
+  get loan(): string {
+    let value = this.get("loan");
+    return value.toString();
+  }
+
+  set loan(value: string) {
+    this.set("loan", Value.fromString(value));
+  }
+
   get blockNumber(): BigInt {
     let value = this.get("blockNumber");
     return value.toBigInt();

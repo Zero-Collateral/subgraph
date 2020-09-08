@@ -432,6 +432,21 @@ export class SettingsInterface extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toBytes());
   }
 
+  ETH_ADDRESS(): Address {
+    let result = super.call("ETH_ADDRESS", "ETH_ADDRESS():(address)", []);
+
+    return result[0].toAddress();
+  }
+
+  try_ETH_ADDRESS(): ethereum.CallResult<Address> {
+    let result = super.tryCall("ETH_ADDRESS", "ETH_ADDRESS():(address)", []);
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toAddress());
+  }
+
   MAX_LOAN_AMOUNT_ASSET_SETTING(): Bytes {
     let result = super.call(
       "MAX_LOAN_AMOUNT_ASSET_SETTING",
@@ -507,6 +522,78 @@ export class SettingsInterface extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toAddress());
   }
 
+  atmSettings(): Address {
+    let result = super.call("atmSettings", "atmSettings():(address)", []);
+
+    return result[0].toAddress();
+  }
+
+  try_atmSettings(): ethereum.CallResult<Address> {
+    let result = super.tryCall("atmSettings", "atmSettings():(address)", []);
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toAddress());
+  }
+
+  escrowFactory(): Address {
+    let result = super.call("escrowFactory", "escrowFactory():(address)", []);
+
+    return result[0].toAddress();
+  }
+
+  try_escrowFactory(): ethereum.CallResult<Address> {
+    let result = super.tryCall(
+      "escrowFactory",
+      "escrowFactory():(address)",
+      []
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toAddress());
+  }
+
+  initialized(): boolean {
+    let result = super.call("initialized", "initialized():(bool)", []);
+
+    return result[0].toBoolean();
+  }
+
+  try_initialized(): ethereum.CallResult<boolean> {
+    let result = super.tryCall("initialized", "initialized():(bool)", []);
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBoolean());
+  }
+
+  interestValidator(): Address {
+    let result = super.call(
+      "interestValidator",
+      "interestValidator():(address)",
+      []
+    );
+
+    return result[0].toAddress();
+  }
+
+  try_interestValidator(): ethereum.CallResult<Address> {
+    let result = super.tryCall(
+      "interestValidator",
+      "interestValidator():(address)",
+      []
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toAddress());
+  }
+
   isPauser(account: Address): boolean {
     let result = super.call("isPauser", "isPauser(address):(bool)", [
       ethereum.Value.fromAddress(account)
@@ -547,6 +634,44 @@ export class SettingsInterface extends ethereum.SmartContract {
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(value[0].toBoolean());
+  }
+
+  marketsState(): Address {
+    let result = super.call("marketsState", "marketsState():(address)", []);
+
+    return result[0].toAddress();
+  }
+
+  try_marketsState(): ethereum.CallResult<Address> {
+    let result = super.tryCall("marketsState", "marketsState():(address)", []);
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toAddress());
+  }
+
+  pairAggregatorRegistry(): Address {
+    let result = super.call(
+      "pairAggregatorRegistry",
+      "pairAggregatorRegistry():(address)",
+      []
+    );
+
+    return result[0].toAddress();
+  }
+
+  try_pairAggregatorRegistry(): ethereum.CallResult<Address> {
+    let result = super.tryCall(
+      "pairAggregatorRegistry",
+      "pairAggregatorRegistry():(address)",
+      []
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toAddress());
   }
 
   paused(): boolean {
@@ -599,6 +724,44 @@ export class SettingsInterface extends ethereum.SmartContract {
         value[3].toBoolean()
       )
     );
+  }
+
+  settings(): Address {
+    let result = super.call("settings", "settings():(address)", []);
+
+    return result[0].toAddress();
+  }
+
+  try_settings(): ethereum.CallResult<Address> {
+    let result = super.tryCall("settings", "settings():(address)", []);
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toAddress());
+  }
+
+  versionsRegistry(): Address {
+    let result = super.call(
+      "versionsRegistry",
+      "versionsRegistry():(address)",
+      []
+    );
+
+    return result[0].toAddress();
+  }
+
+  try_versionsRegistry(): ethereum.CallResult<Address> {
+    let result = super.tryCall(
+      "versionsRegistry",
+      "versionsRegistry():(address)",
+      []
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toAddress());
   }
 
   getPlatformSetting(
@@ -819,36 +982,6 @@ export class AddPauserCall__Outputs {
   _call: AddPauserCall;
 
   constructor(call: AddPauserCall) {
-    this._call = call;
-  }
-}
-
-export class InitializeCall extends ethereum.Call {
-  get inputs(): InitializeCall__Inputs {
-    return new InitializeCall__Inputs(this);
-  }
-
-  get outputs(): InitializeCall__Outputs {
-    return new InitializeCall__Outputs(this);
-  }
-}
-
-export class InitializeCall__Inputs {
-  _call: InitializeCall;
-
-  constructor(call: InitializeCall) {
-    this._call = call;
-  }
-
-  get sender(): Address {
-    return this._call.inputValues[0].value.toAddress();
-  }
-}
-
-export class InitializeCall__Outputs {
-  _call: InitializeCall;
-
-  constructor(call: InitializeCall) {
     this._call = call;
   }
 }
@@ -1229,6 +1362,86 @@ export class UpdateCTokenAddressCall__Outputs {
   _call: UpdateCTokenAddressCall;
 
   constructor(call: UpdateCTokenAddressCall) {
+    this._call = call;
+  }
+}
+
+export class InitializeCall extends ethereum.Call {
+  get inputs(): InitializeCall__Inputs {
+    return new InitializeCall__Inputs(this);
+  }
+
+  get outputs(): InitializeCall__Outputs {
+    return new InitializeCall__Outputs(this);
+  }
+}
+
+export class InitializeCall__Inputs {
+  _call: InitializeCall;
+
+  constructor(call: InitializeCall) {
+    this._call = call;
+  }
+
+  get sender(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+}
+
+export class InitializeCall__Outputs {
+  _call: InitializeCall;
+
+  constructor(call: InitializeCall) {
+    this._call = call;
+  }
+}
+
+export class Initialize1Call extends ethereum.Call {
+  get inputs(): Initialize1Call__Inputs {
+    return new Initialize1Call__Inputs(this);
+  }
+
+  get outputs(): Initialize1Call__Outputs {
+    return new Initialize1Call__Outputs(this);
+  }
+}
+
+export class Initialize1Call__Inputs {
+  _call: Initialize1Call;
+
+  constructor(call: Initialize1Call) {
+    this._call = call;
+  }
+
+  get escrowFactoryAddress(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+
+  get versionsRegistryAddress(): Address {
+    return this._call.inputValues[1].value.toAddress();
+  }
+
+  get pairAggregatorRegistryAddress(): Address {
+    return this._call.inputValues[2].value.toAddress();
+  }
+
+  get marketsStateAddress(): Address {
+    return this._call.inputValues[3].value.toAddress();
+  }
+
+  get interestValidatorAddress(): Address {
+    return this._call.inputValues[4].value.toAddress();
+  }
+
+  get atmSettingsAddress(): Address {
+    return this._call.inputValues[5].value.toAddress();
+  }
+}
+
+export class Initialize1Call__Outputs {
+  _call: Initialize1Call;
+
+  constructor(call: Initialize1Call) {
     this._call = call;
   }
 }

@@ -81,6 +81,7 @@ export function handleLoanTakenOut(event: LoanTakenOutEvent): void {
   internalHandleLoanTakenOut(
     loanID,
     event.params.borrower,
+    event.params.escrow,
     event.params.amountBorrowed,
     event
   );
