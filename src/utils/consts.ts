@@ -1,5 +1,6 @@
 // See enums in schema.graphql
 export const EMPTY_ADDRESS_STRING = "0x0000000000000000000000000000000000000000";
+export const ETH_ADDRESS_STRING = "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee";
 
 // Collateral Tokens consts
 export const COLLATERAL_TOKEN_ETH = "ETH";
@@ -65,6 +66,9 @@ export const ETH_TX_TTOKEN_TRANSFER = "TTokenTransfer"
 export const ETH_TX_TTOKEN_APPROVAL = "TTokenApproval"
 export const ETH_TX_TTOKEN_MINTER_ADDED = "TTokenMinterAdded"
 export const ETH_TX_TTOKEN_MINTER_REMOVED = "TTokenMinterRemoved"
+// ChainlinkPairAggregator
+export const ETH_TX_PAIR_AGGREGATOR_REGISTERED = "PairAggregatorRegistered"
+export const ETH_TX_PAIR_AGGREGATOR_UPDATED = "PairAggregatorUpdated"
 
 // Tokens consts
 export const TOKEN_DAI = "DAI";

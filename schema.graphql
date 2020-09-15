@@ -451,3 +451,67 @@ type TTokenTotalValuesStatus @entity {
   "Timestamp the total supply was most recently updated."
   timestamp: BigInt!
 }
+
+####################################################################################
+#
+# It contains the current pair aggregators used in the platform.
+#
+####################################################################################
+type PairAggregatorsStatus @entity {
+  "It includes the pair (base/quote) address."
+  id: ID!
+  "This is the base token (ERC20) address."
+  baseToken: Bytes!
+  "This is the base token (ERC20) symbol."
+  baseTokenSymbol: String!
+  "This is the quote token (ERC20) address."
+  quoteToken: Bytes!
+  "This is the quote token (ERC20) symbol."
+  quoteTokenSymbol: String!
+  "This is the pair aggregator address (proxy address)."
+  aggregator: Bytes!
+  "The decimals included in the oracle response."
+  responseDecimals: BigInt!
+  "The decimals included in the collateral token."
+  collateralDecimals: BigInt!
+  "It defines if this pair aggregator is inverse."
+  inverse: Boolean!
+  "Blocknumber the pair aggregator (baseToken and quoteToken) was most recently updated."
+  blockNumber: BigInt!
+  "Timestamp the pair aggregator (baseToken and quoteToken) was most recently updated."
+  timestamp: BigInt!
+}
+
+####################################################################################
+#
+# It contains the current pair aggregators used in the platform.
+#
+####################################################################################
+type PairAggregatorsChange @entity {
+  "It includes transaction hash and event log index."
+  id: ID!
+  "The ETH transaction when the pair aggregator was registered."
+  transaction: EthTransaction!
+  "Address that created this pair aggregator."
+  creator: Bytes!
+  "This is the base token (ERC20) address."
+  baseToken: Bytes!
+  "This is the base token (ERC20) symbol."
+  baseTokenSymbol: String!
+  "This is the quote token (ERC20) address."
+  quoteToken: Bytes!
+  "This is the quote token (ERC20) symbol."
+  quoteTokenSymbol: String!
+  "This is the pair aggregator address (proxy address)."
+  aggregator: Bytes!
+  "The decimals included in the oracle response."
+  responseDecimals: BigInt!
+  "The decimals included in the collateral token."
+  collateralDecimals: BigInt!
+  "It defines if this pair aggregator is inverse."
+  inverse: Boolean!
+  "Blocknumber the pair aggregator (baseToken and quoteToken) was most recently updated."
+  blockNumber: BigInt!
+  "Timestamp the pair aggregator (baseToken and quoteToken) was most recently updated."
+  timestamp: BigInt!
+}
