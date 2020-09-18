@@ -3285,3 +3285,275 @@ export class TTokenTotalValuesStatus extends Entity {
     this.set("timestamp", Value.fromBigInt(value));
   }
 }
+
+export class PairAggregatorsStatus extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(
+      id !== null,
+      "Cannot save PairAggregatorsStatus entity without an ID"
+    );
+    assert(
+      id.kind == ValueKind.STRING,
+      "Cannot save PairAggregatorsStatus entity with non-string ID. " +
+        'Considering using .toHex() to convert the "id" to a string.'
+    );
+    store.set("PairAggregatorsStatus", id.toString(), this);
+  }
+
+  static load(id: string): PairAggregatorsStatus | null {
+    return store.get(
+      "PairAggregatorsStatus",
+      id
+    ) as PairAggregatorsStatus | null;
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get baseToken(): Bytes {
+    let value = this.get("baseToken");
+    return value.toBytes();
+  }
+
+  set baseToken(value: Bytes) {
+    this.set("baseToken", Value.fromBytes(value));
+  }
+
+  get baseTokenSymbol(): string {
+    let value = this.get("baseTokenSymbol");
+    return value.toString();
+  }
+
+  set baseTokenSymbol(value: string) {
+    this.set("baseTokenSymbol", Value.fromString(value));
+  }
+
+  get quoteToken(): Bytes {
+    let value = this.get("quoteToken");
+    return value.toBytes();
+  }
+
+  set quoteToken(value: Bytes) {
+    this.set("quoteToken", Value.fromBytes(value));
+  }
+
+  get quoteTokenSymbol(): string {
+    let value = this.get("quoteTokenSymbol");
+    return value.toString();
+  }
+
+  set quoteTokenSymbol(value: string) {
+    this.set("quoteTokenSymbol", Value.fromString(value));
+  }
+
+  get aggregator(): Bytes {
+    let value = this.get("aggregator");
+    return value.toBytes();
+  }
+
+  set aggregator(value: Bytes) {
+    this.set("aggregator", Value.fromBytes(value));
+  }
+
+  get responseDecimals(): BigInt {
+    let value = this.get("responseDecimals");
+    return value.toBigInt();
+  }
+
+  set responseDecimals(value: BigInt) {
+    this.set("responseDecimals", Value.fromBigInt(value));
+  }
+
+  get collateralDecimals(): BigInt {
+    let value = this.get("collateralDecimals");
+    return value.toBigInt();
+  }
+
+  set collateralDecimals(value: BigInt) {
+    this.set("collateralDecimals", Value.fromBigInt(value));
+  }
+
+  get inverse(): boolean {
+    let value = this.get("inverse");
+    return value.toBoolean();
+  }
+
+  set inverse(value: boolean) {
+    this.set("inverse", Value.fromBoolean(value));
+  }
+
+  get blockNumber(): BigInt {
+    let value = this.get("blockNumber");
+    return value.toBigInt();
+  }
+
+  set blockNumber(value: BigInt) {
+    this.set("blockNumber", Value.fromBigInt(value));
+  }
+
+  get timestamp(): BigInt {
+    let value = this.get("timestamp");
+    return value.toBigInt();
+  }
+
+  set timestamp(value: BigInt) {
+    this.set("timestamp", Value.fromBigInt(value));
+  }
+}
+
+export class PairAggregatorsChange extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(
+      id !== null,
+      "Cannot save PairAggregatorsChange entity without an ID"
+    );
+    assert(
+      id.kind == ValueKind.STRING,
+      "Cannot save PairAggregatorsChange entity with non-string ID. " +
+        'Considering using .toHex() to convert the "id" to a string.'
+    );
+    store.set("PairAggregatorsChange", id.toString(), this);
+  }
+
+  static load(id: string): PairAggregatorsChange | null {
+    return store.get(
+      "PairAggregatorsChange",
+      id
+    ) as PairAggregatorsChange | null;
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get transaction(): string {
+    let value = this.get("transaction");
+    return value.toString();
+  }
+
+  set transaction(value: string) {
+    this.set("transaction", Value.fromString(value));
+  }
+
+  get creator(): Bytes {
+    let value = this.get("creator");
+    return value.toBytes();
+  }
+
+  set creator(value: Bytes) {
+    this.set("creator", Value.fromBytes(value));
+  }
+
+  get baseToken(): Bytes {
+    let value = this.get("baseToken");
+    return value.toBytes();
+  }
+
+  set baseToken(value: Bytes) {
+    this.set("baseToken", Value.fromBytes(value));
+  }
+
+  get baseTokenSymbol(): string {
+    let value = this.get("baseTokenSymbol");
+    return value.toString();
+  }
+
+  set baseTokenSymbol(value: string) {
+    this.set("baseTokenSymbol", Value.fromString(value));
+  }
+
+  get quoteToken(): Bytes {
+    let value = this.get("quoteToken");
+    return value.toBytes();
+  }
+
+  set quoteToken(value: Bytes) {
+    this.set("quoteToken", Value.fromBytes(value));
+  }
+
+  get quoteTokenSymbol(): string {
+    let value = this.get("quoteTokenSymbol");
+    return value.toString();
+  }
+
+  set quoteTokenSymbol(value: string) {
+    this.set("quoteTokenSymbol", Value.fromString(value));
+  }
+
+  get aggregator(): Bytes {
+    let value = this.get("aggregator");
+    return value.toBytes();
+  }
+
+  set aggregator(value: Bytes) {
+    this.set("aggregator", Value.fromBytes(value));
+  }
+
+  get responseDecimals(): BigInt {
+    let value = this.get("responseDecimals");
+    return value.toBigInt();
+  }
+
+  set responseDecimals(value: BigInt) {
+    this.set("responseDecimals", Value.fromBigInt(value));
+  }
+
+  get collateralDecimals(): BigInt {
+    let value = this.get("collateralDecimals");
+    return value.toBigInt();
+  }
+
+  set collateralDecimals(value: BigInt) {
+    this.set("collateralDecimals", Value.fromBigInt(value));
+  }
+
+  get inverse(): boolean {
+    let value = this.get("inverse");
+    return value.toBoolean();
+  }
+
+  set inverse(value: boolean) {
+    this.set("inverse", Value.fromBoolean(value));
+  }
+
+  get blockNumber(): BigInt {
+    let value = this.get("blockNumber");
+    return value.toBigInt();
+  }
+
+  set blockNumber(value: BigInt) {
+    this.set("blockNumber", Value.fromBigInt(value));
+  }
+
+  get timestamp(): BigInt {
+    let value = this.get("timestamp");
+    return value.toBigInt();
+  }
+
+  set timestamp(value: BigInt) {
+    this.set("timestamp", Value.fromBigInt(value));
+  }
+}

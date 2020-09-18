@@ -757,3 +757,30 @@ dataSources:
         - event: AccruedInterestWithdrawn(indexed address,uint256)
           handler: handleAccruedInterestWithdrawn
       file: ./src/mappings/lenders/usdc_linkLendersMappings.ts
+  # 24 ChainlinkPairAggregatorRegistry
+  - kind: ethereum/contract
+    name: ChainlinkPairAggregatorRegistry
+    network: {{network}}
+    source:
+      startBlock: {{startBlock}}
+      address: '{{ChainlinkPairAggregatorRegistry_Proxy}}'
+      abi: ChainlinkPairAggregatorRegistry
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.3
+      language: wasm/assemblyscript
+      entities:
+        - EthTransaction
+        - PairAggregatorsChange
+        - PairAggregatorsStatus
+      abis:
+        - name: ChainlinkPairAggregatorRegistry
+          file: ./abis/IChainlinkPairAggregatorRegistry.json
+        - name: ERC20
+          file: ./abis/ERC20Detailed.json
+      eventHandlers:
+        - event: PairAggregatorRegistered(indexed address,indexed address,indexed address,address,uint8,uint8,bool)
+          handler: handlePairAggregatorRegistered
+        - event: PairAggregatorUpdated(indexed address,indexed address,indexed address,address,address,uint8,uint8,bool)
+          handler: handlePairAggregatorUpdated
+      file: ./src/mappings/chainlinkPairAggregatorRegistryMappings.ts
