@@ -8,7 +8,7 @@ import {
 import {
   createEthTransaction,
   buildId,
-  createTTokenHolderBalancesChange,
+  createTTokenHolderActionsChange,
   updateTTokenHolderBalancesFor,
   updateTTokenTotalSupplyFor,
 } from "../../utils/commons";
@@ -28,7 +28,7 @@ export function handleTransfer(event: TransferEvent): void {
   let id = buildId(event);
   let ethTransaction = createEthTransaction(event, ETH_TX_TTOKEN_TRANSFER);
 
-  createTTokenHolderBalancesChange(
+  createTTokenHolderActionsChange(
     id,
     event.params.value,
     TTOKEN_TUSDC,
@@ -38,11 +38,13 @@ export function handleTransfer(event: TransferEvent): void {
     ethTransaction
   )
   updateTTokenHolderBalancesFor(
+    event.address,
     TTOKEN_TUSDC,
     event.params.from,
     event.params.value,
     event.params.to,
-    event
+    event,
+    ethTransaction,
   )
   updateTTokenTotalSupplyFor(
     event.address,
@@ -56,7 +58,7 @@ export function handleTransfer(event: TransferEvent): void {
 export function handleApproval(event: ApprovalEvent): void {
   let id = buildId(event);
   let ethTransaction = createEthTransaction(event, ETH_TX_TTOKEN_APPROVAL);
-  createTTokenHolderBalancesChange(
+  createTTokenHolderActionsChange(
     id,
     event.params.value,
     TTOKEN_TUSDC,
@@ -70,7 +72,7 @@ export function handleApproval(event: ApprovalEvent): void {
 export function handleMinterAdded(event: MinterAddedEvent): void {
   let id = buildId(event);
   let ethTransaction = createEthTransaction(event, ETH_TX_TTOKEN_MINTER_ADDED);
-  createTTokenHolderBalancesChange(
+  createTTokenHolderActionsChange(
     id,
     BigInt.fromI32(0),
     TTOKEN_TUSDC,
@@ -84,7 +86,7 @@ export function handleMinterAdded(event: MinterAddedEvent): void {
 export function handleMinterRemoved(event: MinterRemovedEvent): void {
   let id = buildId(event);
   let ethTransaction = createEthTransaction(event, ETH_TX_TTOKEN_MINTER_REMOVED);
-  createTTokenHolderBalancesChange(
+  createTTokenHolderActionsChange(
     id,
     BigInt.fromI32(0),
     TTOKEN_TUSDC,

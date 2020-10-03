@@ -4,11 +4,12 @@ import {
   Approval as ApprovalEvent,
   MinterAdded as MinterAddedEvent,
   MinterRemoved as MinterRemovedEvent,
+  TToken,
 } from "../../../generated/TDAIToken/TToken";
 import {
   createEthTransaction,
   buildId,
-  createTTokenHolderBalancesChange,
+  createTTokenHolderActionsChange,
   updateTTokenHolderBalancesFor,
   updateTTokenTotalSupplyFor,
 } from "../../utils/commons";
@@ -28,7 +29,7 @@ export function handleTransfer(event: TransferEvent): void {
   let id = buildId(event);
   let ethTransaction = createEthTransaction(event, ETH_TX_TTOKEN_TRANSFER);
 
-  createTTokenHolderBalancesChange(
+  createTTokenHolderActionsChange(
     id,
     event.params.value,
     TTOKEN_TDAI,
@@ -38,11 +39,13 @@ export function handleTransfer(event: TransferEvent): void {
     ethTransaction
   )
   updateTTokenHolderBalancesFor(
+    event.address,
     TTOKEN_TDAI,
     event.params.from,
     event.params.value,
     event.params.to,
-    event
+    event,
+    ethTransaction
   )
   updateTTokenTotalSupplyFor(
     event.address,
@@ -56,7 +59,7 @@ export function handleTransfer(event: TransferEvent): void {
 export function handleApproval(event: ApprovalEvent): void {
   let id = buildId(event);
   let ethTransaction = createEthTransaction(event, ETH_TX_TTOKEN_APPROVAL);
-  createTTokenHolderBalancesChange(
+  createTTokenHolderActionsChange(
     id,
     event.params.value,
     TTOKEN_TDAI,
@@ -70,7 +73,7 @@ export function handleApproval(event: ApprovalEvent): void {
 export function handleMinterAdded(event: MinterAddedEvent): void {
   let id = buildId(event);
   let ethTransaction = createEthTransaction(event, ETH_TX_TTOKEN_MINTER_ADDED);
-  createTTokenHolderBalancesChange(
+  createTTokenHolderActionsChange(
     id,
     BigInt.fromI32(0),
     TTOKEN_TDAI,
@@ -84,7 +87,7 @@ export function handleMinterAdded(event: MinterAddedEvent): void {
 export function handleMinterRemoved(event: MinterRemovedEvent): void {
   let id = buildId(event);
   let ethTransaction = createEthTransaction(event, ETH_TX_TTOKEN_MINTER_REMOVED);
-  createTTokenHolderBalancesChange(
+  createTTokenHolderActionsChange(
     id,
     BigInt.fromI32(0),
     TTOKEN_TDAI,

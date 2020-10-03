@@ -2,9 +2,10 @@ import { log, BigInt, ethereum, Bytes } from "@graphprotocol/graph-ts";
 import {
   Borrower,
   EthTransaction,
-  TTokenHolderBalancesChange,
+  TTokenHolderActionsChange,
   TTokenHolderBalancesStatus,
   TTokenTotalValuesStatus,
+  TTokenHolderBalancesChange,
 } from "../../generated/schema";
 import { Address } from "@graphprotocol/graph-ts";
 import {
@@ -76,6 +77,53 @@ export function buildSignerId(token: string, contract: string, account: Address)
 }
 
 export function createTTokenHolderBalancesChange(
+  amount: BigInt,
+  tokenName: string,
+  token: Address,
+  holder: Address,
+  ethTransaction: EthTransaction
+): void {
+  let id = ethTransaction.id;
+  let entity = new TTokenHolderBalancesChange(id);
+  entity.transaction = ethTransaction.id;
+  entity.amount = amount;
+  entity.tokenName = tokenName;
+  entity.token = token;
+  entity.holder = holder;
+  entity.blockNumber = ethTransaction.blockNumber;
+  entity.timestamp = ethTransaction.timestamp;
+  entity.save();
+}
+
+export function processTTokenHolderBalancesChangeFor(
+  token: Address,
+  tokenName: string,
+  from: Address,
+  value: BigInt,
+  to: Address,
+  ethTransaction: EthTransaction,
+): void {
+  if (to.toHexString() != EMPTY_ADDRESS_STRING) {
+    createTTokenHolderBalancesChange(
+      value,
+      tokenName,
+      token,
+      to,
+      ethTransaction,
+    );
+  }
+  if (from.toHexString() != EMPTY_ADDRESS_STRING) {
+    createTTokenHolderBalancesChange(
+      value.times(BigInt.fromI32(-1)),
+      tokenName,
+      token,
+      from,
+      ethTransaction,
+    );
+  }
+}
+
+export function createTTokenHolderActionsChange(
   id: string,
   amount: BigInt,
   platformToken: string,
@@ -84,7 +132,7 @@ export function createTTokenHolderBalancesChange(
   action: string,
   ethTransaction: EthTransaction
 ): void {
-  let entity = new TTokenHolderBalancesChange(id);
+  let entity = new TTokenHolderActionsChange(id);
   entity.transaction = ethTransaction.id;
   entity.amount = amount;
   entity.platformToken = platformToken;
@@ -113,21 +161,33 @@ export function getOrCreateTTokenHolderBalancesStatus(platformToken: string, hol
 }
 
 export function updateTTokenHolderBalancesFor(
-  platformToken: string,
+  token: Address,
+  tokenName: string,
   from: Address,
   value: BigInt,
   to: Address,
-  event: ethereum.Event
+  event: ethereum.Event,
+  ethTransaction: EthTransaction,
 ): void {
   log.info("Updating tToken balance for holders {} / {} ", [
     from.toHexString(),
     to.toHexString(),
   ]);
+  // Processing TToken Holder Balance Changes
+  processTTokenHolderBalancesChangeFor(
+    token,
+    tokenName,
+    from,
+    value,
+    to,
+    ethTransaction,
+  );
   if (from.toHexString() != EMPTY_ADDRESS_STRING) {
-    let fromEntity = getOrCreateTTokenHolderBalancesStatus(platformToken, from);
+    // Update Holder Balances Status
+    let fromEntity = getOrCreateTTokenHolderBalancesStatus(tokenName, from);
     log.info(
       "Updating tToken balance for holder {} (from). Current balance {} {}",
-      [from.toHexString(), fromEntity.balance.toString(), platformToken]
+      [from.toHexString(), fromEntity.balance.toString(), tokenName]
     );
     fromEntity.balance = fromEntity.balance.minus(value);
     fromEntity.blockNumber = event.block.number;
@@ -135,10 +195,10 @@ export function updateTTokenHolderBalancesFor(
     fromEntity.save();
   }
   if (to.toHexString() != EMPTY_ADDRESS_STRING) {
-    let toEntity = getOrCreateTTokenHolderBalancesStatus(platformToken, to);
+    let toEntity = getOrCreateTTokenHolderBalancesStatus(tokenName, to);
     log.info(
       "Updating tToken balance for holder {} (to). Current balance {} {}",
-      [to.toHexString(), toEntity.balance.toString(), platformToken]
+      [to.toHexString(), toEntity.balance.toString(), tokenName]
     );
     toEntity.balance = toEntity.balance.plus(value);
     toEntity.blockNumber = event.block.number;
