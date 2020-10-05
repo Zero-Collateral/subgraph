@@ -3621,6 +3621,15 @@ export class TTokenHolderBalancesChange extends Entity {
     this.set("tokenName", Value.fromString(value));
   }
 
+  get balance(): BigInt {
+    let value = this.get("balance");
+    return value.toBigInt();
+  }
+
+  set balance(value: BigInt) {
+    this.set("balance", Value.fromBigInt(value));
+  }
+
   get amount(): BigInt {
     let value = this.get("amount");
     return value.toBigInt();

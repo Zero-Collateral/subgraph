@@ -38,12 +38,20 @@ export function handleTransfer(event: TransferEvent): void {
     TTOKEN_STATUS_TRANSFER,
     ethTransaction
   )
+  let tToken = TToken.bind(event.address);
+  let tryBalanceOfFrom = tToken.try_balanceOf(event.params.from);
+  let tryBalanceOfTo = tToken.try_balanceOf(event.params.to);
+
+  let balanceOfFrom = tryBalanceOfFrom.reverted ? BigInt.fromI32(0) : tryBalanceOfFrom.value;
+  let balanceOfTo = tryBalanceOfTo.reverted ? BigInt.fromI32(0) : tryBalanceOfTo.value;
   updateTTokenHolderBalancesFor(
     event.address,
     TTOKEN_TDAI,
     event.params.from,
     event.params.value,
     event.params.to,
+    balanceOfFrom,
+    balanceOfTo,
     event,
     ethTransaction
   )

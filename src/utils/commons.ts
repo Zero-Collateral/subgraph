@@ -78,6 +78,7 @@ export function buildSignerId(token: string, contract: string, account: Address)
 
 export function createTTokenHolderBalancesChange(
   amount: BigInt,
+  balance: BigInt,
   tokenName: string,
   token: Address,
   holder: Address,
@@ -87,6 +88,7 @@ export function createTTokenHolderBalancesChange(
   let entity = new TTokenHolderBalancesChange(id);
   entity.transaction = ethTransaction.id;
   entity.amount = amount;
+  entity.balance = balance;
   entity.tokenName = tokenName;
   entity.token = token;
   entity.holder = holder;
@@ -101,11 +103,14 @@ export function processTTokenHolderBalancesChangeFor(
   from: Address,
   value: BigInt,
   to: Address,
+  balanceOfFrom: BigInt,
+  balanceOfTo: BigInt,
   ethTransaction: EthTransaction,
 ): void {
   if (to.toHexString() != EMPTY_ADDRESS_STRING) {
     createTTokenHolderBalancesChange(
       value,
+      balanceOfTo,
       tokenName,
       token,
       to,
@@ -115,6 +120,7 @@ export function processTTokenHolderBalancesChangeFor(
   if (from.toHexString() != EMPTY_ADDRESS_STRING) {
     createTTokenHolderBalancesChange(
       value.times(BigInt.fromI32(-1)),
+      balanceOfFrom,
       tokenName,
       token,
       from,
@@ -166,6 +172,8 @@ export function updateTTokenHolderBalancesFor(
   from: Address,
   value: BigInt,
   to: Address,
+  balanceOfFrom: BigInt,
+  balanceOfTo: BigInt,
   event: ethereum.Event,
   ethTransaction: EthTransaction,
 ): void {
@@ -180,6 +188,8 @@ export function updateTTokenHolderBalancesFor(
     from,
     value,
     to,
+    balanceOfFrom,
+    balanceOfTo,
     ethTransaction,
   );
   if (from.toHexString() != EMPTY_ADDRESS_STRING) {

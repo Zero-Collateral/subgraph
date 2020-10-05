@@ -531,7 +531,9 @@ type TTokenHolderBalancesChange @entity {
   token: Bytes!
   "TToken name."
   tokenName: String!
-  "Current holder balance for the given token."
+  "Current holder balance for the given token and holder."
+  balance: BigInt!
+  "Amount used in this transaction for the given token and holder. It is a negative value if the sender is the holder, and a positive value if the holder received a transfer."
   amount: BigInt!
   "Holder address."
   holder: Bytes!
