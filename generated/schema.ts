@@ -1469,6 +1469,15 @@ export class LoanTermsSubmitted extends Entity {
     this.set("requestNonce", Value.fromBigInt(value));
   }
 
+  get signerNonce(): BigInt {
+    let value = this.get("signerNonce");
+    return value.toBigInt();
+  }
+
+  set signerNonce(value: BigInt) {
+    this.set("signerNonce", Value.fromBigInt(value));
+  }
+
   get interestRate(): BigInt {
     let value = this.get("interestRate");
     return value.toBigInt();

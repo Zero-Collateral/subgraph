@@ -197,18 +197,37 @@ type InterestAccepted @entity {
   timestamp: BigInt!
 }
 
+####################################################################################
+#
+# It contains all the loan terms submitted by the signers.
+#
+####################################################################################
 type LoanTermsSubmitted @entity {
+  "An unique ID."
   id: ID!
+  "The lending/borrowed token name."
   token: String!
+  "The collateral token name."
   collateralToken: String!
+  "The reference to the ETH transaction."
   transaction: EthTransaction!
+  "The signer address."
   signer: Bytes!
+  "The borrower address."
   borrower: Bytes!
+  "The request nonce used in the loan terms."
   requestNonce: BigInt!
+  "The signer nonce used in this loan terms."
+  signerNonce: BigInt!
+  "The interest rate accepted."
   interestRate: BigInt!
+  "The collateral ratio accepted."
   collateralRatio: BigInt!
+  "The max loan amount accepted."
   maxLoanAmount: BigInt!
+  "Blocknumber where the transaction was executed."
   blockNumber: BigInt!
+  "Timestamp when the transaction was executed."
   timestamp: BigInt!
 }
 

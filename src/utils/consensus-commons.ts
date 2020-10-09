@@ -8,6 +8,7 @@ import {
   LoanTermsAccepted,
   BorrowerNoncesChange,
   LenderNoncesChange,
+  EthTransaction,
 } from "../../generated/schema";
 import { Address } from "@graphprotocol/graph-ts";
 import {
@@ -126,12 +127,45 @@ export function internalHandleInterestAccepted(
   return entity
 }
 
+export function createLoanTermsSubmitted(
+  token: string,
+  collateralToken: string,
+  signer: Address,
+  borrower: Address,
+  requestNonce: BigInt,
+  signerNonce: BigInt,
+  interestRate: BigInt,
+  collateralRatio: BigInt,
+  maxLoanAmount: BigInt,
+  ethTransaction: EthTransaction,
+  event: ethereum.Event
+): LoanTermsSubmitted {
+  let id = buildId(event);
+  log.info("Creating new loan terms submitted ({}) with id {}", [token, id]);
+  let entity = new LoanTermsSubmitted(id);
+  entity.transaction = ethTransaction.id;
+  entity.token = token;
+  entity.collateralToken = collateralToken;
+  entity.signer = signer;
+  entity.borrower = borrower;
+  entity.requestNonce = requestNonce;
+  entity.signerNonce = signerNonce;
+  entity.interestRate = interestRate;
+  entity.collateralRatio = collateralRatio;
+  entity.maxLoanAmount = maxLoanAmount;
+  entity.blockNumber = event.block.number;
+  entity.timestamp = getTimestampInMillis(event);
+  entity.save();
+  return entity;
+}
+
 export function internalHandleLoanTermsSubmitted(
   token: string,
   collateralToken: string,
   signer: Address,
   borrower: Address,
   requestNonce: BigInt,
+  signerNonce: BigInt,
   interestRate: BigInt,
   collateralRatio: BigInt,
   maxLoanAmount: BigInt,
@@ -140,19 +174,19 @@ export function internalHandleLoanTermsSubmitted(
   let id = buildId(event);
   log.info("Creating new loan terms submitted ({}) with id {}", [token, id]);
   let ethTransaction = createEthTransaction(event, ETH_TX_TERMS_SUBMITTED);
-  let entity = new LoanTermsSubmitted(id);
-  entity.transaction = ethTransaction.id;
-  entity.token = token;
-  entity.collateralToken = collateralToken;
-  entity.signer = signer;
-  entity.borrower = borrower;
-  entity.requestNonce = requestNonce;
-  entity.interestRate = interestRate;
-  entity.collateralRatio = collateralRatio;
-  entity.maxLoanAmount = maxLoanAmount;
-  entity.blockNumber = event.block.number;
-  entity.timestamp = getTimestampInMillis(event);
-  entity.save();
+  createLoanTermsSubmitted(
+    token,
+    collateralToken,
+    signer,
+    borrower,
+    requestNonce,
+    signerNonce,
+    interestRate,
+    collateralRatio,
+    maxLoanAmount,
+    ethTransaction,
+    event,
+  )
 }
 
 export function internalHandleLoanTermsAccepted(
