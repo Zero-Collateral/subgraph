@@ -276,7 +276,7 @@ type TTokenHolderBalancesStatus @entity {
 # Each change (transaction) represents a row in the entity.
 #
 ####################################################################################
-type TTokenHolderBalancesChange @entity {
+type TTokenHolderActionsChange @entity {
   "Transaction hash and event index."
   id: ID!
   "Transaction info about the change."
@@ -513,5 +513,32 @@ type PairAggregatorsChange @entity {
   "Blocknumber the pair aggregator (baseToken and quoteToken) was most recently updated."
   blockNumber: BigInt!
   "Timestamp the pair aggregator (baseToken and quoteToken) was most recently updated."
+  timestamp: BigInt!
+}
+
+####################################################################################
+#
+# It contains the all the changes for the tToken holder balances (transfer events).
+# Each row represents the current holder balance for a given tToken and block number.
+#
+####################################################################################
+type TTokenHolderBalancesChange @entity {
+  "TToken address and holder address."
+  id: ID!
+  "The ETH transaction when transfer event was emitted."
+  transaction: EthTransaction!
+  "TToken address."
+  token: Bytes!
+  "TToken name."
+  tokenName: String!
+  "Current holder balance for the given token and holder."
+  balance: BigInt!
+  "Amount used in this transaction for the given token and holder. It is a negative value if the sender is the holder, and a positive value if the holder received a transfer."
+  amount: BigInt!
+  "Holder address."
+  holder: Bytes!
+  "Blocknumber the holder balance was most recently updated."
+  blockNumber: BigInt!
+  "Timestamp the holder balance was most recently updated."
   timestamp: BigInt!
 }
