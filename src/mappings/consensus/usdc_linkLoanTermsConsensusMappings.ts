@@ -23,6 +23,7 @@ export function handleTermsSubmitted(event: TermsSubmittedEvent): void {
     event.params.signer,
     event.params.borrower,
     event.params.requestNonce,
+    event.params.signerNonce,
     event.params.interestRate,
     event.params.collateralRatio,
     event.params.maxLoanAmount,

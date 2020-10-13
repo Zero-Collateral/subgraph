@@ -127,16 +127,20 @@ export class TermsSubmitted__Params {
     return this._event.parameters[2].value.toBigInt();
   }
 
-  get interestRate(): BigInt {
+  get signerNonce(): BigInt {
     return this._event.parameters[3].value.toBigInt();
   }
 
-  get collateralRatio(): BigInt {
+  get interestRate(): BigInt {
     return this._event.parameters[4].value.toBigInt();
   }
 
-  get maxLoanAmount(): BigInt {
+  get collateralRatio(): BigInt {
     return this._event.parameters[5].value.toBigInt();
+  }
+
+  get maxLoanAmount(): BigInt {
+    return this._event.parameters[6].value.toBigInt();
   }
 }
 
@@ -358,21 +362,6 @@ export class DAILoanTermsConsensus extends ethereum.SmartContract {
       "callerAddress():(address)",
       []
     );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toAddress());
-  }
-
-  consts(): Address {
-    let result = super.call("consts", "consts():(address)", []);
-
-    return result[0].toAddress();
-  }
-
-  try_consts(): ethereum.CallResult<Address> {
-    let result = super.tryCall("consts", "consts():(address)", []);
     if (result.reverted) {
       return new ethereum.CallResult();
     }
