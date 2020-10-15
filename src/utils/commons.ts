@@ -6,6 +6,7 @@ import {
   TTokenHolderBalancesStatus,
   TTokenTotalValuesStatus,
   TTokenHolderBalancesChange,
+  TTokenTotalValuesChange,
 } from "../../generated/schema";
 import { Address } from "@graphprotocol/graph-ts";
 import {
@@ -256,6 +257,14 @@ export function updateTTokenTotalSupplyFor(
   entity.timestamp = ethTransaction.timestamp;
   entity.save();
 
+  createTTokenTotalValuesChange(
+    ethTransaction,
+    ethTransaction.from as Address,
+    tToken,
+    entity.totalSupply,
+    entity.totalLent,
+    entity.totalRepaid,
+  )
   return entity as TTokenTotalValuesStatus
 }
 
@@ -271,6 +280,14 @@ export function updateTTokenTotalLentFor(
   entity.timestamp = ethTransaction.timestamp;
   entity.save();
 
+  createTTokenTotalValuesChange(
+    ethTransaction,
+    ethTransaction.from as Address,
+    tToken,
+    entity.totalSupply,
+    entity.totalLent,
+    entity.totalRepaid,
+  )
   return entity as TTokenTotalValuesStatus
 }
 
@@ -285,5 +302,37 @@ export function updateTTokenTotalRepaidFor(
   entity.blockNumber = ethTransaction.blockNumber;
   entity.timestamp = ethTransaction.timestamp;
   entity.save();
+  createTTokenTotalValuesChange(
+    ethTransaction,
+    ethTransaction.from as Address,
+    tToken,
+    entity.totalSupply,
+    entity.totalLent,
+    entity.totalRepaid,
+  )
   return entity as TTokenTotalValuesStatus
 }
+
+export function createTTokenTotalValuesChange(
+  ethTransaction: EthTransaction,
+  sender: Address,
+  ttoken: Address,
+  totalSupply: BigInt,
+  totalLent: BigInt,
+  totalRepaid: BigInt,
+): TTokenTotalValuesChange {
+  let id = ethTransaction.id;
+  let entity = new TTokenTotalValuesChange(id);
+  
+  entity.transaction = ethTransaction.id;
+  entity.sender = sender;
+  entity.ttoken = ttoken;
+  entity.totalSupply = totalSupply;
+  entity.totalLent = totalLent;
+  entity.totalRepaid = totalRepaid;
+  entity.blockNumber = ethTransaction.blockNumber;
+  entity.timestamp = ethTransaction.timestamp;
+  entity.save();
+  return entity;
+}
+

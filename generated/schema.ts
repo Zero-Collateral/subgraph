@@ -3295,6 +3295,115 @@ export class TTokenTotalValuesStatus extends Entity {
   }
 }
 
+export class TTokenTotalValuesChange extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(
+      id !== null,
+      "Cannot save TTokenTotalValuesChange entity without an ID"
+    );
+    assert(
+      id.kind == ValueKind.STRING,
+      "Cannot save TTokenTotalValuesChange entity with non-string ID. " +
+        'Considering using .toHex() to convert the "id" to a string.'
+    );
+    store.set("TTokenTotalValuesChange", id.toString(), this);
+  }
+
+  static load(id: string): TTokenTotalValuesChange | null {
+    return store.get(
+      "TTokenTotalValuesChange",
+      id
+    ) as TTokenTotalValuesChange | null;
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get transaction(): string {
+    let value = this.get("transaction");
+    return value.toString();
+  }
+
+  set transaction(value: string) {
+    this.set("transaction", Value.fromString(value));
+  }
+
+  get sender(): Bytes {
+    let value = this.get("sender");
+    return value.toBytes();
+  }
+
+  set sender(value: Bytes) {
+    this.set("sender", Value.fromBytes(value));
+  }
+
+  get ttoken(): Bytes {
+    let value = this.get("ttoken");
+    return value.toBytes();
+  }
+
+  set ttoken(value: Bytes) {
+    this.set("ttoken", Value.fromBytes(value));
+  }
+
+  get totalSupply(): BigInt {
+    let value = this.get("totalSupply");
+    return value.toBigInt();
+  }
+
+  set totalSupply(value: BigInt) {
+    this.set("totalSupply", Value.fromBigInt(value));
+  }
+
+  get totalLent(): BigInt {
+    let value = this.get("totalLent");
+    return value.toBigInt();
+  }
+
+  set totalLent(value: BigInt) {
+    this.set("totalLent", Value.fromBigInt(value));
+  }
+
+  get totalRepaid(): BigInt {
+    let value = this.get("totalRepaid");
+    return value.toBigInt();
+  }
+
+  set totalRepaid(value: BigInt) {
+    this.set("totalRepaid", Value.fromBigInt(value));
+  }
+
+  get blockNumber(): BigInt {
+    let value = this.get("blockNumber");
+    return value.toBigInt();
+  }
+
+  set blockNumber(value: BigInt) {
+    this.set("blockNumber", Value.fromBigInt(value));
+  }
+
+  get timestamp(): BigInt {
+    let value = this.get("timestamp");
+    return value.toBigInt();
+  }
+
+  set timestamp(value: BigInt) {
+    this.set("timestamp", Value.fromBigInt(value));
+  }
+}
+
 export class PairAggregatorsStatus extends Entity {
   constructor(id: string) {
     super();
