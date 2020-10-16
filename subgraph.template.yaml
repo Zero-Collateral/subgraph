@@ -439,8 +439,10 @@ dataSources:
       language: wasm/assemblyscript
       entities:
         - EthTransaction
-        - TTokenChange
-        - TTokenStatus
+        - TTokenHolderBalancesChange
+        - TTokenHolderBalancesStatus
+        - TTokenTotalValuesStatus
+        - TTokenTotalValuesChange
       abis:
         - name: TToken
           file: ./abis/TToken.json
@@ -470,6 +472,8 @@ dataSources:
         - EthTransaction
         - TTokenHolderBalancesChange
         - TTokenHolderBalancesStatus
+        - TTokenTotalValuesStatus
+        - TTokenTotalValuesChange
       abis:
         - name: TToken
           file: ./abis/TToken.json
@@ -552,6 +556,8 @@ dataSources:
       entities:
         - LendingPoolChange
         - EthTransaction
+        - TTokenTotalValuesStatus
+        - TTokenTotalValuesChange
       abis:
         - name: DAILendingPool
           file: ./abis/LendingPoolInterface.json
@@ -582,6 +588,8 @@ dataSources:
       entities:
         - LendingPoolChange
         - EthTransaction
+        - TTokenTotalValuesStatus
+        - TTokenTotalValuesChange
       abis:
         - name: DAILendingPool
           file: ./abis/LendingPoolInterface.json
@@ -612,6 +620,8 @@ dataSources:
       entities:
         - LendingPoolChange
         - EthTransaction
+        - TTokenTotalValuesStatus
+        - TTokenTotalValuesChange
       abis:
         - name: USDCLendingPool
           file: ./abis/LendingPoolInterface.json
@@ -642,6 +652,8 @@ dataSources:
       entities:
         - LendingPoolChange
         - EthTransaction
+        - TTokenTotalValuesStatus
+        - TTokenTotalValuesChange
       abis:
         - name: USDCLendingPool
           file: ./abis/LendingPoolInterface.json

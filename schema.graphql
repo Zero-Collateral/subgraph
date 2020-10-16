@@ -473,6 +473,32 @@ type TTokenTotalValuesStatus @entity {
 
 ####################################################################################
 #
+# It contains the total values (supply, repaid and lent) per TToken asset for a given block number.
+#
+####################################################################################
+type TTokenTotalValuesChange @entity {
+  "It includes transaction hash and event log index."
+  id: ID!
+  "The ETH transaction where an amount was modified."
+  transaction: EthTransaction!
+  "The sender address."
+  sender: Bytes!
+  "The TToken address."
+  ttoken: Bytes!
+  "The total supply for the given TToken and block number."
+  totalSupply: BigInt!
+  "The total lent for the given TToken and block number."
+  totalLent: BigInt!
+  "The total repaid amount for the given TToken and block number."
+  totalRepaid: BigInt!
+  "Blocknumber when the total values were updated."
+  blockNumber: BigInt!
+  "Timestamp the total total values were updated."
+  timestamp: BigInt!
+}
+
+####################################################################################
+#
 # It contains the current pair aggregators used in the platform.
 #
 ####################################################################################
