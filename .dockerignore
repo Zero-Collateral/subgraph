@@ -4,3 +4,4 @@ node_modules
 subgraph.yaml
 dist
 build
+generated
