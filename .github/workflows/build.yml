@@ -27,5 +27,5 @@ jobs:
         with:
           push: true
           tags: |
-            ${{ secrets.DOCKER_REGISTRY }}/${{ secrets.DOCKER_REPOSITORY }}:latest
-            ${{ secrets.DOCKER_REGISTRY }}/${{ secrets.DOCKER_REPOSITORY }}:${{ steps.slug.outputs.sha8 }}
+            ${{ secrets.DOCKERHUB_REGISTRY }}/${{ secrets.DOCKER_REPOSITORY }}:latest
+            ${{ secrets.DOCKERHUB_REGISTRY }}/${{ secrets.DOCKER_REPOSITORY }}:${{ steps.slug.outputs.sha8 }}
