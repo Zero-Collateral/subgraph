@@ -4,5 +4,3 @@ node_modules
 subgraph.yaml
 dist
 build
-subgraph.yaml
-package-lock.json

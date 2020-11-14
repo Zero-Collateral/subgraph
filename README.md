@@ -13,7 +13,7 @@ Discord → https://discord.gg/z3AJ9F
 
 To get started, you need to install the dependencies:
 
-- Using Yarn: ```yarn install```
+- Using Yarn: ```yarn```
 - Using NPM: ```npm install```
 
 ## Network Configuration
