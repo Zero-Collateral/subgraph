@@ -1,5 +1,5 @@
 FROM node:14-alpine
+RUN yarn
 WORKDIR /app
 COPY . .
-RUN yarn
-ENTRYPOINT [ "node", "./entrypoint.js" ]
+ENTRYPOINT [ "./entrypoint.sh" ]
