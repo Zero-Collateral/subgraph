@@ -14,7 +14,7 @@ async function entryPoint() {
     console.log("Trying to deploy")
     execSync(`yarn graph deploy --ipfs $IPFS_URL --node $NODE_URL $SUBGRAPH_NAME`)
   } catch(e) {
-    console.log(e.stderr, e.stdout)
+    console.log(e.stderr.toString(), e.stdout.toString())
     return await entryPoint()
   }
 
