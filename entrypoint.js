@@ -12,7 +12,7 @@ async function entryPoint() {
 
   try {
     console.log("Trying to deploy")
-    execSync(`yarn build:$ETH_NETWORK && yarn graph deploy --ipfs $IPFS_URL --node $NODE_URL $SUBGRAPH_NAME`)
+    execSync(`yarn graph deploy --ipfs $IPFS_URL --node $NODE_URL $SUBGRAPH_NAME`)
   } catch(e) {
     console.log(e.stderr, e.stdout)
     return await entryPoint()
