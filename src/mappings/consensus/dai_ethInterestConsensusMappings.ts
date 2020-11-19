@@ -24,6 +24,7 @@ export function handleInterestSubmitted(event: InterestSubmittedEvent): void {
     event.params.lender,
     event.params.interest,
     event.params.endTime,
+    event.params.requestNonce,
     event
   );
 }
@@ -35,6 +36,7 @@ export function handleInterestAccepted(event: InterestAcceptedEvent): void {
     event.params.lender,
     event.params.interest,
     event.params.endTime,
+    event.params.requestNonce,
     event
   );
   internalHandleLenderNoncesChange(

@@ -85,6 +85,7 @@ export function internalHandleInterestSubmitted(
   lender: Address,
   interest: BigInt,
   endTime: BigInt,
+  requestNonce: BigInt,
   event: ethereum.Event
 ): void {
   let id = buildId(event)
@@ -98,6 +99,7 @@ export function internalHandleInterestSubmitted(
   entity.lender = lender
   entity.interest = interest
   entity.endTime = endTime
+  entity.requestNonce = requestNonce
   entity.blockNumber = event.block.number
   entity.timestamp = getTimestampInMillis(event)
   entity.save()
@@ -109,6 +111,7 @@ export function internalHandleInterestAccepted(
   lender: Address,
   interest: BigInt,
   endTime: BigInt,
+  requestNonce: BigInt,
   event: ethereum.Event
 ): InterestAccepted {
   let id = buildId(event)
@@ -121,6 +124,7 @@ export function internalHandleInterestAccepted(
   entity.lender = lender
   entity.endTime = endTime
   entity.interest = interest
+  entity.requestNonce = requestNonce
   entity.blockNumber = event.block.number
   entity.timestamp = getTimestampInMillis(event)
   entity.save()
