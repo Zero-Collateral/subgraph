@@ -437,18 +437,6 @@ type LenderNoncesChange @entity {
   blockNumber: BigInt!
 }
 
-type OracleAddressChange @entity {
-  id: ID!
-  sender: Bytes!
-  lendingToken: String!
-  collateralToken: String!
-  transaction: EthTransaction!
-  oldOracleAddress: Bytes!
-  newOracleAddress: Bytes!
-  blockNumber: BigInt!
-  timestamp: BigInt!
-}
-
 ####################################################################################
 #
 # It contains the total values (supply, and lent) per TToken asset.

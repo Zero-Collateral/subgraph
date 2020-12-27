@@ -5,7 +5,6 @@ import {
   LoanTermsSet as LoanTermsSetEvent,
   LoanTakenOut as LoanTakenOutEvent,
   LoanLiquidated as LoanLiquidatedEvent,
-  PriceOracleUpdated as PriceOracleUpdatedEvent,
 } from "../../../generated/USDC_LINK_Loans/USDCLoans";
 import { TOKEN_DAI, COLLATERAL_TOKEN_LINK } from "../../utils/consts";
 import {
@@ -15,7 +14,6 @@ import {
   internalHandleLoanRepaid,
   internalHandleLoanTakenOut,
   internalHandleCollateralWithdrawn,
-  internalHandlePriceOracleUpdated,
 } from "../../utils/loans-commons";
 import { buildLoanId } from "../../utils/commons";
 import { DAILoans } from "../../../generated/DAI_LINK_Loans/DAILoans";
@@ -125,17 +123,4 @@ export function handleLoanLiquidated(event: LoanLiquidatedEvent): void {
     event.params.tokensIn,
     event
   );
-}
-
-export function handlePriceOracleUpdated(
-  event: PriceOracleUpdatedEvent
-): void {
-  internalHandlePriceOracleUpdated(
-    TOKEN_DAI,
-    COLLATERAL_TOKEN_LINK,
-    event.params.sender,
-    event.params.oldPriceOracle,
-    event.params.newPriceOracle,
-    event,
-  )
 }

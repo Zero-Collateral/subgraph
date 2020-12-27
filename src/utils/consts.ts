@@ -31,7 +31,6 @@ export const ETH_TX_LOAN_TERMS_SET = "LoanTermsSet"
 export const ETH_TX_LOAN_TAKEN_OUT = "LoanTakenOut"
 export const ETH_TX_LOAN_REPAID = "LoanRepaid"
 export const ETH_TX_LOAN_LIQUIDATED = "LoanLiquidated"
-export const ETH_TX_PRICE_ORACLE_UPDATED = "PriceOracleUpdated"
 // Lenders
 export const ETH_TX_ACCRUED_INTEREST_UPDATED = "AccruedInterestUpdated"
 export const ETH_TX_ACCRUED_INTEREST_WITHDRAWN = "AccruedInterestWithdrawn"
