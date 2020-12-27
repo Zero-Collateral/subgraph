@@ -43,8 +43,6 @@ dataSources:
           handler: handleCollateralDeposited
         - event: CollateralWithdrawn(indexed uint256,indexed address,uint256)
           handler: handleCollateralWithdrawn
-        - event: PriceOracleUpdated(indexed address,indexed address,indexed address)
-          handler: handlePriceOracleUpdated
       file: ./src/mappings/loans/dai_ethLoansMappings.ts
   # 2 DAI_LINK_Loans
   - kind: ethereum/contract
@@ -84,8 +82,6 @@ dataSources:
           handler: handleCollateralDeposited
         - event: CollateralWithdrawn(indexed uint256,indexed address,uint256)
           handler: handleCollateralWithdrawn
-        - event: PriceOracleUpdated(indexed address,indexed address,indexed address)
-          handler: handlePriceOracleUpdated
       file: ./src/mappings/loans/dai_linkLoansMappings.ts
   # 3 USDC_ETH_Loans
   - kind: ethereum/contract
@@ -125,8 +121,6 @@ dataSources:
           handler: handleCollateralDeposited
         - event: CollateralWithdrawn(indexed uint256,indexed address,uint256)
           handler: handleCollateralWithdrawn
-        - event: PriceOracleUpdated(indexed address,indexed address,indexed address)
-          handler: handlePriceOracleUpdated
       file: ./src/mappings/loans/usdc_ethLoansMappings.ts
   # 4 USDC_LINK_Loans
   - kind: ethereum/contract
@@ -166,8 +160,6 @@ dataSources:
           handler: handleCollateralDeposited
         - event: CollateralWithdrawn(indexed uint256,indexed address,uint256)
           handler: handleCollateralWithdrawn
-        - event: PriceOracleUpdated(indexed address,indexed address,indexed address)
-          handler: handlePriceOracleUpdated
       file: ./src/mappings/loans/usdc_linkLoansMappings.ts
   # 5 DAI_ETH_InterestConsensus
   - kind: ethereum/contract
