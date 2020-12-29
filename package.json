@@ -19,6 +19,7 @@
     "prepare:ganache": "mustache config/ganache.json subgraph.template.yaml > subgraph.yaml",
     "prepare:ropsten": "mustache config/ropsten.json subgraph.template.yaml > subgraph.yaml",
     "prepare:rinkeby": "mustache config/rinkeby.json subgraph.template.yaml > subgraph.yaml",
+    "prepare:kovan": "mustache config/kovan.json subgraph.template.yaml > subgraph.yaml",
     "prepare:mainnet": "mustache config/mainnet.json subgraph.template.yaml > subgraph.yaml",
     "deploy:ganache": "yarn remove-local; yarn prepare:ganache && yarn create-local && yarn build:ganache && yarn deploy-local",
     "deploy:ropsten": "yarn prepare:ropsten && yarn build:ropsten && yarn thegraph:deploy:ropsten",
