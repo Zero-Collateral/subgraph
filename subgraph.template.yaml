@@ -352,7 +352,7 @@ dataSources:
     network: {{network}}
     source:
       startBlock: {{startBlock}}
-      address: '{{AssetSettings}}'
+      address: '{{AssetSettings_Proxy}}'
       abi: AssetSettingsInterface
     mapping:
       kind: ethereum/events
