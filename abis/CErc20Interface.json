@@ -267,14 +267,14 @@
     "absolutePath": "/Users/sy/Documents/GitHub/teller-protocol-v1/contracts/providers/compound/CErc20Interface.sol",
     "exportedSymbols": {
       "CErc20Interface": [
-        17417
+        17490
       ]
     },
-    "id": 17418,
+    "id": 17491,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 17331,
+        "id": 17404,
         "literals": [
           "solidity",
           "0.5",
@@ -289,9 +289,9 @@
         "contractKind": "interface",
         "documentation": null,
         "fullyImplemented": false,
-        "id": 17417,
+        "id": 17490,
         "linearizedBaseContracts": [
-          17417
+          17490
         ],
         "name": "CErc20Interface",
         "nodeType": "ContractDefinition",
@@ -299,22 +299,22 @@
           {
             "body": null,
             "documentation": "@notice The mint function transfers an asset into the protocol, which begins accumulating interest based on the current Supply Rate for the asset. The user receives a quantity of cTokens equal to the underlying tokens supplied, divided by the current Exchange Rate.\n@param mintAmount The amount of the asset to be supplied, in units of the underlying asset.\n@return 0 on success, otherwise an Error code\n@dev msg.sender The account which shall supply the asset, and own the minted cTokens.\n@dev Before supplying an asset, users must first approve the cToken to access their token balance.",
-            "id": 17338,
+            "id": 17411,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "mint",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 17334,
+              "id": 17407,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 17333,
+                  "id": 17406,
                   "name": "mintAmount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 17338,
+                  "scope": 17411,
                   "src": "746:18:101",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -323,7 +323,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 17332,
+                    "id": 17405,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "746:7:101",
@@ -339,15 +339,15 @@
               "src": "745:20:101"
             },
             "returnParameters": {
-              "id": 17337,
+              "id": 17410,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 17336,
+                  "id": 17409,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 17338,
+                  "scope": 17411,
                   "src": "784:7:101",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -356,7 +356,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 17335,
+                    "id": 17408,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "784:7:101",
@@ -371,7 +371,7 @@
               ],
               "src": "783:9:101"
             },
-            "scope": 17417,
+            "scope": 17490,
             "src": "732:61:101",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -380,22 +380,22 @@
           {
             "body": null,
             "documentation": "@notice The redeem function converts a specified quantity of cTokens into the underlying asset, and returns them to the user. The amount of underlying tokens received is equal to the quantity of cTokens redeemed, multiplied by the current Exchange Rate. The amount redeemed must be less than the user's Account Liquidity and the market's available liquidity.\n@param redeemTokens The number of cTokens to be redeemed.\n@return 0 on success, otherwise an Error code\n@dev msg.sender The account to which redeemed funds shall be transferred.",
-            "id": 17345,
+            "id": 17418,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "redeem",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 17341,
+              "id": 17414,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 17340,
+                  "id": 17413,
                   "name": "redeemTokens",
                   "nodeType": "VariableDeclaration",
-                  "scope": 17345,
+                  "scope": 17418,
                   "src": "1400:20:101",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -404,7 +404,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 17339,
+                    "id": 17412,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1400:7:101",
@@ -420,15 +420,15 @@
               "src": "1399:22:101"
             },
             "returnParameters": {
-              "id": 17344,
+              "id": 17417,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 17343,
+                  "id": 17416,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 17345,
+                  "scope": 17418,
                   "src": "1440:7:101",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -437,7 +437,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 17342,
+                    "id": 17415,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1440:7:101",
@@ -452,7 +452,7 @@
               ],
               "src": "1439:9:101"
             },
-            "scope": 17417,
+            "scope": 17490,
             "src": "1384:65:101",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -461,22 +461,22 @@
           {
             "body": null,
             "documentation": "@notice The redeem underlying function converts cTokens into a specified quantity of the underlying asset, and returns them to the user. The amount of cTokens redeemed is equal to the quantity of underlying tokens received, divided by the current Exchange Rate. The amount redeemed must be less than the user's Account Liquidity and the market's available liquidity.\n@param redeemAmount The amount of underlying to be redeemed.\n@return 0 on success, otherwise an Error code\n@dev msg.sender The account to which redeemed funds shall be transferred.",
-            "id": 17352,
+            "id": 17425,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "redeemUnderlying",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 17348,
+              "id": 17421,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 17347,
+                  "id": 17420,
                   "name": "redeemAmount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 17352,
+                  "scope": 17425,
                   "src": "2077:20:101",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -485,7 +485,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 17346,
+                    "id": 17419,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "2077:7:101",
@@ -501,15 +501,15 @@
               "src": "2076:22:101"
             },
             "returnParameters": {
-              "id": 17351,
+              "id": 17424,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 17350,
+                  "id": 17423,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 17352,
+                  "scope": 17425,
                   "src": "2117:7:101",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -518,7 +518,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 17349,
+                    "id": 17422,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "2117:7:101",
@@ -533,7 +533,7 @@
               ],
               "src": "2116:9:101"
             },
-            "scope": 17417,
+            "scope": 17490,
             "src": "2051:75:101",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -542,22 +542,22 @@
           {
             "body": null,
             "documentation": "@notice The borrow function transfers an asset from the protocol to the user, and creates a borrow balance which begins accumulating interest based on the Borrow Rate for the asset. The amount borrowed must be less than the user's Account Liquidity and the market's available liquidity.\n@param borrowAmount The amount of the underlying asset to be borrowed.\n@return 0 on success, otherwise an Error code\n@dev msg.sender The account to which borrowed funds shall be transferred.",
-            "id": 17359,
+            "id": 17432,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "borrow",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 17355,
+              "id": 17428,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 17354,
+                  "id": 17427,
                   "name": "borrowAmount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 17359,
+                  "scope": 17432,
                   "src": "2674:20:101",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -566,7 +566,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 17353,
+                    "id": 17426,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "2674:7:101",
@@ -582,15 +582,15 @@
               "src": "2673:22:101"
             },
             "returnParameters": {
-              "id": 17358,
+              "id": 17431,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 17357,
+                  "id": 17430,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 17359,
+                  "scope": 17432,
                   "src": "2714:7:101",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -599,7 +599,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 17356,
+                    "id": 17429,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "2714:7:101",
@@ -614,7 +614,7 @@
               ],
               "src": "2713:9:101"
             },
-            "scope": 17417,
+            "scope": 17490,
             "src": "2658:65:101",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -623,22 +623,22 @@
           {
             "body": null,
             "documentation": "@notice The repay function transfers an asset into the protocol, reducing the user's borrow balance.\n@param repayAmount The amount of the underlying borrowed asset to be repaid. A value of -1 (i.e. 2^256 - 1) can be used to repay the full amount.\n@return 0 on success, otherwise an Error code\n@dev msg.sender The account which borrowed the asset, and shall repay the borrow.\n@dev Before repaying an asset, users must first approve the cToken to access their token balance.",
-            "id": 17366,
+            "id": 17439,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "repayBorrow",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 17362,
+              "id": 17435,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 17361,
+                  "id": 17434,
                   "name": "repayAmount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 17366,
+                  "scope": 17439,
                   "src": "3279:19:101",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -647,7 +647,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 17360,
+                    "id": 17433,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "3279:7:101",
@@ -663,15 +663,15 @@
               "src": "3278:21:101"
             },
             "returnParameters": {
-              "id": 17365,
+              "id": 17438,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 17364,
+                  "id": 17437,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 17366,
+                  "scope": 17439,
                   "src": "3318:7:101",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -680,7 +680,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 17363,
+                    "id": 17436,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "3318:7:101",
@@ -695,7 +695,7 @@
               ],
               "src": "3317:9:101"
             },
-            "scope": 17417,
+            "scope": 17490,
             "src": "3258:69:101",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -704,22 +704,22 @@
           {
             "body": null,
             "documentation": "@notice The repay function transfers an asset into the protocol, reducing the target user's borrow balance.\n@param borrower The account which borrowed the asset to be repaid.\n@param repayAmount The amount of the underlying borrowed asset to be repaid. A value of -1 (i.e. 2^256 - 1) can be used to repay the full amount.\n@return 0 on success, otherwise an Error code\n@dev msg.sender The account which shall repay the borrow.\n@dev Before repaying an asset, users must first approve the cToken to access their token balance.",
-            "id": 17375,
+            "id": 17448,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "repayBorrowBehalf",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 17371,
+              "id": 17444,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 17368,
+                  "id": 17441,
                   "name": "borrower",
                   "nodeType": "VariableDeclaration",
-                  "scope": 17375,
+                  "scope": 17448,
                   "src": "3947:16:101",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -728,7 +728,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 17367,
+                    "id": 17440,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "3947:7:101",
@@ -743,10 +743,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 17370,
+                  "id": 17443,
                   "name": "repayAmount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 17375,
+                  "scope": 17448,
                   "src": "3965:19:101",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -755,7 +755,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 17369,
+                    "id": 17442,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "3965:7:101",
@@ -771,15 +771,15 @@
               "src": "3946:39:101"
             },
             "returnParameters": {
-              "id": 17374,
+              "id": 17447,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 17373,
+                  "id": 17446,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 17375,
+                  "scope": 17448,
                   "src": "4020:7:101",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -788,7 +788,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 17372,
+                    "id": 17445,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "4020:7:101",
@@ -803,7 +803,7 @@
               ],
               "src": "4019:9:101"
             },
-            "scope": 17417,
+            "scope": 17490,
             "src": "3920:109:101",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -812,22 +812,22 @@
           {
             "body": null,
             "documentation": "* Admin Functions **",
-            "id": 17382,
+            "id": 17455,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "_addReserves",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 17378,
+              "id": 17451,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 17377,
+                  "id": 17450,
                   "name": "addAmount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 17382,
+                  "scope": 17455,
                   "src": "4088:17:101",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -836,7 +836,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 17376,
+                    "id": 17449,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "4088:7:101",
@@ -852,15 +852,15 @@
               "src": "4087:19:101"
             },
             "returnParameters": {
-              "id": 17381,
+              "id": 17454,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 17380,
+                  "id": 17453,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 17382,
+                  "scope": 17455,
                   "src": "4125:7:101",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -869,7 +869,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 17379,
+                    "id": 17452,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "4125:7:101",
@@ -884,7 +884,7 @@
               ],
               "src": "4124:9:101"
             },
-            "scope": 17417,
+            "scope": 17490,
             "src": "4066:68:101",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -893,28 +893,28 @@
           {
             "body": null,
             "documentation": "End Admin Functions ",
-            "id": 17387,
+            "id": 17460,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "underlying",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 17383,
+              "id": 17456,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "4191:2:101"
             },
             "returnParameters": {
-              "id": 17386,
+              "id": 17459,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 17385,
+                  "id": 17458,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 17387,
+                  "scope": 17460,
                   "src": "4217:7:101",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -923,7 +923,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 17384,
+                    "id": 17457,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "4217:7:101",
@@ -939,7 +939,7 @@
               ],
               "src": "4216:9:101"
             },
-            "scope": 17417,
+            "scope": 17490,
             "src": "4172:54:101",
             "stateMutability": "view",
             "superFunction": null,
@@ -948,28 +948,28 @@
           {
             "body": null,
             "documentation": "@notice Each cToken is convertible into an ever increasing quantity of the underlying asset, as interest accrues in the market. The exchange rate between a cToken and the underlying asset is \nequal to: exchangeRate = (getCash() + totalBorrows() - totalReserves()) / totalSupply()\n@return The current exchange rate as an unsigned integer, scaled by 1e18.",
-            "id": 17392,
+            "id": 17465,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "exchangeRateCurrent",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 17388,
+              "id": 17461,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "4654:2:101"
             },
             "returnParameters": {
-              "id": 17391,
+              "id": 17464,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 17390,
+                  "id": 17463,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 17392,
+                  "scope": 17465,
                   "src": "4675:7:101",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -978,7 +978,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 17389,
+                    "id": 17462,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "4675:7:101",
@@ -993,7 +993,7 @@
               ],
               "src": "4674:9:101"
             },
-            "scope": 17417,
+            "scope": 17490,
             "src": "4626:58:101",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -1002,28 +1002,28 @@
           {
             "body": null,
             "documentation": null,
-            "id": 17397,
+            "id": 17470,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "exchangeRateStored",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 17393,
+              "id": 17466,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "4717:2:101"
             },
             "returnParameters": {
-              "id": 17396,
+              "id": 17469,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 17395,
+                  "id": 17468,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 17397,
+                  "scope": 17470,
                   "src": "4743:7:101",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1032,7 +1032,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 17394,
+                    "id": 17467,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "4743:7:101",
@@ -1047,7 +1047,7 @@
               ],
               "src": "4742:9:101"
             },
-            "scope": 17417,
+            "scope": 17490,
             "src": "4690:62:101",
             "stateMutability": "view",
             "superFunction": null,
@@ -1056,28 +1056,28 @@
           {
             "body": null,
             "documentation": null,
-            "id": 17402,
+            "id": 17475,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "decimals",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 17398,
+              "id": 17471,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "4775:2:101"
             },
             "returnParameters": {
-              "id": 17401,
+              "id": 17474,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 17400,
+                  "id": 17473,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 17402,
+                  "scope": 17475,
                   "src": "4801:5:101",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1086,7 +1086,7 @@
                     "typeString": "uint8"
                   },
                   "typeName": {
-                    "id": 17399,
+                    "id": 17472,
                     "name": "uint8",
                     "nodeType": "ElementaryTypeName",
                     "src": "4801:5:101",
@@ -1101,7 +1101,7 @@
               ],
               "src": "4800:7:101"
             },
-            "scope": 17417,
+            "scope": 17490,
             "src": "4758:50:101",
             "stateMutability": "view",
             "superFunction": null,
@@ -1110,22 +1110,22 @@
           {
             "body": null,
             "documentation": null,
-            "id": 17409,
+            "id": 17482,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "balanceOf",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 17405,
+              "id": 17478,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 17404,
+                  "id": 17477,
                   "name": "account",
                   "nodeType": "VariableDeclaration",
-                  "scope": 17409,
+                  "scope": 17482,
                   "src": "4833:15:101",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1134,7 +1134,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 17403,
+                    "id": 17476,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "4833:7:101",
@@ -1151,15 +1151,15 @@
               "src": "4832:17:101"
             },
             "returnParameters": {
-              "id": 17408,
+              "id": 17481,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 17407,
+                  "id": 17480,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 17409,
+                  "scope": 17482,
                   "src": "4873:7:101",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1168,7 +1168,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 17406,
+                    "id": 17479,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "4873:7:101",
@@ -1183,7 +1183,7 @@
               ],
               "src": "4872:9:101"
             },
-            "scope": 17417,
+            "scope": 17490,
             "src": "4814:68:101",
             "stateMutability": "view",
             "superFunction": null,
@@ -1192,22 +1192,22 @@
           {
             "body": null,
             "documentation": "@notice The user's underlying balance, representing their assets in the protocol, is equal to the user's cToken balance multiplied by the Exchange Rate.\n@param account The account to get the underlying balance of.\n@return The amount of underlying currently owned by the account.",
-            "id": 17416,
+            "id": 17489,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "balanceOfUnderlying",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 17412,
+              "id": 17485,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 17411,
+                  "id": 17484,
                   "name": "account",
                   "nodeType": "VariableDeclaration",
-                  "scope": 17416,
+                  "scope": 17489,
                   "src": "5236:15:101",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1216,7 +1216,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 17410,
+                    "id": 17483,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "5236:7:101",
@@ -1233,15 +1233,15 @@
               "src": "5235:17:101"
             },
             "returnParameters": {
-              "id": 17415,
+              "id": 17488,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 17414,
+                  "id": 17487,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 17416,
+                  "scope": 17489,
                   "src": "5276:7:101",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1250,7 +1250,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 17413,
+                    "id": 17486,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "5276:7:101",
@@ -1265,14 +1265,14 @@
               ],
               "src": "5275:9:101"
             },
-            "scope": 17417,
+            "scope": 17490,
             "src": "5207:78:101",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "external"
           }
         ],
-        "scope": 17418,
+        "scope": 17491,
         "src": "25:5262:101"
       }
     ],
@@ -1282,14 +1282,14 @@
     "absolutePath": "/Users/sy/Documents/GitHub/teller-protocol-v1/contracts/providers/compound/CErc20Interface.sol",
     "exportedSymbols": {
       "CErc20Interface": [
-        17417
+        17490
       ]
     },
-    "id": 17418,
+    "id": 17491,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 17331,
+        "id": 17404,
         "literals": [
           "solidity",
           "0.5",
@@ -1304,9 +1304,9 @@
         "contractKind": "interface",
         "documentation": null,
         "fullyImplemented": false,
-        "id": 17417,
+        "id": 17490,
         "linearizedBaseContracts": [
-          17417
+          17490
         ],
         "name": "CErc20Interface",
         "nodeType": "ContractDefinition",
@@ -1314,22 +1314,22 @@
           {
             "body": null,
             "documentation": "@notice The mint function transfers an asset into the protocol, which begins accumulating interest based on the current Supply Rate for the asset. The user receives a quantity of cTokens equal to the underlying tokens supplied, divided by the current Exchange Rate.\n@param mintAmount The amount of the asset to be supplied, in units of the underlying asset.\n@return 0 on success, otherwise an Error code\n@dev msg.sender The account which shall supply the asset, and own the minted cTokens.\n@dev Before supplying an asset, users must first approve the cToken to access their token balance.",
-            "id": 17338,
+            "id": 17411,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "mint",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 17334,
+              "id": 17407,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 17333,
+                  "id": 17406,
                   "name": "mintAmount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 17338,
+                  "scope": 17411,
                   "src": "746:18:101",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1338,7 +1338,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 17332,
+                    "id": 17405,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "746:7:101",
@@ -1354,15 +1354,15 @@
               "src": "745:20:101"
             },
             "returnParameters": {
-              "id": 17337,
+              "id": 17410,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 17336,
+                  "id": 17409,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 17338,
+                  "scope": 17411,
                   "src": "784:7:101",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1371,7 +1371,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 17335,
+                    "id": 17408,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "784:7:101",
@@ -1386,7 +1386,7 @@
               ],
               "src": "783:9:101"
             },
-            "scope": 17417,
+            "scope": 17490,
             "src": "732:61:101",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -1395,22 +1395,22 @@
           {
             "body": null,
             "documentation": "@notice The redeem function converts a specified quantity of cTokens into the underlying asset, and returns them to the user. The amount of underlying tokens received is equal to the quantity of cTokens redeemed, multiplied by the current Exchange Rate. The amount redeemed must be less than the user's Account Liquidity and the market's available liquidity.\n@param redeemTokens The number of cTokens to be redeemed.\n@return 0 on success, otherwise an Error code\n@dev msg.sender The account to which redeemed funds shall be transferred.",
-            "id": 17345,
+            "id": 17418,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "redeem",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 17341,
+              "id": 17414,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 17340,
+                  "id": 17413,
                   "name": "redeemTokens",
                   "nodeType": "VariableDeclaration",
-                  "scope": 17345,
+                  "scope": 17418,
                   "src": "1400:20:101",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1419,7 +1419,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 17339,
+                    "id": 17412,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1400:7:101",
@@ -1435,15 +1435,15 @@
               "src": "1399:22:101"
             },
             "returnParameters": {
-              "id": 17344,
+              "id": 17417,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 17343,
+                  "id": 17416,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 17345,
+                  "scope": 17418,
                   "src": "1440:7:101",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1452,7 +1452,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 17342,
+                    "id": 17415,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1440:7:101",
@@ -1467,7 +1467,7 @@
               ],
               "src": "1439:9:101"
             },
-            "scope": 17417,
+            "scope": 17490,
             "src": "1384:65:101",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -1476,22 +1476,22 @@
           {
             "body": null,
             "documentation": "@notice The redeem underlying function converts cTokens into a specified quantity of the underlying asset, and returns them to the user. The amount of cTokens redeemed is equal to the quantity of underlying tokens received, divided by the current Exchange Rate. The amount redeemed must be less than the user's Account Liquidity and the market's available liquidity.\n@param redeemAmount The amount of underlying to be redeemed.\n@return 0 on success, otherwise an Error code\n@dev msg.sender The account to which redeemed funds shall be transferred.",
-            "id": 17352,
+            "id": 17425,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "redeemUnderlying",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 17348,
+              "id": 17421,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 17347,
+                  "id": 17420,
                   "name": "redeemAmount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 17352,
+                  "scope": 17425,
                   "src": "2077:20:101",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1500,7 +1500,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 17346,
+                    "id": 17419,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "2077:7:101",
@@ -1516,15 +1516,15 @@
               "src": "2076:22:101"
             },
             "returnParameters": {
-              "id": 17351,
+              "id": 17424,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 17350,
+                  "id": 17423,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 17352,
+                  "scope": 17425,
                   "src": "2117:7:101",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1533,7 +1533,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 17349,
+                    "id": 17422,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "2117:7:101",
@@ -1548,7 +1548,7 @@
               ],
               "src": "2116:9:101"
             },
-            "scope": 17417,
+            "scope": 17490,
             "src": "2051:75:101",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -1557,22 +1557,22 @@
           {
             "body": null,
             "documentation": "@notice The borrow function transfers an asset from the protocol to the user, and creates a borrow balance which begins accumulating interest based on the Borrow Rate for the asset. The amount borrowed must be less than the user's Account Liquidity and the market's available liquidity.\n@param borrowAmount The amount of the underlying asset to be borrowed.\n@return 0 on success, otherwise an Error code\n@dev msg.sender The account to which borrowed funds shall be transferred.",
-            "id": 17359,
+            "id": 17432,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "borrow",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 17355,
+              "id": 17428,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 17354,
+                  "id": 17427,
                   "name": "borrowAmount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 17359,
+                  "scope": 17432,
                   "src": "2674:20:101",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1581,7 +1581,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 17353,
+                    "id": 17426,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "2674:7:101",
@@ -1597,15 +1597,15 @@
               "src": "2673:22:101"
             },
             "returnParameters": {
-              "id": 17358,
+              "id": 17431,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 17357,
+                  "id": 17430,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 17359,
+                  "scope": 17432,
                   "src": "2714:7:101",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1614,7 +1614,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 17356,
+                    "id": 17429,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "2714:7:101",
@@ -1629,7 +1629,7 @@
               ],
               "src": "2713:9:101"
             },
-            "scope": 17417,
+            "scope": 17490,
             "src": "2658:65:101",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -1638,22 +1638,22 @@
           {
             "body": null,
             "documentation": "@notice The repay function transfers an asset into the protocol, reducing the user's borrow balance.\n@param repayAmount The amount of the underlying borrowed asset to be repaid. A value of -1 (i.e. 2^256 - 1) can be used to repay the full amount.\n@return 0 on success, otherwise an Error code\n@dev msg.sender The account which borrowed the asset, and shall repay the borrow.\n@dev Before repaying an asset, users must first approve the cToken to access their token balance.",
-            "id": 17366,
+            "id": 17439,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "repayBorrow",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 17362,
+              "id": 17435,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 17361,
+                  "id": 17434,
                   "name": "repayAmount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 17366,
+                  "scope": 17439,
                   "src": "3279:19:101",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1662,7 +1662,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 17360,
+                    "id": 17433,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "3279:7:101",
@@ -1678,15 +1678,15 @@
               "src": "3278:21:101"
             },
             "returnParameters": {
-              "id": 17365,
+              "id": 17438,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 17364,
+                  "id": 17437,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 17366,
+                  "scope": 17439,
                   "src": "3318:7:101",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1695,7 +1695,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 17363,
+                    "id": 17436,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "3318:7:101",
@@ -1710,7 +1710,7 @@
               ],
               "src": "3317:9:101"
             },
-            "scope": 17417,
+            "scope": 17490,
             "src": "3258:69:101",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -1719,22 +1719,22 @@
           {
             "body": null,
             "documentation": "@notice The repay function transfers an asset into the protocol, reducing the target user's borrow balance.\n@param borrower The account which borrowed the asset to be repaid.\n@param repayAmount The amount of the underlying borrowed asset to be repaid. A value of -1 (i.e. 2^256 - 1) can be used to repay the full amount.\n@return 0 on success, otherwise an Error code\n@dev msg.sender The account which shall repay the borrow.\n@dev Before repaying an asset, users must first approve the cToken to access their token balance.",
-            "id": 17375,
+            "id": 17448,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "repayBorrowBehalf",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 17371,
+              "id": 17444,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 17368,
+                  "id": 17441,
                   "name": "borrower",
                   "nodeType": "VariableDeclaration",
-                  "scope": 17375,
+                  "scope": 17448,
                   "src": "3947:16:101",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1743,7 +1743,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 17367,
+                    "id": 17440,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "3947:7:101",
@@ -1758,10 +1758,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 17370,
+                  "id": 17443,
                   "name": "repayAmount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 17375,
+                  "scope": 17448,
                   "src": "3965:19:101",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1770,7 +1770,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 17369,
+                    "id": 17442,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "3965:7:101",
@@ -1786,15 +1786,15 @@
               "src": "3946:39:101"
             },
             "returnParameters": {
-              "id": 17374,
+              "id": 17447,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 17373,
+                  "id": 17446,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 17375,
+                  "scope": 17448,
                   "src": "4020:7:101",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1803,7 +1803,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 17372,
+                    "id": 17445,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "4020:7:101",
@@ -1818,7 +1818,7 @@
               ],
               "src": "4019:9:101"
             },
-            "scope": 17417,
+            "scope": 17490,
             "src": "3920:109:101",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -1827,22 +1827,22 @@
           {
             "body": null,
             "documentation": "* Admin Functions **",
-            "id": 17382,
+            "id": 17455,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "_addReserves",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 17378,
+              "id": 17451,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 17377,
+                  "id": 17450,
                   "name": "addAmount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 17382,
+                  "scope": 17455,
                   "src": "4088:17:101",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1851,7 +1851,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 17376,
+                    "id": 17449,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "4088:7:101",
@@ -1867,15 +1867,15 @@
               "src": "4087:19:101"
             },
             "returnParameters": {
-              "id": 17381,
+              "id": 17454,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 17380,
+                  "id": 17453,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 17382,
+                  "scope": 17455,
                   "src": "4125:7:101",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1884,7 +1884,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 17379,
+                    "id": 17452,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "4125:7:101",
@@ -1899,7 +1899,7 @@
               ],
               "src": "4124:9:101"
             },
-            "scope": 17417,
+            "scope": 17490,
             "src": "4066:68:101",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -1908,28 +1908,28 @@
           {
             "body": null,
             "documentation": "End Admin Functions ",
-            "id": 17387,
+            "id": 17460,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "underlying",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 17383,
+              "id": 17456,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "4191:2:101"
             },
             "returnParameters": {
-              "id": 17386,
+              "id": 17459,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 17385,
+                  "id": 17458,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 17387,
+                  "scope": 17460,
                   "src": "4217:7:101",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1938,7 +1938,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 17384,
+                    "id": 17457,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "4217:7:101",
@@ -1954,7 +1954,7 @@
               ],
               "src": "4216:9:101"
             },
-            "scope": 17417,
+            "scope": 17490,
             "src": "4172:54:101",
             "stateMutability": "view",
             "superFunction": null,
@@ -1963,28 +1963,28 @@
           {
             "body": null,
             "documentation": "@notice Each cToken is convertible into an ever increasing quantity of the underlying asset, as interest accrues in the market. The exchange rate between a cToken and the underlying asset is \nequal to: exchangeRate = (getCash() + totalBorrows() - totalReserves()) / totalSupply()\n@return The current exchange rate as an unsigned integer, scaled by 1e18.",
-            "id": 17392,
+            "id": 17465,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "exchangeRateCurrent",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 17388,
+              "id": 17461,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "4654:2:101"
             },
             "returnParameters": {
-              "id": 17391,
+              "id": 17464,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 17390,
+                  "id": 17463,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 17392,
+                  "scope": 17465,
                   "src": "4675:7:101",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1993,7 +1993,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 17389,
+                    "id": 17462,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "4675:7:101",
@@ -2008,7 +2008,7 @@
               ],
               "src": "4674:9:101"
             },
-            "scope": 17417,
+            "scope": 17490,
             "src": "4626:58:101",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -2017,28 +2017,28 @@
           {
             "body": null,
             "documentation": null,
-            "id": 17397,
+            "id": 17470,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "exchangeRateStored",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 17393,
+              "id": 17466,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "4717:2:101"
             },
             "returnParameters": {
-              "id": 17396,
+              "id": 17469,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 17395,
+                  "id": 17468,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 17397,
+                  "scope": 17470,
                   "src": "4743:7:101",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -2047,7 +2047,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 17394,
+                    "id": 17467,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "4743:7:101",
@@ -2062,7 +2062,7 @@
               ],
               "src": "4742:9:101"
             },
-            "scope": 17417,
+            "scope": 17490,
             "src": "4690:62:101",
             "stateMutability": "view",
             "superFunction": null,
@@ -2071,28 +2071,28 @@
           {
             "body": null,
             "documentation": null,
-            "id": 17402,
+            "id": 17475,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "decimals",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 17398,
+              "id": 17471,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "4775:2:101"
             },
             "returnParameters": {
-              "id": 17401,
+              "id": 17474,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 17400,
+                  "id": 17473,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 17402,
+                  "scope": 17475,
                   "src": "4801:5:101",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -2101,7 +2101,7 @@
                     "typeString": "uint8"
                   },
                   "typeName": {
-                    "id": 17399,
+                    "id": 17472,
                     "name": "uint8",
                     "nodeType": "ElementaryTypeName",
                     "src": "4801:5:101",
@@ -2116,7 +2116,7 @@
               ],
               "src": "4800:7:101"
             },
-            "scope": 17417,
+            "scope": 17490,
             "src": "4758:50:101",
             "stateMutability": "view",
             "superFunction": null,
@@ -2125,22 +2125,22 @@
           {
             "body": null,
             "documentation": null,
-            "id": 17409,
+            "id": 17482,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "balanceOf",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 17405,
+              "id": 17478,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 17404,
+                  "id": 17477,
                   "name": "account",
                   "nodeType": "VariableDeclaration",
-                  "scope": 17409,
+                  "scope": 17482,
                   "src": "4833:15:101",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -2149,7 +2149,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 17403,
+                    "id": 17476,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "4833:7:101",
@@ -2166,15 +2166,15 @@
               "src": "4832:17:101"
             },
             "returnParameters": {
-              "id": 17408,
+              "id": 17481,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 17407,
+                  "id": 17480,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 17409,
+                  "scope": 17482,
                   "src": "4873:7:101",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -2183,7 +2183,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 17406,
+                    "id": 17479,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "4873:7:101",
@@ -2198,7 +2198,7 @@
               ],
               "src": "4872:9:101"
             },
-            "scope": 17417,
+            "scope": 17490,
             "src": "4814:68:101",
             "stateMutability": "view",
             "superFunction": null,
@@ -2207,22 +2207,22 @@
           {
             "body": null,
             "documentation": "@notice The user's underlying balance, representing their assets in the protocol, is equal to the user's cToken balance multiplied by the Exchange Rate.\n@param account The account to get the underlying balance of.\n@return The amount of underlying currently owned by the account.",
-            "id": 17416,
+            "id": 17489,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "balanceOfUnderlying",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 17412,
+              "id": 17485,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 17411,
+                  "id": 17484,
                   "name": "account",
                   "nodeType": "VariableDeclaration",
-                  "scope": 17416,
+                  "scope": 17489,
                   "src": "5236:15:101",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -2231,7 +2231,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 17410,
+                    "id": 17483,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "5236:7:101",
@@ -2248,15 +2248,15 @@
               "src": "5235:17:101"
             },
             "returnParameters": {
-              "id": 17415,
+              "id": 17488,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 17414,
+                  "id": 17487,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 17416,
+                  "scope": 17489,
                   "src": "5276:7:101",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -2265,7 +2265,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 17413,
+                    "id": 17486,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "5276:7:101",
@@ -2280,14 +2280,14 @@
               ],
               "src": "5275:9:101"
             },
-            "scope": 17417,
+            "scope": 17490,
             "src": "5207:78:101",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "external"
           }
         ],
-        "scope": 17418,
+        "scope": 17491,
         "src": "25:5262:101"
       }
     ],
@@ -2299,7 +2299,7 @@
   },
   "networks": {},
   "schemaVersion": "3.2.3",
-  "updatedAt": "2020-12-13T07:17:18.826Z",
+  "updatedAt": "2021-01-13T05:14:30.817Z",
   "devdoc": {
     "methods": {
       "balanceOfUnderlying(address)": {
