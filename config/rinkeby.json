@@ -42,5 +42,6 @@
     "ETH_LoanTermsConsensus_tUSDC_Proxy": "0x0284240E93C6AFED35482b3BDda0Ec5f5EEBfBb5",
     "LINK_Loans_tUSDC_Proxy": "0x29860Ad00A00c51A6e5677Bc94A42218400312fa",
     "LINK_LendingPool_tUSDC_Proxy": "0xbBAcF09d7c7fA1FeB87D2d3454a466dc8A7385d8",
-    "LINK_LoanTermsConsensus_tUSDC_Proxy": "0xAdB5591bBcA16f39450ae31d4556fE78d1396B1b"
+    "LINK_LoanTermsConsensus_tUSDC_Proxy": "0xAdB5591bBcA16f39450ae31d4556fE78d1396B1b",
+    "AssetSettings_Proxy": "0xf7f29BA2192BcD1E99d06c828d1e6692C0408743"
 }
