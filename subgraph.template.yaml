@@ -347,6 +347,33 @@ dataSources:
         - event: MinterRemoved(indexed address)
           handler: handleMinterRemoved
       file: ./src/mappings/tTokens/tUSDCMappings.ts
+  - kind: ethereum/contract
+    name: AssetSettingsInterface
+    network: {{network}}
+    source:
+      startBlock: {{startBlock}}
+      address: '{{AssetSettings}}'
+      abi: AssetSettingsInterface
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.3
+      language: wasm/assemblyscript
+      entities:
+        - AssetSettingsStatus
+        - AssetSettingsChange
+      abis:
+        - name: AssetSettingsInterface
+          file: ./abis/AssetSettingsInterface.json
+      eventHandlers:
+        - event: AssetSettingsCreated(indexed address,indexed address,address,uint256)
+          handler: handleAssetSettingsCreated
+        - event: AssetSettingsAddressUpdated(indexed bytes32,indexed address,indexed address,address,address)
+          handler: handleAssetSettingsAddressUpdated
+        - event: AssetSettingsUintUpdated(indexed bytes32,indexed address,indexed address,uint256,uint256)
+          handler: handleAssetSettingsUintUpdated
+        - event: AssetSettingsRemoved(indexed address,indexed address)
+          handler: handleAssetSettingsRemoved
+      file: ./src/mappings/assetSettingsMappings.ts
   # 15 Settings
   - kind: ethereum/contract
     name: SettingsInterface
@@ -386,14 +413,6 @@ dataSources:
           handler: handlePauserAdded
         - event: PauserRemoved(indexed address)
           handler: handlePauserRemoved
-        - event: AssetSettingsCreated(indexed address,indexed address,address,uint256)
-          handler: handleAssetSettingsCreated
-        - event: AssetSettingsAddressUpdated(indexed bytes32,indexed address,indexed address,address,address)
-          handler: handleAssetSettingsAddressUpdated
-        - event: AssetSettingsUintUpdated(indexed bytes32,indexed address,indexed address,uint256,uint256)
-          handler: handleAssetSettingsUintUpdated
-        - event: AssetSettingsRemoved(indexed address,indexed address)
-          handler: handleAssetSettingsRemoved
         - event: PlatformSettingCreated(indexed bytes32,indexed address,uint256,uint256,uint256)
           handler: handlePlatformSettingCreated
         - event: PlatformSettingRemoved(indexed bytes32,uint256,indexed address)
@@ -426,11 +445,11 @@ dataSources:
           handler: handleInterestWithdrawn
         - event: PaymentLiquidated(indexed address,uint256)
           handler: handlePaymentLiquidated
-        - event: TokenDeposited(indexed address,uint256)
+        - event: TokenDeposited(indexed address,uint256,uint256)
           handler: handleTokenDeposited
         - event: TokenRepaid(indexed address,uint256)
           handler: handleDaiRepaid
-        - event: TokenWithdrawn(indexed address,uint256)
+        - event: TokenWithdrawn(indexed address,uint256,uint256)
           handler: handleTokenWithdrawn
       file: ./src/mappings/lendingPools/dai_ethLendingPoolMappings.ts
   # 17 DAI_LINK_LendingPool
@@ -458,11 +477,11 @@ dataSources:
           handler: handleInterestWithdrawn
         - event: PaymentLiquidated(indexed address,uint256)
           handler: handlePaymentLiquidated
-        - event: TokenDeposited(indexed address,uint256)
+        - event: TokenDeposited(indexed address,uint256,uint256)
           handler: handleTokenDeposited
         - event: TokenRepaid(indexed address,uint256)
           handler: handleDaiRepaid
-        - event: TokenWithdrawn(indexed address,uint256)
+        - event: TokenWithdrawn(indexed address,uint256,uint256)
           handler: handleTokenWithdrawn
       file: ./src/mappings/lendingPools/dai_linkLendingPoolMappings.ts
   # 18 USDC_ETH_LendingPool
@@ -490,11 +509,11 @@ dataSources:
           handler: handleInterestWithdrawn
         - event: PaymentLiquidated(indexed address,uint256)
           handler: handlePaymentLiquidated
-        - event: TokenDeposited(indexed address,uint256)
+        - event: TokenDeposited(indexed address,uint256,uint256)
           handler: handleTokenDeposited
         - event: TokenRepaid(indexed address,uint256)
           handler: handleDaiRepaid
-        - event: TokenWithdrawn(indexed address,uint256)
+        - event: TokenWithdrawn(indexed address,uint256,uint256)
           handler: handleTokenWithdrawn
       file: ./src/mappings/lendingPools/usdc_ethLendingPoolMappings.ts
   # 19 USDC_LINK_LendingPool
@@ -522,10 +541,10 @@ dataSources:
           handler: handleInterestWithdrawn
         - event: PaymentLiquidated(indexed address,uint256)
           handler: handlePaymentLiquidated
-        - event: TokenDeposited(indexed address,uint256)
+        - event: TokenDeposited(indexed address,uint256,uint256)
           handler: handleTokenDeposited
         - event: TokenRepaid(indexed address,uint256)
           handler: handleDaiRepaid
-        - event: TokenWithdrawn(indexed address,uint256)
+        - event: TokenWithdrawn(indexed address,uint256,uint256)
           handler: handleTokenWithdrawn
       file: ./src/mappings/lendingPools/usdc_linkLendingPoolMappings.ts
