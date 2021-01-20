@@ -443,8 +443,6 @@ dataSources:
       eventHandlers:
         - event: InterestWithdrawn(indexed address,uint256)
           handler: handleInterestWithdrawn
-        - event: PaymentLiquidated(indexed address,uint256)
-          handler: handlePaymentLiquidated
         - event: TokenDeposited(indexed address,uint256,uint256)
           handler: handleTokenDeposited
         - event: TokenRepaid(indexed address,uint256)
@@ -475,8 +473,6 @@ dataSources:
       eventHandlers:
         - event: InterestWithdrawn(indexed address,uint256)
           handler: handleInterestWithdrawn
-        - event: PaymentLiquidated(indexed address,uint256)
-          handler: handlePaymentLiquidated
         - event: TokenDeposited(indexed address,uint256,uint256)
           handler: handleTokenDeposited
         - event: TokenRepaid(indexed address,uint256)
@@ -507,8 +503,6 @@ dataSources:
       eventHandlers:
         - event: InterestWithdrawn(indexed address,uint256)
           handler: handleInterestWithdrawn
-        - event: PaymentLiquidated(indexed address,uint256)
-          handler: handlePaymentLiquidated
         - event: TokenDeposited(indexed address,uint256,uint256)
           handler: handleTokenDeposited
         - event: TokenRepaid(indexed address,uint256)
@@ -539,8 +533,6 @@ dataSources:
       eventHandlers:
         - event: InterestWithdrawn(indexed address,uint256)
           handler: handleInterestWithdrawn
-        - event: PaymentLiquidated(indexed address,uint256)
-          handler: handlePaymentLiquidated
         - event: TokenDeposited(indexed address,uint256,uint256)
           handler: handleTokenDeposited
         - event: TokenRepaid(indexed address,uint256)
