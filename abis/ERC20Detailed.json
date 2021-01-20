@@ -1766,7 +1766,7 @@
   },
   "networks": {},
   "schemaVersion": "3.2.3",
-  "updatedAt": "2021-01-19T20:22:25.750Z",
+  "updatedAt": "2021-01-20T02:39:27.829Z",
   "networkType": "ethereum",
   "devdoc": {
     "details": "Optional functions from the ERC20 standard.",
