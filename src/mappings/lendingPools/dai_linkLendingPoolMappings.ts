@@ -1,7 +1,6 @@
 import {
   TokenDeposited as TokenDepositedEvent,
   TokenWithdrawn as TokenWithdrawnEvent,
-  PaymentLiquidated as PaymentLiquidatedEvent,
   TokenRepaid as TokenRepaidEvent,
   InterestWithdrawn as InterestWithdrawnEvent,
 } from "../../../generated/DAI_LINK_LendingPool/DAILendingPool";
@@ -69,19 +68,6 @@ export function handleDaiRepaid(event: TokenRepaidEvent): void {
     COLLATERAL_TOKEN_LINK,
     LENDING_POOL_REPAID,
     event.params.borrower,
-    event.params.amount,
-    event
-  )
-}
-
-export function handlePaymentLiquidated(event: PaymentLiquidatedEvent): void {
-  internalHandleLendingPoolChange(
-    ETH_TX_PAYMENT_LIQUIDATED,
-    TTOKEN_TDAI,
-    TOKEN_DAI,
-    COLLATERAL_TOKEN_LINK,
-    LENDING_POOL_LIQUIDATED,
-    event.params.liquidator,
     event.params.amount,
     event
   )
