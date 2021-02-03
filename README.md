@@ -40,4 +40,4 @@ Currently, you can play with our subgraph here:
 - [Mainnet](https://thegraph.com/explorer/subgraph/teller-protocol/subgraph-mainnet).
 
 ---
-© Copyright 2020, Fabrx Labs
+© Copyright 2020, Fabrx Labs 
