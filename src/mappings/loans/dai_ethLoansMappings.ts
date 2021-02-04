@@ -5,7 +5,7 @@ import {
   LoanTermsSet as LoanTermsSetEvent,
   LoanTakenOut as LoanTakenOutEvent,
   LoanLiquidated as LoanLiquidatedEvent,
-} from "../../../generated/USDC_LINK_Loans/USDCLoans";
+} from "../../../generated/DAI_ETH_Loans/DAILoans";
 import { TOKEN_DAI, COLLATERAL_TOKEN_ETH } from "../../utils/consts";
 import {
   internalHandleCollateralDeposited,
