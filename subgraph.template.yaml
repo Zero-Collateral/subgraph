@@ -77,36 +77,6 @@ dataSources:
       file: ./src/mappings/consensus/dai_ethLoanTermsConsensusMappings.ts
   # 13 TDAIToken
   - kind: ethereum/contract
-    name: TDAIToken
-    network: {{network}}
-    source:
-      startBlock: {{startBlock}}
-      address: '{{TDAI}}'
-      abi: TToken
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.3
-      language: wasm/assemblyscript
-      entities:
-        - EthTransaction
-        - TTokenHolderBalancesChange
-        - TTokenHolderBalancesStatus
-        - TTokenTotalValuesStatus
-        - TTokenTotalValuesChange
-      abis:
-        - name: TToken
-          file: ./abis/TToken.json
-      eventHandlers:
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
-        - event: MinterAdded(indexed address)
-          handler: handleMinterAdded
-        - event: MinterRemoved(indexed address)
-          handler: handleMinterRemoved
-      file: ./src/mappings/tTokens/tDaiMappings.ts
-  - kind: ethereum/contract
     name: AssetSettingsInterface
     network: {{network}}
     source:
