@@ -12,7 +12,7 @@ export function handleAssetSettingsCreated(event: AssetSettingsCreatedEvent): vo
   createAssetSettingsChange(
     event.params.sender,
     event.params.assetAddress,
-    Bytes.fromUTF8(ASSET_SETTINGS_CTOKEN_ADDRESS) as Bytes,
+    ASSET_SETTINGS_CTOKEN_ADDRESS,
     '',
     event.params.cTokenAddress.toHexString(),
     event
@@ -21,7 +21,7 @@ export function handleAssetSettingsCreated(event: AssetSettingsCreatedEvent): vo
   createAssetSettingsChange(
     event.params.sender,
     event.params.assetAddress,
-    Bytes.fromUTF8(ASSET_SETTINGS_MAX_LOAN_AMOUNT) as Bytes,
+    ASSET_SETTINGS_MAX_LOAN_AMOUNT,
     '0',
     event.params.maxLoanAmount.toString(),
     event

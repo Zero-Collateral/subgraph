@@ -1,3 +1,5 @@
+import { Bytes } from "@graphprotocol/graph-ts";
+
 // See enums in schema.graphql
 export const EMPTY_ADDRESS_STRING = "0x0000000000000000000000000000000000000000";
 export const ETH_ADDRESS_STRING = "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee";
@@ -97,6 +99,6 @@ export const LOAN_STATUS_ACTIVE = "Active";
 export const LOAN_STATUS_CLOSED = "Closed";
 
 // Asset Settings Property Consts
-export const ASSET_SETTINGS_CTOKEN_ADDRESS:string = 'CTokenAddress';
-export const ASSET_SETTINGS_MAX_LOAN_AMOUNT:string = 'MaxLoanAmount';
-export const ASSET_SETTINGS_REMOVED:string = 'Removed';
+export const ASSET_SETTINGS_CTOKEN_ADDRESS:Bytes = Bytes.fromHexString('0x903bd4f34e0bce6cac0efc5fd597163cd9e5d2a15e4b154fd8f443394ede46ff') as Bytes;
+export const ASSET_SETTINGS_MAX_LOAN_AMOUNT:Bytes = Bytes.fromHexString('0xf525bf48e9856fe8ffe40794a6793d36612641c2549eb536845518cf7ffcb992') as Bytes;
+export const ASSET_SETTINGS_REMOVED:string = "Removed";
