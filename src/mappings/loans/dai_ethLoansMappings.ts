@@ -21,7 +21,7 @@ import { Address } from "@graphprotocol/graph-ts";
 
 function getTTokenAddress(loansAddress: Address): Address {
   // PATCH: HARD-CODED TO TDAI ADDRESS
-  return Address.fromString("0x28E0d79369106D6776Acdcf91Ebe62845985D847");
+  return Address.fromString("0x78c9Ac654459F3863cF1E788a52F73F26de6f437");
   // let loans = DAILoans.bind(loansAddress);
   // let tTokenAddress = loans.tToken();
   // return tTokenAddress;
