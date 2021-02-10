@@ -20,9 +20,12 @@ import { DAILoans } from "../../../generated/DAI_ETH_Loans/DAILoans";
 import { Address } from "@graphprotocol/graph-ts";
 
 function getTTokenAddress(loansAddress: Address): Address {
-  let loans = DAILoans.bind(loansAddress);
-  let tTokenAddress = loans.tToken();
-  return tTokenAddress;
+  // PATCH: HARD-CODED TO TDAI ADDRESS
+  return Address.fromString("0x28E0d79369106D6776Acdcf91Ebe62845985D847");
+  // let loans = DAILoans.bind(loansAddress);
+  // let tTokenAddress = loans.tToken();
+  // return tTokenAddress;
+
 }
 
 export function handleCollateralDeposited(
