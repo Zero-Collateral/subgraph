@@ -15,7 +15,7 @@ export function updateAddressAssetSettingsStatus(
   log.info('Getting asset settings status instance with id {}', [id]);
   log.info('Updating asset settings status (address). Property: {}', [propertyChanged]);
   
-  if(propertyChanged == ASSET_SETTINGS_CTOKEN_ADDRESS) {
+  if(propertyChanged == ASSET_SETTINGS_CTOKEN_ADDRESS.toString()) {
     entity.cTokenAddress = newValue
   }
   entity.timestamp = getTimestampInMillis(event)
@@ -34,7 +34,7 @@ export function updateBigIntAssetSettingsStatus(
   log.info('Getting asset settings status (BigInt) instance with id {}', [id]);
   log.info('Updating asset settings status. Property: {}', [propertyChanged]);
 
-  if(propertyChanged == ASSET_SETTINGS_MAX_LOAN_AMOUNT) {
+  if(propertyChanged == ASSET_SETTINGS_MAX_LOAN_AMOUNT.toString()) {
     entity.maxLoanAmount = newValue
   }
   if(propertyChanged == ASSET_SETTINGS_REMOVED) {
