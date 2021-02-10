@@ -3,7 +3,7 @@ name: "Build, tag, push Docker image"
 on:
   push:
     branches:
-      - build/*
+      - build/**
 
 jobs:
   build:

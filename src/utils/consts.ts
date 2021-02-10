@@ -1,3 +1,5 @@
+import { ethers } from "ethers";
+
 // See enums in schema.graphql
 export const EMPTY_ADDRESS_STRING = "0x0000000000000000000000000000000000000000";
 export const ETH_ADDRESS_STRING = "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee";
@@ -97,6 +99,6 @@ export const LOAN_STATUS_ACTIVE = "Active";
 export const LOAN_STATUS_CLOSED = "Closed";
 
 // Asset Settings Property Consts
-export const ASSET_SETTINGS_CTOKEN_ADDRESS:string = 'CTokenAddress';
-export const ASSET_SETTINGS_MAX_LOAN_AMOUNT:string = 'MaxLoanAmount';
-export const ASSET_SETTINGS_REMOVED:string = 'Removed';
+export const ASSET_SETTINGS_CTOKEN_ADDRESS:string = ethers.utils.id('CTokenAddress');
+export const ASSET_SETTINGS_MAX_LOAN_AMOUNT:string = ethers.utils.id('MaxLoanAmount');
+export const ASSET_SETTINGS_REMOVED:string = "Removed";
