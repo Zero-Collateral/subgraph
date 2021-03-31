@@ -193,7 +193,7 @@ export function internalHandleLoanTermsSubmitted(
   )
 }
 
-export function internalHandleLoanTermsAccepted(
+export function internalHandleLoanTermsSet(
   token: string,
   collateralToken: string,
   borrower: Address,

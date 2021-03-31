@@ -12,6 +12,10 @@ import {
   internalHandleBorrowerNoncesChange,
 } from "../../utils/consensus-commons";
 
+export function handleTermsSet(event: TermsSetEvent): void {
+  
+}
+
 export function handleTermsSubmitted(event: TermsSubmittedEvent): void {
   internalHandleLoanTermsSubmitted(
     TOKEN_DAI,
@@ -45,24 +49,3 @@ export function handleTermsAccepted(event: TermsAcceptedEvent): void {
   )
 }
 
-export function handleSignerAdded(event: SignerAddedEvent): void {
-  internalHandleSigner(
-    TOKEN_DAI,
-    COLLATERAL_TOKEN_ETH,
-    CONTRACT_LOAN_TERMS_CONSENSUS,
-    false,
-    event.params.account,
-    event
-  );
-}
-
-export function handleSignerRemoved(event: SignerRemovedEvent): void {
-  internalHandleSigner(
-    TOKEN_DAI,
-    COLLATERAL_TOKEN_ETH,
-    CONTRACT_LOAN_TERMS_CONSENSUS,
-    true,
-    event.params.account,
-    event
-  );
-}

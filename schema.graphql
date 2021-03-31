@@ -98,10 +98,11 @@ type LoanTerm @entity {
   id: ID! # LoanID
   transaction: EthTransaction!
   interestRate: BigInt!
-  collateralRatio: BigInt! 
+  collateralRatio: BigInt!
   maxLoanAmount: BigInt!
   duration: BigInt!
   expiryAt: BigInt!
+  nonce: BigInt!
   blockNumber: BigInt!
   timestamp: BigInt!
 }
@@ -238,6 +239,20 @@ type LoanTermsAccepted @entity {
   transaction: EthTransaction!
   borrower: Bytes!
   requestNonce: BigInt!
+  interestRate: BigInt!
+  collateralRatio: BigInt!
+  maxLoanAmount: BigInt!
+  blockNumber: BigInt!
+  timestamp: BigInt!
+}
+
+type LoanTermsSet @entity {
+  id: ID!
+  token: String!
+  collateralToken: String!
+  transaction: EthTransaction!
+  borrower: Bytes!
+  nonce: BigInt!
   interestRate: BigInt!
   collateralRatio: BigInt!
   maxLoanAmount: BigInt!

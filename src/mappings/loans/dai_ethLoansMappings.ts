@@ -5,7 +5,11 @@ import {
   LoanTermsSet as LoanTermsSetEvent,
   LoanTakenOut as LoanTakenOutEvent,
   LoanLiquidated as LoanLiquidatedEvent,
-} from "../../../generated/DAI_ETH_Loans/DAILoans";
+  ETH_DAI_Loans__loansResultValue0Struct as Loan,
+  ETH_DAI_Loans,
+} from "../../../generated/ETH_DAI_Loans/ETH_DAI_Loans";
+import { SettingsInterface } from "../../../generated/ETH_DAI_Loans/SettingsInterface";
+import { DAI_LendingPool } from "../../../generated/DAI_LendingPool/DAI_LendingPool";
 import { TOKEN_DAI, COLLATERAL_TOKEN_ETH } from "../../utils/consts";
 import {
   internalHandleCollateralDeposited,
@@ -14,15 +18,31 @@ import {
   internalHandleLoanRepaid,
   internalHandleLoanTakenOut,
   internalHandleCollateralWithdrawn,
+  createLoanTerms,
 } from "../../utils/loans-commons";
 import { buildLoanId } from "../../utils/commons";
-import { DAILoans } from "../../../generated/DAI_ETH_Loans/DAILoans";
-import { Address } from "@graphprotocol/graph-ts";
+import { Address, BigInt } from "@graphprotocol/graph-ts";
 
 function getTTokenAddress(loansAddress: Address): Address {
-  let loans = DAILoans.bind(loansAddress);
-  let tTokenAddress = loans.tToken();
+  let loans = ETH_DAI_Loans.bind(loansAddress);
+  let lendingPoolAddress = loans.lendingPool();
+  let lendingPool = DAI_LendingPool.bind(lendingPoolAddress);
+  let tTokenAddress = lendingPool.tToken();
   return tTokenAddress;
+}
+
+function getLoan(loansAddress: Address, loanID: BigInt): Loan {
+  let loans = ETH_DAI_Loans.bind(loansAddress);
+  let loan = loans.loans(loanID);
+  return loan;
+}
+
+function getExpiryTime(loansAddress: Address): BigInt {
+  let loans = ETH_DAI_Loans.bind(loansAddress);
+  let settingsAddress = loans.settings();
+  let settings = SettingsInterface.bind(settingsAddress);
+  let termsExpiry = settings.getTermsExpiryTimeValue();
+  return termsExpiry;
 }
 
 export function handleCollateralDeposited(
@@ -52,28 +72,7 @@ export function handleCollateralWithdrawn(
   internalHandleCollateralWithdrawn(
     loanID,
     event.params.borrower,
-    event.params.withdrawalAmount,
-    event
-  );
-}
-
-export function handleLoanTermsSet(event: LoanTermsSetEvent): void {
-  let loanID = buildLoanId(
-    TOKEN_DAI,
-    COLLATERAL_TOKEN_ETH,
-    event.params.loanID.toString()
-  );
-  internalHandleLoanTermsSet(
-    loanID,
-    TOKEN_DAI,
-    COLLATERAL_TOKEN_ETH,
-    event.params.borrower,
-    event.params.recipient,
-    event.params.interestRate,
-    event.params.collateralRatio,
-    event.params.maxLoanAmount,
-    event.params.duration,
-    event.params.termsExpiry,
+    event.params.amount,
     event
   );
 }
@@ -94,6 +93,32 @@ export function handleLoanTakenOut(event: LoanTakenOutEvent): void {
   );
 }
 
+export function handleLoanTermsSet(event: LoanTermsSetEvent): void {
+  let loanID = buildLoanId(
+    TOKEN_DAI,
+    COLLATERAL_TOKEN_ETH,
+    event.params.loanID.toString()
+  );
+  let loan = getLoan(event.address, event.params.loanID);
+  let loanTerms = loan.loanTerms;
+  let expiryTime = getExpiryTime(event.address);
+
+  internalHandleLoanTermsSet(
+    loanID,
+    TOKEN_DAI,
+    COLLATERAL_TOKEN_ETH,
+    event.params.borrower,
+    event.params.recipient,
+    loanTerms.interestRate,
+    loanTerms.collateralRatio,
+    loanTerms.maxLoanAmount,
+    loanTerms.duration,
+    event.block.timestamp.plus(expiryTime),
+    event.params.nonce,
+    event
+  );
+}
+
 export function handleLoanRepaid(event: LoanRepaidEvent): void {
   let loanID = buildLoanId(
     TOKEN_DAI,
@@ -104,8 +129,8 @@ export function handleLoanRepaid(event: LoanRepaidEvent): void {
     getTTokenAddress(event.address),
     loanID,
     event.params.amountPaid,
-    event.params.totalOwed,
     event.params.payer,
+    event.params.totalOwed,
     event
   );
 }
@@ -124,4 +149,3 @@ export function handleLoanLiquidated(event: LoanLiquidatedEvent): void {
     event
   );
 }
-

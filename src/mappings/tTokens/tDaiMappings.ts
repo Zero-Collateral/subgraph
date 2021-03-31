@@ -1,9 +1,7 @@
-import { BigInt } from "@graphprotocol/graph-ts"
+import { BigInt } from "@graphprotocol/graph-ts";
 import {
   Transfer as TransferEvent,
   Approval as ApprovalEvent,
-  MinterAdded as MinterAddedEvent,
-  MinterRemoved as MinterRemovedEvent,
   TToken,
 } from "../../../generated/TDAIToken/TToken";
 import {
@@ -37,13 +35,17 @@ export function handleTransfer(event: TransferEvent): void {
     event.params.to,
     TTOKEN_STATUS_TRANSFER,
     ethTransaction
-  )
+  );
   let tToken = TToken.bind(event.address);
   let tryBalanceOfFrom = tToken.try_balanceOf(event.params.from);
   let tryBalanceOfTo = tToken.try_balanceOf(event.params.to);
 
-  let balanceOfFrom = tryBalanceOfFrom.reverted ? BigInt.fromI32(0) : tryBalanceOfFrom.value;
-  let balanceOfTo = tryBalanceOfTo.reverted ? BigInt.fromI32(0) : tryBalanceOfTo.value;
+  let balanceOfFrom = tryBalanceOfFrom.reverted
+    ? BigInt.fromI32(0)
+    : tryBalanceOfFrom.value;
+  let balanceOfTo = tryBalanceOfTo.reverted
+    ? BigInt.fromI32(0)
+    : tryBalanceOfTo.value;
   updateTTokenHolderBalancesFor(
     event.address,
     TTOKEN_TDAI,
@@ -54,14 +56,14 @@ export function handleTransfer(event: TransferEvent): void {
     balanceOfTo,
     event,
     ethTransaction
-  )
+  );
   updateTTokenTotalSupplyFor(
     event.address,
     event.params.from,
     event.params.to,
     event.params.value,
-    ethTransaction,
-  )
+    ethTransaction
+  );
 }
 
 export function handleApproval(event: ApprovalEvent): void {
@@ -75,33 +77,5 @@ export function handleApproval(event: ApprovalEvent): void {
     event.params.spender,
     TTOKEN_STATUS_APPROVAL,
     ethTransaction
-  )
-}
-
-export function handleMinterAdded(event: MinterAddedEvent): void {
-  let id = buildId(event);
-  let ethTransaction = createEthTransaction(event, ETH_TX_TTOKEN_MINTER_ADDED);
-  createTTokenHolderActionsChange(
-    id,
-    BigInt.fromI32(0),
-    TTOKEN_TDAI,
-    event.params.account,
-    event.params.account,
-    TTOKEN_STATUS_MINTER_ADDED,
-    ethTransaction
-  )
-}
-
-export function handleMinterRemoved(event: MinterRemovedEvent): void {
-  let id = buildId(event);
-  let ethTransaction = createEthTransaction(event, ETH_TX_TTOKEN_MINTER_REMOVED);
-  createTTokenHolderActionsChange(
-    id,
-    BigInt.fromI32(0),
-    TTOKEN_TDAI,
-    event.params.account,
-    event.params.account,
-    TTOKEN_STATUS_MINTER_REMOVED,
-    ethTransaction
-  )
+  );
 }
