@@ -3,7 +3,7 @@ import {
   TokenWithdrawn as TokenWithdrawnEvent,
   TokenRepaid as TokenRepaidEvent,
   InterestWithdrawn as InterestWithdrawnEvent,
-} from "../../../generated/DAI_ETH_LendingPool/DAILendingPool";
+} from "../../../generated/DAI_LendingPool/DAI_LendingPool";
 import {
   LENDING_POOL_DEPOSITED,
   LENDING_POOL_WITHDRAWN,
@@ -31,7 +31,7 @@ export function handleInterestWithdrawn(event: InterestWithdrawnEvent): void {
     event.params.lender,
     event.params.amount,
     event
-  )
+  );
 }
 
 export function handleTokenDeposited(event: TokenDepositedEvent): void {
@@ -44,7 +44,7 @@ export function handleTokenDeposited(event: TokenDepositedEvent): void {
     event.params.sender,
     event.params.amount,
     event
-  )
+  );
 }
 
 export function handleTokenWithdrawn(event: TokenWithdrawnEvent): void {
@@ -57,7 +57,7 @@ export function handleTokenWithdrawn(event: TokenWithdrawnEvent): void {
     event.params.sender,
     event.params.amount,
     event
-  )
+  );
 }
 
 export function handleDaiRepaid(event: TokenRepaidEvent): void {
@@ -70,5 +70,5 @@ export function handleDaiRepaid(event: TokenRepaidEvent): void {
     event.params.borrower,
     event.params.amount,
     event
-  )
+  );
 }
