@@ -34,6 +34,8 @@ dataSources:
           file: ./abis/ILoanManager.json
         - name: SettingsInterface
           file: ./abis/Settings.json
+        - name: LendingPool
+          file: ./abis/LendingPoolInterface.json
       eventHandlers:
         - event: LoanTermsSet(indexed uint256,indexed address,indexed address,uint256)
           handler: handleLoanTermsSet

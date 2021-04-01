@@ -9,7 +9,7 @@ import {
   ETH_DAI_Loans,
 } from "../../../generated/ETH_DAI_Loans/ETH_DAI_Loans";
 import { SettingsInterface } from "../../../generated/ETH_DAI_Loans/SettingsInterface";
-import { DAI_LendingPool } from "../../../generated/DAI_LendingPool/DAI_LendingPool";
+import { LendingPool } from "../../../generated/ETH_DAI_Loans/LendingPool";
 import { TOKEN_DAI, COLLATERAL_TOKEN_ETH } from "../../utils/consts";
 import {
   internalHandleCollateralDeposited,
@@ -26,7 +26,7 @@ import { Address, BigInt } from "@graphprotocol/graph-ts";
 function getTTokenAddress(loansAddress: Address): Address {
   let loans = ETH_DAI_Loans.bind(loansAddress);
   let lendingPoolAddress = loans.lendingPool();
-  let lendingPool = DAI_LendingPool.bind(lendingPoolAddress);
+  let lendingPool = LendingPool.bind(lendingPoolAddress);
   let tTokenAddress = lendingPool.tToken();
   return tTokenAddress;
 }
