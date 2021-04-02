@@ -32,63 +32,68 @@ import {
   createPlatformSettingChange,
   updateOrCreatePlatformSettingsStatus,
 } from "../utils/settings-commons";
-import { createAssetSettingsChange, getOrCreateAssetSettingsStatus, updateBigIntAssetSettingsStatus, updateAddressAssetSettingsStatus } from "../utils/common-settings";
 
-export function handlePlatformSettingCreated(event: PlatformSettingCreatedEvent): void {
+export function handlePlatformSettingCreated(
+  event: PlatformSettingCreatedEvent
+): void {
   createPlatformSettingChange(
     BigInt.fromI32(0),
     event.params.value,
     event.params.sender,
-    event.params.settingName.toHexString(),
+    event.params.settingName.toString(),
     ETH_TX_PLATFORM_SETTING_CREATED,
-    event,
-  )
+    event
+  );
   updateOrCreatePlatformSettingsStatus(
-    event.params.settingName.toHexString(),
+    event.params.settingName.toString(),
     event.params.minValue,
     event.params.maxValue,
     false,
     event.params.value,
     event
-  )
+  );
 }
 
-export function handlePlatformSettingUpdated(event: PlatformSettingUpdatedEvent): void {
+export function handlePlatformSettingUpdated(
+  event: PlatformSettingUpdatedEvent
+): void {
   createPlatformSettingChange(
     event.params.oldValue,
     event.params.newValue,
     event.params.sender,
-    event.params.settingName.toHexString(),
+    event.params.settingName.toString(),
     ETH_TX_PLATFORM_SETTING_UPDATED,
-    event,
-  )
+    event
+  );
   updateOrCreatePlatformSettingsStatus(
-    event.params.settingName.toHexString(),
-    event.params.newValue,// We haven't got the min/max value at this point. So we pass the newValue, but it only modify the new value internally.
-    event.params.newValue,// We haven't got the min/max value at this point. So we pass the newValue, but it only modify the new value internally.
+    event.params.settingName.toString(),
+    event.params.newValue, // We haven't got the min/max value at this point. So we pass the newValue, but it only modify the new value internally.
+    event.params.newValue, // We haven't got the min/max value at this point. So we pass the newValue, but it only modify the new value internally.
     false,
     event.params.newValue,
     event
-  )
+  );
 }
 
-export function handlePlatformSettingRemoved(event: PlatformSettingRemovedEvent): void {
+export function handlePlatformSettingRemoved(
+  event: PlatformSettingRemovedEvent
+): void {
   createPlatformSettingChange(
     event.params.lastValue,
     BigInt.fromI32(0),
     event.params.sender,
-    event.params.settingName.toHexString(),
+    event.params.settingName.toString(),
     ETH_TX_PLATFORM_SETTING_REMOVED,
-    event,
-  )
+    event
+  );
   updateOrCreatePlatformSettingsStatus(
-    event.params.settingName.toHexString(),
-    BigInt.fromI32(0),// We haven't got the min/max value at this point. So we pass the newValue, but it only modify the new value internally.
-    BigInt.fromI32(0),// We haven't got the min/max value at this point. So we pass the newValue, but it only modify the new value internally.
+    event.params.settingName.toString(),
+    BigInt.fromI32(0), // We haven't got the min/max value at this point. So we pass the newValue, but it only modify the new value internally.
+    BigInt.fromI32(0), // We haven't got the min/max value at this point. So we pass the newValue, but it only modify the new value internally.
     true,
     event.params.lastValue,
     event
-  )
+  );
 }
 
 export function handleLendingPoolPaused(event: LendingPoolPausedEvent): void {
@@ -134,8 +139,8 @@ export function handlePaused(event: PausedEvent): void {
     event.params.account,
     "PausePlatform",
     ETH_TX_PLATFORM_PAUSED,
-    event,
-  )
+    event
+  );
   updateOrCreatePlatformSettingsStatus(
     "PausePlatform",
     BigInt.fromI32(0),
@@ -143,7 +148,7 @@ export function handlePaused(event: PausedEvent): void {
     false,
     BigInt.fromI32(1),
     event
-  )
+  );
 }
 
 export function handleUnpaused(event: UnpausedEvent): void {
@@ -153,8 +158,8 @@ export function handleUnpaused(event: UnpausedEvent): void {
     event.params.account,
     "PausePlatform",
     ETH_TX_PLATFORM_UNPAUSED,
-    event,
-  )
+    event
+  );
   updateOrCreatePlatformSettingsStatus(
     "PausePlatform",
     BigInt.fromI32(0),
@@ -162,7 +167,7 @@ export function handleUnpaused(event: UnpausedEvent): void {
     false,
     BigInt.fromI32(0),
     event
-  )
+  );
 }
 
 export function handlePauserAdded(event: PauserAddedEvent): void {
