@@ -39,12 +39,12 @@ export function handlePlatformSettingCreated(event: PlatformSettingCreatedEvent)
     BigInt.fromI32(0),
     event.params.value,
     event.params.sender,
-    event.params.settingName.toString(),
+    event.params.settingName.toHexString(),
     ETH_TX_PLATFORM_SETTING_CREATED,
     event,
   )
   updateOrCreatePlatformSettingsStatus(
-    event.params.settingName.toString(),
+    event.params.settingName.toHexString(),
     event.params.minValue,
     event.params.maxValue,
     false,
@@ -58,12 +58,12 @@ export function handlePlatformSettingUpdated(event: PlatformSettingUpdatedEvent)
     event.params.oldValue,
     event.params.newValue,
     event.params.sender,
-    event.params.settingName.toString(),
+    event.params.settingName.toHexString(),
     ETH_TX_PLATFORM_SETTING_UPDATED,
     event,
   )
   updateOrCreatePlatformSettingsStatus(
-    event.params.settingName.toString(),
+    event.params.settingName.toHexString(),
     event.params.newValue,// We haven't got the min/max value at this point. So we pass the newValue, but it only modify the new value internally.
     event.params.newValue,// We haven't got the min/max value at this point. So we pass the newValue, but it only modify the new value internally.
     false,
@@ -77,12 +77,12 @@ export function handlePlatformSettingRemoved(event: PlatformSettingRemovedEvent)
     event.params.lastValue,
     BigInt.fromI32(0),
     event.params.sender,
-    event.params.settingName.toString(),
+    event.params.settingName.toHexString(),
     ETH_TX_PLATFORM_SETTING_REMOVED,
     event,
   )
   updateOrCreatePlatformSettingsStatus(
-    event.params.settingName.toString(),
+    event.params.settingName.toHexString(),
     BigInt.fromI32(0),// We haven't got the min/max value at this point. So we pass the newValue, but it only modify the new value internally.
     BigInt.fromI32(0),// We haven't got the min/max value at this point. So we pass the newValue, but it only modify the new value internally.
     true,
