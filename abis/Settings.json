@@ -349,6 +349,21 @@
       "type": "function"
     },
     {
+      "constant": true,
+      "inputs": [],
+      "name": "chainlinkAggregator",
+      "outputs": [
+        {
+          "internalType": "contract IChainlinkAggregator",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
       "constant": false,
       "inputs": [
         {
@@ -656,7 +671,7 @@
         },
         {
           "internalType": "address",
-          "name": "uniswapV2RouterAddress",
+          "name": "uniswapRouterV2Address",
           "type": "address"
         }
       ],
@@ -805,21 +820,6 @@
           "internalType": "struct PlatformSettingsLib.PlatformSetting",
           "name": "",
           "type": "tuple"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "constant": true,
-      "inputs": [],
-      "name": "priceAggregator",
-      "outputs": [
-        {
-          "internalType": "contract IPriceAggregator",
-          "name": "",
-          "type": "address"
         }
       ],
       "payable": false,
