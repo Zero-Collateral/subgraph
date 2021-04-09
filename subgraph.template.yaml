@@ -68,7 +68,7 @@ dataSources:
       eventHandlers:
         - event: TermsAccepted(indexed address,indexed uint256,uint256,uint256,uint256)
           handler: handleTermsAccepted
-        - event: TermsSubmitted(indexed address,indexed address,indexed uint256,uint256,uint256,uint256,uint256)
+        - event: TermsSubmitted(indexed address,indexed address,indexed uint256,uint256,uint256,uint256)
           handler: handleTermsSubmitted
         - event: SignerAdded(indexed address)
           handler: handleSignerAdded

@@ -137,7 +137,6 @@ export function createLoanTermsSubmitted(
   signer: Address,
   borrower: Address,
   requestNonce: BigInt,
-  signerNonce: BigInt,
   interestRate: BigInt,
   collateralRatio: BigInt,
   maxLoanAmount: BigInt,
@@ -153,7 +152,6 @@ export function createLoanTermsSubmitted(
   entity.signer = signer;
   entity.borrower = borrower;
   entity.requestNonce = requestNonce;
-  entity.signerNonce = signerNonce;
   entity.interestRate = interestRate;
   entity.collateralRatio = collateralRatio;
   entity.maxLoanAmount = maxLoanAmount;
@@ -169,7 +167,6 @@ export function internalHandleLoanTermsSubmitted(
   signer: Address,
   borrower: Address,
   requestNonce: BigInt,
-  signerNonce: BigInt,
   interestRate: BigInt,
   collateralRatio: BigInt,
   maxLoanAmount: BigInt,
@@ -184,7 +181,6 @@ export function internalHandleLoanTermsSubmitted(
     signer,
     borrower,
     requestNonce,
-    signerNonce,
     interestRate,
     collateralRatio,
     maxLoanAmount,

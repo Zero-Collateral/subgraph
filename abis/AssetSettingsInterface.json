@@ -388,6 +388,47 @@
           "internalType": "address",
           "name": "assetAddress",
           "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "newMaxDebtRatio",
+          "type": "uint256"
+        }
+      ],
+      "name": "updateMaxDebtRatio",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "assetAddress",
+          "type": "address"
+        }
+      ],
+      "name": "getMaxDebtRatio",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "assetAddress",
+          "type": "address"
         }
       ],
       "name": "removeAsset",
@@ -397,50 +438,50 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.5.17+commit.d19bba13\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"assetSettingName\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"assetAddress\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"oldValue\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"newValue\",\"type\":\"address\"}],\"name\":\"AssetSettingsAddressUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"assetAddress\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"cTokenAddress\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"maxLoanAmount\",\"type\":\"uint256\"}],\"name\":\"AssetSettingsCreated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"assetAddress\",\"type\":\"address\"}],\"name\":\"AssetSettingsRemoved\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"assetSettingName\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"assetAddress\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"oldValue\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newValue\",\"type\":\"uint256\"}],\"name\":\"AssetSettingsUintUpdated\",\"type\":\"event\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"assetAddress\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"cTokenAddress\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"maxLoanAmount\",\"type\":\"uint256\"}],\"name\":\"createAssetSetting\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"assetAddress\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"exceedsMaxLoanAmount\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"assetAddress\",\"type\":\"address\"}],\"name\":\"getCRVPoolAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"assetAddress\",\"type\":\"address\"}],\"name\":\"getCTokenAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"assetAddress\",\"type\":\"address\"}],\"name\":\"getMaxLoanAmount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"assetAddress\",\"type\":\"address\"}],\"name\":\"getMaxTVLAmount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"assetAddress\",\"type\":\"address\"}],\"name\":\"getYVaultAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"assetAddress\",\"type\":\"address\"}],\"name\":\"removeAsset\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"assetAddress\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"crvPoolAddress\",\"type\":\"address\"}],\"name\":\"updateCRVPoolAddressSetting\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"assetAddress\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"cTokenAddress\",\"type\":\"address\"}],\"name\":\"updateCTokenAddress\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"assetAddress\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"newMaxLoanAmount\",\"type\":\"uint256\"}],\"name\":\"updateMaxLoanAmount\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"assetAddress\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"newMaxTVLAmount\",\"type\":\"uint256\"}],\"name\":\"updateMaxTVL\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"assetAddress\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"yVaultAddress\",\"type\":\"address\"}],\"name\":\"updateYVaultAddressSetting\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"author\":\"develop@teller.finance\",\"methods\":{\"createAssetSetting(address,address,uint256)\":{\"params\":{\"assetAddress\":\"asset address used to create the new setting.\",\"cTokenAddress\":\"cToken address used to configure the asset setting.\",\"maxLoanAmount\":\"the initial max loan amount.\"}},\"exceedsMaxLoanAmount(address,uint256)\":{\"params\":{\"amount\":\"the loan amount to check.\",\"assetAddress\":\"asset address used to return the max loan amount setting.\"},\"return\":\"true if the given amount is greater than the current max loan amount. Otherwise it returns false.\"},\"getCRVPoolAddress(address)\":{\"params\":{\"assetAddress\":\"asset address to get the associated curve pool address for.\"},\"return\":\"The address of the curve pool.\"},\"getCTokenAddress(address)\":{\"params\":{\"assetAddress\":\"asset address to get the associated cToken for.\"},\"return\":\"The associated cToken address\"},\"getMaxLoanAmount(address)\":{\"params\":{\"assetAddress\":\"asset address to retrieve the max loan amount.\"}},\"getMaxTVLAmount(address)\":{\"params\":{\"assetAddress\":\"asset address to retrieve the max total value locked amount.\"}},\"getYVaultAddress(address)\":{\"params\":{\"assetAddress\":\"asset address to get the associated yearn vault address for.\"},\"return\":\"The address of the yearn vault.\"},\"removeAsset(address)\":{\"params\":{\"assetAddress\":\"asset address to remove.\"}},\"updateCRVPoolAddressSetting(address,address)\":{\"params\":{\"assetAddress\":\"asset address to configure.\",\"crvPoolAddress\":\"the new Curve pool address to configure.\"}},\"updateCTokenAddress(address,address)\":{\"params\":{\"assetAddress\":\"asset address to configure.\",\"cTokenAddress\":\"the new cToken address to configure.\"}},\"updateMaxLoanAmount(address,uint256)\":{\"params\":{\"assetAddress\":\"asset address used to update the max loan amount.\",\"newMaxLoanAmount\":\"the new max loan amount to set.\"}},\"updateMaxTVL(address,uint256)\":{\"params\":{\"assetAddress\":\"asset address used to update the max loan amount.\",\"newMaxTVLAmount\":\"the new max total vault locked amount to set.\"}},\"updateYVaultAddressSetting(address,address)\":{\"params\":{\"assetAddress\":\"asset address to configure.\",\"yVaultAddress\":\"the new yVault address to configure.\"}}}},\"userdoc\":{\"methods\":{\"createAssetSetting(address,address,uint256)\":{\"notice\":\"It creates an asset with the given parameters.\"},\"exceedsMaxLoanAmount(address,uint256)\":{\"notice\":\"Tests whether a given amount is greater than the current max loan amount.\"},\"getCRVPoolAddress(address)\":{\"notice\":\"It returns the curve pool address associted with an asset.\"},\"getCTokenAddress(address)\":{\"notice\":\"It returns the cToken address associted with an asset.\"},\"getMaxLoanAmount(address)\":{\"notice\":\"Returns the max loan amount for a given asset.\"},\"getMaxTVLAmount(address)\":{\"notice\":\"Returns the max total value locked amount for a given asset.\"},\"getYVaultAddress(address)\":{\"notice\":\"It returns the yearn vault address associted with an asset.\"},\"removeAsset(address)\":{\"notice\":\"It removes a configuration for a given asset on the platform.\"},\"updateCRVPoolAddressSetting(address,address)\":{\"notice\":\"It updates the curve pool address associted with an asset.\"},\"updateCTokenAddress(address,address)\":{\"notice\":\"It updates the cToken address associted with an asset.\"},\"updateMaxLoanAmount(address,uint256)\":{\"notice\":\"It updates the max loan amount for a given asset.\"},\"updateMaxTVL(address,uint256)\":{\"notice\":\"It updates the max total vaule locked amount for a given asset.\"},\"updateYVaultAddressSetting(address,address)\":{\"notice\":\"It updates the yearn vault address associted with an asset.\"}},\"notice\":\"This interface defines all function to manage the asset settings on the platform.\"}},\"settings\":{\"compilationTarget\":{\"/Users/sy/Documents/GitHub/teller-protocol-v1/contracts/interfaces/AssetSettingsInterface.sol\":\"AssetSettingsInterface\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/sy/Documents/GitHub/teller-protocol-v1/contracts/interfaces/AssetSettingsInterface.sol\":{\"keccak256\":\"0x0b58fed714f80a7ae2be1c4f9baa1ec360ea446e7bef2a88c79071696406bbe3\",\"urls\":[\"bzz-raw://d348870fc8d6e738573eda914c89b87d8e0e28708ec14ceae0f7f26ed43a1d1a\",\"dweb:/ipfs/QmRTRkf6GKX8fnG2kM2cHY3D72LoJzkp7scvDP6xHAornj\"]},\"/Users/sy/Documents/GitHub/teller-protocol-v1/contracts/util/AddressLib.sol\":{\"keccak256\":\"0xb6311a4caaab2cc3f783d476a1432e436d12b4ea45be92809b1adbeafc4d31c1\",\"urls\":[\"bzz-raw://643716fbfdf17e6936c46ee04c0355c27b1c052bee89918e97cfa78b8eb81d68\",\"dweb:/ipfs/QmSXTEHePHXfhk38F2Y4JP4Rr9ichFiSuDCpTL5PJ1v5pC\"]},\"/Users/sy/Documents/GitHub/teller-protocol-v1/contracts/util/CacheLib.sol\":{\"keccak256\":\"0xa43ff6d740577dfeae4972671c9a60cdf9607d6e81cadc585955debe1ca38dd7\",\"urls\":[\"bzz-raw://ad94cfc3259b2e18be2d6faefd109a306394f94ec85c181995a8a547a4555a9e\",\"dweb:/ipfs/QmYBPyNaRohQXZzM9uixEV1oBrQrhFTTi5HpWPS7udZNh6\"]},\"@openzeppelin/contracts-ethereum-package/contracts/utils/Address.sol\":{\"keccak256\":\"0x1a8e5072509c5ea7365eb1d48030b9be865140c8fb779968da0a459a0e174a11\",\"urls\":[\"bzz-raw://03335b7b07c7c8c8d613cfdd8ec39a0b5ec133ee510bf2fe6cc5a496767bef4b\",\"dweb:/ipfs/Qmebp4nzPja645c9yXSdJkGq96oU3am3LUnG2K3R7XxyKf\"]}},\"version\":1}",
+  "metadata": "{\"compiler\":{\"version\":\"0.5.17+commit.d19bba13\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"assetSettingName\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"assetAddress\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"oldValue\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"newValue\",\"type\":\"address\"}],\"name\":\"AssetSettingsAddressUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"assetAddress\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"cTokenAddress\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"maxLoanAmount\",\"type\":\"uint256\"}],\"name\":\"AssetSettingsCreated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"assetAddress\",\"type\":\"address\"}],\"name\":\"AssetSettingsRemoved\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"assetSettingName\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"assetAddress\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"oldValue\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newValue\",\"type\":\"uint256\"}],\"name\":\"AssetSettingsUintUpdated\",\"type\":\"event\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"assetAddress\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"cTokenAddress\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"maxLoanAmount\",\"type\":\"uint256\"}],\"name\":\"createAssetSetting\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"assetAddress\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"exceedsMaxLoanAmount\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"assetAddress\",\"type\":\"address\"}],\"name\":\"getCRVPoolAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"assetAddress\",\"type\":\"address\"}],\"name\":\"getCTokenAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"assetAddress\",\"type\":\"address\"}],\"name\":\"getMaxDebtRatio\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"assetAddress\",\"type\":\"address\"}],\"name\":\"getMaxLoanAmount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"assetAddress\",\"type\":\"address\"}],\"name\":\"getMaxTVLAmount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"assetAddress\",\"type\":\"address\"}],\"name\":\"getYVaultAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"assetAddress\",\"type\":\"address\"}],\"name\":\"removeAsset\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"assetAddress\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"crvPoolAddress\",\"type\":\"address\"}],\"name\":\"updateCRVPoolAddressSetting\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"assetAddress\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"cTokenAddress\",\"type\":\"address\"}],\"name\":\"updateCTokenAddress\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"assetAddress\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"newMaxDebtRatio\",\"type\":\"uint256\"}],\"name\":\"updateMaxDebtRatio\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"assetAddress\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"newMaxLoanAmount\",\"type\":\"uint256\"}],\"name\":\"updateMaxLoanAmount\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"assetAddress\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"newMaxTVLAmount\",\"type\":\"uint256\"}],\"name\":\"updateMaxTVL\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"assetAddress\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"yVaultAddress\",\"type\":\"address\"}],\"name\":\"updateYVaultAddressSetting\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"author\":\"develop@teller.finance\",\"methods\":{\"createAssetSetting(address,address,uint256)\":{\"params\":{\"assetAddress\":\"asset address used to create the new setting.\",\"cTokenAddress\":\"cToken address used to configure the asset setting.\",\"maxLoanAmount\":\"the initial max loan amount.\"}},\"exceedsMaxLoanAmount(address,uint256)\":{\"params\":{\"amount\":\"the loan amount to check.\",\"assetAddress\":\"asset address used to return the max loan amount setting.\"},\"return\":\"true if the given amount is greater than the current max loan amount. Otherwise it returns false.\"},\"getCRVPoolAddress(address)\":{\"params\":{\"assetAddress\":\"asset address to get the associated curve pool address for.\"},\"return\":\"The address of the curve pool.\"},\"getCTokenAddress(address)\":{\"params\":{\"assetAddress\":\"asset address to get the associated cToken for.\"},\"return\":\"The associated cToken address\"},\"getMaxDebtRatio(address)\":{\"details\":\"The ratio value has 2 decimal places. I.e 100 = 1%\",\"params\":{\"assetAddress\":\"asset address to retrieve the max debt ratio.\"}},\"getMaxLoanAmount(address)\":{\"params\":{\"assetAddress\":\"asset address to retrieve the max loan amount.\"}},\"getMaxTVLAmount(address)\":{\"params\":{\"assetAddress\":\"asset address to retrieve the max total value locked amount.\"}},\"getYVaultAddress(address)\":{\"params\":{\"assetAddress\":\"asset address to get the associated yearn vault address for.\"},\"return\":\"The address of the yearn vault.\"},\"removeAsset(address)\":{\"params\":{\"assetAddress\":\"asset address to remove.\"}},\"updateCRVPoolAddressSetting(address,address)\":{\"params\":{\"assetAddress\":\"asset address to configure.\",\"crvPoolAddress\":\"the new Curve pool address to configure.\"}},\"updateCTokenAddress(address,address)\":{\"params\":{\"assetAddress\":\"asset address to configure.\",\"cTokenAddress\":\"the new cToken address to configure.\"}},\"updateMaxDebtRatio(address,uint256)\":{\"details\":\"The ratio value has 2 decimal places. I.e 100 = 1%\",\"params\":{\"assetAddress\":\"asset address used to update the max debt ratio.\",\"newMaxDebtRatio\":\"the new max debt ratio to set.\"}},\"updateMaxLoanAmount(address,uint256)\":{\"params\":{\"assetAddress\":\"asset address used to update the max loan amount.\",\"newMaxLoanAmount\":\"the new max loan amount to set.\"}},\"updateMaxTVL(address,uint256)\":{\"params\":{\"assetAddress\":\"asset address used to update the max loan amount.\",\"newMaxTVLAmount\":\"the new max total vault locked amount to set.\"}},\"updateYVaultAddressSetting(address,address)\":{\"params\":{\"assetAddress\":\"asset address to configure.\",\"yVaultAddress\":\"the new yVault address to configure.\"}}}},\"userdoc\":{\"methods\":{\"createAssetSetting(address,address,uint256)\":{\"notice\":\"It creates an asset with the given parameters.\"},\"exceedsMaxLoanAmount(address,uint256)\":{\"notice\":\"Tests whether a given amount is greater than the current max loan amount.\"},\"getCRVPoolAddress(address)\":{\"notice\":\"It returns the curve pool address associted with an asset.\"},\"getCTokenAddress(address)\":{\"notice\":\"It returns the cToken address associted with an asset.\"},\"getMaxDebtRatio(address)\":{\"notice\":\"Returns the max debt ratio for a given asset.\"},\"getMaxLoanAmount(address)\":{\"notice\":\"Returns the max loan amount for a given asset.\"},\"getMaxTVLAmount(address)\":{\"notice\":\"Returns the max total value locked amount for a given asset.\"},\"getYVaultAddress(address)\":{\"notice\":\"It returns the yearn vault address associted with an asset.\"},\"removeAsset(address)\":{\"notice\":\"It removes a configuration for a given asset on the platform.\"},\"updateCRVPoolAddressSetting(address,address)\":{\"notice\":\"It updates the curve pool address associted with an asset.\"},\"updateCTokenAddress(address,address)\":{\"notice\":\"It updates the cToken address associted with an asset.\"},\"updateMaxDebtRatio(address,uint256)\":{\"notice\":\"It updates the max debt ratio for a given asset.\"},\"updateMaxLoanAmount(address,uint256)\":{\"notice\":\"It updates the max loan amount for a given asset.\"},\"updateMaxTVL(address,uint256)\":{\"notice\":\"It updates the max total vaule locked amount for a given asset.\"},\"updateYVaultAddressSetting(address,address)\":{\"notice\":\"It updates the yearn vault address associted with an asset.\"}},\"notice\":\"This interface defines all function to manage the asset settings on the platform.\"}},\"settings\":{\"compilationTarget\":{\"/home/jeremig/Documents/Teller/dojo/teller-protocol-v1/contracts/interfaces/AssetSettingsInterface.sol\":\"AssetSettingsInterface\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/jeremig/Documents/Teller/dojo/teller-protocol-v1/contracts/interfaces/AssetSettingsInterface.sol\":{\"keccak256\":\"0x60079e5d9b1f2ef9cfd3c041a4b8f72009d209a010afad1613dbfc9a19ad3708\",\"urls\":[\"bzz-raw://626a36df5d72a7b3610265045a90bc10d0336932bc46272448ae14ced4b5e426\",\"dweb:/ipfs/QmTN8jX2VjENdEhxfYZrpvBPP7LMUgdzZhLUsDfXrGtg4x\"]},\"/home/jeremig/Documents/Teller/dojo/teller-protocol-v1/contracts/util/AddressLib.sol\":{\"keccak256\":\"0xb6311a4caaab2cc3f783d476a1432e436d12b4ea45be92809b1adbeafc4d31c1\",\"urls\":[\"bzz-raw://643716fbfdf17e6936c46ee04c0355c27b1c052bee89918e97cfa78b8eb81d68\",\"dweb:/ipfs/QmSXTEHePHXfhk38F2Y4JP4Rr9ichFiSuDCpTL5PJ1v5pC\"]},\"/home/jeremig/Documents/Teller/dojo/teller-protocol-v1/contracts/util/CacheLib.sol\":{\"keccak256\":\"0xa43ff6d740577dfeae4972671c9a60cdf9607d6e81cadc585955debe1ca38dd7\",\"urls\":[\"bzz-raw://ad94cfc3259b2e18be2d6faefd109a306394f94ec85c181995a8a547a4555a9e\",\"dweb:/ipfs/QmYBPyNaRohQXZzM9uixEV1oBrQrhFTTi5HpWPS7udZNh6\"]},\"@openzeppelin/contracts-ethereum-package/contracts/utils/Address.sol\":{\"keccak256\":\"0x1a8e5072509c5ea7365eb1d48030b9be865140c8fb779968da0a459a0e174a11\",\"urls\":[\"bzz-raw://03335b7b07c7c8c8d613cfdd8ec39a0b5ec133ee510bf2fe6cc5a496767bef4b\",\"dweb:/ipfs/Qmebp4nzPja645c9yXSdJkGq96oU3am3LUnG2K3R7XxyKf\"]}},\"version\":1}",
   "bytecode": "0x",
   "deployedBytecode": "0x",
   "sourceMap": "",
   "deployedSourceMap": "",
-  "source": "pragma solidity 0.5.17;\npragma experimental ABIEncoderV2;\n\nimport \"../util/CacheLib.sol\";\n\n/**\n    @notice This interface defines all function to manage the asset settings on the platform.\n\n    @author develop@teller.finance\n */\ninterface AssetSettingsInterface {\n\n  /**\n        @notice This event is emitted when a new asset settings is created.\n        @param sender the transaction sender address.\n        @param assetAddress the asset address used to create the settings.\n        @param cTokenAddress cToken address to configure for the asset.\n        @param maxLoanAmount max loan amount to configure for the asset.\n     */\n  event AssetSettingsCreated(\n    address indexed sender,\n    address indexed assetAddress,\n    address cTokenAddress,\n    uint256 maxLoanAmount\n  );\n\n  /**\n        @notice This event is emitted when an asset settings is removed.\n        @param sender the transaction sender address.\n        @param assetAddress the asset address used to remove the settings.\n     */\n  event AssetSettingsRemoved(address indexed sender, address indexed assetAddress);\n\n  /**\n        @notice This event is emitted when an asset settings (address type) is updated.\n        @param assetSettingName asset setting name updated.\n        @param sender the transaction sender address.\n        @param assetAddress the asset address used to update the asset settings.\n        @param oldValue old value used for the asset setting.\n        @param newValue the value updated.\n     */\n  event AssetSettingsAddressUpdated(\n    bytes32 indexed assetSettingName,\n    address indexed sender,\n    address indexed assetAddress,\n    address oldValue,\n    address newValue\n  );\n\n  /**\n        @notice This event is emitted when an asset settings (uint256 type) is updated.\n        @param assetSettingName asset setting name updated.\n        @param sender the transaction sender address.\n        @param assetAddress the asset address used to update the asset settings.\n        @param oldValue old value used for the asset setting.\n        @param newValue the value updated.\n     */\n  event AssetSettingsUintUpdated(\n    bytes32 indexed assetSettingName,\n    address indexed sender,\n    address indexed assetAddress,\n    uint256 oldValue,\n    uint256 newValue\n  );\n\n//   function initialize(address settingsAddress) external;\n  /**\n        @notice It creates an asset with the given parameters.\n        @param assetAddress asset address used to create the new setting.\n        @param cTokenAddress cToken address used to configure the asset setting.\n        @param maxLoanAmount the initial max loan amount.\n     */\n  function createAssetSetting(\n    address assetAddress,\n    address cTokenAddress,\n    uint256 maxLoanAmount\n  ) external;\n\n  /**\n        @notice It updates the cToken address associted with an asset.\n        @param assetAddress asset address to configure.\n        @param cTokenAddress the new cToken address to configure.\n     */\n  function updateCTokenAddress(address assetAddress, address cTokenAddress) external;\n\n  /**\n        @notice It returns the cToken address associted with an asset.\n        @param assetAddress asset address to get the associated cToken for.\n        @return The associated cToken address\n     */\n  function getCTokenAddress(address assetAddress) external view returns (address);\n\n  /**\n        @notice It updates the yearn vault address associted with an asset.\n        @param assetAddress asset address to configure.\n        @param yVaultAddress the new yVault address to configure.\n     */\n  function updateYVaultAddressSetting(address assetAddress, address yVaultAddress)\n    external;\n\n  /**\n        @notice It returns the yearn vault address associted with an asset.\n        @param assetAddress asset address to get the associated yearn vault address for.\n        @return The address of the yearn vault.\n     */\n  function getYVaultAddress(address assetAddress) external view returns (address);\n\n  /**\n        @notice It updates the curve pool address associted with an asset.\n        @param assetAddress asset address to configure.\n        @param crvPoolAddress the new Curve pool address to configure.\n     */\n  function updateCRVPoolAddressSetting(address assetAddress, address crvPoolAddress)\n    external;\n\n  /**\n        @notice It returns the curve pool address associted with an asset.\n        @param assetAddress asset address to get the associated curve pool address for.\n        @return The address of the curve pool.\n     */\n  function getCRVPoolAddress(address assetAddress) external view returns (address);\n\n  /**\n        @notice It updates the max loan amount for a given asset.\n        @param assetAddress asset address used to update the max loan amount.\n        @param newMaxLoanAmount the new max loan amount to set.\n     */\n  function updateMaxLoanAmount(address assetAddress, uint256 newMaxLoanAmount) external;\n\n  /**\n        @notice Returns the max loan amount for a given asset.\n        @param assetAddress asset address to retrieve the max loan amount.\n     */\n  function getMaxLoanAmount(address assetAddress) external view returns (uint256);\n\n  /**\n        @notice Tests whether a given amount is greater than the current max loan amount.\n        @param assetAddress asset address used to return the max loan amount setting.\n        @param amount the loan amount to check.\n        @return true if the given amount is greater than the current max loan amount. Otherwise it returns false.\n     */\n  function exceedsMaxLoanAmount(address assetAddress, uint256 amount)\n    external\n    view\n    returns (bool);\n\n  /**\n        @notice It updates the max total vaule locked amount for a given asset.\n        @param assetAddress asset address used to update the max loan amount.\n        @param newMaxTVLAmount the new max total vault locked amount to set.\n     */\n  function updateMaxTVL(address assetAddress, uint256 newMaxTVLAmount) external;\n\n  /**\n        @notice Returns the max total value locked amount for a given asset.\n        @param assetAddress asset address to retrieve the max total value locked amount.\n     */\n  function getMaxTVLAmount(address assetAddress) external view returns (uint256);\n\n  /**\n        @notice It removes a configuration for a given asset on the platform.\n        @param assetAddress asset address to remove.\n     */\n  function removeAsset(address assetAddress) external;\n}\n",
-  "sourcePath": "/Users/sy/Documents/GitHub/teller-protocol-v1/contracts/interfaces/AssetSettingsInterface.sol",
+  "source": "pragma solidity 0.5.17;\npragma experimental ABIEncoderV2;\n\nimport \"../util/CacheLib.sol\";\n\n/**\n    @notice This interface defines all function to manage the asset settings on the platform.\n\n    @author develop@teller.finance\n */\ninterface AssetSettingsInterface {\n\n  /**\n        @notice This event is emitted when a new asset settings is created.\n        @param sender the transaction sender address.\n        @param assetAddress the asset address used to create the settings.\n        @param cTokenAddress cToken address to configure for the asset.\n        @param maxLoanAmount max loan amount to configure for the asset.\n     */\n  event AssetSettingsCreated(\n    address indexed sender,\n    address indexed assetAddress,\n    address cTokenAddress,\n    uint256 maxLoanAmount\n  );\n\n  /**\n        @notice This event is emitted when an asset settings is removed.\n        @param sender the transaction sender address.\n        @param assetAddress the asset address used to remove the settings.\n     */\n  event AssetSettingsRemoved(address indexed sender, address indexed assetAddress);\n\n  /**\n        @notice This event is emitted when an asset settings (address type) is updated.\n        @param assetSettingName asset setting name updated.\n        @param sender the transaction sender address.\n        @param assetAddress the asset address used to update the asset settings.\n        @param oldValue old value used for the asset setting.\n        @param newValue the value updated.\n     */\n  event AssetSettingsAddressUpdated(\n    bytes32 indexed assetSettingName,\n    address indexed sender,\n    address indexed assetAddress,\n    address oldValue,\n    address newValue\n  );\n\n  /**\n        @notice This event is emitted when an asset settings (uint256 type) is updated.\n        @param assetSettingName asset setting name updated.\n        @param sender the transaction sender address.\n        @param assetAddress the asset address used to update the asset settings.\n        @param oldValue old value used for the asset setting.\n        @param newValue the value updated.\n     */\n  event AssetSettingsUintUpdated(\n    bytes32 indexed assetSettingName,\n    address indexed sender,\n    address indexed assetAddress,\n    uint256 oldValue,\n    uint256 newValue\n  );\n\n//   function initialize(address settingsAddress) external;\n  /**\n        @notice It creates an asset with the given parameters.\n        @param assetAddress asset address used to create the new setting.\n        @param cTokenAddress cToken address used to configure the asset setting.\n        @param maxLoanAmount the initial max loan amount.\n     */\n  function createAssetSetting(\n    address assetAddress,\n    address cTokenAddress,\n    uint256 maxLoanAmount\n  ) external;\n\n  /**\n        @notice It updates the cToken address associted with an asset.\n        @param assetAddress asset address to configure.\n        @param cTokenAddress the new cToken address to configure.\n     */\n  function updateCTokenAddress(address assetAddress, address cTokenAddress) external;\n\n  /**\n        @notice It returns the cToken address associted with an asset.\n        @param assetAddress asset address to get the associated cToken for.\n        @return The associated cToken address\n     */\n  function getCTokenAddress(address assetAddress) external view returns (address);\n\n  /**\n        @notice It updates the yearn vault address associted with an asset.\n        @param assetAddress asset address to configure.\n        @param yVaultAddress the new yVault address to configure.\n     */\n  function updateYVaultAddressSetting(address assetAddress, address yVaultAddress)\n    external;\n\n  /**\n        @notice It returns the yearn vault address associted with an asset.\n        @param assetAddress asset address to get the associated yearn vault address for.\n        @return The address of the yearn vault.\n     */\n  function getYVaultAddress(address assetAddress) external view returns (address);\n\n  /**\n        @notice It updates the curve pool address associted with an asset.\n        @param assetAddress asset address to configure.\n        @param crvPoolAddress the new Curve pool address to configure.\n     */\n  function updateCRVPoolAddressSetting(address assetAddress, address crvPoolAddress)\n    external;\n\n  /**\n        @notice It returns the curve pool address associted with an asset.\n        @param assetAddress asset address to get the associated curve pool address for.\n        @return The address of the curve pool.\n     */\n  function getCRVPoolAddress(address assetAddress) external view returns (address);\n\n  /**\n        @notice It updates the max loan amount for a given asset.\n        @param assetAddress asset address used to update the max loan amount.\n        @param newMaxLoanAmount the new max loan amount to set.\n     */\n  function updateMaxLoanAmount(address assetAddress, uint256 newMaxLoanAmount) external;\n\n  /**\n        @notice Returns the max loan amount for a given asset.\n        @param assetAddress asset address to retrieve the max loan amount.\n     */\n  function getMaxLoanAmount(address assetAddress) external view returns (uint256);\n\n  /**\n        @notice Tests whether a given amount is greater than the current max loan amount.\n        @param assetAddress asset address used to return the max loan amount setting.\n        @param amount the loan amount to check.\n        @return true if the given amount is greater than the current max loan amount. Otherwise it returns false.\n     */\n  function exceedsMaxLoanAmount(address assetAddress, uint256 amount)\n    external\n    view\n    returns (bool);\n\n  /**\n        @notice It updates the max total vaule locked amount for a given asset.\n        @param assetAddress asset address used to update the max loan amount.\n        @param newMaxTVLAmount the new max total vault locked amount to set.\n     */\n  function updateMaxTVL(address assetAddress, uint256 newMaxTVLAmount) external;\n\n  /**\n        @notice Returns the max total value locked amount for a given asset.\n        @param assetAddress asset address to retrieve the max total value locked amount.\n     */\n  function getMaxTVLAmount(address assetAddress) external view returns (uint256);\n\n  /**\n    @notice It updates the max debt ratio for a given asset.\n    @dev The ratio value has 2 decimal places. I.e 100 = 1%\n    @param assetAddress asset address used to update the max debt ratio.\n    @param newMaxDebtRatio the new max debt ratio to set.\n    */\n  function updateMaxDebtRatio(address assetAddress, uint256 newMaxDebtRatio) external;\n\n  /**\n    @notice Returns the max debt ratio for a given asset.\n    @dev The ratio value has 2 decimal places. I.e 100 = 1%\n    @param assetAddress asset address to retrieve the max debt ratio.\n    */\n  function getMaxDebtRatio(address assetAddress) external view returns (uint256);\n\n  /**\n        @notice It removes a configuration for a given asset on the platform.\n        @param assetAddress asset address to remove.\n     */\n  function removeAsset(address assetAddress) external;\n}\n",
+  "sourcePath": "/home/jeremig/Documents/Teller/dojo/teller-protocol-v1/contracts/interfaces/AssetSettingsInterface.sol",
   "ast": {
-    "absolutePath": "/Users/sy/Documents/GitHub/teller-protocol-v1/contracts/interfaces/AssetSettingsInterface.sol",
+    "absolutePath": "/home/jeremig/Documents/Teller/dojo/teller-protocol-v1/contracts/interfaces/AssetSettingsInterface.sol",
     "exportedSymbols": {
       "AssetSettingsInterface": [
-        11068
+        11221
       ]
     },
-    "id": 11069,
+    "id": 11222,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 10932,
+        "id": 11071,
         "literals": [
           "solidity",
           "0.5",
           ".17"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:23:40"
+        "src": "0:23:38"
       },
       {
-        "id": 10933,
+        "id": 11072,
         "literals": [
           "experimental",
           "ABIEncoderV2"
         ],
         "nodeType": "PragmaDirective",
-        "src": "24:33:40"
+        "src": "24:33:38"
       },
       {
-        "absolutePath": "/Users/sy/Documents/GitHub/teller-protocol-v1/contracts/util/CacheLib.sol",
+        "absolutePath": "/home/jeremig/Documents/Teller/dojo/teller-protocol-v1/contracts/util/CacheLib.sol",
         "file": "../util/CacheLib.sol",
-        "id": 10934,
+        "id": 11073,
         "nodeType": "ImportDirective",
-        "scope": 11069,
-        "sourceUnit": 18269,
-        "src": "59:30:40",
+        "scope": 11222,
+        "sourceUnit": 18383,
+        "src": "59:30:38",
         "symbolAliases": [],
         "unitAlias": ""
       },
@@ -450,9 +491,9 @@
         "contractKind": "interface",
         "documentation": "@notice This interface defines all function to manage the asset settings on the platform.\n@author develop@teller.finance",
         "fullyImplemented": false,
-        "id": 11068,
+        "id": 11221,
         "linearizedBaseContracts": [
-          11068
+          11221
         ],
         "name": "AssetSettingsInterface",
         "nodeType": "ContractDefinition",
@@ -460,21 +501,21 @@
           {
             "anonymous": false,
             "documentation": "@notice This event is emitted when a new asset settings is created.\n@param sender the transaction sender address.\n@param assetAddress the asset address used to create the settings.\n@param cTokenAddress cToken address to configure for the asset.\n@param maxLoanAmount max loan amount to configure for the asset.",
-            "id": 10944,
+            "id": 11083,
             "name": "AssetSettingsCreated",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 10943,
+              "id": 11082,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 10936,
+                  "id": 11075,
                   "indexed": true,
                   "name": "sender",
                   "nodeType": "VariableDeclaration",
-                  "scope": 10944,
-                  "src": "663:22:40",
+                  "scope": 11083,
+                  "src": "663:22:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -482,10 +523,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 10935,
+                    "id": 11074,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "663:7:40",
+                    "src": "663:7:38",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -497,12 +538,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 10938,
+                  "id": 11077,
                   "indexed": true,
                   "name": "assetAddress",
                   "nodeType": "VariableDeclaration",
-                  "scope": 10944,
-                  "src": "691:28:40",
+                  "scope": 11083,
+                  "src": "691:28:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -510,10 +551,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 10937,
+                    "id": 11076,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "691:7:40",
+                    "src": "691:7:38",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -525,12 +566,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 10940,
+                  "id": 11079,
                   "indexed": false,
                   "name": "cTokenAddress",
                   "nodeType": "VariableDeclaration",
-                  "scope": 10944,
-                  "src": "725:21:40",
+                  "scope": 11083,
+                  "src": "725:21:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -538,10 +579,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 10939,
+                    "id": 11078,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "725:7:40",
+                    "src": "725:7:38",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -553,12 +594,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 10942,
+                  "id": 11081,
                   "indexed": false,
                   "name": "maxLoanAmount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 10944,
-                  "src": "752:21:40",
+                  "scope": 11083,
+                  "src": "752:21:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -566,10 +607,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 10941,
+                    "id": 11080,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "752:7:40",
+                    "src": "752:7:38",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -579,28 +620,28 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "657:120:40"
+              "src": "657:120:38"
             },
-            "src": "631:147:40"
+            "src": "631:147:38"
           },
           {
             "anonymous": false,
             "documentation": "@notice This event is emitted when an asset settings is removed.\n@param sender the transaction sender address.\n@param assetAddress the asset address used to remove the settings.",
-            "id": 10950,
+            "id": 11089,
             "name": "AssetSettingsRemoved",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 10949,
+              "id": 11088,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 10946,
+                  "id": 11085,
                   "indexed": true,
                   "name": "sender",
                   "nodeType": "VariableDeclaration",
-                  "scope": 10950,
-                  "src": "1025:22:40",
+                  "scope": 11089,
+                  "src": "1025:22:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -608,10 +649,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 10945,
+                    "id": 11084,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1025:7:40",
+                    "src": "1025:7:38",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -623,12 +664,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 10948,
+                  "id": 11087,
                   "indexed": true,
                   "name": "assetAddress",
                   "nodeType": "VariableDeclaration",
-                  "scope": 10950,
-                  "src": "1049:28:40",
+                  "scope": 11089,
+                  "src": "1049:28:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -636,10 +677,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 10947,
+                    "id": 11086,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1049:7:40",
+                    "src": "1049:7:38",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -650,28 +691,28 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1024:54:40"
+              "src": "1024:54:38"
             },
-            "src": "998:81:40"
+            "src": "998:81:38"
           },
           {
             "anonymous": false,
             "documentation": "@notice This event is emitted when an asset settings (address type) is updated.\n@param assetSettingName asset setting name updated.\n@param sender the transaction sender address.\n@param assetAddress the asset address used to update the asset settings.\n@param oldValue old value used for the asset setting.\n@param newValue the value updated.",
-            "id": 10962,
+            "id": 11101,
             "name": "AssetSettingsAddressUpdated",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 10961,
+              "id": 11100,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 10952,
+                  "id": 11091,
                   "indexed": true,
                   "name": "assetSettingName",
                   "nodeType": "VariableDeclaration",
-                  "scope": 10962,
-                  "src": "1524:32:40",
+                  "scope": 11101,
+                  "src": "1524:32:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -679,10 +720,10 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 10951,
+                    "id": 11090,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1524:7:40",
+                    "src": "1524:7:38",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -693,12 +734,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 10954,
+                  "id": 11093,
                   "indexed": true,
                   "name": "sender",
                   "nodeType": "VariableDeclaration",
-                  "scope": 10962,
-                  "src": "1562:22:40",
+                  "scope": 11101,
+                  "src": "1562:22:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -706,10 +747,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 10953,
+                    "id": 11092,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1562:7:40",
+                    "src": "1562:7:38",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -721,12 +762,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 10956,
+                  "id": 11095,
                   "indexed": true,
                   "name": "assetAddress",
                   "nodeType": "VariableDeclaration",
-                  "scope": 10962,
-                  "src": "1590:28:40",
+                  "scope": 11101,
+                  "src": "1590:28:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -734,10 +775,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 10955,
+                    "id": 11094,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1590:7:40",
+                    "src": "1590:7:38",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -749,12 +790,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 10958,
+                  "id": 11097,
                   "indexed": false,
                   "name": "oldValue",
                   "nodeType": "VariableDeclaration",
-                  "scope": 10962,
-                  "src": "1624:16:40",
+                  "scope": 11101,
+                  "src": "1624:16:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -762,10 +803,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 10957,
+                    "id": 11096,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1624:7:40",
+                    "src": "1624:7:38",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -777,12 +818,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 10960,
+                  "id": 11099,
                   "indexed": false,
                   "name": "newValue",
                   "nodeType": "VariableDeclaration",
-                  "scope": 10962,
-                  "src": "1646:16:40",
+                  "scope": 11101,
+                  "src": "1646:16:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -790,10 +831,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 10959,
+                    "id": 11098,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1646:7:40",
+                    "src": "1646:7:38",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -804,28 +845,28 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1518:148:40"
+              "src": "1518:148:38"
             },
-            "src": "1485:182:40"
+            "src": "1485:182:38"
           },
           {
             "anonymous": false,
             "documentation": "@notice This event is emitted when an asset settings (uint256 type) is updated.\n@param assetSettingName asset setting name updated.\n@param sender the transaction sender address.\n@param assetAddress the asset address used to update the asset settings.\n@param oldValue old value used for the asset setting.\n@param newValue the value updated.",
-            "id": 10974,
+            "id": 11113,
             "name": "AssetSettingsUintUpdated",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 10973,
+              "id": 11112,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 10964,
+                  "id": 11103,
                   "indexed": true,
                   "name": "assetSettingName",
                   "nodeType": "VariableDeclaration",
-                  "scope": 10974,
-                  "src": "2109:32:40",
+                  "scope": 11113,
+                  "src": "2109:32:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -833,10 +874,10 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 10963,
+                    "id": 11102,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "2109:7:40",
+                    "src": "2109:7:38",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -847,12 +888,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 10966,
+                  "id": 11105,
                   "indexed": true,
                   "name": "sender",
                   "nodeType": "VariableDeclaration",
-                  "scope": 10974,
-                  "src": "2147:22:40",
+                  "scope": 11113,
+                  "src": "2147:22:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -860,10 +901,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 10965,
+                    "id": 11104,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "2147:7:40",
+                    "src": "2147:7:38",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -875,12 +916,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 10968,
+                  "id": 11107,
                   "indexed": true,
                   "name": "assetAddress",
                   "nodeType": "VariableDeclaration",
-                  "scope": 10974,
-                  "src": "2175:28:40",
+                  "scope": 11113,
+                  "src": "2175:28:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -888,10 +929,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 10967,
+                    "id": 11106,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "2175:7:40",
+                    "src": "2175:7:38",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -903,12 +944,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 10970,
+                  "id": 11109,
                   "indexed": false,
                   "name": "oldValue",
                   "nodeType": "VariableDeclaration",
-                  "scope": 10974,
-                  "src": "2209:16:40",
+                  "scope": 11113,
+                  "src": "2209:16:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -916,10 +957,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 10969,
+                    "id": 11108,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "2209:7:40",
+                    "src": "2209:7:38",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -930,12 +971,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 10972,
+                  "id": 11111,
                   "indexed": false,
                   "name": "newValue",
                   "nodeType": "VariableDeclaration",
-                  "scope": 10974,
-                  "src": "2231:16:40",
+                  "scope": 11113,
+                  "src": "2231:16:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -943,10 +984,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 10971,
+                    "id": 11110,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "2231:7:40",
+                    "src": "2231:7:38",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -956,30 +997,30 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "2103:148:40"
+              "src": "2103:148:38"
             },
-            "src": "2073:179:40"
+            "src": "2073:179:38"
           },
           {
             "body": null,
             "documentation": "@notice It creates an asset with the given parameters.\n@param assetAddress asset address used to create the new setting.\n@param cTokenAddress cToken address used to configure the asset setting.\n@param maxLoanAmount the initial max loan amount.",
-            "id": 10983,
+            "id": 11122,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "createAssetSetting",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 10981,
+              "id": 11120,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 10976,
+                  "id": 11115,
                   "name": "assetAddress",
                   "nodeType": "VariableDeclaration",
-                  "scope": 10983,
-                  "src": "2639:20:40",
+                  "scope": 11122,
+                  "src": "2639:20:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -987,10 +1028,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 10975,
+                    "id": 11114,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "2639:7:40",
+                    "src": "2639:7:38",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -1002,11 +1043,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 10978,
+                  "id": 11117,
                   "name": "cTokenAddress",
                   "nodeType": "VariableDeclaration",
-                  "scope": 10983,
-                  "src": "2665:21:40",
+                  "scope": 11122,
+                  "src": "2665:21:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1014,10 +1055,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 10977,
+                    "id": 11116,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "2665:7:40",
+                    "src": "2665:7:38",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -1029,11 +1070,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 10980,
+                  "id": 11119,
                   "name": "maxLoanAmount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 10983,
-                  "src": "2692:21:40",
+                  "scope": 11122,
+                  "src": "2692:21:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1041,10 +1082,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 10979,
+                    "id": 11118,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "2692:7:40",
+                    "src": "2692:7:38",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -1054,16 +1095,16 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "2633:84:40"
+              "src": "2633:84:38"
             },
             "returnParameters": {
-              "id": 10982,
+              "id": 11121,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "2726:0:40"
+              "src": "2726:0:38"
             },
-            "scope": 11068,
-            "src": "2606:121:40",
+            "scope": 11221,
+            "src": "2606:121:38",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "external"
@@ -1071,23 +1112,23 @@
           {
             "body": null,
             "documentation": "@notice It updates the cToken address associted with an asset.\n@param assetAddress asset address to configure.\n@param cTokenAddress the new cToken address to configure.",
-            "id": 10990,
+            "id": 11129,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "updateCTokenAddress",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 10988,
+              "id": 11127,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 10985,
+                  "id": 11124,
                   "name": "assetAddress",
                   "nodeType": "VariableDeclaration",
-                  "scope": 10990,
-                  "src": "2967:20:40",
+                  "scope": 11129,
+                  "src": "2967:20:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1095,10 +1136,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 10984,
+                    "id": 11123,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "2967:7:40",
+                    "src": "2967:7:38",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -1110,11 +1151,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 10987,
+                  "id": 11126,
                   "name": "cTokenAddress",
                   "nodeType": "VariableDeclaration",
-                  "scope": 10990,
-                  "src": "2989:21:40",
+                  "scope": 11129,
+                  "src": "2989:21:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1122,10 +1163,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 10986,
+                    "id": 11125,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "2989:7:40",
+                    "src": "2989:7:38",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -1136,16 +1177,16 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "2966:45:40"
+              "src": "2966:45:38"
             },
             "returnParameters": {
-              "id": 10989,
+              "id": 11128,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "3020:0:40"
+              "src": "3020:0:38"
             },
-            "scope": 11068,
-            "src": "2938:83:40",
+            "scope": 11221,
+            "src": "2938:83:38",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "external"
@@ -1153,23 +1194,23 @@
           {
             "body": null,
             "documentation": "@notice It returns the cToken address associted with an asset.\n@param assetAddress asset address to get the associated cToken for.\n@return The associated cToken address",
-            "id": 10997,
+            "id": 11136,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "getCTokenAddress",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 10993,
+              "id": 11132,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 10992,
+                  "id": 11131,
                   "name": "assetAddress",
                   "nodeType": "VariableDeclaration",
-                  "scope": 10997,
-                  "src": "3258:20:40",
+                  "scope": 11136,
+                  "src": "3258:20:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1177,10 +1218,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 10991,
+                    "id": 11130,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "3258:7:40",
+                    "src": "3258:7:38",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -1191,19 +1232,19 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "3257:22:40"
+              "src": "3257:22:38"
             },
             "returnParameters": {
-              "id": 10996,
+              "id": 11135,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 10995,
+                  "id": 11134,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 10997,
-                  "src": "3303:7:40",
+                  "scope": 11136,
+                  "src": "3303:7:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1211,10 +1252,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 10994,
+                    "id": 11133,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "3303:7:40",
+                    "src": "3303:7:38",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -1225,10 +1266,10 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "3302:9:40"
+              "src": "3302:9:38"
             },
-            "scope": 11068,
-            "src": "3232:80:40",
+            "scope": 11221,
+            "src": "3232:80:38",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "external"
@@ -1236,23 +1277,23 @@
           {
             "body": null,
             "documentation": "@notice It updates the yearn vault address associted with an asset.\n@param assetAddress asset address to configure.\n@param yVaultAddress the new yVault address to configure.",
-            "id": 11004,
+            "id": 11143,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "updateYVaultAddressSetting",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 11002,
+              "id": 11141,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 10999,
+                  "id": 11138,
                   "name": "assetAddress",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11004,
-                  "src": "3564:20:40",
+                  "scope": 11143,
+                  "src": "3564:20:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1260,10 +1301,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 10998,
+                    "id": 11137,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "3564:7:40",
+                    "src": "3564:7:38",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -1275,11 +1316,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 11001,
+                  "id": 11140,
                   "name": "yVaultAddress",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11004,
-                  "src": "3586:21:40",
+                  "scope": 11143,
+                  "src": "3586:21:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1287,10 +1328,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 11000,
+                    "id": 11139,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "3586:7:40",
+                    "src": "3586:7:38",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -1301,16 +1342,16 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "3563:45:40"
+              "src": "3563:45:38"
             },
             "returnParameters": {
-              "id": 11003,
+              "id": 11142,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "3621:0:40"
+              "src": "3621:0:38"
             },
-            "scope": 11068,
-            "src": "3528:94:40",
+            "scope": 11221,
+            "src": "3528:94:38",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "external"
@@ -1318,23 +1359,23 @@
           {
             "body": null,
             "documentation": "@notice It returns the yearn vault address associted with an asset.\n@param assetAddress asset address to get the associated yearn vault address for.\n@return The address of the yearn vault.",
-            "id": 11011,
+            "id": 11150,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "getYVaultAddress",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 11007,
+              "id": 11146,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11006,
+                  "id": 11145,
                   "name": "assetAddress",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11011,
-                  "src": "3879:20:40",
+                  "scope": 11150,
+                  "src": "3879:20:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1342,10 +1383,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 11005,
+                    "id": 11144,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "3879:7:40",
+                    "src": "3879:7:38",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -1356,19 +1397,19 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "3878:22:40"
+              "src": "3878:22:38"
             },
             "returnParameters": {
-              "id": 11010,
+              "id": 11149,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11009,
+                  "id": 11148,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11011,
-                  "src": "3924:7:40",
+                  "scope": 11150,
+                  "src": "3924:7:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1376,10 +1417,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 11008,
+                    "id": 11147,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "3924:7:40",
+                    "src": "3924:7:38",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -1390,10 +1431,10 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "3923:9:40"
+              "src": "3923:9:38"
             },
-            "scope": 11068,
-            "src": "3853:80:40",
+            "scope": 11221,
+            "src": "3853:80:38",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "external"
@@ -1401,23 +1442,23 @@
           {
             "body": null,
             "documentation": "@notice It updates the curve pool address associted with an asset.\n@param assetAddress asset address to configure.\n@param crvPoolAddress the new Curve pool address to configure.",
-            "id": 11018,
+            "id": 11157,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "updateCRVPoolAddressSetting",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 11016,
+              "id": 11155,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11013,
+                  "id": 11152,
                   "name": "assetAddress",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11018,
-                  "src": "4190:20:40",
+                  "scope": 11157,
+                  "src": "4190:20:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1425,10 +1466,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 11012,
+                    "id": 11151,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "4190:7:40",
+                    "src": "4190:7:38",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -1440,11 +1481,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 11015,
+                  "id": 11154,
                   "name": "crvPoolAddress",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11018,
-                  "src": "4212:22:40",
+                  "scope": 11157,
+                  "src": "4212:22:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1452,10 +1493,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 11014,
+                    "id": 11153,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "4212:7:40",
+                    "src": "4212:7:38",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -1466,16 +1507,16 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "4189:46:40"
+              "src": "4189:46:38"
             },
             "returnParameters": {
-              "id": 11017,
+              "id": 11156,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "4248:0:40"
+              "src": "4248:0:38"
             },
-            "scope": 11068,
-            "src": "4153:96:40",
+            "scope": 11221,
+            "src": "4153:96:38",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "external"
@@ -1483,23 +1524,23 @@
           {
             "body": null,
             "documentation": "@notice It returns the curve pool address associted with an asset.\n@param assetAddress asset address to get the associated curve pool address for.\n@return The address of the curve pool.",
-            "id": 11025,
+            "id": 11164,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "getCRVPoolAddress",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 11021,
+              "id": 11160,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11020,
+                  "id": 11159,
                   "name": "assetAddress",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11025,
-                  "src": "4504:20:40",
+                  "scope": 11164,
+                  "src": "4504:20:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1507,10 +1548,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 11019,
+                    "id": 11158,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "4504:7:40",
+                    "src": "4504:7:38",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -1521,19 +1562,19 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "4503:22:40"
+              "src": "4503:22:38"
             },
             "returnParameters": {
-              "id": 11024,
+              "id": 11163,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11023,
+                  "id": 11162,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11025,
-                  "src": "4549:7:40",
+                  "scope": 11164,
+                  "src": "4549:7:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1541,10 +1582,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 11022,
+                    "id": 11161,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "4549:7:40",
+                    "src": "4549:7:38",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -1555,10 +1596,10 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "4548:9:40"
+              "src": "4548:9:38"
             },
-            "scope": 11068,
-            "src": "4477:81:40",
+            "scope": 11221,
+            "src": "4477:81:38",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "external"
@@ -1566,23 +1607,23 @@
           {
             "body": null,
             "documentation": "@notice It updates the max loan amount for a given asset.\n@param assetAddress asset address used to update the max loan amount.\n@param newMaxLoanAmount the new max loan amount to set.",
-            "id": 11032,
+            "id": 11171,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "updateMaxLoanAmount",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 11030,
+              "id": 11169,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11027,
+                  "id": 11166,
                   "name": "assetAddress",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11032,
-                  "src": "4813:20:40",
+                  "scope": 11171,
+                  "src": "4813:20:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1590,10 +1631,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 11026,
+                    "id": 11165,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "4813:7:40",
+                    "src": "4813:7:38",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -1605,11 +1646,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 11029,
+                  "id": 11168,
                   "name": "newMaxLoanAmount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11032,
-                  "src": "4835:24:40",
+                  "scope": 11171,
+                  "src": "4835:24:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1617,10 +1658,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11028,
+                    "id": 11167,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "4835:7:40",
+                    "src": "4835:7:38",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -1630,16 +1671,16 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "4812:48:40"
+              "src": "4812:48:38"
             },
             "returnParameters": {
-              "id": 11031,
+              "id": 11170,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "4869:0:40"
+              "src": "4869:0:38"
             },
-            "scope": 11068,
-            "src": "4784:86:40",
+            "scope": 11221,
+            "src": "4784:86:38",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "external"
@@ -1647,23 +1688,23 @@
           {
             "body": null,
             "documentation": "@notice Returns the max loan amount for a given asset.\n@param assetAddress asset address to retrieve the max loan amount.",
-            "id": 11039,
+            "id": 11178,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "getMaxLoanAmount",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 11035,
+              "id": 11174,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11034,
+                  "id": 11173,
                   "name": "assetAddress",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11039,
-                  "src": "5052:20:40",
+                  "scope": 11178,
+                  "src": "5052:20:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1671,10 +1712,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 11033,
+                    "id": 11172,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "5052:7:40",
+                    "src": "5052:7:38",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -1685,19 +1726,19 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "5051:22:40"
+              "src": "5051:22:38"
             },
             "returnParameters": {
-              "id": 11038,
+              "id": 11177,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11037,
+                  "id": 11176,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11039,
-                  "src": "5097:7:40",
+                  "scope": 11178,
+                  "src": "5097:7:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1705,10 +1746,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11036,
+                    "id": 11175,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "5097:7:40",
+                    "src": "5097:7:38",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -1718,10 +1759,10 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "5096:9:40"
+              "src": "5096:9:38"
             },
-            "scope": 11068,
-            "src": "5026:80:40",
+            "scope": 11221,
+            "src": "5026:80:38",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "external"
@@ -1729,23 +1770,23 @@
           {
             "body": null,
             "documentation": "@notice Tests whether a given amount is greater than the current max loan amount.\n@param assetAddress asset address used to return the max loan amount setting.\n@param amount the loan amount to check.\n@return true if the given amount is greater than the current max loan amount. Otherwise it returns false.",
-            "id": 11048,
+            "id": 11187,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "exceedsMaxLoanAmount",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 11044,
+              "id": 11183,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11041,
+                  "id": 11180,
                   "name": "assetAddress",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11048,
-                  "src": "5492:20:40",
+                  "scope": 11187,
+                  "src": "5492:20:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1753,10 +1794,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 11040,
+                    "id": 11179,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "5492:7:40",
+                    "src": "5492:7:38",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -1768,11 +1809,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 11043,
+                  "id": 11182,
                   "name": "amount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11048,
-                  "src": "5514:14:40",
+                  "scope": 11187,
+                  "src": "5514:14:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1780,10 +1821,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11042,
+                    "id": 11181,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "5514:7:40",
+                    "src": "5514:7:38",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -1793,19 +1834,19 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "5491:38:40"
+              "src": "5491:38:38"
             },
             "returnParameters": {
-              "id": 11047,
+              "id": 11186,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11046,
+                  "id": 11185,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11048,
-                  "src": "5565:4:40",
+                  "scope": 11187,
+                  "src": "5565:4:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1813,10 +1854,10 @@
                     "typeString": "bool"
                   },
                   "typeName": {
-                    "id": 11045,
+                    "id": 11184,
                     "name": "bool",
                     "nodeType": "ElementaryTypeName",
-                    "src": "5565:4:40",
+                    "src": "5565:4:38",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bool",
                       "typeString": "bool"
@@ -1826,10 +1867,10 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "5564:6:40"
+              "src": "5564:6:38"
             },
-            "scope": 11068,
-            "src": "5462:109:40",
+            "scope": 11221,
+            "src": "5462:109:38",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "external"
@@ -1837,23 +1878,23 @@
           {
             "body": null,
             "documentation": "@notice It updates the max total vaule locked amount for a given asset.\n@param assetAddress asset address used to update the max loan amount.\n@param newMaxTVLAmount the new max total vault locked amount to set.",
-            "id": 11055,
+            "id": 11194,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "updateMaxTVL",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 11053,
+              "id": 11192,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11050,
+                  "id": 11189,
                   "name": "assetAddress",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11055,
-                  "src": "5846:20:40",
+                  "scope": 11194,
+                  "src": "5846:20:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1861,10 +1902,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 11049,
+                    "id": 11188,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "5846:7:40",
+                    "src": "5846:7:38",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -1876,11 +1917,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 11052,
+                  "id": 11191,
                   "name": "newMaxTVLAmount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11055,
-                  "src": "5868:23:40",
+                  "scope": 11194,
+                  "src": "5868:23:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1888,10 +1929,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11051,
+                    "id": 11190,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "5868:7:40",
+                    "src": "5868:7:38",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -1901,16 +1942,16 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "5845:47:40"
+              "src": "5845:47:38"
             },
             "returnParameters": {
-              "id": 11054,
+              "id": 11193,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "5901:0:40"
+              "src": "5901:0:38"
             },
-            "scope": 11068,
-            "src": "5824:78:40",
+            "scope": 11221,
+            "src": "5824:78:38",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "external"
@@ -1918,23 +1959,23 @@
           {
             "body": null,
             "documentation": "@notice Returns the max total value locked amount for a given asset.\n@param assetAddress asset address to retrieve the max total value locked amount.",
-            "id": 11062,
+            "id": 11201,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "getMaxTVLAmount",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 11058,
+              "id": 11197,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11057,
+                  "id": 11196,
                   "name": "assetAddress",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11062,
-                  "src": "6111:20:40",
+                  "scope": 11201,
+                  "src": "6111:20:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1942,10 +1983,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 11056,
+                    "id": 11195,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "6111:7:40",
+                    "src": "6111:7:38",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -1956,19 +1997,19 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "6110:22:40"
+              "src": "6110:22:38"
             },
             "returnParameters": {
-              "id": 11061,
+              "id": 11200,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11060,
+                  "id": 11199,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11062,
-                  "src": "6156:7:40",
+                  "scope": 11201,
+                  "src": "6156:7:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1976,10 +2017,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11059,
+                    "id": 11198,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "6156:7:40",
+                    "src": "6156:7:38",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -1989,34 +2030,34 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "6155:9:40"
+              "src": "6155:9:38"
             },
-            "scope": 11068,
-            "src": "6086:79:40",
+            "scope": 11221,
+            "src": "6086:79:38",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "external"
           },
           {
             "body": null,
-            "documentation": "@notice It removes a configuration for a given asset on the platform.\n@param assetAddress asset address to remove.",
-            "id": 11067,
+            "documentation": "@notice It updates the max debt ratio for a given asset.\n@dev The ratio value has 2 decimal places. I.e 100 = 1%\n@param assetAddress asset address used to update the max debt ratio.\n@param newMaxDebtRatio the new max debt ratio to set.",
+            "id": 11208,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
-            "name": "removeAsset",
+            "name": "updateMaxDebtRatio",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 11065,
+              "id": 11206,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11064,
+                  "id": 11203,
                   "name": "assetAddress",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11067,
-                  "src": "6335:20:40",
+                  "scope": 11208,
+                  "src": "6462:20:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -2024,10 +2065,91 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 11063,
+                    "id": 11202,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "6335:7:40",
+                    "src": "6462:7:38",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 11205,
+                  "name": "newMaxDebtRatio",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11208,
+                  "src": "6484:23:38",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 11204,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "6484:7:38",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "6461:47:38"
+            },
+            "returnParameters": {
+              "id": 11207,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "6517:0:38"
+            },
+            "scope": 11221,
+            "src": "6434:84:38",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": "@notice Returns the max debt ratio for a given asset.\n@dev The ratio value has 2 decimal places. I.e 100 = 1%\n@param assetAddress asset address to retrieve the max debt ratio.",
+            "id": 11215,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getMaxDebtRatio",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 11211,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 11210,
+                  "name": "assetAddress",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11215,
+                  "src": "6748:20:38",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 11209,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "6748:7:38",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -2038,64 +2160,146 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "6334:22:40"
+              "src": "6747:22:38"
             },
             "returnParameters": {
-              "id": 11066,
+              "id": 11214,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 11213,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11215,
+                  "src": "6793:7:38",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 11212,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "6793:7:38",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "6792:9:38"
+            },
+            "scope": 11221,
+            "src": "6723:79:38",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": "@notice It removes a configuration for a given asset on the platform.\n@param assetAddress asset address to remove.",
+            "id": 11220,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "removeAsset",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 11218,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 11217,
+                  "name": "assetAddress",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11220,
+                  "src": "6972:20:38",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 11216,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "6972:7:38",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "6971:22:38"
+            },
+            "returnParameters": {
+              "id": 11219,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "6365:0:40"
+              "src": "7002:0:38"
             },
-            "scope": 11068,
-            "src": "6314:52:40",
+            "scope": 11221,
+            "src": "6951:52:38",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "external"
           }
         ],
-        "scope": 11069,
-        "src": "229:6139:40"
+        "scope": 11222,
+        "src": "229:6776:38"
       }
     ],
-    "src": "0:6369:40"
+    "src": "0:7006:38"
   },
   "legacyAST": {
-    "absolutePath": "/Users/sy/Documents/GitHub/teller-protocol-v1/contracts/interfaces/AssetSettingsInterface.sol",
+    "absolutePath": "/home/jeremig/Documents/Teller/dojo/teller-protocol-v1/contracts/interfaces/AssetSettingsInterface.sol",
     "exportedSymbols": {
       "AssetSettingsInterface": [
-        11068
+        11221
       ]
     },
-    "id": 11069,
+    "id": 11222,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 10932,
+        "id": 11071,
         "literals": [
           "solidity",
           "0.5",
           ".17"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:23:40"
+        "src": "0:23:38"
       },
       {
-        "id": 10933,
+        "id": 11072,
         "literals": [
           "experimental",
           "ABIEncoderV2"
         ],
         "nodeType": "PragmaDirective",
-        "src": "24:33:40"
+        "src": "24:33:38"
       },
       {
-        "absolutePath": "/Users/sy/Documents/GitHub/teller-protocol-v1/contracts/util/CacheLib.sol",
+        "absolutePath": "/home/jeremig/Documents/Teller/dojo/teller-protocol-v1/contracts/util/CacheLib.sol",
         "file": "../util/CacheLib.sol",
-        "id": 10934,
+        "id": 11073,
         "nodeType": "ImportDirective",
-        "scope": 11069,
-        "sourceUnit": 18269,
-        "src": "59:30:40",
+        "scope": 11222,
+        "sourceUnit": 18383,
+        "src": "59:30:38",
         "symbolAliases": [],
         "unitAlias": ""
       },
@@ -2105,9 +2309,9 @@
         "contractKind": "interface",
         "documentation": "@notice This interface defines all function to manage the asset settings on the platform.\n@author develop@teller.finance",
         "fullyImplemented": false,
-        "id": 11068,
+        "id": 11221,
         "linearizedBaseContracts": [
-          11068
+          11221
         ],
         "name": "AssetSettingsInterface",
         "nodeType": "ContractDefinition",
@@ -2115,21 +2319,21 @@
           {
             "anonymous": false,
             "documentation": "@notice This event is emitted when a new asset settings is created.\n@param sender the transaction sender address.\n@param assetAddress the asset address used to create the settings.\n@param cTokenAddress cToken address to configure for the asset.\n@param maxLoanAmount max loan amount to configure for the asset.",
-            "id": 10944,
+            "id": 11083,
             "name": "AssetSettingsCreated",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 10943,
+              "id": 11082,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 10936,
+                  "id": 11075,
                   "indexed": true,
                   "name": "sender",
                   "nodeType": "VariableDeclaration",
-                  "scope": 10944,
-                  "src": "663:22:40",
+                  "scope": 11083,
+                  "src": "663:22:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -2137,10 +2341,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 10935,
+                    "id": 11074,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "663:7:40",
+                    "src": "663:7:38",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -2152,12 +2356,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 10938,
+                  "id": 11077,
                   "indexed": true,
                   "name": "assetAddress",
                   "nodeType": "VariableDeclaration",
-                  "scope": 10944,
-                  "src": "691:28:40",
+                  "scope": 11083,
+                  "src": "691:28:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -2165,10 +2369,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 10937,
+                    "id": 11076,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "691:7:40",
+                    "src": "691:7:38",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -2180,12 +2384,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 10940,
+                  "id": 11079,
                   "indexed": false,
                   "name": "cTokenAddress",
                   "nodeType": "VariableDeclaration",
-                  "scope": 10944,
-                  "src": "725:21:40",
+                  "scope": 11083,
+                  "src": "725:21:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -2193,10 +2397,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 10939,
+                    "id": 11078,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "725:7:40",
+                    "src": "725:7:38",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -2208,12 +2412,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 10942,
+                  "id": 11081,
                   "indexed": false,
                   "name": "maxLoanAmount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 10944,
-                  "src": "752:21:40",
+                  "scope": 11083,
+                  "src": "752:21:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -2221,10 +2425,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 10941,
+                    "id": 11080,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "752:7:40",
+                    "src": "752:7:38",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -2234,28 +2438,28 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "657:120:40"
+              "src": "657:120:38"
             },
-            "src": "631:147:40"
+            "src": "631:147:38"
           },
           {
             "anonymous": false,
             "documentation": "@notice This event is emitted when an asset settings is removed.\n@param sender the transaction sender address.\n@param assetAddress the asset address used to remove the settings.",
-            "id": 10950,
+            "id": 11089,
             "name": "AssetSettingsRemoved",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 10949,
+              "id": 11088,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 10946,
+                  "id": 11085,
                   "indexed": true,
                   "name": "sender",
                   "nodeType": "VariableDeclaration",
-                  "scope": 10950,
-                  "src": "1025:22:40",
+                  "scope": 11089,
+                  "src": "1025:22:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -2263,10 +2467,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 10945,
+                    "id": 11084,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1025:7:40",
+                    "src": "1025:7:38",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -2278,12 +2482,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 10948,
+                  "id": 11087,
                   "indexed": true,
                   "name": "assetAddress",
                   "nodeType": "VariableDeclaration",
-                  "scope": 10950,
-                  "src": "1049:28:40",
+                  "scope": 11089,
+                  "src": "1049:28:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -2291,10 +2495,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 10947,
+                    "id": 11086,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1049:7:40",
+                    "src": "1049:7:38",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -2305,28 +2509,28 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1024:54:40"
+              "src": "1024:54:38"
             },
-            "src": "998:81:40"
+            "src": "998:81:38"
           },
           {
             "anonymous": false,
             "documentation": "@notice This event is emitted when an asset settings (address type) is updated.\n@param assetSettingName asset setting name updated.\n@param sender the transaction sender address.\n@param assetAddress the asset address used to update the asset settings.\n@param oldValue old value used for the asset setting.\n@param newValue the value updated.",
-            "id": 10962,
+            "id": 11101,
             "name": "AssetSettingsAddressUpdated",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 10961,
+              "id": 11100,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 10952,
+                  "id": 11091,
                   "indexed": true,
                   "name": "assetSettingName",
                   "nodeType": "VariableDeclaration",
-                  "scope": 10962,
-                  "src": "1524:32:40",
+                  "scope": 11101,
+                  "src": "1524:32:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -2334,10 +2538,10 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 10951,
+                    "id": 11090,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1524:7:40",
+                    "src": "1524:7:38",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -2348,12 +2552,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 10954,
+                  "id": 11093,
                   "indexed": true,
                   "name": "sender",
                   "nodeType": "VariableDeclaration",
-                  "scope": 10962,
-                  "src": "1562:22:40",
+                  "scope": 11101,
+                  "src": "1562:22:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -2361,10 +2565,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 10953,
+                    "id": 11092,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1562:7:40",
+                    "src": "1562:7:38",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -2376,12 +2580,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 10956,
+                  "id": 11095,
                   "indexed": true,
                   "name": "assetAddress",
                   "nodeType": "VariableDeclaration",
-                  "scope": 10962,
-                  "src": "1590:28:40",
+                  "scope": 11101,
+                  "src": "1590:28:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -2389,10 +2593,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 10955,
+                    "id": 11094,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1590:7:40",
+                    "src": "1590:7:38",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -2404,12 +2608,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 10958,
+                  "id": 11097,
                   "indexed": false,
                   "name": "oldValue",
                   "nodeType": "VariableDeclaration",
-                  "scope": 10962,
-                  "src": "1624:16:40",
+                  "scope": 11101,
+                  "src": "1624:16:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -2417,10 +2621,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 10957,
+                    "id": 11096,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1624:7:40",
+                    "src": "1624:7:38",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -2432,12 +2636,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 10960,
+                  "id": 11099,
                   "indexed": false,
                   "name": "newValue",
                   "nodeType": "VariableDeclaration",
-                  "scope": 10962,
-                  "src": "1646:16:40",
+                  "scope": 11101,
+                  "src": "1646:16:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -2445,10 +2649,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 10959,
+                    "id": 11098,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1646:7:40",
+                    "src": "1646:7:38",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -2459,28 +2663,28 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1518:148:40"
+              "src": "1518:148:38"
             },
-            "src": "1485:182:40"
+            "src": "1485:182:38"
           },
           {
             "anonymous": false,
             "documentation": "@notice This event is emitted when an asset settings (uint256 type) is updated.\n@param assetSettingName asset setting name updated.\n@param sender the transaction sender address.\n@param assetAddress the asset address used to update the asset settings.\n@param oldValue old value used for the asset setting.\n@param newValue the value updated.",
-            "id": 10974,
+            "id": 11113,
             "name": "AssetSettingsUintUpdated",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 10973,
+              "id": 11112,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 10964,
+                  "id": 11103,
                   "indexed": true,
                   "name": "assetSettingName",
                   "nodeType": "VariableDeclaration",
-                  "scope": 10974,
-                  "src": "2109:32:40",
+                  "scope": 11113,
+                  "src": "2109:32:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -2488,10 +2692,10 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 10963,
+                    "id": 11102,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "2109:7:40",
+                    "src": "2109:7:38",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -2502,12 +2706,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 10966,
+                  "id": 11105,
                   "indexed": true,
                   "name": "sender",
                   "nodeType": "VariableDeclaration",
-                  "scope": 10974,
-                  "src": "2147:22:40",
+                  "scope": 11113,
+                  "src": "2147:22:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -2515,10 +2719,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 10965,
+                    "id": 11104,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "2147:7:40",
+                    "src": "2147:7:38",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -2530,12 +2734,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 10968,
+                  "id": 11107,
                   "indexed": true,
                   "name": "assetAddress",
                   "nodeType": "VariableDeclaration",
-                  "scope": 10974,
-                  "src": "2175:28:40",
+                  "scope": 11113,
+                  "src": "2175:28:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -2543,10 +2747,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 10967,
+                    "id": 11106,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "2175:7:40",
+                    "src": "2175:7:38",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -2558,12 +2762,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 10970,
+                  "id": 11109,
                   "indexed": false,
                   "name": "oldValue",
                   "nodeType": "VariableDeclaration",
-                  "scope": 10974,
-                  "src": "2209:16:40",
+                  "scope": 11113,
+                  "src": "2209:16:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -2571,10 +2775,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 10969,
+                    "id": 11108,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "2209:7:40",
+                    "src": "2209:7:38",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -2585,12 +2789,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 10972,
+                  "id": 11111,
                   "indexed": false,
                   "name": "newValue",
                   "nodeType": "VariableDeclaration",
-                  "scope": 10974,
-                  "src": "2231:16:40",
+                  "scope": 11113,
+                  "src": "2231:16:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -2598,10 +2802,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 10971,
+                    "id": 11110,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "2231:7:40",
+                    "src": "2231:7:38",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -2611,30 +2815,30 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "2103:148:40"
+              "src": "2103:148:38"
             },
-            "src": "2073:179:40"
+            "src": "2073:179:38"
           },
           {
             "body": null,
             "documentation": "@notice It creates an asset with the given parameters.\n@param assetAddress asset address used to create the new setting.\n@param cTokenAddress cToken address used to configure the asset setting.\n@param maxLoanAmount the initial max loan amount.",
-            "id": 10983,
+            "id": 11122,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "createAssetSetting",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 10981,
+              "id": 11120,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 10976,
+                  "id": 11115,
                   "name": "assetAddress",
                   "nodeType": "VariableDeclaration",
-                  "scope": 10983,
-                  "src": "2639:20:40",
+                  "scope": 11122,
+                  "src": "2639:20:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -2642,10 +2846,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 10975,
+                    "id": 11114,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "2639:7:40",
+                    "src": "2639:7:38",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -2657,11 +2861,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 10978,
+                  "id": 11117,
                   "name": "cTokenAddress",
                   "nodeType": "VariableDeclaration",
-                  "scope": 10983,
-                  "src": "2665:21:40",
+                  "scope": 11122,
+                  "src": "2665:21:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -2669,10 +2873,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 10977,
+                    "id": 11116,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "2665:7:40",
+                    "src": "2665:7:38",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -2684,11 +2888,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 10980,
+                  "id": 11119,
                   "name": "maxLoanAmount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 10983,
-                  "src": "2692:21:40",
+                  "scope": 11122,
+                  "src": "2692:21:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -2696,10 +2900,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 10979,
+                    "id": 11118,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "2692:7:40",
+                    "src": "2692:7:38",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -2709,16 +2913,16 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "2633:84:40"
+              "src": "2633:84:38"
             },
             "returnParameters": {
-              "id": 10982,
+              "id": 11121,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "2726:0:40"
+              "src": "2726:0:38"
             },
-            "scope": 11068,
-            "src": "2606:121:40",
+            "scope": 11221,
+            "src": "2606:121:38",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "external"
@@ -2726,23 +2930,23 @@
           {
             "body": null,
             "documentation": "@notice It updates the cToken address associted with an asset.\n@param assetAddress asset address to configure.\n@param cTokenAddress the new cToken address to configure.",
-            "id": 10990,
+            "id": 11129,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "updateCTokenAddress",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 10988,
+              "id": 11127,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 10985,
+                  "id": 11124,
                   "name": "assetAddress",
                   "nodeType": "VariableDeclaration",
-                  "scope": 10990,
-                  "src": "2967:20:40",
+                  "scope": 11129,
+                  "src": "2967:20:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -2750,10 +2954,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 10984,
+                    "id": 11123,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "2967:7:40",
+                    "src": "2967:7:38",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -2765,11 +2969,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 10987,
+                  "id": 11126,
                   "name": "cTokenAddress",
                   "nodeType": "VariableDeclaration",
-                  "scope": 10990,
-                  "src": "2989:21:40",
+                  "scope": 11129,
+                  "src": "2989:21:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -2777,10 +2981,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 10986,
+                    "id": 11125,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "2989:7:40",
+                    "src": "2989:7:38",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -2791,16 +2995,16 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "2966:45:40"
+              "src": "2966:45:38"
             },
             "returnParameters": {
-              "id": 10989,
+              "id": 11128,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "3020:0:40"
+              "src": "3020:0:38"
             },
-            "scope": 11068,
-            "src": "2938:83:40",
+            "scope": 11221,
+            "src": "2938:83:38",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "external"
@@ -2808,23 +3012,23 @@
           {
             "body": null,
             "documentation": "@notice It returns the cToken address associted with an asset.\n@param assetAddress asset address to get the associated cToken for.\n@return The associated cToken address",
-            "id": 10997,
+            "id": 11136,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "getCTokenAddress",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 10993,
+              "id": 11132,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 10992,
+                  "id": 11131,
                   "name": "assetAddress",
                   "nodeType": "VariableDeclaration",
-                  "scope": 10997,
-                  "src": "3258:20:40",
+                  "scope": 11136,
+                  "src": "3258:20:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -2832,10 +3036,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 10991,
+                    "id": 11130,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "3258:7:40",
+                    "src": "3258:7:38",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -2846,19 +3050,19 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "3257:22:40"
+              "src": "3257:22:38"
             },
             "returnParameters": {
-              "id": 10996,
+              "id": 11135,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 10995,
+                  "id": 11134,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 10997,
-                  "src": "3303:7:40",
+                  "scope": 11136,
+                  "src": "3303:7:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -2866,10 +3070,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 10994,
+                    "id": 11133,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "3303:7:40",
+                    "src": "3303:7:38",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -2880,10 +3084,10 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "3302:9:40"
+              "src": "3302:9:38"
             },
-            "scope": 11068,
-            "src": "3232:80:40",
+            "scope": 11221,
+            "src": "3232:80:38",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "external"
@@ -2891,23 +3095,23 @@
           {
             "body": null,
             "documentation": "@notice It updates the yearn vault address associted with an asset.\n@param assetAddress asset address to configure.\n@param yVaultAddress the new yVault address to configure.",
-            "id": 11004,
+            "id": 11143,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "updateYVaultAddressSetting",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 11002,
+              "id": 11141,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 10999,
+                  "id": 11138,
                   "name": "assetAddress",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11004,
-                  "src": "3564:20:40",
+                  "scope": 11143,
+                  "src": "3564:20:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -2915,10 +3119,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 10998,
+                    "id": 11137,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "3564:7:40",
+                    "src": "3564:7:38",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -2930,11 +3134,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 11001,
+                  "id": 11140,
                   "name": "yVaultAddress",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11004,
-                  "src": "3586:21:40",
+                  "scope": 11143,
+                  "src": "3586:21:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -2942,10 +3146,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 11000,
+                    "id": 11139,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "3586:7:40",
+                    "src": "3586:7:38",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -2956,16 +3160,16 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "3563:45:40"
+              "src": "3563:45:38"
             },
             "returnParameters": {
-              "id": 11003,
+              "id": 11142,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "3621:0:40"
+              "src": "3621:0:38"
             },
-            "scope": 11068,
-            "src": "3528:94:40",
+            "scope": 11221,
+            "src": "3528:94:38",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "external"
@@ -2973,23 +3177,23 @@
           {
             "body": null,
             "documentation": "@notice It returns the yearn vault address associted with an asset.\n@param assetAddress asset address to get the associated yearn vault address for.\n@return The address of the yearn vault.",
-            "id": 11011,
+            "id": 11150,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "getYVaultAddress",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 11007,
+              "id": 11146,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11006,
+                  "id": 11145,
                   "name": "assetAddress",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11011,
-                  "src": "3879:20:40",
+                  "scope": 11150,
+                  "src": "3879:20:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -2997,10 +3201,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 11005,
+                    "id": 11144,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "3879:7:40",
+                    "src": "3879:7:38",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -3011,19 +3215,19 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "3878:22:40"
+              "src": "3878:22:38"
             },
             "returnParameters": {
-              "id": 11010,
+              "id": 11149,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11009,
+                  "id": 11148,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11011,
-                  "src": "3924:7:40",
+                  "scope": 11150,
+                  "src": "3924:7:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -3031,10 +3235,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 11008,
+                    "id": 11147,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "3924:7:40",
+                    "src": "3924:7:38",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -3045,10 +3249,10 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "3923:9:40"
+              "src": "3923:9:38"
             },
-            "scope": 11068,
-            "src": "3853:80:40",
+            "scope": 11221,
+            "src": "3853:80:38",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "external"
@@ -3056,23 +3260,23 @@
           {
             "body": null,
             "documentation": "@notice It updates the curve pool address associted with an asset.\n@param assetAddress asset address to configure.\n@param crvPoolAddress the new Curve pool address to configure.",
-            "id": 11018,
+            "id": 11157,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "updateCRVPoolAddressSetting",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 11016,
+              "id": 11155,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11013,
+                  "id": 11152,
                   "name": "assetAddress",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11018,
-                  "src": "4190:20:40",
+                  "scope": 11157,
+                  "src": "4190:20:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -3080,10 +3284,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 11012,
+                    "id": 11151,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "4190:7:40",
+                    "src": "4190:7:38",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -3095,11 +3299,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 11015,
+                  "id": 11154,
                   "name": "crvPoolAddress",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11018,
-                  "src": "4212:22:40",
+                  "scope": 11157,
+                  "src": "4212:22:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -3107,10 +3311,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 11014,
+                    "id": 11153,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "4212:7:40",
+                    "src": "4212:7:38",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -3121,16 +3325,16 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "4189:46:40"
+              "src": "4189:46:38"
             },
             "returnParameters": {
-              "id": 11017,
+              "id": 11156,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "4248:0:40"
+              "src": "4248:0:38"
             },
-            "scope": 11068,
-            "src": "4153:96:40",
+            "scope": 11221,
+            "src": "4153:96:38",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "external"
@@ -3138,23 +3342,23 @@
           {
             "body": null,
             "documentation": "@notice It returns the curve pool address associted with an asset.\n@param assetAddress asset address to get the associated curve pool address for.\n@return The address of the curve pool.",
-            "id": 11025,
+            "id": 11164,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "getCRVPoolAddress",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 11021,
+              "id": 11160,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11020,
+                  "id": 11159,
                   "name": "assetAddress",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11025,
-                  "src": "4504:20:40",
+                  "scope": 11164,
+                  "src": "4504:20:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -3162,10 +3366,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 11019,
+                    "id": 11158,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "4504:7:40",
+                    "src": "4504:7:38",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -3176,19 +3380,19 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "4503:22:40"
+              "src": "4503:22:38"
             },
             "returnParameters": {
-              "id": 11024,
+              "id": 11163,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11023,
+                  "id": 11162,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11025,
-                  "src": "4549:7:40",
+                  "scope": 11164,
+                  "src": "4549:7:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -3196,10 +3400,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 11022,
+                    "id": 11161,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "4549:7:40",
+                    "src": "4549:7:38",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -3210,10 +3414,10 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "4548:9:40"
+              "src": "4548:9:38"
             },
-            "scope": 11068,
-            "src": "4477:81:40",
+            "scope": 11221,
+            "src": "4477:81:38",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "external"
@@ -3221,23 +3425,23 @@
           {
             "body": null,
             "documentation": "@notice It updates the max loan amount for a given asset.\n@param assetAddress asset address used to update the max loan amount.\n@param newMaxLoanAmount the new max loan amount to set.",
-            "id": 11032,
+            "id": 11171,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "updateMaxLoanAmount",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 11030,
+              "id": 11169,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11027,
+                  "id": 11166,
                   "name": "assetAddress",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11032,
-                  "src": "4813:20:40",
+                  "scope": 11171,
+                  "src": "4813:20:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -3245,10 +3449,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 11026,
+                    "id": 11165,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "4813:7:40",
+                    "src": "4813:7:38",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -3260,11 +3464,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 11029,
+                  "id": 11168,
                   "name": "newMaxLoanAmount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11032,
-                  "src": "4835:24:40",
+                  "scope": 11171,
+                  "src": "4835:24:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -3272,10 +3476,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11028,
+                    "id": 11167,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "4835:7:40",
+                    "src": "4835:7:38",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -3285,16 +3489,16 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "4812:48:40"
+              "src": "4812:48:38"
             },
             "returnParameters": {
-              "id": 11031,
+              "id": 11170,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "4869:0:40"
+              "src": "4869:0:38"
             },
-            "scope": 11068,
-            "src": "4784:86:40",
+            "scope": 11221,
+            "src": "4784:86:38",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "external"
@@ -3302,23 +3506,23 @@
           {
             "body": null,
             "documentation": "@notice Returns the max loan amount for a given asset.\n@param assetAddress asset address to retrieve the max loan amount.",
-            "id": 11039,
+            "id": 11178,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "getMaxLoanAmount",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 11035,
+              "id": 11174,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11034,
+                  "id": 11173,
                   "name": "assetAddress",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11039,
-                  "src": "5052:20:40",
+                  "scope": 11178,
+                  "src": "5052:20:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -3326,10 +3530,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 11033,
+                    "id": 11172,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "5052:7:40",
+                    "src": "5052:7:38",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -3340,19 +3544,19 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "5051:22:40"
+              "src": "5051:22:38"
             },
             "returnParameters": {
-              "id": 11038,
+              "id": 11177,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11037,
+                  "id": 11176,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11039,
-                  "src": "5097:7:40",
+                  "scope": 11178,
+                  "src": "5097:7:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -3360,10 +3564,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11036,
+                    "id": 11175,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "5097:7:40",
+                    "src": "5097:7:38",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -3373,10 +3577,10 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "5096:9:40"
+              "src": "5096:9:38"
             },
-            "scope": 11068,
-            "src": "5026:80:40",
+            "scope": 11221,
+            "src": "5026:80:38",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "external"
@@ -3384,23 +3588,23 @@
           {
             "body": null,
             "documentation": "@notice Tests whether a given amount is greater than the current max loan amount.\n@param assetAddress asset address used to return the max loan amount setting.\n@param amount the loan amount to check.\n@return true if the given amount is greater than the current max loan amount. Otherwise it returns false.",
-            "id": 11048,
+            "id": 11187,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "exceedsMaxLoanAmount",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 11044,
+              "id": 11183,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11041,
+                  "id": 11180,
                   "name": "assetAddress",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11048,
-                  "src": "5492:20:40",
+                  "scope": 11187,
+                  "src": "5492:20:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -3408,10 +3612,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 11040,
+                    "id": 11179,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "5492:7:40",
+                    "src": "5492:7:38",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -3423,11 +3627,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 11043,
+                  "id": 11182,
                   "name": "amount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11048,
-                  "src": "5514:14:40",
+                  "scope": 11187,
+                  "src": "5514:14:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -3435,10 +3639,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11042,
+                    "id": 11181,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "5514:7:40",
+                    "src": "5514:7:38",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -3448,19 +3652,19 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "5491:38:40"
+              "src": "5491:38:38"
             },
             "returnParameters": {
-              "id": 11047,
+              "id": 11186,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11046,
+                  "id": 11185,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11048,
-                  "src": "5565:4:40",
+                  "scope": 11187,
+                  "src": "5565:4:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -3468,10 +3672,10 @@
                     "typeString": "bool"
                   },
                   "typeName": {
-                    "id": 11045,
+                    "id": 11184,
                     "name": "bool",
                     "nodeType": "ElementaryTypeName",
-                    "src": "5565:4:40",
+                    "src": "5565:4:38",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bool",
                       "typeString": "bool"
@@ -3481,10 +3685,10 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "5564:6:40"
+              "src": "5564:6:38"
             },
-            "scope": 11068,
-            "src": "5462:109:40",
+            "scope": 11221,
+            "src": "5462:109:38",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "external"
@@ -3492,23 +3696,23 @@
           {
             "body": null,
             "documentation": "@notice It updates the max total vaule locked amount for a given asset.\n@param assetAddress asset address used to update the max loan amount.\n@param newMaxTVLAmount the new max total vault locked amount to set.",
-            "id": 11055,
+            "id": 11194,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "updateMaxTVL",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 11053,
+              "id": 11192,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11050,
+                  "id": 11189,
                   "name": "assetAddress",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11055,
-                  "src": "5846:20:40",
+                  "scope": 11194,
+                  "src": "5846:20:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -3516,10 +3720,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 11049,
+                    "id": 11188,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "5846:7:40",
+                    "src": "5846:7:38",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -3531,11 +3735,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 11052,
+                  "id": 11191,
                   "name": "newMaxTVLAmount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11055,
-                  "src": "5868:23:40",
+                  "scope": 11194,
+                  "src": "5868:23:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -3543,10 +3747,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11051,
+                    "id": 11190,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "5868:7:40",
+                    "src": "5868:7:38",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -3556,16 +3760,16 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "5845:47:40"
+              "src": "5845:47:38"
             },
             "returnParameters": {
-              "id": 11054,
+              "id": 11193,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "5901:0:40"
+              "src": "5901:0:38"
             },
-            "scope": 11068,
-            "src": "5824:78:40",
+            "scope": 11221,
+            "src": "5824:78:38",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "external"
@@ -3573,23 +3777,23 @@
           {
             "body": null,
             "documentation": "@notice Returns the max total value locked amount for a given asset.\n@param assetAddress asset address to retrieve the max total value locked amount.",
-            "id": 11062,
+            "id": 11201,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "getMaxTVLAmount",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 11058,
+              "id": 11197,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11057,
+                  "id": 11196,
                   "name": "assetAddress",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11062,
-                  "src": "6111:20:40",
+                  "scope": 11201,
+                  "src": "6111:20:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -3597,10 +3801,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 11056,
+                    "id": 11195,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "6111:7:40",
+                    "src": "6111:7:38",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -3611,19 +3815,19 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "6110:22:40"
+              "src": "6110:22:38"
             },
             "returnParameters": {
-              "id": 11061,
+              "id": 11200,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11060,
+                  "id": 11199,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11062,
-                  "src": "6156:7:40",
+                  "scope": 11201,
+                  "src": "6156:7:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -3631,10 +3835,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11059,
+                    "id": 11198,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "6156:7:40",
+                    "src": "6156:7:38",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -3644,34 +3848,34 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "6155:9:40"
+              "src": "6155:9:38"
             },
-            "scope": 11068,
-            "src": "6086:79:40",
+            "scope": 11221,
+            "src": "6086:79:38",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "external"
           },
           {
             "body": null,
-            "documentation": "@notice It removes a configuration for a given asset on the platform.\n@param assetAddress asset address to remove.",
-            "id": 11067,
+            "documentation": "@notice It updates the max debt ratio for a given asset.\n@dev The ratio value has 2 decimal places. I.e 100 = 1%\n@param assetAddress asset address used to update the max debt ratio.\n@param newMaxDebtRatio the new max debt ratio to set.",
+            "id": 11208,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
-            "name": "removeAsset",
+            "name": "updateMaxDebtRatio",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 11065,
+              "id": 11206,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11064,
+                  "id": 11203,
                   "name": "assetAddress",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11067,
-                  "src": "6335:20:40",
+                  "scope": 11208,
+                  "src": "6462:20:38",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -3679,10 +3883,91 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 11063,
+                    "id": 11202,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "6335:7:40",
+                    "src": "6462:7:38",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 11205,
+                  "name": "newMaxDebtRatio",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11208,
+                  "src": "6484:23:38",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 11204,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "6484:7:38",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "6461:47:38"
+            },
+            "returnParameters": {
+              "id": 11207,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "6517:0:38"
+            },
+            "scope": 11221,
+            "src": "6434:84:38",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": "@notice Returns the max debt ratio for a given asset.\n@dev The ratio value has 2 decimal places. I.e 100 = 1%\n@param assetAddress asset address to retrieve the max debt ratio.",
+            "id": 11215,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getMaxDebtRatio",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 11211,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 11210,
+                  "name": "assetAddress",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11215,
+                  "src": "6748:20:38",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 11209,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "6748:7:38",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -3693,26 +3978,108 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "6334:22:40"
+              "src": "6747:22:38"
             },
             "returnParameters": {
-              "id": 11066,
+              "id": 11214,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 11213,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11215,
+                  "src": "6793:7:38",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 11212,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "6793:7:38",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "6792:9:38"
+            },
+            "scope": 11221,
+            "src": "6723:79:38",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": "@notice It removes a configuration for a given asset on the platform.\n@param assetAddress asset address to remove.",
+            "id": 11220,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "removeAsset",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 11218,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 11217,
+                  "name": "assetAddress",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11220,
+                  "src": "6972:20:38",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 11216,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "6972:7:38",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "6971:22:38"
+            },
+            "returnParameters": {
+              "id": 11219,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "6365:0:40"
+              "src": "7002:0:38"
             },
-            "scope": 11068,
-            "src": "6314:52:40",
+            "scope": 11221,
+            "src": "6951:52:38",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "external"
           }
         ],
-        "scope": 11069,
-        "src": "229:6139:40"
+        "scope": 11222,
+        "src": "229:6776:38"
       }
     ],
-    "src": "0:6369:40"
+    "src": "0:7006:38"
   },
   "compiler": {
     "name": "solc",
@@ -3720,7 +4087,7 @@
   },
   "networks": {},
   "schemaVersion": "3.2.3",
-  "updatedAt": "2021-01-16T19:55:02.714Z",
+  "updatedAt": "2021-04-09T17:47:40.903Z",
   "devdoc": {
     "author": "develop@teller.finance",
     "methods": {
@@ -3749,6 +4116,12 @@
           "assetAddress": "asset address to get the associated cToken for."
         },
         "return": "The associated cToken address"
+      },
+      "getMaxDebtRatio(address)": {
+        "details": "The ratio value has 2 decimal places. I.e 100 = 1%",
+        "params": {
+          "assetAddress": "asset address to retrieve the max debt ratio."
+        }
       },
       "getMaxLoanAmount(address)": {
         "params": {
@@ -3781,6 +4154,13 @@
         "params": {
           "assetAddress": "asset address to configure.",
           "cTokenAddress": "the new cToken address to configure."
+        }
+      },
+      "updateMaxDebtRatio(address,uint256)": {
+        "details": "The ratio value has 2 decimal places. I.e 100 = 1%",
+        "params": {
+          "assetAddress": "asset address used to update the max debt ratio.",
+          "newMaxDebtRatio": "the new max debt ratio to set."
         }
       },
       "updateMaxLoanAmount(address,uint256)": {
@@ -3817,6 +4197,9 @@
       "getCTokenAddress(address)": {
         "notice": "It returns the cToken address associted with an asset."
       },
+      "getMaxDebtRatio(address)": {
+        "notice": "Returns the max debt ratio for a given asset."
+      },
       "getMaxLoanAmount(address)": {
         "notice": "Returns the max loan amount for a given asset."
       },
@@ -3834,6 +4217,9 @@
       },
       "updateCTokenAddress(address,address)": {
         "notice": "It updates the cToken address associted with an asset."
+      },
+      "updateMaxDebtRatio(address,uint256)": {
+        "notice": "It updates the max debt ratio for a given asset."
       },
       "updateMaxLoanAmount(address,uint256)": {
         "notice": "It updates the max loan amount for a given asset."

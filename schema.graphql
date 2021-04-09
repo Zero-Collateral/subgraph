@@ -217,8 +217,6 @@ type LoanTermsSubmitted @entity {
   borrower: Bytes!
   "The request nonce used in the loan terms."
   requestNonce: BigInt!
-  "The signer nonce used in this loan terms."
-  signerNonce: BigInt!
   "The interest rate accepted."
   interestRate: BigInt!
   "The collateral ratio accepted."
