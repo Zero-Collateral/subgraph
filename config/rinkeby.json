@@ -1,7 +1,7 @@
 {
     "TDAI": "0x620BFC2572516d9a9C6A6bcCfC046B8eC74b3A7f",
     "AssetSettings_Proxy": "0x79c79b99e485424a64D34aCBeA9be4ADe377BF95",
-    "startBlock": "8388500",
+    "startBlock": "8388000",
     "network": "rinkeby",
     "TToken": "0x5d2a8E0D810f6291D8D962bd6A36dF9CF658d724",
     "LendingPool": "0xa06b41644922D46f53E009BdE222BD2aec50bc0b",
