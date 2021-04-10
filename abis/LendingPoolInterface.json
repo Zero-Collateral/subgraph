@@ -260,7 +260,22 @@
       "type": "function"
     },
     {
-      "constant": true,
+      "constant": false,
+      "inputs": [],
+      "name": "exchangeRateCurrent",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
       "inputs": [
         {
           "internalType": "address",
@@ -277,11 +292,11 @@
         }
       ],
       "payable": false,
-      "stateMutability": "view",
+      "stateMutability": "nonpayable",
       "type": "function"
     },
     {
-      "constant": true,
+      "constant": false,
       "inputs": [
         {
           "internalType": "address",
@@ -298,11 +313,11 @@
         }
       ],
       "payable": false,
-      "stateMutability": "view",
+      "stateMutability": "nonpayable",
       "type": "function"
     },
     {
-      "constant": true,
+      "constant": false,
       "inputs": [
         {
           "internalType": "address",
@@ -319,7 +334,7 @@
         }
       ],
       "payable": false,
-      "stateMutability": "view",
+      "stateMutability": "nonpayable",
       "type": "function"
     },
     {
@@ -389,25 +404,25 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.5.17+commit.d19bba13\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"oldInterestValidator\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newInterestValidator\",\"type\":\"address\"}],\"name\":\"InterestValidatorUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"lender\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"InterestWithdrawn\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"tTokenAmount\",\"type\":\"uint256\"}],\"name\":\"TokenDeposited\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"borrower\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"TokenRepaid\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"tTokenAmount\",\"type\":\"uint256\"}],\"name\":\"TokenWithdrawn\",\"type\":\"event\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"lender\",\"type\":\"address\"}],\"name\":\"balanceOfUnderlying\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"cToken\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"borrower\",\"type\":\"address\"}],\"name\":\"createLoan\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"deposit\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"lender\",\"type\":\"address\"}],\"name\":\"getClaimableInterestEarned\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"loanAmount\",\"type\":\"uint256\"}],\"name\":\"getDebtRatioFor\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"lender\",\"type\":\"address\"}],\"name\":\"getLenderInterestEarned\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"getMarketState\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"totalSupplied\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"totalBorrowed\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"totalRepaid\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"totalOnLoan\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"contract IMarketRegistry\",\"name\":\"aMarketRegistry\",\"type\":\"address\"},{\"internalType\":\"contract TToken\",\"name\":\"aTToken\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"settingsAddress\",\"type\":\"address\"}],\"name\":\"initialize\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"lendingToken\",\"outputs\":[{\"internalType\":\"contract ERC20Detailed\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"principalAmount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"interestAmount\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"borrower\",\"type\":\"address\"}],\"name\":\"repay\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"tToken\",\"outputs\":[{\"internalType\":\"contract TToken\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"totalInterestEarned\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"withdraw\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"author\":\"develop@teller.finance\",\"methods\":{\"balanceOfUnderlying(address)\":{\"return\":\"a lender's balance of the underlying token in the pool.\"},\"cToken()\":{\"return\":\"the cToken address.\"},\"createLoan(uint256,address)\":{\"details\":\"This function only can be invoked by the LoansInterface implementation.It throws a require error if current ERC20 balance isn't enough to transfer the tokens.\",\"params\":{\"amount\":\"of tokens to transfer.\",\"borrower\":\"address which will receive the tokens.\"}},\"deposit(uint256)\":{\"details\":\"the user must call ERC20.approve function previously.\",\"params\":{\"amount\":\"of tokens to deposit in the pool.\"}},\"getClaimableInterestEarned(address)\":{\"return\":\"claimable interest value.\"},\"getDebtRatioFor(uint256)\":{\"params\":{\"loanAmount\":\"a new loan amount to consider in the ratio.\"},\"return\":\"the debt-to-supply ratio value.\"},\"getLenderInterestEarned(address)\":{\"details\":\"This value includes already claimed + unclaimed interest earned.\",\"return\":\"total interest earned by lender.\"},\"getMarketState()\":{\"return\":\"values that represent the global state across all markets.\"},\"initialize(address,address,address)\":{\"details\":\"It throws a require error if the contract is already initialized.\",\"params\":{\"aMarketRegistry\":\"the MarketRegistry contract.\",\"aTToken\":\"the Teller token to link to the lending pool.\",\"settingsAddress\":\"Settings contract address.\"}},\"lendingToken()\":{\"return\":\"the ERC20 lending token address.\"},\"repay(uint256,uint256,address)\":{\"details\":\"This function can be called ONLY by the Loans contract.It requires a ERC20.approve call before calling it.It throws a require error if borrower called ERC20.approve function before calling it.\",\"params\":{\"borrower\":\"address that is repaying the loan.\",\"interestAmount\":\"amount of tokens towards the interest.\",\"principalAmount\":\"amount of tokens towards the principal.\"}},\"tToken()\":{\"return\":\"the tToken address.\"},\"totalInterestEarned()\":{\"return\":\"total interest earned from loans.\"},\"withdraw(uint256)\":{\"details\":\"It throws a require error if the contract hasn't enough tokens balance.It throws a require error if the holder hasn't enough tToken balance.\",\"params\":{\"amount\":\"of tokens to withdraw.\"}}}},\"userdoc\":{\"methods\":{\"balanceOfUnderlying(address)\":{\"notice\":\"It returns the balance of underlying tokens a lender owns with the amount of TTokens owned and the current exchange rate.\"},\"cToken()\":{\"notice\":\"It gets the cToken address.\"},\"createLoan(uint256,address)\":{\"notice\":\"Once the loan is created, it transfers the amount of tokens to the borrower.\"},\"deposit(uint256)\":{\"notice\":\"It allows users to deposit tokens into the pool.\"},\"getClaimableInterestEarned(address)\":{\"notice\":\"Returns the amount of claimable interest a lender has earned.\"},\"getDebtRatioFor(uint256)\":{\"notice\":\"It gets the debt-to-supply (DtS) ratio for a given market, including a new loan amount.The formula to calculate DtS ratio (including a new loan amount) is: DtS = (SUM(total borrowed) - SUM(total repaid) + NewLoanAmount) / SUM(total supplied)The value has 2 decimal places. Example: 100 => 1%\"},\"getLenderInterestEarned(address)\":{\"notice\":\"Returns the total amount of interest earned by a lender.\"},\"getMarketState()\":{\"notice\":\"It calculates the market state values across all markets.\"},\"initialize(address,address,address)\":{\"notice\":\"It initializes the contract state variables.\"},\"lendingToken()\":{\"notice\":\"It gets the lending token address.\"},\"repay(uint256,uint256,address)\":{\"notice\":\"It allows a borrower repaying their loan.\"},\"tToken()\":{\"notice\":\"It gets the tToken address.\"},\"totalInterestEarned()\":{\"notice\":\"Returns the total amount of interest the pool has earned from repaying loans.\"},\"withdraw(uint256)\":{\"notice\":\"It allows any tToken holder to burn their tToken tokens and withdraw their tokens.\"}},\"notice\":\"This interface defines the functions for a lending pool that holds all of the tokens that lenders transfer into the protocol.\"}},\"settings\":{\"compilationTarget\":{\"/home/jeremig/Documents/Teller/dojo/teller-protocol-v1/contracts/interfaces/LendingPoolInterface.sol\":\"LendingPoolInterface\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/jeremig/Documents/Teller/dojo/teller-protocol-v1/contracts/base/BaseUpgradeable.sol\":{\"keccak256\":\"0xa6063f679f0bb7ace21a083a7784a3c676c3fad2f4428ef70b75cbd563520edd\",\"urls\":[\"bzz-raw://70e25936f772bd22a2fb1ef01e8ac6143c5c30ef336f8a501d3c8cb55da98c43\",\"dweb:/ipfs/QmQwfKwmrda4iPsbD6iLcq8UM2bNwgAGv21M8JSX5tQ6Da\"]},\"/home/jeremig/Documents/Teller/dojo/teller-protocol-v1/contracts/base/TToken.sol\":{\"keccak256\":\"0x383aca1ee1f1431b8583243bfaa979b7993aeb463e31ca4c8fb03cdeba4d1a3b\",\"urls\":[\"bzz-raw://fc2269440f57e20546dbf5706ad0b9e6298494cacdf1541fdaa1827c0f7b47c0\",\"dweb:/ipfs/QmSqpLwb8pEp99zi4di83SNJzr4t47Wa7oJhGNdEUoMCHq\"]},\"/home/jeremig/Documents/Teller/dojo/teller-protocol-v1/contracts/interfaces/AssetSettingsInterface.sol\":{\"keccak256\":\"0x60079e5d9b1f2ef9cfd3c041a4b8f72009d209a010afad1613dbfc9a19ad3708\",\"urls\":[\"bzz-raw://626a36df5d72a7b3610265045a90bc10d0336932bc46272448ae14ced4b5e426\",\"dweb:/ipfs/QmTN8jX2VjENdEhxfYZrpvBPP7LMUgdzZhLUsDfXrGtg4x\"]},\"/home/jeremig/Documents/Teller/dojo/teller-protocol-v1/contracts/interfaces/EscrowFactoryInterface.sol\":{\"keccak256\":\"0x65b252d2e93c0fe47ba456e93bd6a9a24db46028b7312631597a7d36c2fc56ef\",\"urls\":[\"bzz-raw://b94bcfe3673d458956bd83e347fee518abff7195212125a39edbbe7975ccbe70\",\"dweb:/ipfs/QmYeHCxNJ4GMchBL2RQ6NsVjbRtRCdkNq9ZHe3dJxyR4DW\"]},\"/home/jeremig/Documents/Teller/dojo/teller-protocol-v1/contracts/interfaces/IBaseUpgradeable.sol\":{\"keccak256\":\"0xede43efe3ee18011d12e627b72deefa11ed2495146c25de9614e9f665deccb50\",\"urls\":[\"bzz-raw://ee2b24a4bb55c300a7a33a85f657c57c646f3f495ec6ad95b25552f0b5c761df\",\"dweb:/ipfs/QmQFfvTwQTRBqs2sX8q8sCZi5qBEEUP95LZR4phybzoqfB\"]},\"/home/jeremig/Documents/Teller/dojo/teller-protocol-v1/contracts/interfaces/IMarketRegistry.sol\":{\"keccak256\":\"0x0be46633fa37f4bdd154145b382f6dd1aa96dbda29d20fc5c44d915f88c57c55\",\"urls\":[\"bzz-raw://33db4899c5d6bb3a2734a3eb40679e985df2dc55a4c3dfbe294ea5b6f1e7da50\",\"dweb:/ipfs/QmWaZztMPN1mnoERvNmbrBf67uGSRYcR6dFGLT8Z3PTYag\"]},\"/home/jeremig/Documents/Teller/dojo/teller-protocol-v1/contracts/interfaces/InterestValidatorInterface.sol\":{\"keccak256\":\"0x9f968a4bf850ebfbf27a1d8da07a5af7a9d6db1283a3327622e2b9cec6986d48\",\"urls\":[\"bzz-raw://f54596a0f5c08d22d47e3628e7cb3a3ab9c1dbd3392bdc0fa3d498d01b0815f3\",\"dweb:/ipfs/QmTSdwf5S5VgD3cFWLajY9sK7MdhSmusu9VJFDcTDkznPb\"]},\"/home/jeremig/Documents/Teller/dojo/teller-protocol-v1/contracts/interfaces/LendingPoolInterface.sol\":{\"keccak256\":\"0xc86e0fd6011343b366f309fbf4af5fe3ecad1e5836aec82b7cc3ea28c993fd76\",\"urls\":[\"bzz-raw://b36e168eaad33d3ddf8bf668c5a6ec98cfd8a3b7f219880b0d01d44f6e3ceda6\",\"dweb:/ipfs/QmbDh4xZeHAuMnbN6S3BPijfyixvEnYmTmyB6zYu2Mz5bh\"]},\"/home/jeremig/Documents/Teller/dojo/teller-protocol-v1/contracts/interfaces/LoansInterface.sol\":{\"keccak256\":\"0x98edbbb7c1c937f925a2dfce75d8b00260c9b6b77d78272f84fae3aab8ff0f9d\",\"urls\":[\"bzz-raw://4aa62cd03c860b9aa31fada3d68b0533ba3e5a8632fcd8088f6a2f756c08945f\",\"dweb:/ipfs/Qmb173SFRqFyv49yjenHPT5dFmHgCi7reLZh9f1RzqeGZy\"]},\"/home/jeremig/Documents/Teller/dojo/teller-protocol-v1/contracts/interfaces/LogicVersionsRegistryInterface.sol\":{\"keccak256\":\"0x09bd2761f299e58f03abba7ff908cb2d02ca5b3947cc4ab1be6b5598a41533ca\",\"urls\":[\"bzz-raw://712fe4975c46421f4d29a7a34ecc783fe3d2963bd4d1608be8c13ff143b2e6a1\",\"dweb:/ipfs/QmUqQPSTUaxULzPWh9aBGCPPRFFvCKnz2ThEKqxeGdnnmX\"]},\"/home/jeremig/Documents/Teller/dojo/teller-protocol-v1/contracts/interfaces/SettingsInterface.sol\":{\"keccak256\":\"0x35169d535f127d48189b8ee0db993d47a2beab6a2493135e05b3c5e4a1df8860\",\"urls\":[\"bzz-raw://6beb369cb6404da0919bb898831588cbf1d283279b95835e1a0fadf2b601e2ab\",\"dweb:/ipfs/QmcW33UPxKWdHbs9sUVqYkTpRcFzMkyy7UgVQXLui72VqC\"]},\"/home/jeremig/Documents/Teller/dojo/teller-protocol-v1/contracts/providers/chainlink/IChainlinkAggregator.sol\":{\"keccak256\":\"0x162b32975e272aa1d86e9a36135d7da30a2dde633ac286e2ca54e6f734c083ea\",\"urls\":[\"bzz-raw://5df615261bc912ecf55210d58bff6122194b243236938d4f489e9053ab648c3e\",\"dweb:/ipfs/QmRokEM614TJUk1pDCo9uEd9CUSANHC73yx3RNZNmiNtDY\"]},\"/home/jeremig/Documents/Teller/dojo/teller-protocol-v1/contracts/settings/IATMSettings.sol\":{\"keccak256\":\"0x3298d82a77b05c01c04d4759893e04128e3636ca94c548de1e774622cb0f1d89\",\"urls\":[\"bzz-raw://4a2d185d34a96269514a74d0f42d30ddc71020b90f3847c5a9bb31fbff87ec62\",\"dweb:/ipfs/QmQUSmaZzku7BDbEvEEtp2hmk8QtMZCHz457nNuKNW2FFv\"]},\"/home/jeremig/Documents/Teller/dojo/teller-protocol-v1/contracts/util/AddressArrayLib.sol\":{\"keccak256\":\"0xe28b4cca4292c36b193d8596960510bda9e1789bffa9f5c57b28f323c2552b4f\",\"urls\":[\"bzz-raw://e25116dc3e5176a928e550fb34ffc1ecf710efc1c385a65b1989d55d0b63d427\",\"dweb:/ipfs/QmRcKvxZMTEWne9ZHNHviszigz1SxzWFsgtJGFifPEtECj\"]},\"/home/jeremig/Documents/Teller/dojo/teller-protocol-v1/contracts/util/AddressLib.sol\":{\"keccak256\":\"0xb6311a4caaab2cc3f783d476a1432e436d12b4ea45be92809b1adbeafc4d31c1\",\"urls\":[\"bzz-raw://643716fbfdf17e6936c46ee04c0355c27b1c052bee89918e97cfa78b8eb81d68\",\"dweb:/ipfs/QmSXTEHePHXfhk38F2Y4JP4Rr9ichFiSuDCpTL5PJ1v5pC\"]},\"/home/jeremig/Documents/Teller/dojo/teller-protocol-v1/contracts/util/CacheLib.sol\":{\"keccak256\":\"0xa43ff6d740577dfeae4972671c9a60cdf9607d6e81cadc585955debe1ca38dd7\",\"urls\":[\"bzz-raw://ad94cfc3259b2e18be2d6faefd109a306394f94ec85c181995a8a547a4555a9e\",\"dweb:/ipfs/QmYBPyNaRohQXZzM9uixEV1oBrQrhFTTi5HpWPS7udZNh6\"]},\"/home/jeremig/Documents/Teller/dojo/teller-protocol-v1/contracts/util/LogicVersionLib.sol\":{\"keccak256\":\"0x0fb35b6b314b9fc7f4b9ed0c10f0b2a71e67c34157209cda1ebfc6c174ad3813\",\"urls\":[\"bzz-raw://e7031377ba277b419377f7aa4588c5250583bd3812d8056f60bce059b4fbfd6c\",\"dweb:/ipfs/QmWCoGshJUK75gPbGSzhx5bVHJgKLqngSwLDA5sD5TgHwq\"]},\"/home/jeremig/Documents/Teller/dojo/teller-protocol-v1/contracts/util/LogicVersionsConsts.sol\":{\"keccak256\":\"0x45711c23615ebfcbc5e5140096cdda6f2155cefa961c71801456ac22302e88c9\",\"urls\":[\"bzz-raw://29b9546e58aef1416a28b387d1d4b14e351f9a34bb5fdf8c22d0bfcb1c74ccf5\",\"dweb:/ipfs/QmSh8TU8BWnJwk8MgaDUxGjKaA3Dsqef4ztQMrHcsuXzUh\"]},\"/home/jeremig/Documents/Teller/dojo/teller-protocol-v1/contracts/util/NumbersLib.sol\":{\"keccak256\":\"0xaa858071cda31070104f3ad479213c5fa4d898568823c98b18de60cb1c097c21\",\"urls\":[\"bzz-raw://1d1c87d6a3022d35f30153b4398051756842395ab9d48f1caeb2b1f2ef16937d\",\"dweb:/ipfs/QmNPMUw2fQTyD2Xad4WqoGfndMWw1giUUUw3xcBTgGpY4b\"]},\"/home/jeremig/Documents/Teller/dojo/teller-protocol-v1/contracts/util/NumbersList.sol\":{\"keccak256\":\"0x9848b264416dbafb5cca7ed93205956ccc1f0690dce1bc27a2dbfd8fa55fb13d\",\"urls\":[\"bzz-raw://85b5f94a3d3f627025e07901114c332e34e0e396caf409059461ab34e0fc1c45\",\"dweb:/ipfs/QmUqS1ZAzyRamvpjZNuaepqprnQFdWch7Ug6xXrgXDfz6v\"]},\"/home/jeremig/Documents/Teller/dojo/teller-protocol-v1/contracts/util/PlatformSettingsLib.sol\":{\"keccak256\":\"0x0a63860141bab4588a5cd4af606b9a27ddd29aa7554029cb8b89b703d444f28b\",\"urls\":[\"bzz-raw://26c98caa3604ff8fca7ad11716bdec73ffc17195a74dac4ef61c6e2373edecda\",\"dweb:/ipfs/QmcxyVdVmQfXWpc6MJXauquD8hT5XVVcVLCfUouHUrXf98\"]},\"/home/jeremig/Documents/Teller/dojo/teller-protocol-v1/contracts/util/SettingsConsts.sol\":{\"keccak256\":\"0x20ab9e90a20d34b38bb199555819461f36fb5b17baa41a9810f50e4cf3872f27\",\"urls\":[\"bzz-raw://a4e88fa632a430a52d867fa38c0455d2583d4f4ffee04d68646c6da811375970\",\"dweb:/ipfs/QmR627guCZS3dsjcYyFBB2U4HcVdEq1kGKpkA5P5czK9b8\"]},\"/home/jeremig/Documents/Teller/dojo/teller-protocol-v1/contracts/util/TellerCommon.sol\":{\"keccak256\":\"0x10f0ea3fa316f244d8cf397a42e9a8194399f8e6396836194ccc10a1616b59fd\",\"urls\":[\"bzz-raw://8e29019d71d09a8c65deb14705387af536f4472c5ae6e877ab0e634af5f0a99a\",\"dweb:/ipfs/Qmb5kpCYFpDyqog2zo8G3opYaJ68KNKBr8n3hRqe7ULAtY\"]},\"@chainlink/contracts/src/v0.5/interfaces/AggregatorInterface.sol\":{\"keccak256\":\"0x64fa8b255860b1cf2661a2d87ca287c21479edf18673ca694a770b6498e2de39\",\"urls\":[\"bzz-raw://ee19cc8583ee342d285c32a74bdc6050ac3fda11530a20fddadc8b1e9cc8f9be\",\"dweb:/ipfs/QmYRwA8umXm2gBbeWDVXWA1ADVFJu2eVn1xofkCGJrkxkz\"]},\"@chainlink/contracts/src/v0.5/interfaces/AggregatorV2V3Interface.sol\":{\"keccak256\":\"0xacc87fdd0c5891084d0a2d801bb968d864f6bebacad14767a399b5b0ad3511f3\",\"urls\":[\"bzz-raw://d7eab097c04947df94daf86e2a5f6f461774028ba9e85d30b91550c6a42954bc\",\"dweb:/ipfs/QmPmVqMzTqBWh5Dcfo1U7bmUMGDLCEZPqwmRVukyM8YxcB\"]},\"@chainlink/contracts/src/v0.5/interfaces/AggregatorV3Interface.sol\":{\"keccak256\":\"0x636b9f52b4ef5795c35a189a94e95a8f909ed1f7ef799e0218b71d97b3a780a0\",\"urls\":[\"bzz-raw://5c4813bfde66e6d6790eab4b44cf99b5eefe675f9726af454d8885c5c9959db4\",\"dweb:/ipfs/QmT83dCUn1yJFN9ftoJ9RWmJfsYosNyktuQkjRRfDWGLzp\"]},\"@openzeppelin/contracts-ethereum-package/contracts/GSN/Context.sol\":{\"keccak256\":\"0x3491510fa4862af1a43f6c860d9cf7392240196540cd3c0eea79d374d419c5a1\",\"urls\":[\"bzz-raw://3e51386d74eb723d3acaaddafce1dd0b4082ad4c10ddba6b9fc154aad2930d02\",\"dweb:/ipfs/QmcA8Huap1c7YjdVjx5TGasxKNMLgsa3XyLvQUaMa1nMt8\"]},\"@openzeppelin/contracts-ethereum-package/contracts/access/Roles.sol\":{\"keccak256\":\"0xb002c378d7b82a101bd659c341518953ca0919d342c0a400196982c0e7e7bcdb\",\"urls\":[\"bzz-raw://00a788c4631466c220b385bdd100c571d24b2deccd657615cfbcef6cadf669a4\",\"dweb:/ipfs/QmTEwDbjJNxmMNCDMqtuou3dyM8Wtp8Q9NFvn7SAVM7Jf3\"]},\"@openzeppelin/contracts-ethereum-package/contracts/access/roles/MinterRole.sol\":{\"keccak256\":\"0xdf50b7ae128ae6234bf297a03a7622b3d146734479b26b749052e61ee9dae650\",\"urls\":[\"bzz-raw://93218d23526253d8e8634e5f5be8c21e3c46f12992eae378b202ca22d48564a0\",\"dweb:/ipfs/QmfG4XhTbsxnzCGXgsvxWmuJtU8snNaMEpW9drGde2yY6S\"]},\"@openzeppelin/contracts-ethereum-package/contracts/math/SafeMath.sol\":{\"keccak256\":\"0x640b6dee7a4b830bdfd52b5031a07fc2b12209f5b2e29e5d364a7d37f69d8076\",\"urls\":[\"bzz-raw://31113152e1ddb78fe7a4197f247591ca894e93f916867beb708d8e747b6cc74f\",\"dweb:/ipfs/QmbZaJyXdpsYGykVhHH9qpVGQg9DGCxE2QufbCUy3daTgq\"]},\"@openzeppelin/contracts-ethereum-package/contracts/token/ERC20/ERC20.sol\":{\"keccak256\":\"0x2a474399663812668bb8e9c9e7d011d54fd09de386bd6e9fcb2407a677ebd1aa\",\"urls\":[\"bzz-raw://93754fbe81bcf1f111288152c40987a9fd7cdb43dc72b9f8d7eabb96a4fa9976\",\"dweb:/ipfs/QmNZadpwGrNYB6jndNcAk6dT7f6HHMZBPXdNTa5fKu3HVp\"]},\"@openzeppelin/contracts-ethereum-package/contracts/token/ERC20/ERC20Detailed.sol\":{\"keccak256\":\"0x704e0cb521f0b571096a72266a34d9a2a59a89853b5b271bc97fa307a4cc4dcc\",\"urls\":[\"bzz-raw://96317e95d4c301e54ff42f2b6dede996ac4d714e50a6b5552c68fbb378330dcf\",\"dweb:/ipfs/QmawKJQVK7yXeBhGcvkmujYpo8n7CWQJizDV2dWzsxupnh\"]},\"@openzeppelin/contracts-ethereum-package/contracts/token/ERC20/ERC20Mintable.sol\":{\"keccak256\":\"0x4342dbe1cb06cc0f0ee8929d6ab41ac68e39a1bac3b9c593e205a358ad243aee\",\"urls\":[\"bzz-raw://15a916b9dd4a3597f25381adfd5cf9abf8fbf3dab78ff001f63bc471b1cdb8f7\",\"dweb:/ipfs/QmeALu4iYnRtoPbnt5xcHHNpTqV3rPQg5Xg7rK67KqA3RB\"]},\"@openzeppelin/contracts-ethereum-package/contracts/token/ERC20/IERC20.sol\":{\"keccak256\":\"0xe5bb0f57cff3e299f360052ba50f1ea0fff046df2be070b6943e0e3c3fdad8a9\",\"urls\":[\"bzz-raw://59fd025151435da35faa8093a5c7a17de02de9d08ad27275c5cdf05050820d91\",\"dweb:/ipfs/QmQMvwEcPhoRXzbXyrdoeRtvLoifUW9Qh7Luho7bmUPRkc\"]},\"@openzeppelin/contracts-ethereum-package/contracts/utils/Address.sol\":{\"keccak256\":\"0x1a8e5072509c5ea7365eb1d48030b9be865140c8fb779968da0a459a0e174a11\",\"urls\":[\"bzz-raw://03335b7b07c7c8c8d613cfdd8ec39a0b5ec133ee510bf2fe6cc5a496767bef4b\",\"dweb:/ipfs/Qmebp4nzPja645c9yXSdJkGq96oU3am3LUnG2K3R7XxyKf\"]},\"@openzeppelin/upgrades/contracts/Initializable.sol\":{\"keccak256\":\"0x9bfec92e36234ecc99b5d37230acb6cd1f99560233753162204104a4897e8721\",\"urls\":[\"bzz-raw://5cf7c208583d4d046d75bd99f5507412ab01cce9dd9f802ce9768a416d93ea2f\",\"dweb:/ipfs/QmcQS1BBMPpVEkXP3qzwSjxHNrqDek8YeR7xbVWDC9ApC7\"]}},\"version\":1}",
+  "metadata": "{\"compiler\":{\"version\":\"0.5.17+commit.d19bba13\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"oldInterestValidator\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newInterestValidator\",\"type\":\"address\"}],\"name\":\"InterestValidatorUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"lender\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"InterestWithdrawn\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"tTokenAmount\",\"type\":\"uint256\"}],\"name\":\"TokenDeposited\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"borrower\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"TokenRepaid\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"tTokenAmount\",\"type\":\"uint256\"}],\"name\":\"TokenWithdrawn\",\"type\":\"event\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"lender\",\"type\":\"address\"}],\"name\":\"balanceOfUnderlying\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"cToken\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"borrower\",\"type\":\"address\"}],\"name\":\"createLoan\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"deposit\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[],\"name\":\"exchangeRateCurrent\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"lender\",\"type\":\"address\"}],\"name\":\"getClaimableInterestEarned\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"loanAmount\",\"type\":\"uint256\"}],\"name\":\"getDebtRatioFor\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"lender\",\"type\":\"address\"}],\"name\":\"getLenderInterestEarned\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"getMarketState\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"totalSupplied\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"totalBorrowed\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"totalRepaid\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"totalOnLoan\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"contract IMarketRegistry\",\"name\":\"aMarketRegistry\",\"type\":\"address\"},{\"internalType\":\"contract TToken\",\"name\":\"aTToken\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"settingsAddress\",\"type\":\"address\"}],\"name\":\"initialize\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"lendingToken\",\"outputs\":[{\"internalType\":\"contract ERC20Detailed\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"principalAmount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"interestAmount\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"borrower\",\"type\":\"address\"}],\"name\":\"repay\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"tToken\",\"outputs\":[{\"internalType\":\"contract TToken\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"totalInterestEarned\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"withdraw\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"author\":\"develop@teller.finance\",\"methods\":{\"balanceOfUnderlying(address)\":{\"return\":\"a lender's balance of the underlying token in the pool.\"},\"cToken()\":{\"return\":\"the cToken address.\"},\"createLoan(uint256,address)\":{\"details\":\"This function only can be invoked by the LoansInterface implementation.It throws a require error if current ERC20 balance isn't enough to transfer the tokens.\",\"params\":{\"amount\":\"of tokens to transfer.\",\"borrower\":\"address which will receive the tokens.\"}},\"deposit(uint256)\":{\"details\":\"the user must call ERC20.approve function previously.\",\"params\":{\"amount\":\"of tokens to deposit in the pool.\"}},\"getClaimableInterestEarned(address)\":{\"return\":\"claimable interest value.\"},\"getDebtRatioFor(uint256)\":{\"params\":{\"loanAmount\":\"a new loan amount to consider in the ratio.\"},\"return\":\"the debt-to-supply ratio value.\"},\"getLenderInterestEarned(address)\":{\"details\":\"This value includes already claimed + unclaimed interest earned.\",\"return\":\"total interest earned by lender.\"},\"getMarketState()\":{\"return\":\"values that represent the global state across all markets.\"},\"initialize(address,address,address)\":{\"details\":\"It throws a require error if the contract is already initialized.\",\"params\":{\"aMarketRegistry\":\"the MarketRegistry contract.\",\"aTToken\":\"the Teller token to link to the lending pool.\",\"settingsAddress\":\"Settings contract address.\"}},\"lendingToken()\":{\"return\":\"the ERC20 lending token address.\"},\"repay(uint256,uint256,address)\":{\"details\":\"This function can be called ONLY by the Loans contract.It requires a ERC20.approve call before calling it.It throws a require error if borrower called ERC20.approve function before calling it.\",\"params\":{\"borrower\":\"address that is repaying the loan.\",\"interestAmount\":\"amount of tokens towards the interest.\",\"principalAmount\":\"amount of tokens towards the principal.\"}},\"tToken()\":{\"return\":\"the tToken address.\"},\"totalInterestEarned()\":{\"return\":\"total interest earned from loans.\"},\"withdraw(uint256)\":{\"details\":\"It throws a require error if the contract hasn't enough tokens balance.It throws a require error if the holder hasn't enough tToken balance.\",\"params\":{\"amount\":\"of tokens to withdraw.\"}}}},\"userdoc\":{\"methods\":{\"balanceOfUnderlying(address)\":{\"notice\":\"It returns the balance of underlying tokens a lender owns with the amount of TTokens owned and the current exchange rate.\"},\"cToken()\":{\"notice\":\"It gets the cToken address.\"},\"createLoan(uint256,address)\":{\"notice\":\"Once the loan is created, it transfers the amount of tokens to the borrower.\"},\"deposit(uint256)\":{\"notice\":\"It allows users to deposit tokens into the pool.\"},\"getClaimableInterestEarned(address)\":{\"notice\":\"Returns the amount of claimable interest a lender has earned.\"},\"getDebtRatioFor(uint256)\":{\"notice\":\"It gets the debt-to-supply (DtS) ratio for a given market, including a new loan amount.The formula to calculate DtS ratio (including a new loan amount) is: DtS = (SUM(total borrowed) - SUM(total repaid) + NewLoanAmount) / SUM(total supplied)The value has 2 decimal places. Example: 100 => 1%\"},\"getLenderInterestEarned(address)\":{\"notice\":\"Returns the total amount of interest earned by a lender.\"},\"getMarketState()\":{\"notice\":\"It calculates the market state values across all markets.\"},\"initialize(address,address,address)\":{\"notice\":\"It initializes the contract state variables.\"},\"lendingToken()\":{\"notice\":\"It gets the lending token address.\"},\"repay(uint256,uint256,address)\":{\"notice\":\"It allows a borrower repaying their loan.\"},\"tToken()\":{\"notice\":\"It gets the tToken address.\"},\"totalInterestEarned()\":{\"notice\":\"Returns the total amount of interest the pool has earned from repaying loans.\"},\"withdraw(uint256)\":{\"notice\":\"It allows any tToken holder to burn their tToken tokens and withdraw their tokens.\"}},\"notice\":\"This interface defines the functions for a lending pool that holds all of the tokens that lenders transfer into the protocol.\"}},\"settings\":{\"compilationTarget\":{\"/home/jeremig/Documents/Teller/dojo/teller-protocol-v1/contracts/interfaces/LendingPoolInterface.sol\":\"LendingPoolInterface\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/jeremig/Documents/Teller/dojo/teller-protocol-v1/contracts/base/BaseUpgradeable.sol\":{\"keccak256\":\"0xa6063f679f0bb7ace21a083a7784a3c676c3fad2f4428ef70b75cbd563520edd\",\"urls\":[\"bzz-raw://70e25936f772bd22a2fb1ef01e8ac6143c5c30ef336f8a501d3c8cb55da98c43\",\"dweb:/ipfs/QmQwfKwmrda4iPsbD6iLcq8UM2bNwgAGv21M8JSX5tQ6Da\"]},\"/home/jeremig/Documents/Teller/dojo/teller-protocol-v1/contracts/base/TToken.sol\":{\"keccak256\":\"0x383aca1ee1f1431b8583243bfaa979b7993aeb463e31ca4c8fb03cdeba4d1a3b\",\"urls\":[\"bzz-raw://fc2269440f57e20546dbf5706ad0b9e6298494cacdf1541fdaa1827c0f7b47c0\",\"dweb:/ipfs/QmSqpLwb8pEp99zi4di83SNJzr4t47Wa7oJhGNdEUoMCHq\"]},\"/home/jeremig/Documents/Teller/dojo/teller-protocol-v1/contracts/interfaces/AssetSettingsInterface.sol\":{\"keccak256\":\"0x60079e5d9b1f2ef9cfd3c041a4b8f72009d209a010afad1613dbfc9a19ad3708\",\"urls\":[\"bzz-raw://626a36df5d72a7b3610265045a90bc10d0336932bc46272448ae14ced4b5e426\",\"dweb:/ipfs/QmTN8jX2VjENdEhxfYZrpvBPP7LMUgdzZhLUsDfXrGtg4x\"]},\"/home/jeremig/Documents/Teller/dojo/teller-protocol-v1/contracts/interfaces/EscrowFactoryInterface.sol\":{\"keccak256\":\"0x65b252d2e93c0fe47ba456e93bd6a9a24db46028b7312631597a7d36c2fc56ef\",\"urls\":[\"bzz-raw://b94bcfe3673d458956bd83e347fee518abff7195212125a39edbbe7975ccbe70\",\"dweb:/ipfs/QmYeHCxNJ4GMchBL2RQ6NsVjbRtRCdkNq9ZHe3dJxyR4DW\"]},\"/home/jeremig/Documents/Teller/dojo/teller-protocol-v1/contracts/interfaces/IBaseUpgradeable.sol\":{\"keccak256\":\"0xede43efe3ee18011d12e627b72deefa11ed2495146c25de9614e9f665deccb50\",\"urls\":[\"bzz-raw://ee2b24a4bb55c300a7a33a85f657c57c646f3f495ec6ad95b25552f0b5c761df\",\"dweb:/ipfs/QmQFfvTwQTRBqs2sX8q8sCZi5qBEEUP95LZR4phybzoqfB\"]},\"/home/jeremig/Documents/Teller/dojo/teller-protocol-v1/contracts/interfaces/IMarketRegistry.sol\":{\"keccak256\":\"0x0be46633fa37f4bdd154145b382f6dd1aa96dbda29d20fc5c44d915f88c57c55\",\"urls\":[\"bzz-raw://33db4899c5d6bb3a2734a3eb40679e985df2dc55a4c3dfbe294ea5b6f1e7da50\",\"dweb:/ipfs/QmWaZztMPN1mnoERvNmbrBf67uGSRYcR6dFGLT8Z3PTYag\"]},\"/home/jeremig/Documents/Teller/dojo/teller-protocol-v1/contracts/interfaces/InterestValidatorInterface.sol\":{\"keccak256\":\"0x9f968a4bf850ebfbf27a1d8da07a5af7a9d6db1283a3327622e2b9cec6986d48\",\"urls\":[\"bzz-raw://f54596a0f5c08d22d47e3628e7cb3a3ab9c1dbd3392bdc0fa3d498d01b0815f3\",\"dweb:/ipfs/QmTSdwf5S5VgD3cFWLajY9sK7MdhSmusu9VJFDcTDkznPb\"]},\"/home/jeremig/Documents/Teller/dojo/teller-protocol-v1/contracts/interfaces/LendingPoolInterface.sol\":{\"keccak256\":\"0x6c665438dd9ad5ca73efbfa1a3cb875ed96802d127d265dd6acf345956f810c5\",\"urls\":[\"bzz-raw://c54b1a47e3b3215f89679d264c7c8125c8c90b31e1592cb6c02fb676515bd687\",\"dweb:/ipfs/QmQdhZcRx6Z46N1LJ6Vv2YwLQiBm3B7yQx8TiA2LoaeetX\"]},\"/home/jeremig/Documents/Teller/dojo/teller-protocol-v1/contracts/interfaces/LoansInterface.sol\":{\"keccak256\":\"0x98edbbb7c1c937f925a2dfce75d8b00260c9b6b77d78272f84fae3aab8ff0f9d\",\"urls\":[\"bzz-raw://4aa62cd03c860b9aa31fada3d68b0533ba3e5a8632fcd8088f6a2f756c08945f\",\"dweb:/ipfs/Qmb173SFRqFyv49yjenHPT5dFmHgCi7reLZh9f1RzqeGZy\"]},\"/home/jeremig/Documents/Teller/dojo/teller-protocol-v1/contracts/interfaces/LogicVersionsRegistryInterface.sol\":{\"keccak256\":\"0x09bd2761f299e58f03abba7ff908cb2d02ca5b3947cc4ab1be6b5598a41533ca\",\"urls\":[\"bzz-raw://712fe4975c46421f4d29a7a34ecc783fe3d2963bd4d1608be8c13ff143b2e6a1\",\"dweb:/ipfs/QmUqQPSTUaxULzPWh9aBGCPPRFFvCKnz2ThEKqxeGdnnmX\"]},\"/home/jeremig/Documents/Teller/dojo/teller-protocol-v1/contracts/interfaces/SettingsInterface.sol\":{\"keccak256\":\"0x35169d535f127d48189b8ee0db993d47a2beab6a2493135e05b3c5e4a1df8860\",\"urls\":[\"bzz-raw://6beb369cb6404da0919bb898831588cbf1d283279b95835e1a0fadf2b601e2ab\",\"dweb:/ipfs/QmcW33UPxKWdHbs9sUVqYkTpRcFzMkyy7UgVQXLui72VqC\"]},\"/home/jeremig/Documents/Teller/dojo/teller-protocol-v1/contracts/providers/chainlink/IChainlinkAggregator.sol\":{\"keccak256\":\"0x162b32975e272aa1d86e9a36135d7da30a2dde633ac286e2ca54e6f734c083ea\",\"urls\":[\"bzz-raw://5df615261bc912ecf55210d58bff6122194b243236938d4f489e9053ab648c3e\",\"dweb:/ipfs/QmRokEM614TJUk1pDCo9uEd9CUSANHC73yx3RNZNmiNtDY\"]},\"/home/jeremig/Documents/Teller/dojo/teller-protocol-v1/contracts/settings/IATMSettings.sol\":{\"keccak256\":\"0x3298d82a77b05c01c04d4759893e04128e3636ca94c548de1e774622cb0f1d89\",\"urls\":[\"bzz-raw://4a2d185d34a96269514a74d0f42d30ddc71020b90f3847c5a9bb31fbff87ec62\",\"dweb:/ipfs/QmQUSmaZzku7BDbEvEEtp2hmk8QtMZCHz457nNuKNW2FFv\"]},\"/home/jeremig/Documents/Teller/dojo/teller-protocol-v1/contracts/util/AddressArrayLib.sol\":{\"keccak256\":\"0xe28b4cca4292c36b193d8596960510bda9e1789bffa9f5c57b28f323c2552b4f\",\"urls\":[\"bzz-raw://e25116dc3e5176a928e550fb34ffc1ecf710efc1c385a65b1989d55d0b63d427\",\"dweb:/ipfs/QmRcKvxZMTEWne9ZHNHviszigz1SxzWFsgtJGFifPEtECj\"]},\"/home/jeremig/Documents/Teller/dojo/teller-protocol-v1/contracts/util/AddressLib.sol\":{\"keccak256\":\"0xb6311a4caaab2cc3f783d476a1432e436d12b4ea45be92809b1adbeafc4d31c1\",\"urls\":[\"bzz-raw://643716fbfdf17e6936c46ee04c0355c27b1c052bee89918e97cfa78b8eb81d68\",\"dweb:/ipfs/QmSXTEHePHXfhk38F2Y4JP4Rr9ichFiSuDCpTL5PJ1v5pC\"]},\"/home/jeremig/Documents/Teller/dojo/teller-protocol-v1/contracts/util/CacheLib.sol\":{\"keccak256\":\"0xa43ff6d740577dfeae4972671c9a60cdf9607d6e81cadc585955debe1ca38dd7\",\"urls\":[\"bzz-raw://ad94cfc3259b2e18be2d6faefd109a306394f94ec85c181995a8a547a4555a9e\",\"dweb:/ipfs/QmYBPyNaRohQXZzM9uixEV1oBrQrhFTTi5HpWPS7udZNh6\"]},\"/home/jeremig/Documents/Teller/dojo/teller-protocol-v1/contracts/util/LogicVersionLib.sol\":{\"keccak256\":\"0x0fb35b6b314b9fc7f4b9ed0c10f0b2a71e67c34157209cda1ebfc6c174ad3813\",\"urls\":[\"bzz-raw://e7031377ba277b419377f7aa4588c5250583bd3812d8056f60bce059b4fbfd6c\",\"dweb:/ipfs/QmWCoGshJUK75gPbGSzhx5bVHJgKLqngSwLDA5sD5TgHwq\"]},\"/home/jeremig/Documents/Teller/dojo/teller-protocol-v1/contracts/util/LogicVersionsConsts.sol\":{\"keccak256\":\"0x45711c23615ebfcbc5e5140096cdda6f2155cefa961c71801456ac22302e88c9\",\"urls\":[\"bzz-raw://29b9546e58aef1416a28b387d1d4b14e351f9a34bb5fdf8c22d0bfcb1c74ccf5\",\"dweb:/ipfs/QmSh8TU8BWnJwk8MgaDUxGjKaA3Dsqef4ztQMrHcsuXzUh\"]},\"/home/jeremig/Documents/Teller/dojo/teller-protocol-v1/contracts/util/NumbersLib.sol\":{\"keccak256\":\"0xaa858071cda31070104f3ad479213c5fa4d898568823c98b18de60cb1c097c21\",\"urls\":[\"bzz-raw://1d1c87d6a3022d35f30153b4398051756842395ab9d48f1caeb2b1f2ef16937d\",\"dweb:/ipfs/QmNPMUw2fQTyD2Xad4WqoGfndMWw1giUUUw3xcBTgGpY4b\"]},\"/home/jeremig/Documents/Teller/dojo/teller-protocol-v1/contracts/util/NumbersList.sol\":{\"keccak256\":\"0x9848b264416dbafb5cca7ed93205956ccc1f0690dce1bc27a2dbfd8fa55fb13d\",\"urls\":[\"bzz-raw://85b5f94a3d3f627025e07901114c332e34e0e396caf409059461ab34e0fc1c45\",\"dweb:/ipfs/QmUqS1ZAzyRamvpjZNuaepqprnQFdWch7Ug6xXrgXDfz6v\"]},\"/home/jeremig/Documents/Teller/dojo/teller-protocol-v1/contracts/util/PlatformSettingsLib.sol\":{\"keccak256\":\"0x0a63860141bab4588a5cd4af606b9a27ddd29aa7554029cb8b89b703d444f28b\",\"urls\":[\"bzz-raw://26c98caa3604ff8fca7ad11716bdec73ffc17195a74dac4ef61c6e2373edecda\",\"dweb:/ipfs/QmcxyVdVmQfXWpc6MJXauquD8hT5XVVcVLCfUouHUrXf98\"]},\"/home/jeremig/Documents/Teller/dojo/teller-protocol-v1/contracts/util/SettingsConsts.sol\":{\"keccak256\":\"0x20ab9e90a20d34b38bb199555819461f36fb5b17baa41a9810f50e4cf3872f27\",\"urls\":[\"bzz-raw://a4e88fa632a430a52d867fa38c0455d2583d4f4ffee04d68646c6da811375970\",\"dweb:/ipfs/QmR627guCZS3dsjcYyFBB2U4HcVdEq1kGKpkA5P5czK9b8\"]},\"/home/jeremig/Documents/Teller/dojo/teller-protocol-v1/contracts/util/TellerCommon.sol\":{\"keccak256\":\"0x10f0ea3fa316f244d8cf397a42e9a8194399f8e6396836194ccc10a1616b59fd\",\"urls\":[\"bzz-raw://8e29019d71d09a8c65deb14705387af536f4472c5ae6e877ab0e634af5f0a99a\",\"dweb:/ipfs/Qmb5kpCYFpDyqog2zo8G3opYaJ68KNKBr8n3hRqe7ULAtY\"]},\"@chainlink/contracts/src/v0.5/interfaces/AggregatorInterface.sol\":{\"keccak256\":\"0x64fa8b255860b1cf2661a2d87ca287c21479edf18673ca694a770b6498e2de39\",\"urls\":[\"bzz-raw://ee19cc8583ee342d285c32a74bdc6050ac3fda11530a20fddadc8b1e9cc8f9be\",\"dweb:/ipfs/QmYRwA8umXm2gBbeWDVXWA1ADVFJu2eVn1xofkCGJrkxkz\"]},\"@chainlink/contracts/src/v0.5/interfaces/AggregatorV2V3Interface.sol\":{\"keccak256\":\"0xacc87fdd0c5891084d0a2d801bb968d864f6bebacad14767a399b5b0ad3511f3\",\"urls\":[\"bzz-raw://d7eab097c04947df94daf86e2a5f6f461774028ba9e85d30b91550c6a42954bc\",\"dweb:/ipfs/QmPmVqMzTqBWh5Dcfo1U7bmUMGDLCEZPqwmRVukyM8YxcB\"]},\"@chainlink/contracts/src/v0.5/interfaces/AggregatorV3Interface.sol\":{\"keccak256\":\"0x636b9f52b4ef5795c35a189a94e95a8f909ed1f7ef799e0218b71d97b3a780a0\",\"urls\":[\"bzz-raw://5c4813bfde66e6d6790eab4b44cf99b5eefe675f9726af454d8885c5c9959db4\",\"dweb:/ipfs/QmT83dCUn1yJFN9ftoJ9RWmJfsYosNyktuQkjRRfDWGLzp\"]},\"@openzeppelin/contracts-ethereum-package/contracts/GSN/Context.sol\":{\"keccak256\":\"0x3491510fa4862af1a43f6c860d9cf7392240196540cd3c0eea79d374d419c5a1\",\"urls\":[\"bzz-raw://3e51386d74eb723d3acaaddafce1dd0b4082ad4c10ddba6b9fc154aad2930d02\",\"dweb:/ipfs/QmcA8Huap1c7YjdVjx5TGasxKNMLgsa3XyLvQUaMa1nMt8\"]},\"@openzeppelin/contracts-ethereum-package/contracts/access/Roles.sol\":{\"keccak256\":\"0xb002c378d7b82a101bd659c341518953ca0919d342c0a400196982c0e7e7bcdb\",\"urls\":[\"bzz-raw://00a788c4631466c220b385bdd100c571d24b2deccd657615cfbcef6cadf669a4\",\"dweb:/ipfs/QmTEwDbjJNxmMNCDMqtuou3dyM8Wtp8Q9NFvn7SAVM7Jf3\"]},\"@openzeppelin/contracts-ethereum-package/contracts/access/roles/MinterRole.sol\":{\"keccak256\":\"0xdf50b7ae128ae6234bf297a03a7622b3d146734479b26b749052e61ee9dae650\",\"urls\":[\"bzz-raw://93218d23526253d8e8634e5f5be8c21e3c46f12992eae378b202ca22d48564a0\",\"dweb:/ipfs/QmfG4XhTbsxnzCGXgsvxWmuJtU8snNaMEpW9drGde2yY6S\"]},\"@openzeppelin/contracts-ethereum-package/contracts/math/SafeMath.sol\":{\"keccak256\":\"0x640b6dee7a4b830bdfd52b5031a07fc2b12209f5b2e29e5d364a7d37f69d8076\",\"urls\":[\"bzz-raw://31113152e1ddb78fe7a4197f247591ca894e93f916867beb708d8e747b6cc74f\",\"dweb:/ipfs/QmbZaJyXdpsYGykVhHH9qpVGQg9DGCxE2QufbCUy3daTgq\"]},\"@openzeppelin/contracts-ethereum-package/contracts/token/ERC20/ERC20.sol\":{\"keccak256\":\"0x2a474399663812668bb8e9c9e7d011d54fd09de386bd6e9fcb2407a677ebd1aa\",\"urls\":[\"bzz-raw://93754fbe81bcf1f111288152c40987a9fd7cdb43dc72b9f8d7eabb96a4fa9976\",\"dweb:/ipfs/QmNZadpwGrNYB6jndNcAk6dT7f6HHMZBPXdNTa5fKu3HVp\"]},\"@openzeppelin/contracts-ethereum-package/contracts/token/ERC20/ERC20Detailed.sol\":{\"keccak256\":\"0x704e0cb521f0b571096a72266a34d9a2a59a89853b5b271bc97fa307a4cc4dcc\",\"urls\":[\"bzz-raw://96317e95d4c301e54ff42f2b6dede996ac4d714e50a6b5552c68fbb378330dcf\",\"dweb:/ipfs/QmawKJQVK7yXeBhGcvkmujYpo8n7CWQJizDV2dWzsxupnh\"]},\"@openzeppelin/contracts-ethereum-package/contracts/token/ERC20/ERC20Mintable.sol\":{\"keccak256\":\"0x4342dbe1cb06cc0f0ee8929d6ab41ac68e39a1bac3b9c593e205a358ad243aee\",\"urls\":[\"bzz-raw://15a916b9dd4a3597f25381adfd5cf9abf8fbf3dab78ff001f63bc471b1cdb8f7\",\"dweb:/ipfs/QmeALu4iYnRtoPbnt5xcHHNpTqV3rPQg5Xg7rK67KqA3RB\"]},\"@openzeppelin/contracts-ethereum-package/contracts/token/ERC20/IERC20.sol\":{\"keccak256\":\"0xe5bb0f57cff3e299f360052ba50f1ea0fff046df2be070b6943e0e3c3fdad8a9\",\"urls\":[\"bzz-raw://59fd025151435da35faa8093a5c7a17de02de9d08ad27275c5cdf05050820d91\",\"dweb:/ipfs/QmQMvwEcPhoRXzbXyrdoeRtvLoifUW9Qh7Luho7bmUPRkc\"]},\"@openzeppelin/contracts-ethereum-package/contracts/utils/Address.sol\":{\"keccak256\":\"0x1a8e5072509c5ea7365eb1d48030b9be865140c8fb779968da0a459a0e174a11\",\"urls\":[\"bzz-raw://03335b7b07c7c8c8d613cfdd8ec39a0b5ec133ee510bf2fe6cc5a496767bef4b\",\"dweb:/ipfs/Qmebp4nzPja645c9yXSdJkGq96oU3am3LUnG2K3R7XxyKf\"]},\"@openzeppelin/upgrades/contracts/Initializable.sol\":{\"keccak256\":\"0x9bfec92e36234ecc99b5d37230acb6cd1f99560233753162204104a4897e8721\",\"urls\":[\"bzz-raw://5cf7c208583d4d046d75bd99f5507412ab01cce9dd9f802ce9768a416d93ea2f\",\"dweb:/ipfs/QmcQS1BBMPpVEkXP3qzwSjxHNrqDek8YeR7xbVWDC9ApC7\"]}},\"version\":1}",
   "bytecode": "0x",
   "deployedBytecode": "0x",
   "sourceMap": "",
   "deployedSourceMap": "",
-  "source": "pragma solidity 0.5.17;\npragma experimental ABIEncoderV2;\n\n// Utils\nimport \"@openzeppelin/contracts-ethereum-package/contracts/token/ERC20/ERC20Detailed.sol\";\n\n// Interfaces\nimport \"./IMarketRegistry.sol\";\n\n// Contracts\nimport \"../base/TToken.sol\";\n\n/**\n    @notice This interface defines the functions for a lending pool that holds all of the tokens\n    that lenders transfer into the protocol.\n\n    @author develop@teller.finance\n */\ninterface LendingPoolInterface {\n    /**\n        @notice It allows users to deposit tokens into the pool.\n        @dev the user must call ERC20.approve function previously.\n        @param amount of tokens to deposit in the pool.\n    */\n    function deposit(uint256 amount) external;\n\n    /**\n        @notice It allows any tToken holder to burn their tToken tokens and withdraw their tokens.\n        @param amount of tokens to withdraw.\n        @dev It throws a require error if the contract hasn't enough tokens balance.\n        @dev It throws a require error if the holder hasn't enough tToken balance.\n     */\n    function withdraw(uint256 amount) external;\n\n    /**\n        @notice It allows a borrower repaying their loan.\n        @dev This function can be called ONLY by the Loans contract.\n        @dev It requires a ERC20.approve call before calling it.\n        @dev It throws a require error if borrower called ERC20.approve function before calling it.\n        @param principalAmount amount of tokens towards the principal.\n        @param interestAmount amount of tokens towards the interest.\n        @param borrower address that is repaying the loan.\n     */\n    function repay(\n        uint256 principalAmount,\n        uint256 interestAmount,\n        address borrower\n    ) external;\n\n    /**\n        @notice Once the loan is created, it transfers the amount of tokens to the borrower.\n        @param amount of tokens to transfer.\n        @param borrower address which will receive the tokens.\n        @dev This function only can be invoked by the LoansInterface implementation.\n        @dev It throws a require error if current ERC20 balance isn't enough to transfer the tokens.\n     */\n    function createLoan(uint256 amount, address borrower) external;\n\n    /**\n        @notice It gets the lending token address.\n        @return the ERC20 lending token address.\n    */\n    function lendingToken() external view returns (ERC20Detailed);\n\n    /**\n        @notice It initializes the contract state variables.\n        @param aMarketRegistry the MarketRegistry contract.\n        @param aTToken the Teller token to link to the lending pool.\n        @param settingsAddress Settings contract address.\n        @dev It throws a require error if the contract is already initialized.\n     */\n    function initialize(\n        IMarketRegistry aMarketRegistry,\n        TToken aTToken,\n        address settingsAddress\n    ) external;\n\n    /**\n        @notice It gets the cToken address.\n        @return the cToken address.\n    */\n    function cToken() external view returns (address);\n\n    /**\n        @notice It gets the tToken address.\n        @return the tToken address.\n    */\n    function tToken() external view returns (TToken);\n\n    /**\n        @notice It returns the balance of underlying tokens a lender owns with the amount\n        of TTokens owned and the current exchange rate.\n        @return a lender's balance of the underlying token in the pool.\n     */\n    function balanceOfUnderlying(address lender) external view returns (uint256);\n\n    /**\n        @notice Returns the total amount of interest earned by a lender.\n        @dev This value includes already claimed + unclaimed interest earned.\n        @return total interest earned by lender.\n     */\n    function getLenderInterestEarned(address lender) external view returns (uint256);\n\n    /**\n        @notice Returns the amount of claimable interest a lender has earned.\n        @return claimable interest value.\n     */\n    function getClaimableInterestEarned(address lender) external view returns (uint256);\n\n    /**\n        @notice Returns the total amount of interest the pool has earned from repaying loans.\n        @return total interest earned from loans.\n     */\n    function totalInterestEarned() external view returns (uint256);\n\n    /**\n        @notice It calculates the market state values across all markets.\n        @return values that represent the global state across all markets.\n     */\n    function getMarketState()\n        external\n        view\n        returns (\n            uint256 totalSupplied,\n            uint256 totalBorrowed,\n            uint256 totalRepaid,\n            uint256 totalOnLoan\n        );\n\n    /**\n        @notice It gets the debt-to-supply (DtS) ratio for a given market, including a new loan amount.\n        @notice The formula to calculate DtS ratio (including a new loan amount) is:\n\n            DtS = (SUM(total borrowed) - SUM(total repaid) + NewLoanAmount) / SUM(total supplied)\n\n        @notice The value has 2 decimal places.\n            Example:\n                100 => 1%\n        @param loanAmount a new loan amount to consider in the ratio.\n        @return the debt-to-supply ratio value.\n     */\n    function getDebtRatioFor(uint256 loanAmount) external view returns (uint256);\n\n    /**\n        @notice This event is emitted when an user deposits tokens into the pool.\n        @param sender address.\n        @param amount of tokens.\n     */\n    event TokenDeposited(address indexed sender, uint256 amount, uint256 tTokenAmount);\n\n    /**\n        @notice This event is emitted when an user withdraws tokens from the pool.\n        @param sender address that withdrew the tokens.\n        @param amount of tokens.\n     */\n    event TokenWithdrawn(address indexed sender, uint256 amount, uint256 tTokenAmount);\n\n    /**\n        @notice This event is emitted when an borrower repaid a loan.\n        @param borrower address.\n        @param amount of tokens.\n     */\n    event TokenRepaid(address indexed borrower, uint256 amount);\n\n    /**\n        @notice This event is emitted when an lender withdraws interests.\n        @param lender address.\n        @param amount of tokens.\n     */\n    event InterestWithdrawn(address indexed lender, uint256 amount);\n\n    /**\n        @notice This event is emitted when the interest validator is updated.\n        @param sender account that sends the transaction.\n        @param oldInterestValidator the old validator address.\n        @param newInterestValidator the new validator address.\n     */\n    event InterestValidatorUpdated(\n        address indexed sender,\n        address indexed oldInterestValidator,\n        address indexed newInterestValidator\n    );\n}\n",
+  "source": "pragma solidity 0.5.17;\npragma experimental ABIEncoderV2;\n\n// Utils\nimport \"@openzeppelin/contracts-ethereum-package/contracts/token/ERC20/ERC20Detailed.sol\";\n\n// Interfaces\nimport \"./IMarketRegistry.sol\";\n\n// Contracts\nimport \"../base/TToken.sol\";\n\n/**\n    @notice This interface defines the functions for a lending pool that holds all of the tokens\n    that lenders transfer into the protocol.\n\n    @author develop@teller.finance\n */\ninterface LendingPoolInterface {\n    /**\n        @notice It allows users to deposit tokens into the pool.\n        @dev the user must call ERC20.approve function previously.\n        @param amount of tokens to deposit in the pool.\n    */\n    function deposit(uint256 amount) external;\n\n    /**\n        @notice It allows any tToken holder to burn their tToken tokens and withdraw their tokens.\n        @param amount of tokens to withdraw.\n        @dev It throws a require error if the contract hasn't enough tokens balance.\n        @dev It throws a require error if the holder hasn't enough tToken balance.\n     */\n    function withdraw(uint256 amount) external;\n\n    /**\n        @notice It allows a borrower repaying their loan.\n        @dev This function can be called ONLY by the Loans contract.\n        @dev It requires a ERC20.approve call before calling it.\n        @dev It throws a require error if borrower called ERC20.approve function before calling it.\n        @param principalAmount amount of tokens towards the principal.\n        @param interestAmount amount of tokens towards the interest.\n        @param borrower address that is repaying the loan.\n     */\n    function repay(\n        uint256 principalAmount,\n        uint256 interestAmount,\n        address borrower\n    ) external;\n\n    /**\n        @notice Once the loan is created, it transfers the amount of tokens to the borrower.\n        @param amount of tokens to transfer.\n        @param borrower address which will receive the tokens.\n        @dev This function only can be invoked by the LoansInterface implementation.\n        @dev It throws a require error if current ERC20 balance isn't enough to transfer the tokens.\n     */\n    function createLoan(uint256 amount, address borrower) external;\n\n    /**\n        @notice It gets the lending token address.\n        @return the ERC20 lending token address.\n    */\n    function lendingToken() external view returns (ERC20Detailed);\n\n    /**\n        @notice It initializes the contract state variables.\n        @param aMarketRegistry the MarketRegistry contract.\n        @param aTToken the Teller token to link to the lending pool.\n        @param settingsAddress Settings contract address.\n        @dev It throws a require error if the contract is already initialized.\n     */\n    function initialize(\n        IMarketRegistry aMarketRegistry,\n        TToken aTToken,\n        address settingsAddress\n    ) external;\n\n    /**\n        @notice It gets the cToken address.\n        @return the cToken address.\n    */\n    function cToken() external view returns (address);\n\n    /**\n        @notice It gets the tToken address.\n        @return the tToken address.\n    */\n    function tToken() external view returns (TToken);\n\n    function exchangeRateCurrent() external returns (uint256);\n\n    /**\n        @notice It returns the balance of underlying tokens a lender owns with the amount\n        of TTokens owned and the current exchange rate.\n        @return a lender's balance of the underlying token in the pool.\n     */\n    function balanceOfUnderlying(address lender) external returns (uint256);\n\n    /**\n        @notice Returns the total amount of interest earned by a lender.\n        @dev This value includes already claimed + unclaimed interest earned.\n        @return total interest earned by lender.\n     */\n    function getLenderInterestEarned(address lender) external returns (uint256);\n\n    /**\n        @notice Returns the amount of claimable interest a lender has earned.\n        @return claimable interest value.\n     */\n    function getClaimableInterestEarned(address lender) external returns (uint256);\n\n    /**\n        @notice Returns the total amount of interest the pool has earned from repaying loans.\n        @return total interest earned from loans.\n     */\n    function totalInterestEarned() external view returns (uint256);\n\n    /**\n        @notice It calculates the market state values across all markets.\n        @return values that represent the global state across all markets.\n     */\n    function getMarketState()\n        external\n        view\n        returns (\n            uint256 totalSupplied,\n            uint256 totalBorrowed,\n            uint256 totalRepaid,\n            uint256 totalOnLoan\n        );\n\n    /**\n        @notice It gets the debt-to-supply (DtS) ratio for a given market, including a new loan amount.\n        @notice The formula to calculate DtS ratio (including a new loan amount) is:\n\n            DtS = (SUM(total borrowed) - SUM(total repaid) + NewLoanAmount) / SUM(total supplied)\n\n        @notice The value has 2 decimal places.\n            Example:\n                100 => 1%\n        @param loanAmount a new loan amount to consider in the ratio.\n        @return the debt-to-supply ratio value.\n     */\n    function getDebtRatioFor(uint256 loanAmount) external view returns (uint256);\n\n    /**\n        @notice This event is emitted when an user deposits tokens into the pool.\n        @param sender address.\n        @param amount of tokens.\n     */\n    event TokenDeposited(address indexed sender, uint256 amount, uint256 tTokenAmount);\n\n    /**\n        @notice This event is emitted when an user withdraws tokens from the pool.\n        @param sender address that withdrew the tokens.\n        @param amount of tokens.\n     */\n    event TokenWithdrawn(address indexed sender, uint256 amount, uint256 tTokenAmount);\n\n    /**\n        @notice This event is emitted when an borrower repaid a loan.\n        @param borrower address.\n        @param amount of tokens.\n     */\n    event TokenRepaid(address indexed borrower, uint256 amount);\n\n    /**\n        @notice This event is emitted when an lender withdraws interests.\n        @param lender address.\n        @param amount of tokens.\n     */\n    event InterestWithdrawn(address indexed lender, uint256 amount);\n\n    /**\n        @notice This event is emitted when the interest validator is updated.\n        @param sender account that sends the transaction.\n        @param oldInterestValidator the old validator address.\n        @param newInterestValidator the new validator address.\n     */\n    event InterestValidatorUpdated(\n        address indexed sender,\n        address indexed oldInterestValidator,\n        address indexed newInterestValidator\n    );\n}\n",
   "sourcePath": "/home/jeremig/Documents/Teller/dojo/teller-protocol-v1/contracts/interfaces/LendingPoolInterface.sol",
   "ast": {
     "absolutePath": "/home/jeremig/Documents/Teller/dojo/teller-protocol-v1/contracts/interfaces/LendingPoolInterface.sol",
     "exportedSymbols": {
       "LendingPoolInterface": [
-        11578
+        11679
       ]
     },
-    "id": 11579,
+    "id": 11680,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 11443,
+        "id": 11539,
         "literals": [
           "solidity",
           "0.5",
@@ -417,7 +432,7 @@
         "src": "0:23:45"
       },
       {
-        "id": 11444,
+        "id": 11540,
         "literals": [
           "experimental",
           "ABIEncoderV2"
@@ -428,10 +443,10 @@
       {
         "absolutePath": "@openzeppelin/contracts-ethereum-package/contracts/token/ERC20/ERC20Detailed.sol",
         "file": "@openzeppelin/contracts-ethereum-package/contracts/token/ERC20/ERC20Detailed.sol",
-        "id": 11445,
+        "id": 11541,
         "nodeType": "ImportDirective",
-        "scope": 11579,
-        "sourceUnit": 23103,
+        "scope": 11680,
+        "sourceUnit": 23204,
         "src": "68:90:45",
         "symbolAliases": [],
         "unitAlias": ""
@@ -439,10 +454,10 @@
       {
         "absolutePath": "/home/jeremig/Documents/Teller/dojo/teller-protocol-v1/contracts/interfaces/IMarketRegistry.sol",
         "file": "./IMarketRegistry.sol",
-        "id": 11446,
+        "id": 11542,
         "nodeType": "ImportDirective",
-        "scope": 11579,
-        "sourceUnit": 11426,
+        "scope": 11680,
+        "sourceUnit": 11522,
         "src": "174:31:45",
         "symbolAliases": [],
         "unitAlias": ""
@@ -450,10 +465,10 @@
       {
         "absolutePath": "/home/jeremig/Documents/Teller/dojo/teller-protocol-v1/contracts/base/TToken.sol",
         "file": "../base/TToken.sol",
-        "id": 11447,
+        "id": 11543,
         "nodeType": "ImportDirective",
-        "scope": 11579,
-        "sourceUnit": 10356,
+        "scope": 11680,
+        "sourceUnit": 10452,
         "src": "220:28:45",
         "symbolAliases": [],
         "unitAlias": ""
@@ -464,9 +479,9 @@
         "contractKind": "interface",
         "documentation": "@notice This interface defines the functions for a lending pool that holds all of the tokens\nthat lenders transfer into the protocol.\n@author develop@teller.finance",
         "fullyImplemented": false,
-        "id": 11578,
+        "id": 11679,
         "linearizedBaseContracts": [
-          11578
+          11679
         ],
         "name": "LendingPoolInterface",
         "nodeType": "ContractDefinition",
@@ -474,22 +489,22 @@
           {
             "body": null,
             "documentation": "@notice It allows users to deposit tokens into the pool.\n@dev the user must call ERC20.approve function previously.\n@param amount of tokens to deposit in the pool.",
-            "id": 11452,
+            "id": 11548,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "deposit",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 11450,
+              "id": 11546,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11449,
+                  "id": 11545,
                   "name": "amount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11452,
+                  "scope": 11548,
                   "src": "693:14:45",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -498,7 +513,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11448,
+                    "id": 11544,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "693:7:45",
@@ -514,12 +529,12 @@
               "src": "692:16:45"
             },
             "returnParameters": {
-              "id": 11451,
+              "id": 11547,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "717:0:45"
             },
-            "scope": 11578,
+            "scope": 11679,
             "src": "676:42:45",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -528,22 +543,22 @@
           {
             "body": null,
             "documentation": "@notice It allows any tToken holder to burn their tToken tokens and withdraw their tokens.\n@param amount of tokens to withdraw.\n@dev It throws a require error if the contract hasn't enough tokens balance.\n@dev It throws a require error if the holder hasn't enough tToken balance.",
-            "id": 11457,
+            "id": 11553,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "withdraw",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 11455,
+              "id": 11551,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11454,
+                  "id": 11550,
                   "name": "amount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11457,
+                  "scope": 11553,
                   "src": "1070:14:45",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -552,7 +567,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11453,
+                    "id": 11549,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1070:7:45",
@@ -568,12 +583,12 @@
               "src": "1069:16:45"
             },
             "returnParameters": {
-              "id": 11456,
+              "id": 11552,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1094:0:45"
             },
-            "scope": 11578,
+            "scope": 11679,
             "src": "1052:43:45",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -582,22 +597,22 @@
           {
             "body": null,
             "documentation": "@notice It allows a borrower repaying their loan.\n@dev This function can be called ONLY by the Loans contract.\n@dev It requires a ERC20.approve call before calling it.\n@dev It throws a require error if borrower called ERC20.approve function before calling it.\n@param principalAmount amount of tokens towards the principal.\n@param interestAmount amount of tokens towards the interest.\n@param borrower address that is repaying the loan.",
-            "id": 11466,
+            "id": 11562,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "repay",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 11464,
+              "id": 11560,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11459,
+                  "id": 11555,
                   "name": "principalAmount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11466,
+                  "scope": 11562,
                   "src": "1632:23:45",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -606,7 +621,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11458,
+                    "id": 11554,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1632:7:45",
@@ -620,10 +635,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 11461,
+                  "id": 11557,
                   "name": "interestAmount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11466,
+                  "scope": 11562,
                   "src": "1665:22:45",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -632,7 +647,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11460,
+                    "id": 11556,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1665:7:45",
@@ -646,10 +661,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 11463,
+                  "id": 11559,
                   "name": "borrower",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11466,
+                  "scope": 11562,
                   "src": "1697:16:45",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -658,7 +673,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 11462,
+                    "id": 11558,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "1697:7:45",
@@ -675,12 +690,12 @@
               "src": "1622:97:45"
             },
             "returnParameters": {
-              "id": 11465,
+              "id": 11561,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1728:0:45"
             },
-            "scope": 11578,
+            "scope": 11679,
             "src": "1608:121:45",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -689,22 +704,22 @@
           {
             "body": null,
             "documentation": "@notice Once the loan is created, it transfers the amount of tokens to the borrower.\n@param amount of tokens to transfer.\n@param borrower address which will receive the tokens.\n@dev This function only can be invoked by the LoansInterface implementation.\n@dev It throws a require error if current ERC20 balance isn't enough to transfer the tokens.",
-            "id": 11473,
+            "id": 11569,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "createLoan",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 11471,
+              "id": 11567,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11468,
+                  "id": 11564,
                   "name": "amount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11473,
+                  "scope": 11569,
                   "src": "2158:14:45",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -713,7 +728,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11467,
+                    "id": 11563,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "2158:7:45",
@@ -727,10 +742,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 11470,
+                  "id": 11566,
                   "name": "borrower",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11473,
+                  "scope": 11569,
                   "src": "2174:16:45",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -739,7 +754,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 11469,
+                    "id": 11565,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "2174:7:45",
@@ -756,12 +771,12 @@
               "src": "2157:34:45"
             },
             "returnParameters": {
-              "id": 11472,
+              "id": 11568,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "2200:0:45"
             },
-            "scope": 11578,
+            "scope": 11679,
             "src": "2138:63:45",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -770,44 +785,44 @@
           {
             "body": null,
             "documentation": "@notice It gets the lending token address.\n@return the ERC20 lending token address.",
-            "id": 11478,
+            "id": 11574,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "lendingToken",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 11474,
+              "id": 11570,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "2343:2:45"
             },
             "returnParameters": {
-              "id": 11477,
+              "id": 11573,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11476,
+                  "id": 11572,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11478,
+                  "scope": 11574,
                   "src": "2369:13:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_ERC20Detailed_$23102",
+                    "typeIdentifier": "t_contract$_ERC20Detailed_$23203",
                     "typeString": "contract ERC20Detailed"
                   },
                   "typeName": {
                     "contractScope": null,
-                    "id": 11475,
+                    "id": 11571,
                     "name": "ERC20Detailed",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 23102,
+                    "referencedDeclaration": 23203,
                     "src": "2369:13:45",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_ERC20Detailed_$23102",
+                      "typeIdentifier": "t_contract$_ERC20Detailed_$23203",
                       "typeString": "contract ERC20Detailed"
                     }
                   },
@@ -817,7 +832,7 @@
               ],
               "src": "2368:15:45"
             },
-            "scope": 11578,
+            "scope": 11679,
             "src": "2322:62:45",
             "stateMutability": "view",
             "superFunction": null,
@@ -826,38 +841,38 @@
           {
             "body": null,
             "documentation": "@notice It initializes the contract state variables.\n@param aMarketRegistry the MarketRegistry contract.\n@param aTToken the Teller token to link to the lending pool.\n@param settingsAddress Settings contract address.\n@dev It throws a require error if the contract is already initialized.",
-            "id": 11487,
+            "id": 11583,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "initialize",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 11485,
+              "id": 11581,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11480,
+                  "id": 11576,
                   "name": "aMarketRegistry",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11487,
+                  "scope": 11583,
                   "src": "2762:31:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_IMarketRegistry_$11425",
+                    "typeIdentifier": "t_contract$_IMarketRegistry_$11521",
                     "typeString": "contract IMarketRegistry"
                   },
                   "typeName": {
                     "contractScope": null,
-                    "id": 11479,
+                    "id": 11575,
                     "name": "IMarketRegistry",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 11425,
+                    "referencedDeclaration": 11521,
                     "src": "2762:15:45",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_IMarketRegistry_$11425",
+                      "typeIdentifier": "t_contract$_IMarketRegistry_$11521",
                       "typeString": "contract IMarketRegistry"
                     }
                   },
@@ -866,26 +881,26 @@
                 },
                 {
                   "constant": false,
-                  "id": 11482,
+                  "id": 11578,
                   "name": "aTToken",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11487,
+                  "scope": 11583,
                   "src": "2803:14:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_TToken_$10355",
+                    "typeIdentifier": "t_contract$_TToken_$10451",
                     "typeString": "contract TToken"
                   },
                   "typeName": {
                     "contractScope": null,
-                    "id": 11481,
+                    "id": 11577,
                     "name": "TToken",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 10355,
+                    "referencedDeclaration": 10451,
                     "src": "2803:6:45",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_TToken_$10355",
+                      "typeIdentifier": "t_contract$_TToken_$10451",
                       "typeString": "contract TToken"
                     }
                   },
@@ -894,10 +909,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 11484,
+                  "id": 11580,
                   "name": "settingsAddress",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11487,
+                  "scope": 11583,
                   "src": "2827:23:45",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -906,7 +921,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 11483,
+                    "id": 11579,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "2827:7:45",
@@ -923,12 +938,12 @@
               "src": "2752:104:45"
             },
             "returnParameters": {
-              "id": 11486,
+              "id": 11582,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "2865:0:45"
             },
-            "scope": 11578,
+            "scope": 11679,
             "src": "2733:133:45",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -937,28 +952,28 @@
           {
             "body": null,
             "documentation": "@notice It gets the cToken address.\n@return the cToken address.",
-            "id": 11492,
+            "id": 11588,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "cToken",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 11488,
+              "id": 11584,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "2982:2:45"
             },
             "returnParameters": {
-              "id": 11491,
+              "id": 11587,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11490,
+                  "id": 11586,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11492,
+                  "scope": 11588,
                   "src": "3008:7:45",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -967,7 +982,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 11489,
+                    "id": 11585,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "3008:7:45",
@@ -983,7 +998,7 @@
               ],
               "src": "3007:9:45"
             },
-            "scope": 11578,
+            "scope": 11679,
             "src": "2967:50:45",
             "stateMutability": "view",
             "superFunction": null,
@@ -992,44 +1007,44 @@
           {
             "body": null,
             "documentation": "@notice It gets the tToken address.\n@return the tToken address.",
-            "id": 11497,
+            "id": 11593,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "tToken",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 11493,
+              "id": 11589,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "3133:2:45"
             },
             "returnParameters": {
-              "id": 11496,
+              "id": 11592,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11495,
+                  "id": 11591,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11497,
+                  "scope": 11593,
                   "src": "3159:6:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_TToken_$10355",
+                    "typeIdentifier": "t_contract$_TToken_$10451",
                     "typeString": "contract TToken"
                   },
                   "typeName": {
                     "contractScope": null,
-                    "id": 11494,
+                    "id": 11590,
                     "name": "TToken",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 10355,
+                    "referencedDeclaration": 10451,
                     "src": "3159:6:45",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_TToken_$10355",
+                      "typeIdentifier": "t_contract$_TToken_$10451",
                       "typeString": "contract TToken"
                     }
                   },
@@ -1039,7 +1054,7 @@
               ],
               "src": "3158:8:45"
             },
-            "scope": 11578,
+            "scope": 11679,
             "src": "3118:49:45",
             "stateMutability": "view",
             "superFunction": null,
@@ -1047,24 +1062,78 @@
           },
           {
             "body": null,
+            "documentation": null,
+            "id": 11598,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "exchangeRateCurrent",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 11594,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "3201:2:45"
+            },
+            "returnParameters": {
+              "id": 11597,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 11596,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11598,
+                  "src": "3222:7:45",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 11595,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3222:7:45",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "3221:9:45"
+            },
+            "scope": 11679,
+            "src": "3173:58:45",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
             "documentation": "@notice It returns the balance of underlying tokens a lender owns with the amount\nof TTokens owned and the current exchange rate.\n@return a lender's balance of the underlying token in the pool.",
-            "id": 11504,
+            "id": 11605,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "balanceOfUnderlying",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 11500,
+              "id": 11601,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11499,
+                  "id": 11600,
                   "name": "lender",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11504,
-                  "src": "3436:14:45",
+                  "scope": 11605,
+                  "src": "3500:14:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1072,10 +1141,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 11498,
+                    "id": 11599,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "3436:7:45",
+                    "src": "3500:7:45",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -1086,19 +1155,19 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "3435:16:45"
+              "src": "3499:16:45"
             },
             "returnParameters": {
-              "id": 11503,
+              "id": 11604,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11502,
+                  "id": 11603,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11504,
-                  "src": "3475:7:45",
+                  "scope": 11605,
+                  "src": "3534:7:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1106,10 +1175,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11501,
+                    "id": 11602,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "3475:7:45",
+                    "src": "3534:7:45",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -1119,34 +1188,34 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "3474:9:45"
+              "src": "3533:9:45"
             },
-            "scope": 11578,
-            "src": "3407:77:45",
-            "stateMutability": "view",
+            "scope": 11679,
+            "src": "3471:72:45",
+            "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "external"
           },
           {
             "body": null,
             "documentation": "@notice Returns the total amount of interest earned by a lender.\n@dev This value includes already claimed + unclaimed interest earned.\n@return total interest earned by lender.",
-            "id": 11511,
+            "id": 11612,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "getLenderInterestEarned",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 11507,
+              "id": 11608,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11506,
+                  "id": 11607,
                   "name": "lender",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11511,
-                  "src": "3739:14:45",
+                  "scope": 11612,
+                  "src": "3798:14:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1154,10 +1223,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 11505,
+                    "id": 11606,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "3739:7:45",
+                    "src": "3798:7:45",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -1168,19 +1237,19 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "3738:16:45"
+              "src": "3797:16:45"
             },
             "returnParameters": {
-              "id": 11510,
+              "id": 11611,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11509,
+                  "id": 11610,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11511,
-                  "src": "3778:7:45",
+                  "scope": 11612,
+                  "src": "3832:7:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1188,10 +1257,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11508,
+                    "id": 11609,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "3778:7:45",
+                    "src": "3832:7:45",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -1201,34 +1270,34 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "3777:9:45"
+              "src": "3831:9:45"
             },
-            "scope": 11578,
-            "src": "3706:81:45",
-            "stateMutability": "view",
+            "scope": 11679,
+            "src": "3765:76:45",
+            "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "external"
           },
           {
             "body": null,
             "documentation": "@notice Returns the amount of claimable interest a lender has earned.\n@return claimable interest value.",
-            "id": 11518,
+            "id": 11619,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "getClaimableInterestEarned",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 11514,
+              "id": 11615,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11513,
+                  "id": 11614,
                   "name": "lender",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11518,
-                  "src": "3965:14:45",
+                  "scope": 11619,
+                  "src": "4019:14:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1236,10 +1305,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 11512,
+                    "id": 11613,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "3965:7:45",
+                    "src": "4019:7:45",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -1250,19 +1319,19 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "3964:16:45"
+              "src": "4018:16:45"
             },
             "returnParameters": {
-              "id": 11517,
+              "id": 11618,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11516,
+                  "id": 11617,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11518,
-                  "src": "4004:7:45",
+                  "scope": 11619,
+                  "src": "4053:7:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1270,10 +1339,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11515,
+                    "id": 11616,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "4004:7:45",
+                    "src": "4053:7:45",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -1283,40 +1352,40 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "4003:9:45"
+              "src": "4052:9:45"
             },
-            "scope": 11578,
-            "src": "3929:84:45",
-            "stateMutability": "view",
+            "scope": 11679,
+            "src": "3983:79:45",
+            "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "external"
           },
           {
             "body": null,
             "documentation": "@notice Returns the total amount of interest the pool has earned from repaying loans.\n@return total interest earned from loans.",
-            "id": 11523,
+            "id": 11624,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "totalInterestEarned",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 11519,
+              "id": 11620,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "4207:2:45"
+              "src": "4256:2:45"
             },
             "returnParameters": {
-              "id": 11522,
+              "id": 11623,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11521,
+                  "id": 11622,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11523,
-                  "src": "4233:7:45",
+                  "scope": 11624,
+                  "src": "4282:7:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1324,10 +1393,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11520,
+                    "id": 11621,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "4233:7:45",
+                    "src": "4282:7:45",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -1337,10 +1406,10 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "4232:9:45"
+              "src": "4281:9:45"
             },
-            "scope": 11578,
-            "src": "4179:63:45",
+            "scope": 11679,
+            "src": "4228:63:45",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "external"
@@ -1348,29 +1417,29 @@
           {
             "body": null,
             "documentation": "@notice It calculates the market state values across all markets.\n@return values that represent the global state across all markets.",
-            "id": 11534,
+            "id": 11635,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "getMarketState",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 11524,
+              "id": 11625,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "4436:2:45"
+              "src": "4485:2:45"
             },
             "returnParameters": {
-              "id": 11533,
+              "id": 11634,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11526,
+                  "id": 11627,
                   "name": "totalSupplied",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11534,
-                  "src": "4499:21:45",
+                  "scope": 11635,
+                  "src": "4548:21:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1378,10 +1447,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11525,
+                    "id": 11626,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "4499:7:45",
+                    "src": "4548:7:45",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -1392,11 +1461,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 11528,
+                  "id": 11629,
                   "name": "totalBorrowed",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11534,
-                  "src": "4534:21:45",
+                  "scope": 11635,
+                  "src": "4583:21:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1404,10 +1473,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11527,
+                    "id": 11628,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "4534:7:45",
+                    "src": "4583:7:45",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -1418,11 +1487,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 11530,
+                  "id": 11631,
                   "name": "totalRepaid",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11534,
-                  "src": "4569:19:45",
+                  "scope": 11635,
+                  "src": "4618:19:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1430,10 +1499,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11529,
+                    "id": 11630,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "4569:7:45",
+                    "src": "4618:7:45",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -1444,11 +1513,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 11532,
+                  "id": 11633,
                   "name": "totalOnLoan",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11534,
-                  "src": "4602:19:45",
+                  "scope": 11635,
+                  "src": "4651:19:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1456,10 +1525,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11531,
+                    "id": 11632,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "4602:7:45",
+                    "src": "4651:7:45",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -1469,10 +1538,10 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "4485:146:45"
+              "src": "4534:146:45"
             },
-            "scope": 11578,
-            "src": "4413:219:45",
+            "scope": 11679,
+            "src": "4462:219:45",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "external"
@@ -1480,23 +1549,23 @@
           {
             "body": null,
             "documentation": "@notice It gets the debt-to-supply (DtS) ratio for a given market, including a new loan amount.\n@notice The formula to calculate DtS ratio (including a new loan amount) is:\nDtS = (SUM(total borrowed) - SUM(total repaid) + NewLoanAmount) / SUM(total supplied)\n@notice The value has 2 decimal places.\nExample:\n100 => 1%\n@param loanAmount a new loan amount to consider in the ratio.\n@return the debt-to-supply ratio value.",
-            "id": 11541,
+            "id": 11642,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "getDebtRatioFor",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 11537,
+              "id": 11638,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11536,
+                  "id": 11637,
                   "name": "loanAmount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11541,
-                  "src": "5181:18:45",
+                  "scope": 11642,
+                  "src": "5230:18:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1504,10 +1573,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11535,
+                    "id": 11636,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "5181:7:45",
+                    "src": "5230:7:45",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -1517,19 +1586,19 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "5180:20:45"
+              "src": "5229:20:45"
             },
             "returnParameters": {
-              "id": 11540,
+              "id": 11641,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11539,
+                  "id": 11640,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11541,
-                  "src": "5224:7:45",
+                  "scope": 11642,
+                  "src": "5273:7:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1537,10 +1606,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11538,
+                    "id": 11639,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "5224:7:45",
+                    "src": "5273:7:45",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -1550,10 +1619,10 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "5223:9:45"
+              "src": "5272:9:45"
             },
-            "scope": 11578,
-            "src": "5156:77:45",
+            "scope": 11679,
+            "src": "5205:77:45",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "external"
@@ -1561,21 +1630,21 @@
           {
             "anonymous": false,
             "documentation": "@notice This event is emitted when an user deposits tokens into the pool.\n@param sender address.\n@param amount of tokens.",
-            "id": 11549,
+            "id": 11650,
             "name": "TokenDeposited",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 11548,
+              "id": 11649,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11543,
+                  "id": 11644,
                   "indexed": true,
                   "name": "sender",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11549,
-                  "src": "5422:22:45",
+                  "scope": 11650,
+                  "src": "5471:22:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1583,10 +1652,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 11542,
+                    "id": 11643,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "5422:7:45",
+                    "src": "5471:7:45",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -1598,12 +1667,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 11545,
+                  "id": 11646,
                   "indexed": false,
                   "name": "amount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11549,
-                  "src": "5446:14:45",
+                  "scope": 11650,
+                  "src": "5495:14:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1611,10 +1680,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11544,
+                    "id": 11645,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "5446:7:45",
+                    "src": "5495:7:45",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -1625,12 +1694,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 11547,
+                  "id": 11648,
                   "indexed": false,
                   "name": "tTokenAmount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11549,
-                  "src": "5462:20:45",
+                  "scope": 11650,
+                  "src": "5511:20:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1638,10 +1707,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11546,
+                    "id": 11647,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "5462:7:45",
+                    "src": "5511:7:45",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -1651,28 +1720,28 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "5421:62:45"
+              "src": "5470:62:45"
             },
-            "src": "5401:83:45"
+            "src": "5450:83:45"
           },
           {
             "anonymous": false,
             "documentation": "@notice This event is emitted when an user withdraws tokens from the pool.\n@param sender address that withdrew the tokens.\n@param amount of tokens.",
-            "id": 11557,
+            "id": 11658,
             "name": "TokenWithdrawn",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 11556,
+              "id": 11657,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11551,
+                  "id": 11652,
                   "indexed": true,
                   "name": "sender",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11557,
-                  "src": "5699:22:45",
+                  "scope": 11658,
+                  "src": "5748:22:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1680,10 +1749,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 11550,
+                    "id": 11651,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "5699:7:45",
+                    "src": "5748:7:45",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -1695,12 +1764,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 11553,
+                  "id": 11654,
                   "indexed": false,
                   "name": "amount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11557,
-                  "src": "5723:14:45",
+                  "scope": 11658,
+                  "src": "5772:14:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1708,10 +1777,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11552,
+                    "id": 11653,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "5723:7:45",
+                    "src": "5772:7:45",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -1722,12 +1791,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 11555,
+                  "id": 11656,
                   "indexed": false,
                   "name": "tTokenAmount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11557,
-                  "src": "5739:20:45",
+                  "scope": 11658,
+                  "src": "5788:20:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1735,10 +1804,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11554,
+                    "id": 11655,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "5739:7:45",
+                    "src": "5788:7:45",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -1748,28 +1817,28 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "5698:62:45"
+              "src": "5747:62:45"
             },
-            "src": "5678:83:45"
+            "src": "5727:83:45"
           },
           {
             "anonymous": false,
             "documentation": "@notice This event is emitted when an borrower repaid a loan.\n@param borrower address.\n@param amount of tokens.",
-            "id": 11563,
+            "id": 11664,
             "name": "TokenRepaid",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 11562,
+              "id": 11663,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11559,
+                  "id": 11660,
                   "indexed": true,
                   "name": "borrower",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11563,
-                  "src": "5937:24:45",
+                  "scope": 11664,
+                  "src": "5986:24:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1777,10 +1846,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 11558,
+                    "id": 11659,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "5937:7:45",
+                    "src": "5986:7:45",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -1792,12 +1861,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 11561,
+                  "id": 11662,
                   "indexed": false,
                   "name": "amount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11563,
-                  "src": "5963:14:45",
+                  "scope": 11664,
+                  "src": "6012:14:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1805,10 +1874,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11560,
+                    "id": 11661,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "5963:7:45",
+                    "src": "6012:7:45",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -1818,28 +1887,28 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "5936:42:45"
+              "src": "5985:42:45"
             },
-            "src": "5919:60:45"
+            "src": "5968:60:45"
           },
           {
             "anonymous": false,
             "documentation": "@notice This event is emitted when an lender withdraws interests.\n@param lender address.\n@param amount of tokens.",
-            "id": 11569,
+            "id": 11670,
             "name": "InterestWithdrawn",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 11568,
+              "id": 11669,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11565,
+                  "id": 11666,
                   "indexed": true,
                   "name": "lender",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11569,
-                  "src": "6163:22:45",
+                  "scope": 11670,
+                  "src": "6212:22:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1847,10 +1916,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 11564,
+                    "id": 11665,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "6163:7:45",
+                    "src": "6212:7:45",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -1862,12 +1931,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 11567,
+                  "id": 11668,
                   "indexed": false,
                   "name": "amount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11569,
-                  "src": "6187:14:45",
+                  "scope": 11670,
+                  "src": "6236:14:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1875,10 +1944,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11566,
+                    "id": 11667,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "6187:7:45",
+                    "src": "6236:7:45",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -1888,28 +1957,28 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "6162:40:45"
+              "src": "6211:40:45"
             },
-            "src": "6139:64:45"
+            "src": "6188:64:45"
           },
           {
             "anonymous": false,
             "documentation": "@notice This event is emitted when the interest validator is updated.\n@param sender account that sends the transaction.\n@param oldInterestValidator the old validator address.\n@param newInterestValidator the new validator address.",
-            "id": 11577,
+            "id": 11678,
             "name": "InterestValidatorUpdated",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 11576,
+              "id": 11677,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11571,
+                  "id": 11672,
                   "indexed": true,
                   "name": "sender",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11577,
-                  "src": "6527:22:45",
+                  "scope": 11678,
+                  "src": "6576:22:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1917,10 +1986,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 11570,
+                    "id": 11671,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "6527:7:45",
+                    "src": "6576:7:45",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -1932,12 +2001,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 11573,
+                  "id": 11674,
                   "indexed": true,
                   "name": "oldInterestValidator",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11577,
-                  "src": "6559:36:45",
+                  "scope": 11678,
+                  "src": "6608:36:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1945,10 +2014,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 11572,
+                    "id": 11673,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "6559:7:45",
+                    "src": "6608:7:45",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -1960,12 +2029,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 11575,
+                  "id": 11676,
                   "indexed": true,
                   "name": "newInterestValidator",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11577,
-                  "src": "6605:36:45",
+                  "scope": 11678,
+                  "src": "6654:36:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1973,10 +2042,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 11574,
+                    "id": 11675,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "6605:7:45",
+                    "src": "6654:7:45",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -1987,29 +2056,29 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "6517:130:45"
+              "src": "6566:130:45"
             },
-            "src": "6487:161:45"
+            "src": "6536:161:45"
           }
         ],
-        "scope": 11579,
-        "src": "436:6214:45"
+        "scope": 11680,
+        "src": "436:6263:45"
       }
     ],
-    "src": "0:6651:45"
+    "src": "0:6700:45"
   },
   "legacyAST": {
     "absolutePath": "/home/jeremig/Documents/Teller/dojo/teller-protocol-v1/contracts/interfaces/LendingPoolInterface.sol",
     "exportedSymbols": {
       "LendingPoolInterface": [
-        11578
+        11679
       ]
     },
-    "id": 11579,
+    "id": 11680,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 11443,
+        "id": 11539,
         "literals": [
           "solidity",
           "0.5",
@@ -2019,7 +2088,7 @@
         "src": "0:23:45"
       },
       {
-        "id": 11444,
+        "id": 11540,
         "literals": [
           "experimental",
           "ABIEncoderV2"
@@ -2030,10 +2099,10 @@
       {
         "absolutePath": "@openzeppelin/contracts-ethereum-package/contracts/token/ERC20/ERC20Detailed.sol",
         "file": "@openzeppelin/contracts-ethereum-package/contracts/token/ERC20/ERC20Detailed.sol",
-        "id": 11445,
+        "id": 11541,
         "nodeType": "ImportDirective",
-        "scope": 11579,
-        "sourceUnit": 23103,
+        "scope": 11680,
+        "sourceUnit": 23204,
         "src": "68:90:45",
         "symbolAliases": [],
         "unitAlias": ""
@@ -2041,10 +2110,10 @@
       {
         "absolutePath": "/home/jeremig/Documents/Teller/dojo/teller-protocol-v1/contracts/interfaces/IMarketRegistry.sol",
         "file": "./IMarketRegistry.sol",
-        "id": 11446,
+        "id": 11542,
         "nodeType": "ImportDirective",
-        "scope": 11579,
-        "sourceUnit": 11426,
+        "scope": 11680,
+        "sourceUnit": 11522,
         "src": "174:31:45",
         "symbolAliases": [],
         "unitAlias": ""
@@ -2052,10 +2121,10 @@
       {
         "absolutePath": "/home/jeremig/Documents/Teller/dojo/teller-protocol-v1/contracts/base/TToken.sol",
         "file": "../base/TToken.sol",
-        "id": 11447,
+        "id": 11543,
         "nodeType": "ImportDirective",
-        "scope": 11579,
-        "sourceUnit": 10356,
+        "scope": 11680,
+        "sourceUnit": 10452,
         "src": "220:28:45",
         "symbolAliases": [],
         "unitAlias": ""
@@ -2066,9 +2135,9 @@
         "contractKind": "interface",
         "documentation": "@notice This interface defines the functions for a lending pool that holds all of the tokens\nthat lenders transfer into the protocol.\n@author develop@teller.finance",
         "fullyImplemented": false,
-        "id": 11578,
+        "id": 11679,
         "linearizedBaseContracts": [
-          11578
+          11679
         ],
         "name": "LendingPoolInterface",
         "nodeType": "ContractDefinition",
@@ -2076,22 +2145,22 @@
           {
             "body": null,
             "documentation": "@notice It allows users to deposit tokens into the pool.\n@dev the user must call ERC20.approve function previously.\n@param amount of tokens to deposit in the pool.",
-            "id": 11452,
+            "id": 11548,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "deposit",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 11450,
+              "id": 11546,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11449,
+                  "id": 11545,
                   "name": "amount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11452,
+                  "scope": 11548,
                   "src": "693:14:45",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -2100,7 +2169,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11448,
+                    "id": 11544,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "693:7:45",
@@ -2116,12 +2185,12 @@
               "src": "692:16:45"
             },
             "returnParameters": {
-              "id": 11451,
+              "id": 11547,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "717:0:45"
             },
-            "scope": 11578,
+            "scope": 11679,
             "src": "676:42:45",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -2130,22 +2199,22 @@
           {
             "body": null,
             "documentation": "@notice It allows any tToken holder to burn their tToken tokens and withdraw their tokens.\n@param amount of tokens to withdraw.\n@dev It throws a require error if the contract hasn't enough tokens balance.\n@dev It throws a require error if the holder hasn't enough tToken balance.",
-            "id": 11457,
+            "id": 11553,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "withdraw",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 11455,
+              "id": 11551,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11454,
+                  "id": 11550,
                   "name": "amount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11457,
+                  "scope": 11553,
                   "src": "1070:14:45",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -2154,7 +2223,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11453,
+                    "id": 11549,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1070:7:45",
@@ -2170,12 +2239,12 @@
               "src": "1069:16:45"
             },
             "returnParameters": {
-              "id": 11456,
+              "id": 11552,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1094:0:45"
             },
-            "scope": 11578,
+            "scope": 11679,
             "src": "1052:43:45",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -2184,22 +2253,22 @@
           {
             "body": null,
             "documentation": "@notice It allows a borrower repaying their loan.\n@dev This function can be called ONLY by the Loans contract.\n@dev It requires a ERC20.approve call before calling it.\n@dev It throws a require error if borrower called ERC20.approve function before calling it.\n@param principalAmount amount of tokens towards the principal.\n@param interestAmount amount of tokens towards the interest.\n@param borrower address that is repaying the loan.",
-            "id": 11466,
+            "id": 11562,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "repay",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 11464,
+              "id": 11560,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11459,
+                  "id": 11555,
                   "name": "principalAmount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11466,
+                  "scope": 11562,
                   "src": "1632:23:45",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -2208,7 +2277,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11458,
+                    "id": 11554,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1632:7:45",
@@ -2222,10 +2291,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 11461,
+                  "id": 11557,
                   "name": "interestAmount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11466,
+                  "scope": 11562,
                   "src": "1665:22:45",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -2234,7 +2303,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11460,
+                    "id": 11556,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1665:7:45",
@@ -2248,10 +2317,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 11463,
+                  "id": 11559,
                   "name": "borrower",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11466,
+                  "scope": 11562,
                   "src": "1697:16:45",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -2260,7 +2329,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 11462,
+                    "id": 11558,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "1697:7:45",
@@ -2277,12 +2346,12 @@
               "src": "1622:97:45"
             },
             "returnParameters": {
-              "id": 11465,
+              "id": 11561,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1728:0:45"
             },
-            "scope": 11578,
+            "scope": 11679,
             "src": "1608:121:45",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -2291,22 +2360,22 @@
           {
             "body": null,
             "documentation": "@notice Once the loan is created, it transfers the amount of tokens to the borrower.\n@param amount of tokens to transfer.\n@param borrower address which will receive the tokens.\n@dev This function only can be invoked by the LoansInterface implementation.\n@dev It throws a require error if current ERC20 balance isn't enough to transfer the tokens.",
-            "id": 11473,
+            "id": 11569,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "createLoan",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 11471,
+              "id": 11567,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11468,
+                  "id": 11564,
                   "name": "amount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11473,
+                  "scope": 11569,
                   "src": "2158:14:45",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -2315,7 +2384,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11467,
+                    "id": 11563,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "2158:7:45",
@@ -2329,10 +2398,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 11470,
+                  "id": 11566,
                   "name": "borrower",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11473,
+                  "scope": 11569,
                   "src": "2174:16:45",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -2341,7 +2410,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 11469,
+                    "id": 11565,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "2174:7:45",
@@ -2358,12 +2427,12 @@
               "src": "2157:34:45"
             },
             "returnParameters": {
-              "id": 11472,
+              "id": 11568,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "2200:0:45"
             },
-            "scope": 11578,
+            "scope": 11679,
             "src": "2138:63:45",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -2372,44 +2441,44 @@
           {
             "body": null,
             "documentation": "@notice It gets the lending token address.\n@return the ERC20 lending token address.",
-            "id": 11478,
+            "id": 11574,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "lendingToken",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 11474,
+              "id": 11570,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "2343:2:45"
             },
             "returnParameters": {
-              "id": 11477,
+              "id": 11573,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11476,
+                  "id": 11572,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11478,
+                  "scope": 11574,
                   "src": "2369:13:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_ERC20Detailed_$23102",
+                    "typeIdentifier": "t_contract$_ERC20Detailed_$23203",
                     "typeString": "contract ERC20Detailed"
                   },
                   "typeName": {
                     "contractScope": null,
-                    "id": 11475,
+                    "id": 11571,
                     "name": "ERC20Detailed",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 23102,
+                    "referencedDeclaration": 23203,
                     "src": "2369:13:45",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_ERC20Detailed_$23102",
+                      "typeIdentifier": "t_contract$_ERC20Detailed_$23203",
                       "typeString": "contract ERC20Detailed"
                     }
                   },
@@ -2419,7 +2488,7 @@
               ],
               "src": "2368:15:45"
             },
-            "scope": 11578,
+            "scope": 11679,
             "src": "2322:62:45",
             "stateMutability": "view",
             "superFunction": null,
@@ -2428,38 +2497,38 @@
           {
             "body": null,
             "documentation": "@notice It initializes the contract state variables.\n@param aMarketRegistry the MarketRegistry contract.\n@param aTToken the Teller token to link to the lending pool.\n@param settingsAddress Settings contract address.\n@dev It throws a require error if the contract is already initialized.",
-            "id": 11487,
+            "id": 11583,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "initialize",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 11485,
+              "id": 11581,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11480,
+                  "id": 11576,
                   "name": "aMarketRegistry",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11487,
+                  "scope": 11583,
                   "src": "2762:31:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_IMarketRegistry_$11425",
+                    "typeIdentifier": "t_contract$_IMarketRegistry_$11521",
                     "typeString": "contract IMarketRegistry"
                   },
                   "typeName": {
                     "contractScope": null,
-                    "id": 11479,
+                    "id": 11575,
                     "name": "IMarketRegistry",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 11425,
+                    "referencedDeclaration": 11521,
                     "src": "2762:15:45",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_IMarketRegistry_$11425",
+                      "typeIdentifier": "t_contract$_IMarketRegistry_$11521",
                       "typeString": "contract IMarketRegistry"
                     }
                   },
@@ -2468,26 +2537,26 @@
                 },
                 {
                   "constant": false,
-                  "id": 11482,
+                  "id": 11578,
                   "name": "aTToken",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11487,
+                  "scope": 11583,
                   "src": "2803:14:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_TToken_$10355",
+                    "typeIdentifier": "t_contract$_TToken_$10451",
                     "typeString": "contract TToken"
                   },
                   "typeName": {
                     "contractScope": null,
-                    "id": 11481,
+                    "id": 11577,
                     "name": "TToken",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 10355,
+                    "referencedDeclaration": 10451,
                     "src": "2803:6:45",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_TToken_$10355",
+                      "typeIdentifier": "t_contract$_TToken_$10451",
                       "typeString": "contract TToken"
                     }
                   },
@@ -2496,10 +2565,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 11484,
+                  "id": 11580,
                   "name": "settingsAddress",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11487,
+                  "scope": 11583,
                   "src": "2827:23:45",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -2508,7 +2577,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 11483,
+                    "id": 11579,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "2827:7:45",
@@ -2525,12 +2594,12 @@
               "src": "2752:104:45"
             },
             "returnParameters": {
-              "id": 11486,
+              "id": 11582,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "2865:0:45"
             },
-            "scope": 11578,
+            "scope": 11679,
             "src": "2733:133:45",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -2539,28 +2608,28 @@
           {
             "body": null,
             "documentation": "@notice It gets the cToken address.\n@return the cToken address.",
-            "id": 11492,
+            "id": 11588,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "cToken",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 11488,
+              "id": 11584,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "2982:2:45"
             },
             "returnParameters": {
-              "id": 11491,
+              "id": 11587,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11490,
+                  "id": 11586,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11492,
+                  "scope": 11588,
                   "src": "3008:7:45",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -2569,7 +2638,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 11489,
+                    "id": 11585,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "3008:7:45",
@@ -2585,7 +2654,7 @@
               ],
               "src": "3007:9:45"
             },
-            "scope": 11578,
+            "scope": 11679,
             "src": "2967:50:45",
             "stateMutability": "view",
             "superFunction": null,
@@ -2594,44 +2663,44 @@
           {
             "body": null,
             "documentation": "@notice It gets the tToken address.\n@return the tToken address.",
-            "id": 11497,
+            "id": 11593,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "tToken",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 11493,
+              "id": 11589,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "3133:2:45"
             },
             "returnParameters": {
-              "id": 11496,
+              "id": 11592,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11495,
+                  "id": 11591,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11497,
+                  "scope": 11593,
                   "src": "3159:6:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_TToken_$10355",
+                    "typeIdentifier": "t_contract$_TToken_$10451",
                     "typeString": "contract TToken"
                   },
                   "typeName": {
                     "contractScope": null,
-                    "id": 11494,
+                    "id": 11590,
                     "name": "TToken",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 10355,
+                    "referencedDeclaration": 10451,
                     "src": "3159:6:45",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_TToken_$10355",
+                      "typeIdentifier": "t_contract$_TToken_$10451",
                       "typeString": "contract TToken"
                     }
                   },
@@ -2641,7 +2710,7 @@
               ],
               "src": "3158:8:45"
             },
-            "scope": 11578,
+            "scope": 11679,
             "src": "3118:49:45",
             "stateMutability": "view",
             "superFunction": null,
@@ -2649,24 +2718,78 @@
           },
           {
             "body": null,
+            "documentation": null,
+            "id": 11598,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "exchangeRateCurrent",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 11594,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "3201:2:45"
+            },
+            "returnParameters": {
+              "id": 11597,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 11596,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11598,
+                  "src": "3222:7:45",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 11595,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3222:7:45",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "3221:9:45"
+            },
+            "scope": 11679,
+            "src": "3173:58:45",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
             "documentation": "@notice It returns the balance of underlying tokens a lender owns with the amount\nof TTokens owned and the current exchange rate.\n@return a lender's balance of the underlying token in the pool.",
-            "id": 11504,
+            "id": 11605,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "balanceOfUnderlying",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 11500,
+              "id": 11601,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11499,
+                  "id": 11600,
                   "name": "lender",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11504,
-                  "src": "3436:14:45",
+                  "scope": 11605,
+                  "src": "3500:14:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -2674,10 +2797,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 11498,
+                    "id": 11599,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "3436:7:45",
+                    "src": "3500:7:45",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -2688,19 +2811,19 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "3435:16:45"
+              "src": "3499:16:45"
             },
             "returnParameters": {
-              "id": 11503,
+              "id": 11604,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11502,
+                  "id": 11603,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11504,
-                  "src": "3475:7:45",
+                  "scope": 11605,
+                  "src": "3534:7:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -2708,10 +2831,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11501,
+                    "id": 11602,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "3475:7:45",
+                    "src": "3534:7:45",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -2721,34 +2844,34 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "3474:9:45"
+              "src": "3533:9:45"
             },
-            "scope": 11578,
-            "src": "3407:77:45",
-            "stateMutability": "view",
+            "scope": 11679,
+            "src": "3471:72:45",
+            "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "external"
           },
           {
             "body": null,
             "documentation": "@notice Returns the total amount of interest earned by a lender.\n@dev This value includes already claimed + unclaimed interest earned.\n@return total interest earned by lender.",
-            "id": 11511,
+            "id": 11612,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "getLenderInterestEarned",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 11507,
+              "id": 11608,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11506,
+                  "id": 11607,
                   "name": "lender",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11511,
-                  "src": "3739:14:45",
+                  "scope": 11612,
+                  "src": "3798:14:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -2756,10 +2879,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 11505,
+                    "id": 11606,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "3739:7:45",
+                    "src": "3798:7:45",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -2770,19 +2893,19 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "3738:16:45"
+              "src": "3797:16:45"
             },
             "returnParameters": {
-              "id": 11510,
+              "id": 11611,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11509,
+                  "id": 11610,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11511,
-                  "src": "3778:7:45",
+                  "scope": 11612,
+                  "src": "3832:7:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -2790,10 +2913,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11508,
+                    "id": 11609,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "3778:7:45",
+                    "src": "3832:7:45",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -2803,34 +2926,34 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "3777:9:45"
+              "src": "3831:9:45"
             },
-            "scope": 11578,
-            "src": "3706:81:45",
-            "stateMutability": "view",
+            "scope": 11679,
+            "src": "3765:76:45",
+            "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "external"
           },
           {
             "body": null,
             "documentation": "@notice Returns the amount of claimable interest a lender has earned.\n@return claimable interest value.",
-            "id": 11518,
+            "id": 11619,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "getClaimableInterestEarned",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 11514,
+              "id": 11615,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11513,
+                  "id": 11614,
                   "name": "lender",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11518,
-                  "src": "3965:14:45",
+                  "scope": 11619,
+                  "src": "4019:14:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -2838,10 +2961,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 11512,
+                    "id": 11613,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "3965:7:45",
+                    "src": "4019:7:45",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -2852,19 +2975,19 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "3964:16:45"
+              "src": "4018:16:45"
             },
             "returnParameters": {
-              "id": 11517,
+              "id": 11618,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11516,
+                  "id": 11617,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11518,
-                  "src": "4004:7:45",
+                  "scope": 11619,
+                  "src": "4053:7:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -2872,10 +2995,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11515,
+                    "id": 11616,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "4004:7:45",
+                    "src": "4053:7:45",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -2885,40 +3008,40 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "4003:9:45"
+              "src": "4052:9:45"
             },
-            "scope": 11578,
-            "src": "3929:84:45",
-            "stateMutability": "view",
+            "scope": 11679,
+            "src": "3983:79:45",
+            "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "external"
           },
           {
             "body": null,
             "documentation": "@notice Returns the total amount of interest the pool has earned from repaying loans.\n@return total interest earned from loans.",
-            "id": 11523,
+            "id": 11624,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "totalInterestEarned",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 11519,
+              "id": 11620,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "4207:2:45"
+              "src": "4256:2:45"
             },
             "returnParameters": {
-              "id": 11522,
+              "id": 11623,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11521,
+                  "id": 11622,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11523,
-                  "src": "4233:7:45",
+                  "scope": 11624,
+                  "src": "4282:7:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -2926,10 +3049,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11520,
+                    "id": 11621,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "4233:7:45",
+                    "src": "4282:7:45",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -2939,10 +3062,10 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "4232:9:45"
+              "src": "4281:9:45"
             },
-            "scope": 11578,
-            "src": "4179:63:45",
+            "scope": 11679,
+            "src": "4228:63:45",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "external"
@@ -2950,29 +3073,29 @@
           {
             "body": null,
             "documentation": "@notice It calculates the market state values across all markets.\n@return values that represent the global state across all markets.",
-            "id": 11534,
+            "id": 11635,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "getMarketState",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 11524,
+              "id": 11625,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "4436:2:45"
+              "src": "4485:2:45"
             },
             "returnParameters": {
-              "id": 11533,
+              "id": 11634,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11526,
+                  "id": 11627,
                   "name": "totalSupplied",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11534,
-                  "src": "4499:21:45",
+                  "scope": 11635,
+                  "src": "4548:21:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -2980,10 +3103,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11525,
+                    "id": 11626,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "4499:7:45",
+                    "src": "4548:7:45",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -2994,11 +3117,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 11528,
+                  "id": 11629,
                   "name": "totalBorrowed",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11534,
-                  "src": "4534:21:45",
+                  "scope": 11635,
+                  "src": "4583:21:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -3006,10 +3129,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11527,
+                    "id": 11628,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "4534:7:45",
+                    "src": "4583:7:45",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -3020,11 +3143,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 11530,
+                  "id": 11631,
                   "name": "totalRepaid",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11534,
-                  "src": "4569:19:45",
+                  "scope": 11635,
+                  "src": "4618:19:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -3032,10 +3155,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11529,
+                    "id": 11630,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "4569:7:45",
+                    "src": "4618:7:45",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -3046,11 +3169,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 11532,
+                  "id": 11633,
                   "name": "totalOnLoan",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11534,
-                  "src": "4602:19:45",
+                  "scope": 11635,
+                  "src": "4651:19:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -3058,10 +3181,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11531,
+                    "id": 11632,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "4602:7:45",
+                    "src": "4651:7:45",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -3071,10 +3194,10 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "4485:146:45"
+              "src": "4534:146:45"
             },
-            "scope": 11578,
-            "src": "4413:219:45",
+            "scope": 11679,
+            "src": "4462:219:45",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "external"
@@ -3082,23 +3205,23 @@
           {
             "body": null,
             "documentation": "@notice It gets the debt-to-supply (DtS) ratio for a given market, including a new loan amount.\n@notice The formula to calculate DtS ratio (including a new loan amount) is:\nDtS = (SUM(total borrowed) - SUM(total repaid) + NewLoanAmount) / SUM(total supplied)\n@notice The value has 2 decimal places.\nExample:\n100 => 1%\n@param loanAmount a new loan amount to consider in the ratio.\n@return the debt-to-supply ratio value.",
-            "id": 11541,
+            "id": 11642,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "getDebtRatioFor",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 11537,
+              "id": 11638,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11536,
+                  "id": 11637,
                   "name": "loanAmount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11541,
-                  "src": "5181:18:45",
+                  "scope": 11642,
+                  "src": "5230:18:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -3106,10 +3229,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11535,
+                    "id": 11636,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "5181:7:45",
+                    "src": "5230:7:45",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -3119,19 +3242,19 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "5180:20:45"
+              "src": "5229:20:45"
             },
             "returnParameters": {
-              "id": 11540,
+              "id": 11641,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11539,
+                  "id": 11640,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11541,
-                  "src": "5224:7:45",
+                  "scope": 11642,
+                  "src": "5273:7:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -3139,10 +3262,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11538,
+                    "id": 11639,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "5224:7:45",
+                    "src": "5273:7:45",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -3152,10 +3275,10 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "5223:9:45"
+              "src": "5272:9:45"
             },
-            "scope": 11578,
-            "src": "5156:77:45",
+            "scope": 11679,
+            "src": "5205:77:45",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "external"
@@ -3163,21 +3286,21 @@
           {
             "anonymous": false,
             "documentation": "@notice This event is emitted when an user deposits tokens into the pool.\n@param sender address.\n@param amount of tokens.",
-            "id": 11549,
+            "id": 11650,
             "name": "TokenDeposited",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 11548,
+              "id": 11649,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11543,
+                  "id": 11644,
                   "indexed": true,
                   "name": "sender",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11549,
-                  "src": "5422:22:45",
+                  "scope": 11650,
+                  "src": "5471:22:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -3185,10 +3308,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 11542,
+                    "id": 11643,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "5422:7:45",
+                    "src": "5471:7:45",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -3200,12 +3323,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 11545,
+                  "id": 11646,
                   "indexed": false,
                   "name": "amount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11549,
-                  "src": "5446:14:45",
+                  "scope": 11650,
+                  "src": "5495:14:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -3213,10 +3336,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11544,
+                    "id": 11645,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "5446:7:45",
+                    "src": "5495:7:45",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -3227,12 +3350,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 11547,
+                  "id": 11648,
                   "indexed": false,
                   "name": "tTokenAmount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11549,
-                  "src": "5462:20:45",
+                  "scope": 11650,
+                  "src": "5511:20:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -3240,10 +3363,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11546,
+                    "id": 11647,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "5462:7:45",
+                    "src": "5511:7:45",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -3253,28 +3376,28 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "5421:62:45"
+              "src": "5470:62:45"
             },
-            "src": "5401:83:45"
+            "src": "5450:83:45"
           },
           {
             "anonymous": false,
             "documentation": "@notice This event is emitted when an user withdraws tokens from the pool.\n@param sender address that withdrew the tokens.\n@param amount of tokens.",
-            "id": 11557,
+            "id": 11658,
             "name": "TokenWithdrawn",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 11556,
+              "id": 11657,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11551,
+                  "id": 11652,
                   "indexed": true,
                   "name": "sender",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11557,
-                  "src": "5699:22:45",
+                  "scope": 11658,
+                  "src": "5748:22:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -3282,10 +3405,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 11550,
+                    "id": 11651,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "5699:7:45",
+                    "src": "5748:7:45",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -3297,12 +3420,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 11553,
+                  "id": 11654,
                   "indexed": false,
                   "name": "amount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11557,
-                  "src": "5723:14:45",
+                  "scope": 11658,
+                  "src": "5772:14:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -3310,10 +3433,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11552,
+                    "id": 11653,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "5723:7:45",
+                    "src": "5772:7:45",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -3324,12 +3447,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 11555,
+                  "id": 11656,
                   "indexed": false,
                   "name": "tTokenAmount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11557,
-                  "src": "5739:20:45",
+                  "scope": 11658,
+                  "src": "5788:20:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -3337,10 +3460,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11554,
+                    "id": 11655,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "5739:7:45",
+                    "src": "5788:7:45",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -3350,28 +3473,28 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "5698:62:45"
+              "src": "5747:62:45"
             },
-            "src": "5678:83:45"
+            "src": "5727:83:45"
           },
           {
             "anonymous": false,
             "documentation": "@notice This event is emitted when an borrower repaid a loan.\n@param borrower address.\n@param amount of tokens.",
-            "id": 11563,
+            "id": 11664,
             "name": "TokenRepaid",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 11562,
+              "id": 11663,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11559,
+                  "id": 11660,
                   "indexed": true,
                   "name": "borrower",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11563,
-                  "src": "5937:24:45",
+                  "scope": 11664,
+                  "src": "5986:24:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -3379,10 +3502,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 11558,
+                    "id": 11659,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "5937:7:45",
+                    "src": "5986:7:45",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -3394,12 +3517,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 11561,
+                  "id": 11662,
                   "indexed": false,
                   "name": "amount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11563,
-                  "src": "5963:14:45",
+                  "scope": 11664,
+                  "src": "6012:14:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -3407,10 +3530,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11560,
+                    "id": 11661,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "5963:7:45",
+                    "src": "6012:7:45",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -3420,28 +3543,28 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "5936:42:45"
+              "src": "5985:42:45"
             },
-            "src": "5919:60:45"
+            "src": "5968:60:45"
           },
           {
             "anonymous": false,
             "documentation": "@notice This event is emitted when an lender withdraws interests.\n@param lender address.\n@param amount of tokens.",
-            "id": 11569,
+            "id": 11670,
             "name": "InterestWithdrawn",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 11568,
+              "id": 11669,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11565,
+                  "id": 11666,
                   "indexed": true,
                   "name": "lender",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11569,
-                  "src": "6163:22:45",
+                  "scope": 11670,
+                  "src": "6212:22:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -3449,10 +3572,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 11564,
+                    "id": 11665,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "6163:7:45",
+                    "src": "6212:7:45",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -3464,12 +3587,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 11567,
+                  "id": 11668,
                   "indexed": false,
                   "name": "amount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11569,
-                  "src": "6187:14:45",
+                  "scope": 11670,
+                  "src": "6236:14:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -3477,10 +3600,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11566,
+                    "id": 11667,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "6187:7:45",
+                    "src": "6236:7:45",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -3490,28 +3613,28 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "6162:40:45"
+              "src": "6211:40:45"
             },
-            "src": "6139:64:45"
+            "src": "6188:64:45"
           },
           {
             "anonymous": false,
             "documentation": "@notice This event is emitted when the interest validator is updated.\n@param sender account that sends the transaction.\n@param oldInterestValidator the old validator address.\n@param newInterestValidator the new validator address.",
-            "id": 11577,
+            "id": 11678,
             "name": "InterestValidatorUpdated",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 11576,
+              "id": 11677,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11571,
+                  "id": 11672,
                   "indexed": true,
                   "name": "sender",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11577,
-                  "src": "6527:22:45",
+                  "scope": 11678,
+                  "src": "6576:22:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -3519,10 +3642,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 11570,
+                    "id": 11671,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "6527:7:45",
+                    "src": "6576:7:45",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -3534,12 +3657,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 11573,
+                  "id": 11674,
                   "indexed": true,
                   "name": "oldInterestValidator",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11577,
-                  "src": "6559:36:45",
+                  "scope": 11678,
+                  "src": "6608:36:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -3547,10 +3670,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 11572,
+                    "id": 11673,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "6559:7:45",
+                    "src": "6608:7:45",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -3562,12 +3685,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 11575,
+                  "id": 11676,
                   "indexed": true,
                   "name": "newInterestValidator",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11577,
-                  "src": "6605:36:45",
+                  "scope": 11678,
+                  "src": "6654:36:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -3575,10 +3698,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 11574,
+                    "id": 11675,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "6605:7:45",
+                    "src": "6654:7:45",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -3589,16 +3712,16 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "6517:130:45"
+              "src": "6566:130:45"
             },
-            "src": "6487:161:45"
+            "src": "6536:161:45"
           }
         ],
-        "scope": 11579,
-        "src": "436:6214:45"
+        "scope": 11680,
+        "src": "436:6263:45"
       }
     ],
-    "src": "0:6651:45"
+    "src": "0:6700:45"
   },
   "compiler": {
     "name": "solc",
@@ -3606,7 +3729,7 @@
   },
   "networks": {},
   "schemaVersion": "3.2.3",
-  "updatedAt": "2021-04-09T17:47:40.920Z",
+  "updatedAt": "2021-04-10T14:20:29.424Z",
   "devdoc": {
     "author": "develop@teller.finance",
     "methods": {
