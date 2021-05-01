@@ -1,27 +1,8 @@
-enum ConsensusContract {
-  LoanTermsConsensus
-  InterestConsensus
-}
-
-enum LendingPoolAction {
-  Deposited
-  Withdrawn
-  Repaid
-  InterestWithdrawn
-  PaymentLiquidated
-}
-
 enum LoanStatus {
+  NonExistent
   TermsSet
   Active
   Closed
-}
-
-enum TokenStatusAction {
-  Transfer
-  Approval
-  MinterAdded
-  MinterRemoved
 }
 
 type EthTransaction @entity {
@@ -40,57 +21,22 @@ type EthTransaction @entity {
   blockNumber: BigInt!
 }
 
-type Borrower @entity {
-  id: ID!
-  address: Bytes!
-  loans: [Loan!]! @relation
-}
-
 type Loan @entity {
   id: ID!
   token: String!
   collateralToken: String!
   transaction: EthTransaction!
-  borrower: Borrower!
+  borrower: Bytes!
   recipient: Bytes!
   terms: LoanTerm!
   startDate: BigInt! # https://github.com/graphql/graphql-js/issues/1003#issuecomment-324790647
   endDate: BigInt!
   amountBorrowed: BigInt!
-  "Current loan status."
   status: LoanStatus!
-  "All the repayments made to this loan."
-  repayments: [LoanRepayment!]!
   totalRepaidAmount: BigInt!
   totalOwedAmount: BigInt!
-  collateralDeposits: [CollateralDeposit!]!
-  totalCollateralDepositsAmount: BigInt!
-  collateralWithdrawns: [CollateralWithdraw!]!
-  totalCollateralWithdrawalsAmount: BigInt!
-  liquidation: Liquidation
-  "Represents the escrow contract that is created when the loan is taken out by the borrower or recipient. A loan can have only one escrow."
-  escrow: Escrow
-  "Blocknumber the loan was most recently updated."
+  nft: Boolean!
   blockNumber: BigInt!
-  "Timestamp the loan was most recently updated."
-  timestamp: BigInt!
-}
-
-####################################################################################
-#
-# It contains the Escrow information related to a given loan (after it was taken out).
-#
-####################################################################################
-type Escrow @entity {
-  "It includes the market (borrowed and collateral token names) and loan ID. See Loan#ID field."
-  id: ID!
-  "The ETH transaction when the escrow was created (loan was taken out)."
-  transaction: EthTransaction!
-  "The loan reference to which this escrow is associated to."
-  loan: Loan! @relation
-  "Blocknumber the escrow was most recently updated."
-  blockNumber: BigInt!
-  "Timestamp the escrow was most recently updated."
   timestamp: BigInt!
 }
 
@@ -107,242 +53,17 @@ type LoanTerm @entity {
   timestamp: BigInt!
 }
 
-type Liquidation @entity {
-  id: ID! # LoanID
-  transaction: EthTransaction!
-  loan: Loan!
-  liquidator: Bytes!
-  collateralOut: BigInt!
-  tokensIn: BigInt!
-  blockNumber: BigInt!
-  timestamp: BigInt!
-}
-
-type LoanRepayment @entity {
-  id: ID!
-  transaction: EthTransaction!
-  loan: Loan!
-  amount: BigInt!
-  payer: Bytes!
-  blockNumber: BigInt!
-  timestamp: BigInt!
-}
-
-type CollateralDeposit @entity {
-  id: ID!
-  transaction: EthTransaction!
-  loan: Loan!
-  borrower: Borrower!
-  amount: BigInt!
-  blockNumber: BigInt!
-  timestamp: BigInt!
-}
-
-type CollateralWithdraw @entity {
-  id: ID!
-  transaction: EthTransaction!
-  loan: Loan!
-  borrower: Borrower!
-  amount: BigInt!
-  blockNumber: BigInt!
-  timestamp: BigInt!
-}
-
-type LendingPoolStatus @entity {
-  id: ID!
-  platformToken: String!
-  lendingToken: String!
-  collateralToken: String!
-  amount: BigInt!
-  blockNumber: BigInt!
-  timestamp: BigInt!
-}
-
-type LendingPoolChange @entity {
-  id: ID!
-  platformToken: String!
-  lendingToken: String!
-  collateralToken: String!
-  transaction: EthTransaction!
-  address: Bytes!
-  amount: BigInt!
-  action: LendingPoolAction!
-  blockNumber: BigInt!
-  timestamp: BigInt!
-}
-
-type InterestSubmitted @entity {
-  id: ID!
-  token: String!
-  collateralToken: String!
-  transaction: EthTransaction!
-  signer: Bytes!
-  lender: Bytes!
-  requestNonce: BigInt!
-  interest: BigInt!
-  endTime: BigInt!
-  blockNumber: BigInt!
-  timestamp: BigInt!
-}
-
-type InterestAccepted @entity {
-  id: ID!
-  token: String!
-  collateralToken: String!
-  transaction: EthTransaction!
-  lender: Bytes!
-  requestNonce: BigInt!
-  endTime: BigInt!
-  interest: BigInt!
-  blockNumber: BigInt!
-  timestamp: BigInt!
-}
-
-####################################################################################
-#
-# It contains all the loan terms submitted by the signers.
-#
-####################################################################################
-type LoanTermsSubmitted @entity {
-  "An unique ID."
-  id: ID!
-  "The lending/borrowed token name."
-  token: String!
-  "The collateral token name."
-  collateralToken: String!
-  "The reference to the ETH transaction."
-  transaction: EthTransaction!
-  "The signer address."
-  signer: Bytes!
-  "The borrower address."
-  borrower: Bytes!
-  "The request nonce used in the loan terms."
-  requestNonce: BigInt!
-  "The signer nonce used in this loan terms."
-  signerNonce: BigInt!
-  "The interest rate accepted."
-  interestRate: BigInt!
-  "The collateral ratio accepted."
-  collateralRatio: BigInt!
-  "The max loan amount accepted."
-  maxLoanAmount: BigInt!
-  "Blocknumber where the transaction was executed."
-  blockNumber: BigInt!
-  "Timestamp when the transaction was executed."
-  timestamp: BigInt!
-}
-
-type LoanTermsAccepted @entity {
-  id: ID!
-  token: String!
-  collateralToken: String!
-  transaction: EthTransaction!
-  borrower: Bytes!
-  requestNonce: BigInt!
-  interestRate: BigInt!
-  collateralRatio: BigInt!
-  maxLoanAmount: BigInt!
-  blockNumber: BigInt!
-  timestamp: BigInt!
-}
-
-type LoanTermsSet @entity {
-  id: ID!
-  token: String!
-  collateralToken: String!
-  transaction: EthTransaction!
-  borrower: Bytes!
-  nonce: BigInt!
-  interestRate: BigInt!
-  collateralRatio: BigInt!
-  maxLoanAmount: BigInt!
-  blockNumber: BigInt!
-  timestamp: BigInt!
-}
-
-type AccruedInterestChange @entity {
-  id: ID!
-  token: String!
-  collateralToken: String!
-  transaction: EthTransaction!
-  lender: Bytes!
-  totalNotWithdrawn: BigInt!
-  totalAccruedInterest: BigInt!
-  blockNumber: BigInt!
-  timestamp: BigInt!
-}
-
-type AccruedInterestWithdrawalChange @entity {
-  id: ID!
-  token: String!
-  collateralToken: String!
-  transaction: EthTransaction!
-  recipient: Bytes!
-  amount: BigInt!
-  blockNumber: BigInt!
-  timestamp: BigInt!
-}
-
-####################################################################################
-#
-# It contains the last tToken holder balances.
-# Each row represents the current holder balance for a given tToken.
-#
-####################################################################################
-type TTokenHolderBalancesStatus @entity {
-  "TToken address and holder address."
-  id: ID!
-  "Current holder balance for the given platform token (tToken)."
-  balance: BigInt!
-  "TToken symbol"
-  platformToken: String!
-  "Holder address."
-  holder: Bytes!
-  "Blocknumber the holder balance was most recently updated."
-  blockNumber: BigInt!
-  "Timestamp the holder balance was most recently updated."
-  updatedAt: BigInt!
-}
-
-####################################################################################
-#
-# It contains all the tToken changes (like transfers, approvals).
-# Each change (transaction) represents a row in the entity.
-#
-####################################################################################
-type TTokenHolderActionsChange @entity {
-  "Transaction hash and event index."
-  id: ID!
-  "Transaction info about the change."
-  transaction: EthTransaction!
-  "TToken amount involved in the transaction."
-  amount: BigInt!
-  "The TToken name involved in the transaction."
-  platformToken: String!
-  "TToken holder address that sent the transaction."
-  from: Bytes!
-  "Address that received the change."
-  to: Bytes!
-  "Enum that identifies the token action."
-  action: TokenStatusAction!
-  "Blocknumber where the transaction was executed."
-  blockNumber: BigInt!
-  "Timestamp when the transaction was executed."
-  timestamp: BigInt!
-}
-
-type PlatformSettingsStatus @entity {
+type PlatformSettingStatus @entity {
   id: ID!
   settingName: String!
   value: BigInt!
   min: BigInt!
   max: BigInt!
-  removed: Boolean!
   blockNumber: BigInt!
   timestamp: BigInt!
 }
 
-type PlatformSettingsChange @entity {
+type PlatformSettingChange @entity {
   id: ID!
   transaction: EthTransaction!
   oldValue: BigInt!
@@ -353,70 +74,10 @@ type PlatformSettingsChange @entity {
   timestamp: BigInt!
 }
 
-type LendingPoolPauseStatus @entity {
-  id: ID!
-  lendingPool: Bytes!
-  paused: Boolean!
-  blockNumber: BigInt!
-  timestamp: BigInt!
-}
-
-type LendingPoolPauseChange @entity {
-  id: ID!
-  transaction: EthTransaction!
-  paused: Boolean!
-  lendingPool: Bytes!
-  from: Bytes!
-  blockNumber: BigInt!
-  timestamp: BigInt!
-}
-
-type SignerStatus @entity {
-  id: ID!
-  token: String!
-  collateralToken: String!
-  contract: ConsensusContract!
-  account: Bytes!
-  removed: Boolean!
-  blockNumber: BigInt!
-  timestamp: BigInt!
-}
-
-type SignerChange @entity {
-  id: ID!
-  token: String!
-  collateralToken: String!
-  contract: ConsensusContract!
-  transaction: EthTransaction!
-  account: Bytes!
-  removed: Boolean!
-  blockNumber: BigInt!
-  timestamp: BigInt!
-}
-
-type PauserStatus @entity {
-  id: ID!
-  account: Bytes!
-  active: Boolean!
-  blockNumber: BigInt!
-  timestamp: BigInt!
-}
-
-type PauserChange @entity {
-  id: ID!
-  transaction: EthTransaction!
-  account: Bytes!
-  active: Boolean!
-  blockNumber: BigInt!
-  timestamp: BigInt!
-}
-
 type AssetSettingsStatus @entity {
   id: ID!
   tokenAddress: Bytes!
-  cTokenAddress: Bytes!
   maxLoanAmount: BigInt!
-  removed: Boolean!
   timestamp: BigInt!
   blockNumber: BigInt!
 }
@@ -440,153 +101,4 @@ type BorrowerNoncesChange @entity {
   nonce: BigInt!
   timestamp: BigInt!
   blockNumber: BigInt!
-}
-
-type LenderNoncesChange @entity {
-  id: ID!
-  token: String!
-  collateralToken: String!
-  lender: Bytes!
-  nonce: BigInt!
-  timestamp: BigInt!
-  blockNumber: BigInt!
-}
-
-####################################################################################
-#
-# It contains the total values (supply, and lent) per TToken asset.
-#
-####################################################################################
-type TTokenTotalValuesStatus @entity {
-  "It is the TToken address."
-  id: ID!
-  "The TToken address."
-  ttoken: Bytes!
-  "The current total supply for the given TToken."
-  totalSupply: BigInt!
-  "The current total lent for the given TToken."
-  totalLent: BigInt!
-  "The current total repaid amount for the given TToken."
-  totalRepaid: BigInt!
-  "Blocknumber the total supply was most recently updated."
-  blockNumber: BigInt!
-  "Timestamp the total supply was most recently updated."
-  timestamp: BigInt!
-}
-
-####################################################################################
-#
-# It contains the total values (supply, repaid and lent) per TToken asset for a given block number.
-#
-####################################################################################
-type TTokenTotalValuesChange @entity {
-  "It includes transaction hash and event log index."
-  id: ID!
-  "The ETH transaction where an amount was modified."
-  transaction: EthTransaction!
-  "The sender address."
-  sender: Bytes!
-  "The TToken address."
-  ttoken: Bytes!
-  "The total supply for the given TToken and block number."
-  totalSupply: BigInt!
-  "The total lent for the given TToken and block number."
-  totalLent: BigInt!
-  "The total repaid amount for the given TToken and block number."
-  totalRepaid: BigInt!
-  "Blocknumber when the total values were updated."
-  blockNumber: BigInt!
-  "Timestamp the total total values were updated."
-  timestamp: BigInt!
-}
-
-####################################################################################
-#
-# It contains the current pair aggregators used in the platform.
-#
-####################################################################################
-type PairAggregatorsStatus @entity {
-  "It includes the pair (base/quote) address."
-  id: ID!
-  "This is the base token (ERC20) address."
-  baseToken: Bytes!
-  "This is the base token (ERC20) symbol."
-  baseTokenSymbol: String!
-  "This is the quote token (ERC20) address."
-  quoteToken: Bytes!
-  "This is the quote token (ERC20) symbol."
-  quoteTokenSymbol: String!
-  "This is the pair aggregator address (proxy address)."
-  aggregator: Bytes!
-  "The decimals included in the oracle response."
-  responseDecimals: BigInt!
-  "The decimals included in the collateral token."
-  collateralDecimals: BigInt!
-  "It defines if this pair aggregator is inverse."
-  inverse: Boolean!
-  "Blocknumber the pair aggregator (baseToken and quoteToken) was most recently updated."
-  blockNumber: BigInt!
-  "Timestamp the pair aggregator (baseToken and quoteToken) was most recently updated."
-  timestamp: BigInt!
-}
-
-####################################################################################
-#
-# It contains the current pair aggregators used in the platform.
-#
-####################################################################################
-type PairAggregatorsChange @entity {
-  "It includes transaction hash and event log index."
-  id: ID!
-  "The ETH transaction when the pair aggregator was registered."
-  transaction: EthTransaction!
-  "Address that created this pair aggregator."
-  creator: Bytes!
-  "This is the base token (ERC20) address."
-  baseToken: Bytes!
-  "This is the base token (ERC20) symbol."
-  baseTokenSymbol: String!
-  "This is the quote token (ERC20) address."
-  quoteToken: Bytes!
-  "This is the quote token (ERC20) symbol."
-  quoteTokenSymbol: String!
-  "This is the pair aggregator address (proxy address)."
-  aggregator: Bytes!
-  "The decimals included in the oracle response."
-  responseDecimals: BigInt!
-  "The decimals included in the collateral token."
-  collateralDecimals: BigInt!
-  "It defines if this pair aggregator is inverse."
-  inverse: Boolean!
-  "Blocknumber the pair aggregator (baseToken and quoteToken) was most recently updated."
-  blockNumber: BigInt!
-  "Timestamp the pair aggregator (baseToken and quoteToken) was most recently updated."
-  timestamp: BigInt!
-}
-
-####################################################################################
-#
-# It contains the all the changes for the tToken holder balances (transfer events).
-# Each row represents the current holder balance for a given tToken and block number.
-#
-####################################################################################
-type TTokenHolderBalancesChange @entity {
-  "TToken address and holder address."
-  id: ID!
-  "The ETH transaction when transfer event was emitted."
-  transaction: EthTransaction!
-  "TToken address."
-  token: Bytes!
-  "TToken name."
-  tokenName: String!
-  "Current holder balance for the given token and holder."
-  balance: BigInt!
-  "Amount used in this transaction for the given token and holder. It is a negative value if the sender is the holder, and a positive value if the holder received a transfer."
-  amount: BigInt!
-  "Holder address."
-  holder: Bytes!
-  "Blocknumber the holder balance was most recently updated."
-  blockNumber: BigInt!
-  "Timestamp the holder balance was most recently updated."
-  timestamp: BigInt!
 }

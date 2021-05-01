@@ -5,14 +5,13 @@ specVersion: 0.0.3
 schema:
   file: ./schema.graphql
 dataSources:
-  # 0 ETH_DAI_Loans
   - kind: ethereum/contract
-    name: ETH_DAI_Loans
+    name: TellerDiamond
     network: {{network}}
     source:
       startBlock: {{startBlock}}
-      address: '{{ETH_DAI_Loans}}'
-      abi: ETH_DAI_Loans
+      address: '{{TellerDiamond}}'
+      abi: ITellerDiamond
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.3
@@ -26,185 +25,31 @@ dataSources:
         - LoanRepayment
         - Liquidation
         - Borrower
-        # - SignerStatus
-        # - SignerChange
         - EthTransaction
+        - AssetSettingsStatus
+        - AssetSettingsChange
+        - PlatformSettingChange
+        - PlatformSettingStatus
       abis:
-        - name: ETH_DAI_Loans
-          file: ./abis/ILoanManager.json
-        - name: SettingsInterface
-          file: ./abis/Settings.json
-        - name: LendingPool
-          file: ./abis/LendingPoolInterface.json
+        - name: ITellerDiamond
+          file: ./abis/ITellerDiamond.json
+        - name: ITToken
+          file: ./abis/ITToken.json
       eventHandlers:
-        - event: LoanTermsSet(indexed uint256,indexed address,indexed address,uint256)
-          handler: handleLoanTermsSet
-        - event: LoanTakenOut(indexed uint256,indexed address,indexed address,uint256)
-          handler: handleLoanTakenOut
+        - event: LoanTermsSet(indexed uint256,indexed address,indexed address)
+          handler: loanTermsSet
+        - event: LoanTakenOut(indexed uint256,indexed address,uint256,bool)
+          handler: loanTakenOut
         - event: LoanRepaid(indexed uint256,indexed address,uint256,address,uint256)
-          handler: handleLoanRepaid
-        - event: LoanLiquidated(indexed uint256,indexed address,address,int256,uint256)
-          handler: handleLoanLiquidated
-        - event: CollateralDeposited(indexed uint256,indexed address,uint256)
-          handler: handleCollateralDeposited
-        - event: CollateralWithdrawn(indexed uint256,indexed address,indexed address,uint256)
-          handler: handleCollateralWithdrawn
-        # - event: SignerAdded(indexed address)
-        #   handler: handleSignerAdded
-        # - event: SignerRemoved(indexed address)
-        #   handler: handleSignerRemoved
-      file: ./src/mappings/loans/dai_ethLoansMappings.ts
-  # 9  DAI_ETH_LoanTermsConsensus
-  # - kind: ethereum/contract
-  #   name: DAI_ETH_LoanTermsConsensus
-  #   network: {{network}}
-  #   source:
-  #     startBlock: {{startBlock}}
-  #     address: '{{ETH_LoanTermsConsensus_tDAI}}'
-  #     abi: DAILoanTermsConsensus
-  #   mapping:
-  #     kind: ethereum/events
-  #     apiVersion: 0.0.3
-  #     language: wasm/assemblyscript
-  #     entities:
-  #       - EthTransaction
-  #     abis:
-  #       - name: DAILoanTermsConsensus
-  #         file: ./abis/LoanTermsConsensus.json
-  #     eventHandlers:
-  #       - event: TermsAccepted(indexed address,indexed uint256,uint256,uint256,uint256)
-  #         handler: handleTermsAccepted
-  #       - event: TermsSubmitted(indexed address,indexed address,indexed uint256,uint256,uint256,uint256,uint256)
-  #         handler: handleTermsSubmitted
-  #     file: ./src/mappings/consensus/dai_ethLoanTermsConsensusMappings.ts
-  # 1 TDAIToken
-  - kind: ethereum/contract
-    name: TDAIToken
-    network: {{network}}
-    source:
-      startBlock: {{startBlock}}
-      address: '{{TDAI}}'
-      abi: TToken
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.3
-      language: wasm/assemblyscript
-      entities:
-        - EthTransaction
-        - TTokenHolderBalancesChange
-        - TTokenHolderBalancesStatus
-        - TTokenTotalValuesStatus
-        - TTokenTotalValuesChange
-      abis:
-        - name: TToken
-          file: ./abis/TToken.json
-      eventHandlers:
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
-      file: ./src/mappings/tTokens/tDaiMappings.ts
-  # 2
-  - kind: ethereum/contract
-    name: AssetSettingsInterface
-    network: {{network}}
-    source:
-      startBlock: {{startBlock}}
-      address: '{{AssetSettings}}'
-      abi: AssetSettingsInterface
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.3
-      language: wasm/assemblyscript
-      entities:
-        - AssetSettingsStatus
-        - AssetSettingsChange
-      abis:
-        - name: AssetSettingsInterface
-          file: ./abis/AssetSettingsInterface.json
-      eventHandlers:
-        - event: AssetSettingsCreated(indexed address,indexed address,address,uint256)
-          handler: handleAssetSettingsCreated
-        - event: AssetSettingsAddressUpdated(indexed bytes32,indexed address,indexed address,address,address)
-          handler: handleAssetSettingsAddressUpdated
-        - event: AssetSettingsUintUpdated(indexed bytes32,indexed address,indexed address,uint256,uint256)
-          handler: handleAssetSettingsUintUpdated
-        - event: AssetSettingsRemoved(indexed address,indexed address)
-          handler: handleAssetSettingsRemoved
-      file: ./src/mappings/assetSettingsMappings.ts
-  # 3 Settings
-  - kind: ethereum/contract
-    name: SettingsInterface
-    network: {{network}}
-    source:
-      startBlock: {{startBlock}}
-      address: '{{Settings}}'
-      abi: SettingsInterface
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.3
-      language: wasm/assemblyscript
-      entities:
-        - SettingsChange
-        - SettingsStatus
-        - LendingPoolPauseChange
-        - LendingPoolPauseStatus
-        - EthTransaction
-        - CTokenExchangeRateChange
-        - AssetSettingsStatus
-        - AssetSettingsChange
-      abis:
-        - name: SettingsInterface
-          file: ./abis/Settings.json
-        - name: CErc20Interface
-          file: ./abis/CErc20Interface.json
-      eventHandlers:
-        - event: LendingPoolPaused(indexed address,indexed address)
-          handler: handleLendingPoolPaused
-        - event: LendingPoolUnpaused(indexed address,indexed address)
-          handler: handleLendingPoolUnpaused
-        - event: Paused(address)
-          handler: handlePaused
-        - event: Unpaused(address)
-          handler: handleUnpaused
-        - event: PauserAdded(indexed address)
-          handler: handlePauserAdded
-        - event: PauserRemoved(indexed address)
-          handler: handlePauserRemoved
+          handler: loanRepaid
+        - event: LoanLiquidated(indexed uint256,indexed address,address,uint256,uint256)
+          handler: loanLiquidated
+        - event: AssetSettingsCreated(indexed address,indexed bytes32,bytes32,uint8)
+          handler: assetSettingsCreated
+        - event: AssetSettingsUpdated(indexed address,indexed bytes32,bytes32,uint8)
+          handler: assetSettingsUpdated
         - event: PlatformSettingCreated(indexed bytes32,indexed address,uint256,uint256,uint256)
-          handler: handlePlatformSettingCreated
-        - event: PlatformSettingRemoved(indexed bytes32,uint256,indexed address)
-          handler: handlePlatformSettingRemoved
+          handler: platformSettingCreated
         - event: PlatformSettingUpdated(indexed bytes32,indexed address,uint256,uint256)
-          handler: handlePlatformSettingUpdated
-      file: ./src/mappings/settingsMappings.ts
-  # 4 DAI_ETH_LendingPool
-  - kind: ethereum/contract
-    name: DAI_LendingPool
-    network: {{network}}
-    source:
-      startBlock: {{startBlock}}
-      address: '{{DAI_LendingPool}}'
-      abi: DAI_LendingPool
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.3
-      language: wasm/assemblyscript
-      entities:
-        - LendingPoolChange
-        - EthTransaction
-        - TTokenTotalValuesStatus
-        - TTokenTotalValuesChange
-      abis:
-        - name: DAI_LendingPool
-          file: ./abis/LendingPoolInterface.json
-      eventHandlers:
-        - event: InterestWithdrawn(indexed address,uint256)
-          handler: handleInterestWithdrawn
-        - event: TokenDeposited(indexed address,uint256,uint256)
-          handler: handleTokenDeposited
-        - event: TokenRepaid(indexed address,uint256)
-          handler: handleDaiRepaid
-        - event: TokenWithdrawn(indexed address,uint256,uint256)
-          handler: handleTokenWithdrawn
-      file: ./src/mappings/lendingPools/dai_ethLendingPoolMappings.ts
+          handler: platformSettingUpdated
+      file: ./src/mappings.ts
