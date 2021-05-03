@@ -30,15 +30,15 @@ import {
 } from '../generated/schema';
 import {
   AssetSettingsCreated,
-  AssetSettingsUpdated,
-  ITellerDiamond__getLoanResultLoan_Struct,
+  AssetSettingsUpdated, ITellerDiamond__getDebtOwedResultValue0Struct,
+  ITellerDiamond__getLoanResultLoan_Struct, ITellerDiamond__getLoanTermsResultValue0Struct,
   LoanLiquidated,
   LoanRepaid,
   LoanTakenOut,
   LoanTermsSet,
   PlatformSettingCreated,
   PlatformSettingUpdated
-} from '../generated/TellerDiamond/ITellerDiamond';
+} from '../generated/TellerDiamond/ITellerDiamond'
 import { ITellerDiamond } from '../generated/TellerDiamond/ITellerDiamond';
 
 export function getBorrowerLoans(addy: Address, borrower: Address): BigInt {
@@ -55,11 +55,29 @@ export function getLoan(
   return result;
 }
 
+export function getLoanTerms(
+  addy: Address,
+  loanID: BigInt
+): ITellerDiamond__getLoanTermsResultValue0Struct {
+  let result = ITellerDiamond.bind(addy).getLoanTerms(loanID);
+  return result;
+}
+
+export function getLoanDebt(
+  addy: Address,
+  loanID: BigInt
+): ITellerDiamond__getDebtOwedResultValue0Struct {
+  let result = ITellerDiamond.bind(addy).getDebtOwed(loanID);
+  return result;
+}
+
 export function loanTermsSet(event: LoanTermsSet): void {
   let addy = event.address;
   let loanID = event.params.loanID;
   let borrower = event.params.borrower;
   let loan = getLoan(addy, loanID);
+  let terms = getLoanTerms(addy, loanID);
+  let debt = getLoanDebt(addy, loanID);
 
   let borrowerLoans = getBorrowerLoans(addy, borrower);
   let nonce = borrowerLoans.minus(BigInt.fromI32(1));
@@ -78,10 +96,10 @@ export function loanTermsSet(event: LoanTermsSet): void {
   loanTerms.timestamp = event.block.timestamp;
   loanTerms.transaction = event.transaction.hash.toHexString();
   loanTerms.nonce = nonce;
-  loanTerms.maxLoanAmount = loan.loanTerms.maxLoanAmount;
-  loanTerms.collateralRatio = loan.loanTerms.collateralRatio;
-  loanTerms.duration = loan.loanTerms.duration;
-  loanTerms.interestRate = loan.loanTerms.interestRate;
+  loanTerms.maxLoanAmount = terms.maxLoanAmount;
+  loanTerms.collateralRatio = BigInt.fromI32(loan.collateralRatio);
+  loanTerms.duration = loan.duration;
+  loanTerms.interestRate = BigInt.fromI32(loan.interestRate);
   loanTerms.expiryAt = event.block.timestamp.plus(loanTerms.duration);
   loanTerms.save();
 
@@ -91,13 +109,12 @@ export function loanTermsSet(event: LoanTermsSet): void {
   newLoan.borrower = borrower;
   newLoan.collateralToken = loan.collateralToken.toHexString();
   newLoan.endDate = BigInt.fromI32(0);
-  newLoan.recipient = loan.loanTerms.recipient;
   newLoan.startDate = loan.loanStartTime;
   newLoan.status = 'TermsSet';
   newLoan.terms = loanTerms.id;
   newLoan.timestamp = event.block.timestamp;
   newLoan.token = loan.lendingToken.toHexString();
-  newLoan.totalOwedAmount = loan.principalOwed.plus(loan.interestOwed);
+  newLoan.totalOwedAmount = debt.principalOwed.plus(debt.interestOwed);
   newLoan.totalRepaidAmount = BigInt.fromI32(0);
   newLoan.nft = false;
   newLoan.transaction = event.transaction.hash.toHexString();
@@ -138,7 +155,7 @@ export function loanLiquidated(event: LoanLiquidated): void {
 
   let oldLoan = Loan.load(loanID.toHexString());
   if (oldLoan) {
-    oldLoan.status = 'Closed';
+    oldLoan.status = 'Liquidated';
     oldLoan.save();
   }
 }

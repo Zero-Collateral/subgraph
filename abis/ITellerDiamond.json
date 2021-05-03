@@ -295,12 +295,6 @@
           "internalType": "address",
           "name": "borrower",
           "type": "address"
-        },
-        {
-          "indexed": true,
-          "internalType": "address",
-          "name": "recipient",
-          "type": "address"
         }
       ],
       "name": "LoanTermsSet",
@@ -744,18 +738,8 @@
             },
             {
               "internalType": "address",
-              "name": "recipient",
-              "type": "address"
-            },
-            {
-              "internalType": "address",
               "name": "assetAddress",
               "type": "address"
-            },
-            {
-              "internalType": "uint256",
-              "name": "requestNonce",
-              "type": "uint256"
             },
             {
               "internalType": "uint256",
@@ -763,14 +747,19 @@
               "type": "uint256"
             },
             {
-              "internalType": "uint256",
-              "name": "duration",
-              "type": "uint256"
+              "internalType": "uint32",
+              "name": "requestNonce",
+              "type": "uint32"
             },
             {
-              "internalType": "uint256",
+              "internalType": "uint32",
+              "name": "duration",
+              "type": "uint32"
+            },
+            {
+              "internalType": "uint32",
               "name": "requestTime",
-              "type": "uint256"
+              "type": "uint32"
             }
           ],
           "internalType": "struct LoanRequest",
@@ -791,23 +780,23 @@
             },
             {
               "internalType": "uint256",
-              "name": "responseTime",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "interestRate",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "collateralRatio",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
               "name": "maxLoanAmount",
               "type": "uint256"
+            },
+            {
+              "internalType": "uint32",
+              "name": "responseTime",
+              "type": "uint32"
+            },
+            {
+              "internalType": "uint16",
+              "name": "interestRate",
+              "type": "uint16"
+            },
+            {
+              "internalType": "uint16",
+              "name": "collateralRatio",
+              "type": "uint16"
             },
             {
               "components": [
@@ -1100,9 +1089,9 @@
       "name": "getBorrowerLoans",
       "outputs": [
         {
-          "internalType": "uint256[]",
+          "internalType": "uint128[]",
           "name": "loanIDs",
-          "type": "uint256[]"
+          "type": "uint128[]"
         }
       ],
       "stateMutability": "view",
@@ -1198,6 +1187,37 @@
           "type": "uint256"
         }
       ],
+      "name": "getDebtOwed",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "principalOwed",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "interestOwed",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct LoanDebt",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "loanID",
+          "type": "uint256"
+        }
+      ],
       "name": "getEscrowTokens",
       "outputs": [
         {
@@ -1270,9 +1290,9 @@
         {
           "components": [
             {
-              "internalType": "uint256",
-              "name": "id",
-              "type": "uint256"
+              "internalType": "address payable",
+              "name": "borrower",
+              "type": "address"
             },
             {
               "internalType": "address",
@@ -1285,71 +1305,39 @@
               "type": "address"
             },
             {
-              "components": [
-                {
-                  "internalType": "address payable",
-                  "name": "borrower",
-                  "type": "address"
-                },
-                {
-                  "internalType": "address",
-                  "name": "recipient",
-                  "type": "address"
-                },
-                {
-                  "internalType": "uint256",
-                  "name": "interestRate",
-                  "type": "uint256"
-                },
-                {
-                  "internalType": "uint256",
-                  "name": "collateralRatio",
-                  "type": "uint256"
-                },
-                {
-                  "internalType": "uint256",
-                  "name": "maxLoanAmount",
-                  "type": "uint256"
-                },
-                {
-                  "internalType": "uint256",
-                  "name": "duration",
-                  "type": "uint256"
-                }
-              ],
-              "internalType": "struct LoanTerms",
-              "name": "loanTerms",
-              "type": "tuple"
-            },
-            {
-              "internalType": "enum LoanStatus",
-              "name": "status",
-              "type": "uint8"
-            },
-            {
-              "internalType": "uint256",
-              "name": "principalOwed",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "interestOwed",
-              "type": "uint256"
-            },
-            {
               "internalType": "uint256",
               "name": "borrowedAmount",
               "type": "uint256"
             },
             {
-              "internalType": "uint256",
-              "name": "termsExpiry",
-              "type": "uint256"
+              "internalType": "uint128",
+              "name": "id",
+              "type": "uint128"
             },
             {
-              "internalType": "uint256",
+              "internalType": "uint32",
+              "name": "duration",
+              "type": "uint32"
+            },
+            {
+              "internalType": "uint32",
               "name": "loanStartTime",
-              "type": "uint256"
+              "type": "uint32"
+            },
+            {
+              "internalType": "uint16",
+              "name": "interestRate",
+              "type": "uint16"
+            },
+            {
+              "internalType": "uint16",
+              "name": "collateralRatio",
+              "type": "uint16"
+            },
+            {
+              "internalType": "enum LoanStatus",
+              "name": "status",
+              "type": "uint8"
             }
           ],
           "internalType": "struct Loan",
@@ -1412,6 +1400,37 @@
           "internalType": "uint256",
           "name": "",
           "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "loanID",
+          "type": "uint256"
+        }
+      ],
+      "name": "getLoanTerms",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "maxLoanAmount",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint32",
+              "name": "termsExpiry",
+              "type": "uint32"
+            }
+          ],
+          "internalType": "struct LoanTerms",
+          "name": "",
+          "type": "tuple"
         }
       ],
       "stateMutability": "view",
@@ -1910,53 +1929,12 @@
     {
       "inputs": [
         {
-          "internalType": "uint256",
-          "name": "nftID",
-          "type": "uint256"
-        }
-      ],
-      "name": "stakeNFT",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
           "internalType": "uint256[]",
           "name": "nftIDs",
           "type": "uint256[]"
         }
       ],
       "name": "stakeNFTs",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "loanID",
-          "type": "uint256"
-        },
-        {
-          "internalType": "address[]",
-          "name": "path",
-          "type": "address[]"
-        },
-        {
-          "internalType": "uint256",
-          "name": "sourceAmount",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "minDestination",
-          "type": "uint256"
-        }
-      ],
-      "name": "swap",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
@@ -2015,6 +1993,34 @@
         }
       ],
       "name": "takeOutLoanWithNFTs",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "loanID",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address[]",
+          "name": "path",
+          "type": "address[]"
+        },
+        {
+          "internalType": "uint256",
+          "name": "sourceAmount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "minDestination",
+          "type": "uint256"
+        }
+      ],
+      "name": "uniswapSwap",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"

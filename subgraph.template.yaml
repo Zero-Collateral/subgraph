@@ -36,7 +36,7 @@ dataSources:
         - name: ITToken
           file: ./abis/ITToken.json
       eventHandlers:
-        - event: LoanTermsSet(indexed uint256,indexed address,indexed address)
+        - event: LoanTermsSet(indexed uint256,indexed address)
           handler: loanTermsSet
         - event: LoanTakenOut(indexed uint256,indexed address,uint256,bool)
           handler: loanTakenOut

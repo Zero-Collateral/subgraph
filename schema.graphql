@@ -3,6 +3,7 @@ enum LoanStatus {
   TermsSet
   Active
   Closed
+  Liquidated
 }
 
 type EthTransaction @entity {
@@ -27,7 +28,6 @@ type Loan @entity {
   collateralToken: String!
   transaction: EthTransaction!
   borrower: Bytes!
-  recipient: Bytes!
   terms: LoanTerm!
   startDate: BigInt! # https://github.com/graphql/graphql-js/issues/1003#issuecomment-324790647
   endDate: BigInt!
