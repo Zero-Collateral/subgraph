@@ -1,6 +1,6 @@
 {
-  "startBlock": "24630000",
+  "startBlock": "24670000",
   "network": "kovan",
-  "TellerDiamond": "0x4E614eEC7b8761ea4854CAF1C92c848D0eDF418B",
-  "TDAI": "0x215ec8D7F9b0F44D4530c7F2Fe234d7983754664"
+  "TellerDiamond": "0xC86Ca2BB9C9c9c9F140d832dE00BfA9e153FA1e3",
+  "TDAI": "0x648Ee80f2826D10b13f078E6cD704141536811b7"
 }
