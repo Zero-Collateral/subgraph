@@ -191,6 +191,38 @@
     },
     {
       "inputs": [],
+      "name": "currentTVL",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "tvl_",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "newLoanAmount",
+          "type": "uint256"
+        }
+      ],
+      "name": "debtRatioFor",
+      "outputs": [
+        {
+          "internalType": "uint16",
+          "name": "ratio_",
+          "type": "uint16"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
       "name": "decimals",
       "outputs": [
         {
@@ -255,6 +287,52 @@
       "name": "fundLoan",
       "outputs": [],
       "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getMarketState",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "totalSupplied",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "totalBorrowed",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "totalRepaid",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "totalInterestRepaid",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "totalOnLoan",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getStrategy",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
       "type": "function"
     },
     {
@@ -326,26 +404,14 @@
     {
       "inputs": [
         {
-          "components": [
-            {
-              "internalType": "address",
-              "name": "controller",
-              "type": "address"
-            },
-            {
-              "internalType": "address",
-              "name": "admin",
-              "type": "address"
-            },
-            {
-              "internalType": "address",
-              "name": "underlying",
-              "type": "address"
-            }
-          ],
-          "internalType": "struct ITToken.InitArgs",
-          "name": "args",
-          "type": "tuple"
+          "internalType": "address",
+          "name": "admin",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "underlying",
+          "type": "address"
         }
       ],
       "name": "initialize",
@@ -427,6 +493,24 @@
         }
       ],
       "name": "renounceRole",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "interestAmount",
+          "type": "uint256"
+        }
+      ],
+      "name": "repayLoan",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"

@@ -1440,40 +1440,6 @@
       "inputs": [
         {
           "internalType": "address",
-          "name": "lendingToken",
-          "type": "address"
-        }
-      ],
-      "name": "getMarketState",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "totalSupplied",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "totalBorrowed",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "totalRepaid",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "totalOnLoan",
-          "type": "uint256"
-        }
-      ],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
           "name": "asset",
           "type": "address"
         }
@@ -1487,6 +1453,19 @@
         }
       ],
       "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getNFTLiquidationController",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "controller_",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "nonpayable",
       "type": "function"
     },
     {
@@ -1570,7 +1549,7 @@
           "type": "uint256[]"
         }
       ],
-      "stateMutability": "nonpayable",
+      "stateMutability": "view",
       "type": "function"
     },
     {
@@ -1704,6 +1683,16 @@
               "internalType": "address",
               "name": "collateralEscrowBeacon",
               "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "tTokenBeacon",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "nftLiquidationController",
+              "type": "address"
             }
           ],
           "internalType": "struct InitArgs",
@@ -1721,11 +1710,6 @@
         {
           "internalType": "address",
           "name": "asset",
-          "type": "address"
-        },
-        {
-          "internalType": "address",
-          "name": "tToken",
           "type": "address"
         }
       ],
@@ -1909,6 +1893,19 @@
         }
       ],
       "name": "repayLoan",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "newController",
+          "type": "address"
+        }
+      ],
+      "name": "setNFTLiquidationController",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
